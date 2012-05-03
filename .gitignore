@@ -1,0 +1,8 @@
+build
+.git
+.DS_Store
+.classpath
+.settings
+.project
+WebContent/lib/**/*
+
