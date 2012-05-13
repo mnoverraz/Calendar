@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import calendar.controller.EventController;
-import calendar.model.Event;
+import calendar.core.controller.EventController;
+import calendar.core.model.Event;
 
 public class EventControllerTest {
 
