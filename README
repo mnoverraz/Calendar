@@ -1,4 +1,8 @@
 #BRANCHES
-master				branche qui contient le projet avec la version sans bug et approuvée.
-release				branche qui contient les nouvelles fonctionalités à tester.
-feature-template	branche qui contient les template HTML
+master				source of last stable version
+release				source of version to be next stable version candidate
+feature-template	feature branch for client template
+feature-event-handling	feature branch for calendar core
+
+#DEPENDENCIES
+gson (http://code.google.com/p/google-gson/)

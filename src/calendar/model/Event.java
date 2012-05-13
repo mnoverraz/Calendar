@@ -21,7 +21,6 @@ public class Event extends Element {
 		initialize(start, end, title);
 	}
 	
-	
 	private void initialize(Date start, Date end, String title) {
 		this.start = start;
 		this.end = end;
