@@ -1,52 +1,45 @@
 package calendar.model;
 
-import java.util.Date;
+import java.util.ArrayList;
 
 import calendar.application.Config;
 import calendar.application.utils.DateHelper;
 
 public class Event extends Element {
-	private Date start;
-	private Date end;
+	private ArrayList<EventDate> eventDates;
 	private String title;
 	private String description;
-	public Event(long id, Date start, Date end, String title, String description) {
+		
+	public Event(long id, ArrayList<EventDate> eventDates, String title,
+			String description) {
 		super(id);
-		initialize(start, end, title);
+		initialize(eventDates, title);
 		this.description = description;
 	}
 	
-	public Event(long id, Date start, Date end, String title) {
+	public Event(long id, ArrayList<EventDate> eventDates, String title) {
 		super(id);
-		initialize(start, end, title);
+		initialize(eventDates, title);
 	}
-	
-	private void initialize(Date start, Date end, String title) {
-		this.start = start;
-		this.end = end;
+
+	private void initialize(ArrayList<EventDate> eventDates, String title) {
+		this.eventDates = eventDates;
 		this.title = title;
 	}
-	public Date getStart() {
-		return start;
-	}
-	public Date getEnd() {
-		return end;
-	}
-	public String getTitle() {
-		return title;
-	}
-	public String getDescription() {
-		return description;
-	}
-	
+
 	public String toString() {
 		String ret = "";
-		
 		ret += "id:\t\t" + String.valueOf(super.getId()) + "\n";
 		ret += "title:\t\t" + title + "\n";
 		ret += "description:\t" + String.valueOf(description) + "\n";
-		ret += "begin:\t\t" + DateHelper.DateToString(start, Config.DATE_FORMAT_LONG) + "\n"; 
-		ret += "end:\t\t" + DateHelper.DateToString(end, Config.DATE_FORMAT_LONG) + "\n";  
+		
+		ret += "dates\n";
+		ret += "-------\n";
+		for (EventDate eventDate : eventDates) {
+			ret += "start:\t\t" + DateHelper.DateToString(eventDate.getStart(), Config.DATE_FORMAT_LONG) + "\n"; 
+			ret += "end:\t\t" + DateHelper.DateToString(eventDate.getEnd(), Config.DATE_FORMAT_LONG) + "\n";  
+		}
+		ret += "-------";
 		
 		return  ret;
 	}
