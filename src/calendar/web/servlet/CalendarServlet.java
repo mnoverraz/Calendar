@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import com.google.gson.Gson;
 
 import calendar.core.controller.EventController;
 import calendar.web.renderer.FullCalendarRenderer;
@@ -41,9 +40,11 @@ public class CalendarServlet extends HttpServlet {
 		FullCalendarRenderer renderer = new FullCalendarRenderer();
 		String json = renderer.EventRerderer(eventController.getEvents());
 		
+		
 		response.setContentType("application/json");
 
         PrintWriter out = response.getWriter();
+
 		out.write(json);
 	}
 
