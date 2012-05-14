@@ -37,21 +37,41 @@ public class CalendarServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(true);	
-		FullCalendarRenderer renderer = new FullCalendarRenderer();
-		String json = renderer.EventRerderer(eventController.getEvents());
-		
-		
-		response.setContentType("application/json");
-
         PrintWriter out = response.getWriter();
+		FullCalendarRenderer renderer = new FullCalendarRenderer();
+		StringBuilder content = new StringBuilder();
+		content.append(renderer.EventRerderer(eventController.getEvents()));
+		
+		String contentType = "";
+		
 
-		out.write(json);
+		String format = request.getParameter("format");
+			
+		if (("xml").equals(format))
+			contentType = "application/xml";
+		else if (("html").equals(format)) 
+			contentType = "application/html";
+		else
+			contentType = "application/json";
+
+		
+		response.setContentType(contentType);
+
+		out.write(content.toString());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+	
+	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+	
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
 
