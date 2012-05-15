@@ -5,4 +5,4 @@ feature-template	feature branch for client template
 feature-event-handling	feature branch for calendar core
 
 #DEPENDENCIES
-gson (http://code.google.com/p/google-gson/)
+urlrewrite-3.2.0 (http://www.tuckey.org/urlrewrite/)
