@@ -27,7 +27,7 @@ public class FullCalendarRenderer {
 				sb.append("\"title\": \"" + event.getTitle() + "\",");
 				sb.append("\"start\": \"" + DateHelper.DateToString(eventDate.getStart(), Config.DATE_FORMAT_LONG) + "\",");
 				sb.append("\"end\": \"" + DateHelper.DateToString(eventDate.getEnd(), Config.DATE_FORMAT_LONG) + "\",");
-				sb.append("\"allDay\": false");
+				sb.append("\"allDay\": " + eventDate.isAllDay());
 				sb.append("}");
 				if (eventDates.size() - (j+1) > 0) {
 					sb.append(",");

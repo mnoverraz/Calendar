@@ -92,7 +92,7 @@ public class DateHelper {
 	 * @return
 	 */
 	public static  Date getToday() {
-		return  new Date();  
+		return new Date();  
 	}
 	
 	/**

@@ -15,7 +15,7 @@ import calendar.web.renderer.FullCalendarRenderer;
 /**
  * Servlet implementation class CalendarServlet
  */
-public class CalendarServlet extends HttpServlet {
+public class RESTServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private EventController eventController;
 	
@@ -28,7 +28,7 @@ public class CalendarServlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CalendarServlet() {
+    public RESTServlet() {
         super();
     }
 
