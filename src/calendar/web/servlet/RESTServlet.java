@@ -2,6 +2,9 @@ package calendar.web.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -11,18 +14,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import calendar.core.controller.EventController;
-import calendar.web.renderer.FullCalendarRenderer;
+import calendar.web.controller.WebEventController;
+import calendar.web.controller.WebController;
+import calendar.web.renderer.Renderer;
 /**
  * Servlet implementation class CalendarServlet
  */
 public class RESTServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private EventController eventController;
+	private HashMap<String, WebController> controllers;
+	private String method;
 	
 	public void init(ServletConfig config) 
 			throws ServletException {
-		eventController = new EventController();
-		
+		controllers = new HashMap<String, WebController>();
+		controllers.put("events", new WebEventController());
 	}
        
     /**
@@ -36,43 +42,59 @@ public class RESTServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		this.method = "GET";
+		proceed(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		this.method = "POST";
+		proceed(request, response);
+	}
+	
+	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		this.method = "PUT";
+		proceed(request, response);
+	}
+	
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		this.method = "DELETE";
+		proceed(request, response);
+	}
+	
+	private void proceed(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		HttpSession session = request.getSession(true);	
         PrintWriter out = response.getWriter();
-		FullCalendarRenderer renderer = new FullCalendarRenderer();
 		StringBuilder content = new StringBuilder();
-		content.append(renderer.EventRerderer(eventController.getEvents()));
+		WebController controller = null;
+		
+
 		
 		String contentType = "";
 		
 
 		String format = request.getParameter("format");
+		String ressource = request.getParameter("resource");
+		HashMap<String, String> params = new HashMap<String, String>();
 			
 		if (("xml").equals(format))
-			contentType = "application/xml";
-		else if (("html").equals(format)) 
-			contentType = "application/html";
+			contentType = "text/xml";
 		else
 			contentType = "application/json";
-
+		
+		if (null != ressource || !controllers.containsKey("ressource"))
+			//content.append("error");
+		
+		/*controller = controllers.get(ressource);
+		
+		ArrayList<HashMap<String, Object>> rawContent = new ArrayList<HashMap<String, Object>>();
+		if ("GET".equals(method)) 
+			rawContent = controller.read(params);*/
+		
+		//content.append(Renderer.toJSON(rawContent));
+		content.append(Renderer.EventRerderer(new EventController().getEvents()));
 		
 		response.setContentType(contentType);
-
 		out.write(content.toString());
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
 	
-	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
-	
-	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
-
 }

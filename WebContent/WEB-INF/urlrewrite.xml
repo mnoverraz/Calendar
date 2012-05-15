@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<urlrewrite>
+
+	<!-- From / To /index/ -->
+ 	<rule>
+        <from>^/$</from>
+        <to type="redirect">/index/</to>
+    </rule>
+
+	<!-- JSP-Rewrite -->
+    
+    <rule>
+        <from>^/rest/([a-z0-9]+)/$</from>
+        <to>/rest?ressource=$1</to>
+    </rule>
+    <rule>
+        <from>^/rest/([a-z0-9]+)/(.*)$</from>
+        <to>/rest?ressource=$1/$2</to>
+    </rule>
+</urlrewrite>
+
