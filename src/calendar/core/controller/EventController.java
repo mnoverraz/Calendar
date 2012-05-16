@@ -2,6 +2,7 @@ package calendar.core.controller;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import calendar.core.application.Config;
@@ -11,9 +12,15 @@ import calendar.core.model.EventDate;
 
 
 public class EventController {
-	public ArrayList<Event> getEvents() {
+	public ArrayList<Event> getDummyEvents() {
 		ArrayList<Event> events = new ArrayList<Event>();
 		ArrayList<EventDate> eventDates = new ArrayList<EventDate>();
+		Calendar calendar = Calendar.getInstance();
+		
+		int month = Calendar.MONTH;
+		int year = Calendar.YEAR;
+		
+		System.out.println(year);
 		
 		Date date1 = null;
 		Date date2 = null;
@@ -26,7 +33,7 @@ public class EventController {
 			e.printStackTrace();
 		}
 		
-		eventDates.add(new EventDate(date1, date2));
+		eventDates.add(new EventDate(calendar.getTime(), date2));
 		eventDates.add(new EventDate(DateHelper.getToday(), DateHelper.getToday()));
 		
 		Event event1 = new Event(1, eventDates, "reccurent 1", "description");
@@ -35,5 +42,8 @@ public class EventController {
 		
 		return events;
 	}
-	
+	public ArrayList<Event> getEvents() {
+		
+		return null;
+	}
 }

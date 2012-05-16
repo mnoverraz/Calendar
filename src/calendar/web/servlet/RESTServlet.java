@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -17,6 +20,7 @@ import calendar.core.controller.EventController;
 import calendar.web.controller.WebEventController;
 import calendar.web.controller.WebController;
 import calendar.web.renderer.Renderer;
+
 /**
  * Servlet implementation class CalendarServlet
  */
@@ -24,76 +28,108 @@ public class RESTServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private HashMap<String, WebController> controllers;
 	private String method;
-	
-	public void init(ServletConfig config) 
-			throws ServletException {
+
+	public void init(ServletConfig config) throws ServletException {
 		controllers = new HashMap<String, WebController>();
 		controllers.put("event", new WebEventController());
 	}
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public RESTServlet() {
-        super();
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public RESTServlet() {
+		super();
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		this.method = "GET";
 		proceed(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		this.method = "POST";
 		proceed(request, response);
 	}
-	
-	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doPut(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		this.method = "PUT";
 		proceed(request, response);
 	}
-	
-	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doDelete(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		this.method = "DELETE";
 		proceed(request, response);
 	}
-	
-	private void proceed(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		HttpSession session = request.getSession(true);	
-        PrintWriter out = response.getWriter();
+
+	private void proceed(HttpServletRequest request,
+			HttpServletResponse response) throws IOException {
+		HttpSession session = request.getSession(true);
+		PrintWriter out = response.getWriter();
 		StringBuilder content = new StringBuilder();
 		WebController controller = null;
-		
 
-		
 		String contentType = "";
-		
 
-		String format = request.getParameter("format");
-		String ressource = request.getParameter("ressource");
+		String format = null;;
+		String ressource = null;
 		HashMap<String, String> params = new HashMap<String, String>();
-			
+		ArrayList<HashMap<String, Object>> rawContent = new ArrayList<HashMap<String, Object>>();
+
+		Map<String, String[]> map = request.getParameterMap();
+
+		Set<Entry<String, String[]>> set = map.entrySet();
+		Iterator<Entry<String, String[]>> it = set.iterator();
+		while (it.hasNext()) {
+			Map.Entry<String, String[]> entry = (Entry<String, String[]>) it
+					.next();
+			String paramName = entry.getKey();
+
+			String[] paramValues = entry.getValue();
+
+			if ("format".equals(paramName))
+				format = paramValues[0];
+			else if ("ressource".equals(paramName))
+				ressource = paramValues[0];
+			else
+				params.put(paramName, paramValues[0]);
+
+		}
+
 		if (("xml").equals(format))
 			contentType = "text/xml";
 		else
 			contentType = "application/json";
-		
-		if (null != ressource || !controllers.containsKey("ressource"))
-			//content.append("error");
-		controller = controllers.get(ressource);
+		try {
+			if (null == ressource || !controllers.containsKey(ressource))
+				throw new Exception("Resource: '" + ressource
+						+ "'is not available");
+			controller = controllers.get(ressource);
+			if ("GET".equals(method))
+				rawContent = controller.read(params);
+			else if ("POST".equals(method)) 
+				rawContent = controller.update(params);
+			else if ("PUT".equals(method))
+				rawContent = controller.create(params);
+			else if ("DELETE".equals(method))
+				rawContent = controller.delete(params);
+		} catch (Exception e) {
+			HashMap<String, Object> error = new HashMap<String, Object>();
+			error.put("error", e.getMessage());
+			rawContent.add(error);
+		} finally {
+			content.append(Renderer.toJSON(rawContent));
 
-		
-		ArrayList<HashMap<String, Object>> rawContent = new ArrayList<HashMap<String, Object>>();
-		if ("GET".equals(method)) 
-			rawContent = controller.read(params);
-		
-		content.append(Renderer.toJSON(rawContent));
-		
-		response.setContentType(contentType);
-		out.write(content.toString());
+			response.setContentType(contentType);
+			out.write(content.toString());
+		}
 	}
-	
+
 }

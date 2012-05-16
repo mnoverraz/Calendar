@@ -11,6 +11,12 @@ import calendar.core.model.EventDate;
 
 
 public class WebEventController extends WebController {
+	
+	private EventController controller;
+	
+	public WebEventController() {
+		this.controller = new EventController();
+	}
 
 	@Override
 	public ArrayList<HashMap<String, Object>> create(HashMap<String, String> params) {
@@ -19,8 +25,11 @@ public class WebEventController extends WebController {
 
 	@Override
 	public ArrayList<HashMap<String, Object>> read(HashMap<String, String> params) {
-		EventController eventController = new EventController();
-		ArrayList<Event> events = eventController.getEvents();
+		ArrayList<Event> events = null;
+		if (params.containsKey("example"))
+			events = controller.getDummyEvents();
+		else
+			events = controller.getEvents();
 		ArrayList<HashMap<String, Object>> ret = new ArrayList<HashMap<String, Object>>();
 				
 		for (Event event : events) {
