@@ -78,43 +78,44 @@ public class RESTServlet extends HttpServlet {
 
 		String contentType = "";
 
-		String format = null;;
+		String format = null;
+		;
 		String ressource = null;
 		HashMap<String, String> params = new HashMap<String, String>();
 		ArrayList<HashMap<String, Object>> rawContent = new ArrayList<HashMap<String, Object>>();
-
-		Map<String, String[]> map = request.getParameterMap();
-
-		Set<Entry<String, String[]>> set = map.entrySet();
-		Iterator<Entry<String, String[]>> it = set.iterator();
-		while (it.hasNext()) {
-			Map.Entry<String, String[]> entry = (Entry<String, String[]>) it
-					.next();
-			String paramName = entry.getKey();
-
-			String[] paramValues = entry.getValue();
-
-			if ("format".equals(paramName))
-				format = paramValues[0];
-			else if ("ressource".equals(paramName))
-				ressource = paramValues[0];
-			else
-				params.put(paramName, paramValues[0]);
-
-		}
-
-		if (("xml").equals(format))
-			contentType = "text/xml";
-		else
-			contentType = "application/json";
 		try {
+			Map<String, String[]> map = request.getParameterMap();
+
+			Set<Entry<String, String[]>> set = map.entrySet();
+			Iterator<Entry<String, String[]>> it = set.iterator();
+			while (it.hasNext()) {
+				Map.Entry<String, String[]> entry = (Entry<String, String[]>) it
+						.next();
+				String paramName = entry.getKey();
+
+				String[] paramValues = entry.getValue();
+
+				if ("format".equals(paramName))
+					format = paramValues[0];
+				else if ("ressource".equals(paramName))
+					ressource = paramValues[0];
+				else
+					params.put(paramName, paramValues[0]);
+
+			}
+
+			if (("xml").equals(format))
+				contentType = "text/xml";
+			else
+				contentType = "application/json";
+
 			if (null == ressource || !controllers.containsKey(ressource))
 				throw new Exception("Resource: '" + ressource
 						+ "'is not available");
 			controller = controllers.get(ressource);
 			if ("GET".equals(method))
 				rawContent = controller.read(params);
-			else if ("POST".equals(method)) 
+			else if ("POST".equals(method))
 				rawContent = controller.update(params);
 			else if ("PUT".equals(method))
 				rawContent = controller.create(params);

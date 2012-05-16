@@ -20,6 +20,7 @@ public class WebEventController extends WebController {
 
 	@Override
 	public ArrayList<HashMap<String, Object>> create(HashMap<String, String> params) {
+		System.out.println("create");
 		return null;
 	}
 
@@ -50,13 +51,13 @@ public class WebEventController extends WebController {
 
 	@Override
 	public ArrayList<HashMap<String, Object>> update(HashMap<String, String> params) {
-		// TODO Auto-generated method stub
+		System.out.println("update");
 		return null;
 	}
 
 	@Override
 	public ArrayList<HashMap<String, Object>> delete(HashMap<String, String> params) {
-		// TODO Auto-generated method stub
+		System.out.println("delete");
 		return null;
 	}
 

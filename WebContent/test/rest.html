@@ -26,30 +26,33 @@
 		$.ajax({
 			type : method,
 			url : "../rest/event/",
+			dataType: "text",
 			data : {
-				ressource : "event",
-				param2 : "Boston"
+				example : ""
 			},
 			success : function(msg) {
-				//$('#result').html(msg);
+				$('#log').append("<br/>method: " + method);
+				$('#log').append("<br/>result" + msg);
+				$('#log').append("<br/>--------------")
 			}
 		});
 	}
 </script>
 </head>
 <body>
-	<a id="get">Send GET</a>
+	<a href="#" id="get">Send GET</a>
 	<br />
 	<br />
-	<a id="post">Send POST</a>
+	<a href="#" id="post">Send POST</a>
 	<br />
 	<br />
-	<a id="put">Send PUT</a>
+	<a href="#" id="put">Send PUT</a>
 	<br />
 	<br />
-	<a id="delete">Send DELETE</a>
+	<a href="#" id="delete">Send DELETE</a>
 	<br />
 	<br />
-	Resultat serveur: <span id="result"></span>
+	Log: <br/>
+	<span id="log"></span>
 </body>
 </html>
