@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import calendar.core.application.Config;
 import calendar.core.application.utils.DateHelper;
@@ -23,17 +24,27 @@ public class Renderer {
 		
 		for (int i = 0; i < content.size(); i++) {
 			HashMap<String, Object> inner = content.get(i);
-			Iterator<?> it = inner.entrySet().iterator();
+			Iterator<Entry<String, Object>> it = inner.entrySet().iterator();
 			sb.append("{");
+
+			
 			while (it.hasNext()) {
-				Object key = it.next();
+				Object key = it.next().getKey();
 				Object value = inner.get(key);
 				
-				sb.append("\"" + key + "\":" + value);
+				sb.append("\"" + key + "\":");
+				
+				if (value instanceof Boolean)
+					sb.append(value);
+				else
+					sb.append("\"" + value + "\"");
+				
+				if (it.hasNext())
+					sb.append(",");
 			}
 			sb.append("}");
 			
-			if (inner.size() - (i+1) > 0) {
+			if (content.size() - (i+1) > 0) {
 				sb.append(",");
 			}
 		}

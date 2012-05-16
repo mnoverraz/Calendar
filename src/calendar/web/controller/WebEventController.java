@@ -14,6 +14,11 @@ public class WebEventController extends WebController {
 
 	@Override
 	public ArrayList<HashMap<String, Object>> create(HashMap<String, String> params) {
+		return null;
+	}
+
+	@Override
+	public ArrayList<HashMap<String, Object>> read(HashMap<String, String> params) {
 		EventController eventController = new EventController();
 		ArrayList<Event> events = eventController.getEvents();
 		ArrayList<HashMap<String, Object>> ret = new ArrayList<HashMap<String, Object>>();
@@ -32,12 +37,6 @@ public class WebEventController extends WebController {
 		}
 
 		return ret;
-	}
-
-	@Override
-	public ArrayList<HashMap<String, Object>> read(HashMap<String, String> params) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

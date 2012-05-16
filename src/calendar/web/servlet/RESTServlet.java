@@ -28,7 +28,7 @@ public class RESTServlet extends HttpServlet {
 	public void init(ServletConfig config) 
 			throws ServletException {
 		controllers = new HashMap<String, WebController>();
-		controllers.put("events", new WebEventController());
+		controllers.put("event", new WebEventController());
 	}
        
     /**
@@ -73,7 +73,7 @@ public class RESTServlet extends HttpServlet {
 		
 
 		String format = request.getParameter("format");
-		String ressource = request.getParameter("resource");
+		String ressource = request.getParameter("ressource");
 		HashMap<String, String> params = new HashMap<String, String>();
 			
 		if (("xml").equals(format))
@@ -83,15 +83,14 @@ public class RESTServlet extends HttpServlet {
 		
 		if (null != ressource || !controllers.containsKey("ressource"))
 			//content.append("error");
-		
-		/*controller = controllers.get(ressource);
+		controller = controllers.get(ressource);
+
 		
 		ArrayList<HashMap<String, Object>> rawContent = new ArrayList<HashMap<String, Object>>();
 		if ("GET".equals(method)) 
-			rawContent = controller.read(params);*/
+			rawContent = controller.read(params);
 		
-		//content.append(Renderer.toJSON(rawContent));
-		content.append(Renderer.EventRerderer(new EventController().getEvents()));
+		content.append(Renderer.toJSON(rawContent));
 		
 		response.setContentType(contentType);
 		out.write(content.toString());

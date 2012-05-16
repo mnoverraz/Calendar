@@ -31,7 +31,8 @@ public class EventControllerTest {
 	public void testWebEventController() {
 		WebEventController webEventController = new WebEventController();
 
-		ArrayList<HashMap<String, Object>> ret = webEventController.create(new HashMap<String, String>());
+		ArrayList<HashMap<String, Object>> ret = webEventController.read(new HashMap<String, String>());
+		System.out.println(ret);
 		String output = Renderer.toJSON(ret);
 		
 		System.out.println(output);
