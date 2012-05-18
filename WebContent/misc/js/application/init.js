@@ -45,7 +45,6 @@ $(document).ready(function() {
 
     })();
 	
-	
 	//appel fonction dans contrôleur
 	
     //fullcalendar
@@ -64,9 +63,4 @@ $(document).ready(function() {
 		events: 'rest/event/?example',
 	});
 	
-	
-	//ouvrir boîte de dialogue
-	$('.maClasse').click(function() {
-        showDialog();
-    });
 });

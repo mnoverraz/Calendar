@@ -1,12 +1,7 @@
-function get();
-function post();
-function put();
-function remove();
-
-function send(method) {
+function send(url, method) {
 	$.ajax({
 		type : method,
-		url : "../rest/event/",
+		url : url,
 		dataType: "text",
 		data : {
 			example : ""
@@ -20,14 +15,14 @@ function send(method) {
 }
 //foreach $.each(errors, function(key, val) {
 
-function showDialog() {
+function showDialog(url, dialogTitle, buttonOpts) {
 	var $dialog = $('<div id=\"dialog\"></div>')
-    .load('./php/views/eventdialog.php?mode=' + eventMode + '&posX=' + eventPosX + "&posY=" + eventPosY)
+    .load(url)
     .dialog({
         title: dialogTitle,
         autoOpen: false,
         width: 290,
-        buttons: buttonsOpts,
+        buttons: buttonOpts,
         close: function(ev, ui) {
             calendar();
             $(this).remove();

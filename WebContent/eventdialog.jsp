@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<script type='text/javascript' src='misc/js/application/eventdialog.js'></script>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<script type='text/javascript' src='misc/js/application/handler/EventDialog.js'></script>
 
 <form id="eventform" name="eventform" action="" method="post">
 
