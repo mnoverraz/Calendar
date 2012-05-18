@@ -20,32 +20,14 @@
 	type="image/x-icon" />
 
 <!-- BEGIN JQUERY -->
-<script type='text/javascript' src='misc/jquery/jquery-1.7.1.min.js'></script>
+<script type='text/javascript' src='misc/js/jquery/jquery-1.7.1.min.js'></script>
 <script type='text/javascript'
-	src='misc/jquery/jquery-ui-1.8.17.custom.min.js'></script>
-<script type='text/javascript' src='misc/fullcalendar/fullcalendar.js'></script>
+	src='misc/js/jquery/jquery-ui-1.8.17.custom.min.js'></script>
+<script type='text/javascript' src='misc/js/fullcalendar/fullcalendar.js'></script>
 
 <!-- DELETEME  -->
-<script type='text/javascript'>
-	$(document).ready(function() {
-		
-		var date = new Date();
-		var d = date.getDate();
-		var m = date.getMonth();
-		var y = date.getFullYear();
-		$('#calendar').fullCalendar({
-			header : {
-				left : 'prev,next today',
-				center : 'title',
-				right : 'month,agendaWeek,agendaDay'
-			},
-			editable : true,
-			//defaultView: 'agendaWeek',
-			events: 'rest/event/?example',
-		});
-
-	});
-</script>
+<script type='text/javascript' src='misc/js/application/Controller.js'></script>
+<script type='text/javascript' src='misc/js/application/init.js'></script>
 
 <!-- END JQUERY -->
 
