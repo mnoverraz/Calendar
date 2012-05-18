@@ -1,0 +1,74 @@
+form .instructions {
+    padding: 6px;
+    height: 20px;
+    background: #eee;
+    border: 1px dotted #999;
+    padding: 2px 4px 2px 4px;
+}
+fieldset {
+    padding:10px;
+    margin-bottom:10px;
+    border: 1px solid #999999;
+}
+legend {
+    color:#e88c13;
+    font-weight:bold
+}
+form div.input {
+    clear: both;
+    margin: 4px 0;
+    padding: 2px;
+    -moz-border-radius: 4px;
+    border: 0px;
+    background: #eee;
+}
+form div.input.required {
+    font-weight: bold;
+}
+form div.input.error {
+    border-color: #900;
+    background-color: #FCC;
+    color: #900;
+}
+form div.input label {
+    float: left;
+    text-align: right;
+    width: 60px;
+    margin-right: 10px;
+}
+form div.text input,
+form div.password input,
+form div.select select,
+form div.datetime select,
+form div.textarea textarea,
+form div.time select,
+form div.submit input,
+form div.submit input {
+    background: #eee;
+    border: 1px solid #999999;
+    padding: 2px;
+    width: 175px;
+}
+form div.time select {
+    width: 50px;
+}
+form div.textarea textarea {
+    height: 100px;
+}
+form option {
+    padding-right: .5em;
+}
+form div.input.error div.error-message {
+    margin-left: 14.5em;
+    padding: 2px 2px 2px 22px;
+    background: url(../img/icons/error.png) no-repeat center;
+}
+form div.input input.form-error {
+    border-color: #C00;
+}
+
+form div.submit input:hover {
+    background-color: #9C9;
+    color: #333;
+    text-decoration: none;
+}
