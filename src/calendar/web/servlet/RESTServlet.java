@@ -89,7 +89,7 @@ public class RESTServlet extends HttpServlet {
 		String ressource = null;
 		HashMap<String, String> params = new HashMap<String, String>();
 		Message message = new Message();
-		//ArrayList<HashMap<String, Object>> rawContent = new ArrayList<HashMap<String, Object>>();
+
 		try {
 			Map<String, String[]> map = request.getParameterMap();
 

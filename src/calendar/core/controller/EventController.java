@@ -23,7 +23,7 @@ public class EventController extends Controller {
 	}
 
 	@Override
-	public Object read(Object object) throws CoreException {
+	public Object read(HashMap<String, Object> params) throws CoreException {
 		ArrayList<Event> events = new ArrayList<Event>();
 		ArrayList<EventDate> eventDates = new ArrayList<EventDate>();
 		Calendar calendar = Calendar.getInstance();
@@ -55,7 +55,7 @@ public class EventController extends Controller {
 	}
 
 	@Override
-	public void update(HashMap<String, Object> params) throws CoreException {
+	public void update(Object object) throws CoreException {
 		// TODO Auto-generated method stub
 		
 	}
