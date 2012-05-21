@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
 import calendar.core.application.ResourceRegistry;
 import calendar.web.controller.WebEventController;
 import calendar.web.controller.WebController;
+import calendar.web.renderer.Message;
 import calendar.web.renderer.Renderer;
 
 /**
@@ -87,7 +88,8 @@ public class RESTServlet extends HttpServlet {
 		;
 		String ressource = null;
 		HashMap<String, String> params = new HashMap<String, String>();
-		ArrayList<HashMap<String, Object>> rawContent = new ArrayList<HashMap<String, Object>>();
+		Message message = new Message();
+		//ArrayList<HashMap<String, Object>> rawContent = new ArrayList<HashMap<String, Object>>();
 		try {
 			Map<String, String[]> map = request.getParameterMap();
 
@@ -119,19 +121,22 @@ public class RESTServlet extends HttpServlet {
 						+ "'is not available");
 			controller = controllers.get(ressource);
 			if ("GET".equals(method))
-				rawContent = controller.read(params);
+				message = (Message) controller.read(params);
 			else if ("POST".equals(method))
-				rawContent = controller.update(params);
+				message = (Message) controller.update(params);
 			else if ("PUT".equals(method))
-				rawContent = controller.create(params);
+				message = (Message) controller.create(params);
 			else if ("DELETE".equals(method))
-				rawContent = controller.delete(params);
+				message = (Message) controller.delete(params);
 		} catch (Exception e) {
+			ArrayList<HashMap<String, Object>> body = new ArrayList<HashMap<String, Object>>();
 			HashMap<String, Object> error = new HashMap<String, Object>();
 			error.put("error", e.getMessage());
-			rawContent.add(error);
+			body.add(error);
+			message.body = body;
+			message.success = false;
 		} finally {
-			content.append(Renderer.toJSON(rawContent));
+			content.append(Renderer.toJSON(message));
 
 			response.setContentType(contentType);
 			out.write(content.toString());

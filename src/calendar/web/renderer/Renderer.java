@@ -3,20 +3,16 @@ package calendar.web.renderer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Map.Entry;
-
-import calendar.core.application.Config;
-import calendar.core.application.utils.DateHelper;
-import calendar.core.model.Event;
-import calendar.core.model.EventDate;
 
 public class Renderer {
 	public Renderer() {
 		
 	}
 	
-	public static String toJSON(ArrayList<HashMap<String, Object>> content) {
+	public static String toJSON(Message message) {
+		ArrayList<HashMap<String, Object>> content = message.body;
+		
 		StringBuilder sb = new StringBuilder();
 		
 		sb.append("[");

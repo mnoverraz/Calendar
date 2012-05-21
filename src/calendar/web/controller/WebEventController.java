@@ -11,6 +11,7 @@ import calendar.core.exception.CoreException;
 import calendar.core.exception.TimeSlotException;
 import calendar.core.model.Event;
 import calendar.core.model.EventDate;
+import calendar.web.renderer.Message;
 
 
 public class WebEventController extends WebController {
@@ -23,15 +24,15 @@ public class WebEventController extends WebController {
 	}
 
 	@Override
-	public ArrayList<HashMap<String, Object>> create(HashMap<String, String> params) {
+	public Message create(HashMap<String, String> params) {
 		System.out.println("create");
 		return null;
 	}
 
 	@Override
-	public ArrayList<HashMap<String, Object>> read(HashMap<String, String> params) {
+	public Message read(HashMap<String, String> params) {
 		ArrayList<Event> events = null;
-
+		Message message = new Message();
 		try {
 			events = (ArrayList<Event>) controller.read(null);
 		} catch (CoreException e) {
@@ -52,21 +53,23 @@ public class WebEventController extends WebController {
 				eventMap.put("start", DateHelper.DateToString(eventDate.getStart(), Config.DATE_FORMAT_LONG));
 				eventMap.put("end", DateHelper.DateToString(eventDate.getEnd(), Config.DATE_FORMAT_LONG));
 				eventMap.put("allDay", eventDate.isAllDay());
+				
 				ret.add(eventMap);
 			}
 		}
+		message.body = ret;
 
-		return ret;
+		return message;
 	}
 
 	@Override
-	public ArrayList<HashMap<String, Object>> update(HashMap<String, String> params) {
+	public Message update(HashMap<String, String> params) {
 		System.out.println("update");
 		return null;
 	}
 
 	@Override
-	public ArrayList<HashMap<String, Object>> delete(HashMap<String, String> params) {
+	public Message delete(HashMap<String, String> params) {
 		System.out.println("delete");
 		return null;
 	}

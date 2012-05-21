@@ -2,15 +2,13 @@ package calendar.test;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.junit.Test;
 
 import calendar.core.application.BootStrap;
-import calendar.core.controller.EventController;
-import calendar.core.model.Event;
 import calendar.web.controller.WebEventController;
+import calendar.web.renderer.Message;
 import calendar.web.renderer.Renderer;
 
 public class EventControllerTest {
@@ -32,10 +30,10 @@ public class EventControllerTest {
 	public void testWebEventController() {
 		BootStrap.init();
 		WebEventController webEventController = new WebEventController(BootStrap.ResourceRegistry);
+		Message message = new Message();
+		message = (Message) webEventController.read(new HashMap<String, String>());
 
-		ArrayList<HashMap<String, Object>> ret = webEventController.read(new HashMap<String, String>());
-		System.out.println(ret);
-		String output = Renderer.toJSON(ret);
+		String output = Renderer.toJSON(message);
 		
 		System.out.println(output);
 	}	
