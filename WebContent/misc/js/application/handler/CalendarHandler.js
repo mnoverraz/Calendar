@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$('#clickMe').click(function() {
+	$('.fc-widget-content').click(function() {
 	    buttonOpts = {};
 	    buttonOpts['Fermer'] = $.extend(function() {
 	        $(this).dialog("close");
