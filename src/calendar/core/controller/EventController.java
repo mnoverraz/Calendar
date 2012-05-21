@@ -4,23 +4,26 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 
 import calendar.core.application.Config;
 import calendar.core.application.utils.DateHelper;
+import calendar.core.exception.CoreException;
 import calendar.core.exception.TimeSlotException;
 import calendar.core.model.Event;
 import calendar.core.model.EventDate;
 
 
-public class EventController extends Controller {
-	
-	public void addEvent() throws TimeSlotException {
+public class EventController extends Controller {	
+	@Override
+	public void create(Object object) throws CoreException {
 		TimeSlotException timeSlotException = new TimeSlotException();
 		timeSlotException.detailInformation = new ArrayList<EventDate>();
 		throw timeSlotException;
 	}
-	
-	public ArrayList<Event> getDummyEvents() {
+
+	@Override
+	public Object read(Object object) throws CoreException {
 		ArrayList<Event> events = new ArrayList<Event>();
 		ArrayList<EventDate> eventDates = new ArrayList<EventDate>();
 		Calendar calendar = Calendar.getInstance();
@@ -50,8 +53,16 @@ public class EventController extends Controller {
 		
 		return events;
 	}
-	public ArrayList<Event> getEvents() {
+
+	@Override
+	public void update(HashMap<String, Object> params) throws CoreException {
+		// TODO Auto-generated method stub
 		
-		return null;
+	}
+
+	@Override
+	public void delete(Object object) throws CoreException {
+		// TODO Auto-generated method stub
+		
 	}
 }

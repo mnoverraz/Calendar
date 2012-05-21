@@ -7,6 +7,8 @@ import calendar.core.application.Config;
 import calendar.core.application.ResourceRegistry;
 import calendar.core.application.utils.DateHelper;
 import calendar.core.controller.EventController;
+import calendar.core.exception.CoreException;
+import calendar.core.exception.TimeSlotException;
 import calendar.core.model.Event;
 import calendar.core.model.EventDate;
 
@@ -29,10 +31,16 @@ public class WebEventController extends WebController {
 	@Override
 	public ArrayList<HashMap<String, Object>> read(HashMap<String, String> params) {
 		ArrayList<Event> events = null;
-		if (params.containsKey("example"))
-			events = controller.getDummyEvents();
-		else
-			events = controller.getEvents();
+
+		try {
+			events = (ArrayList<Event>) controller.read(null);
+		} catch (CoreException e) {
+			Object detailInformation = e.detailInformation;
+			if (e instanceof TimeSlotException) {
+				ArrayList<EventDate> eventDates = (ArrayList<EventDate>)detailInformation;
+			}
+		}
+
 		ArrayList<HashMap<String, Object>> ret = new ArrayList<HashMap<String, Object>>();
 				
 		for (Event event : events) {
