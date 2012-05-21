@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import calendar.core.application.ResourceRegistry;
-import calendar.core.controller.EventController;
 import calendar.web.controller.WebEventController;
 import calendar.web.controller.WebController;
 import calendar.web.renderer.Renderer;
@@ -31,12 +30,10 @@ public class RESTServlet extends HttpServlet {
 	private String method;
 
 	public void init(ServletConfig config) throws ServletException {
-		//System.out.println(config.getServletContext().getAttribute("registry"));
 		ResourceRegistry registry = (ResourceRegistry)config.getServletContext().getAttribute("registry");
 		controllers = new HashMap<String, WebController>();
 		
 		if (registry != null) {
-			System.out.println("hello");
 			WebController eventController = new WebEventController(registry);
 			controllers.put("event", eventController);
 		}

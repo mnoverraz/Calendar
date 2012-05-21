@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 import org.junit.Test;
 
+import calendar.core.application.BootStrap;
 import calendar.core.controller.EventController;
 import calendar.core.model.Event;
 import calendar.web.controller.WebEventController;
@@ -29,7 +30,8 @@ public class EventControllerTest {
 	
 	@Test
 	public void testWebEventController() {
-		WebEventController webEventController = new WebEventController();
+		BootStrap.init();
+		WebEventController webEventController = new WebEventController(BootStrap.ResourceRegistry);
 
 		ArrayList<HashMap<String, Object>> ret = webEventController.read(new HashMap<String, String>());
 		System.out.println(ret);

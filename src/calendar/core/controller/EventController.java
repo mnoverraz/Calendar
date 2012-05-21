@@ -7,11 +7,19 @@ import java.util.Date;
 
 import calendar.core.application.Config;
 import calendar.core.application.utils.DateHelper;
+import calendar.core.exception.TimeSlotException;
 import calendar.core.model.Event;
 import calendar.core.model.EventDate;
 
 
 public class EventController extends Controller {
+	
+	public void addEvent() throws TimeSlotException {
+		TimeSlotException timeSlotException = new TimeSlotException();
+		timeSlotException.eventDates = new ArrayList<EventDate>();
+		throw timeSlotException;
+	}
+	
 	public ArrayList<Event> getDummyEvents() {
 		ArrayList<Event> events = new ArrayList<Event>();
 		ArrayList<EventDate> eventDates = new ArrayList<EventDate>();

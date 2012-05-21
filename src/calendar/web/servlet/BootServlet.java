@@ -11,7 +11,6 @@ public class BootServlet extends HttpServlet {
        
 	public void init(ServletConfig config) throws ServletException {
 		BootStrap.init();
-		System.out.println("init");
 		config.getServletContext().setAttribute("registry", BootStrap.ResourceRegistry);
 	}
 
