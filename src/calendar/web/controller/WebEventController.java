@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import calendar.core.application.Config;
+import calendar.core.application.ResourceRegistry;
 import calendar.core.application.utils.DateHelper;
 import calendar.core.controller.EventController;
 import calendar.core.model.Event;
@@ -14,8 +15,9 @@ public class WebEventController extends WebController {
 	
 	private EventController controller;
 	
-	public WebEventController() {
-		this.controller = new EventController();
+	public WebEventController(ResourceRegistry registry) {
+		super(registry);
+		this.controller = (EventController) registry.getController("EventController");
 	}
 
 	@Override

@@ -11,7 +11,7 @@ import calendar.core.model.Event;
 import calendar.core.model.EventDate;
 
 
-public class EventController {
+public class EventController extends Controller {
 	public ArrayList<Event> getDummyEvents() {
 		ArrayList<Event> events = new ArrayList<Event>();
 		ArrayList<EventDate> eventDates = new ArrayList<EventDate>();
