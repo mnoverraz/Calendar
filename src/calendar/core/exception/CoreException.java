@@ -1,9 +1,9 @@
 package calendar.core.exception;
 
-public class TimeSlotException extends CoreException {
-
+public abstract class CoreException extends Exception {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	public Object detailInformation;
 }

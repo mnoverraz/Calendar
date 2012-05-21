@@ -16,7 +16,7 @@ public class EventController extends Controller {
 	
 	public void addEvent() throws TimeSlotException {
 		TimeSlotException timeSlotException = new TimeSlotException();
-		timeSlotException.eventDates = new ArrayList<EventDate>();
+		timeSlotException.detailInformation = new ArrayList<EventDate>();
 		throw timeSlotException;
 	}
 	
