@@ -14,16 +14,16 @@ import calendar.core.model.Event;
 import calendar.core.model.EventDate;
 
 
-public class EventController extends Controller {	
+public class EventController extends Controller<Event> {	
 	@Override
-	public void create(Object object) throws CoreException {
+	public void create(Event event) throws CoreException {
 		TimeSlotException timeSlotException = new TimeSlotException();
 		timeSlotException.detailInformation = new ArrayList<EventDate>();
 		throw timeSlotException;
 	}
 
 	@Override
-	public <T> T read(HashMap<String, Object> params) throws CoreException {
+	public ArrayList<Event> read(HashMap<String, Object> params) throws CoreException {
 		ArrayList<Event> events = new ArrayList<Event>();
 		ArrayList<EventDate> eventDates = new ArrayList<EventDate>();
 		Calendar calendar = Calendar.getInstance();
@@ -51,17 +51,17 @@ public class EventController extends Controller {
 		
 		events.add(event1);
 		
-		return (T) events;
+		return events;
 	}
 
 	@Override
-	public void update(Object object) throws CoreException {
+	public void update(Event event) throws CoreException {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void delete(Object object) throws CoreException {
+	public void delete(Event event) throws CoreException {
 		// TODO Auto-generated method stub
 		
 	}

@@ -85,7 +85,7 @@ public class RESTServlet extends HttpServlet {
 		String contentType = "";
 
 		String format = null;
-		;
+		
 		String ressource = null;
 		HashMap<String, String> params = new HashMap<String, String>();
 		Message message = new Message();
