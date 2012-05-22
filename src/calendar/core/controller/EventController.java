@@ -27,17 +27,10 @@ public class EventController extends Controller<Event> {
 		ArrayList<Event> events = new ArrayList<Event>();
 		ArrayList<EventDate> eventDates = new ArrayList<EventDate>();
 		Calendar calendar = Calendar.getInstance();
-		
-		int month = Calendar.MONTH;
-		int year = Calendar.YEAR;
-		
-		System.out.println(year);
-		
-		Date date1 = null;
+
 		Date date2 = null;
 		
 		try {
-			date1 = DateHelper.StringToDate("2012-05-15 08:00", Config.DATE_FORMAT_LONG);
 			date2 = DateHelper.StringToDate("2012-05-15 10:00", Config.DATE_FORMAT_LONG);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block

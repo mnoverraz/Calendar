@@ -16,8 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import calendar.core.application.ResourceRegistry;
-import calendar.web.controller.WebEventController;
 import calendar.web.controller.WebController;
 import calendar.web.renderer.Message;
 import calendar.web.renderer.Renderer;
@@ -27,17 +25,11 @@ import calendar.web.renderer.Renderer;
  */
 public class RESTServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private HashMap<String, WebController> controllers;
 	private String method;
+	private ServletConfig config;
 
 	public void init(ServletConfig config) throws ServletException {
-		ResourceRegistry registry = (ResourceRegistry)config.getServletContext().getAttribute("registry");
-		controllers = new HashMap<String, WebController>();
-		
-		if (registry != null) {
-			WebController eventController = new WebEventController(registry);
-			controllers.put("event", eventController);
-		}
+		this.config = config;
 	}
 
 	/**
@@ -116,10 +108,10 @@ public class RESTServlet extends HttpServlet {
 			else
 				contentType = "application/json";
 
-			if (null == ressource || !controllers.containsKey(ressource))
+			if (null == ressource || null == config.getServletContext().getAttribute(ressource))
 				throw new Exception("Resource: '" + ressource
 						+ "'is not available");
-			controller = controllers.get(ressource);
+			controller = (WebController) config.getServletContext().getAttribute(ressource);
 			if ("GET".equals(method))
 				message = (Message) controller.read(params);
 			else if ("POST".equals(method))

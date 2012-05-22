@@ -2,15 +2,15 @@ package calendar.web.controller;
 
 import java.util.HashMap;
 
-import calendar.core.application.ResourceRegistry;
+import calendar.core.controller.Controller;
 import calendar.web.renderer.Message;
 
-public abstract class WebController {
+public abstract class WebController<C extends Controller> {
 	
-	protected ResourceRegistry registry;
+	protected C controller;
 	
-	public WebController(ResourceRegistry registry) {
-		this.registry = registry;
+	public WebController (C controller) {
+		this.controller = controller;
 	}
 	
 	public abstract Message create(HashMap<String, String> params);
