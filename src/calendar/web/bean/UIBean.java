@@ -9,7 +9,7 @@ public class UIBean {
 	private ResourceBundle resourceBundle;
 	
 	public UIBean(String lang) {
-		resourceBundle.getBundle("lang", new Locale(lang), 
+		resourceBundle = ResourceBundle.getBundle("lang", new Locale(lang), 
 				 new XMLResourceBundleControl());
 	}
 
