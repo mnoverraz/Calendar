@@ -38,7 +38,9 @@ public class WebEventController extends WebController {
 		} catch (CoreException e) {
 			Object detailInformation = e.detailInformation;
 			if (e instanceof TimeSlotException) {
+				@SuppressWarnings("unchecked")
 				ArrayList<EventDate> eventDates = (ArrayList<EventDate>)detailInformation;
+				eventDates.size();
 			}
 		}
 
