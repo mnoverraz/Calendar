@@ -30,15 +30,21 @@ public class WebEventController extends WebController<EventController> {
 	public Message read(HashMap<String, String> params) {
 		ArrayList<Event> events = null;
 		Message message = new Message();
+		message.success = true;
+		
+		
 		try {
 			events = (ArrayList<Event>) controller.read(null);
-		} catch (CoreException e) {
+		} 
+		catch (TimeSlotException e) {
 			Object detailInformation = e.detailInformation;
-			if (e instanceof TimeSlotException) {
-				@SuppressWarnings("unchecked")
-				ArrayList<EventDate> eventDates = (ArrayList<EventDate>)detailInformation;
-				eventDates.size();
-			}
+			@SuppressWarnings("unchecked")
+			ArrayList<EventDate> eventDates = (ArrayList<EventDate>)detailInformation;
+			message.success = false;
+
+		}
+		catch (CoreException e) {
+			
 		}
 
 		ArrayList<HashMap<String, Object>> ret = new ArrayList<HashMap<String, Object>>();

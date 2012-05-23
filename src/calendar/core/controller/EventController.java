@@ -18,7 +18,7 @@ import calendar.core.model.EventDate;
 
 public class EventController extends Controller<Event> {	
 	@Override
-	public void create(Event event) throws CoreException {
+	public synchronized void create(Event event) throws CoreException {
 		
 		boolean available = checkAvailability(event);
 		
@@ -30,16 +30,18 @@ public class EventController extends Controller<Event> {
 		Date start = null;
 		Date end = null;
 		
-		Iterator<Entry<String, Object>> it = filter.entrySet().iterator();
-		
-		while (it.hasNext()) {
-			Object key = it.next().getKey();
-			Object value = filter.get(key);
+		if (filter != null) {
+			Iterator<Entry<String, Object>> it = filter.entrySet().iterator();
 			
-			if ("start".equals(key))
-				start = (Date) value;
-			if ("end".equals(key))
-				end = (Date) value;
+			while (it.hasNext()) {
+				Object key = it.next().getKey();
+				Object value = filter.get(key);
+				
+				if ("start".equals(key))
+					start = (Date) value;
+				if ("end".equals(key))
+					end = (Date) value;
+			}
 		}
 		
 		/*
@@ -71,13 +73,13 @@ public class EventController extends Controller<Event> {
 	}
 
 	@Override
-	public void update(Event event) throws CoreException {
+	public synchronized void update(Event event) throws CoreException {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void delete(Event event) throws CoreException {
+	public synchronized void delete(Event event) throws CoreException {
 		// TODO Auto-generated method stub
 		
 	}
