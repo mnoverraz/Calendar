@@ -28,6 +28,7 @@ var defaults = {
 		center: '',
 		right: 'today prev,next'
 	},
+	editable: true,
 	weekends: true,
 	
 	// editing

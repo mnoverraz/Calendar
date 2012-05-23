@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function(e) {
 	$('.fc-widget-content').click(function() {
 	    buttonOpts = {};
 	    buttonOpts['Fermer'] = $.extend(function() {
@@ -10,7 +10,14 @@ $(document).ready(function() {
 	    	//action à faire
 	    }, {
 	        id : 'delete'
-	    });   
+	    });
+	    
+		
+	    //alert($(this).attr('class'));
+	    //alert($(".fc-day-number").val());
+	    alert($(this).children('div:first').text());
+	    
         showDialog('../eventdialog.jsp', 'monDialog', buttonOpts);
+        
     });
 });

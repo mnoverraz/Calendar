@@ -36,8 +36,8 @@ function showDialog(url, dialogTitle, buttonOpts) {
 
     $dialog.dialog('open');
 
-    if (eventMode != 'edit') {
+    /*if (eventMode != 'edit') {
         $("#delete").hide();
-    }
+    }*/
     return false;
 }

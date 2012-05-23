@@ -41,18 +41,18 @@ $(document).ready(function() {
 
                 i += 1;
             }
-        }
+        };
 
     })();
 	
 	//appel fonction dans contrôleur
 	
     //fullcalendar
-	var date = new Date();
-	var d = date.getDate();
+	//var date = new Date();
+	/*var d = date.getDate();
 	var m = date.getMonth();
-	var y = date.getFullYear();
-	$('#calendar').fullCalendar({
+	var y = date.getFullYear();*/
+	var calendar = $('#calendar').fullCalendar({
 		header : {
 			left : 'prev,next today',
 			center : 'title',
@@ -61,6 +61,29 @@ $(document).ready(function() {
 		editable : true,
 		//defaultView: 'agendaWeek',
 		events: 'rest/event/?example',
+		selectable: true,
+		selectHelper: true,
+		select: function(start, end, allDay) {
+			    buttonOpts = {};
+			    buttonOpts['Fermer'] = $.extend(function() {
+			        $(this).dialog("close");
+			    },{
+			        id : 'monId'
+			    });
+			    buttonOpts['Button 2'] = $.extend(function() {                    
+			    	//action à faire
+			    }, {
+			        id : 'delete'
+			    });
+			    
+				
+			    //alert($(this).attr('class'));
+			    //alert($(".fc-day-number").val());
+			    
+		        showDialog('eventdialog.jsp', 'monDialog', buttonOpts);
+		        
+			calendar.fullCalendar('unselect');
+		},
 	});
 	
 });
