@@ -4,29 +4,33 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 
 import calendar.core.application.Config;
 import calendar.core.application.utils.DateHelper;
+import calendar.core.exception.CoreException;
+import calendar.core.exception.TimeSlotException;
 import calendar.core.model.Event;
 import calendar.core.model.EventDate;
 
 
-public class EventController {
-	public ArrayList<Event> getDummyEvents() {
+public class EventController extends Controller<Event> {	
+	@Override
+	public void create(Event event) throws CoreException {
+		TimeSlotException timeSlotException = new TimeSlotException();
+		timeSlotException.detailInformation = new ArrayList<EventDate>();
+		throw timeSlotException;
+	}
+
+	@Override
+	public ArrayList<Event> read(HashMap<String, Object> params) throws CoreException {
 		ArrayList<Event> events = new ArrayList<Event>();
 		ArrayList<EventDate> eventDates = new ArrayList<EventDate>();
 		Calendar calendar = Calendar.getInstance();
-		
-		int month = Calendar.MONTH;
-		int year = Calendar.YEAR;
-		
-		System.out.println(year);
-		
-		Date date1 = null;
+
 		Date date2 = null;
 		
 		try {
-			date1 = DateHelper.StringToDate("2012-05-15 08:00", Config.DATE_FORMAT_LONG);
 			date2 = DateHelper.StringToDate("2012-05-15 10:00", Config.DATE_FORMAT_LONG);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
@@ -42,8 +46,16 @@ public class EventController {
 		
 		return events;
 	}
-	public ArrayList<Event> getEvents() {
+
+	@Override
+	public void update(Event event) throws CoreException {
+		// TODO Auto-generated method stub
 		
-		return null;
+	}
+
+	@Override
+	public void delete(Event event) throws CoreException {
+		// TODO Auto-generated method stub
+		
 	}
 }

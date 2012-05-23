@@ -16,9 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import calendar.core.controller.EventController;
-import calendar.web.controller.WebEventController;
 import calendar.web.controller.WebController;
+import calendar.web.renderer.Message;
 import calendar.web.renderer.Renderer;
 
 /**
@@ -26,12 +25,11 @@ import calendar.web.renderer.Renderer;
  */
 public class RESTServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private HashMap<String, WebController> controllers;
 	private String method;
+	private ServletConfig config;
 
 	public void init(ServletConfig config) throws ServletException {
-		controllers = new HashMap<String, WebController>();
-		controllers.put("event", new WebEventController());
+		this.config = config;
 	}
 
 	/**
@@ -79,10 +77,11 @@ public class RESTServlet extends HttpServlet {
 		String contentType = "";
 
 		String format = null;
-		;
+		
 		String ressource = null;
 		HashMap<String, String> params = new HashMap<String, String>();
-		ArrayList<HashMap<String, Object>> rawContent = new ArrayList<HashMap<String, Object>>();
+		Message message = new Message();
+
 		try {
 			Map<String, String[]> map = request.getParameterMap();
 
@@ -109,24 +108,27 @@ public class RESTServlet extends HttpServlet {
 			else
 				contentType = "application/json";
 
-			if (null == ressource || !controllers.containsKey(ressource))
+			if (null == ressource || null == config.getServletContext().getAttribute(ressource))
 				throw new Exception("Resource: '" + ressource
 						+ "'is not available");
-			controller = controllers.get(ressource);
+			controller = (WebController) config.getServletContext().getAttribute(ressource);
 			if ("GET".equals(method))
-				rawContent = controller.read(params);
+				message = (Message) controller.read(params);
 			else if ("POST".equals(method))
-				rawContent = controller.update(params);
+				message = (Message) controller.update(params);
 			else if ("PUT".equals(method))
-				rawContent = controller.create(params);
+				message = (Message) controller.create(params);
 			else if ("DELETE".equals(method))
-				rawContent = controller.delete(params);
+				message = (Message) controller.delete(params);
 		} catch (Exception e) {
+			ArrayList<HashMap<String, Object>> body = new ArrayList<HashMap<String, Object>>();
 			HashMap<String, Object> error = new HashMap<String, Object>();
 			error.put("error", e.getMessage());
-			rawContent.add(error);
+			body.add(error);
+			message.body = body;
+			message.success = false;
 		} finally {
-			content.append(Renderer.toJSON(rawContent));
+			content.append(Renderer.toJSON(message));
 
 			response.setContentType(contentType);
 			out.write(content.toString());
