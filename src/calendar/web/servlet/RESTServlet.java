@@ -14,7 +14,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import calendar.web.controller.WebController;
 import calendar.web.renderer.Message;
@@ -69,10 +68,10 @@ public class RESTServlet extends HttpServlet {
 
 	private void proceed(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
-		HttpSession session = request.getSession(true);
+		//HttpSession session = request.getSession(true);
 		PrintWriter out = response.getWriter();
 		StringBuilder content = new StringBuilder();
-		WebController controller = null;
+		WebController<?> controller = null;
 
 		String contentType = "";
 
@@ -83,6 +82,7 @@ public class RESTServlet extends HttpServlet {
 		Message message = new Message();
 
 		try {
+			@SuppressWarnings("unchecked")
 			Map<String, String[]> map = request.getParameterMap();
 
 			Set<Entry<String, String[]>> set = map.entrySet();
@@ -111,7 +111,7 @@ public class RESTServlet extends HttpServlet {
 			if (null == ressource || null == config.getServletContext().getAttribute(ressource))
 				throw new Exception("Resource: '" + ressource
 						+ "'is not available");
-			controller = (WebController) config.getServletContext().getAttribute(ressource);
+			controller = (WebController<?>) config.getServletContext().getAttribute(ressource);
 			if ("GET".equals(method))
 				message = (Message) controller.read(params);
 			else if ("POST".equals(method))

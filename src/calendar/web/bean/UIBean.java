@@ -3,7 +3,7 @@ package calendar.web.bean;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import calendar.core.application.XMLResourceBundleControl;
+import calendar.core.application.utils.XMLResourceBundleControl;
 
 public class UIBean {
 	private ResourceBundle resourceBundle;

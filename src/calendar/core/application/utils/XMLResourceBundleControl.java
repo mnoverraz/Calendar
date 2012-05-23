@@ -1,4 +1,4 @@
-package calendar.core.application;
+package calendar.core.application.utils;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -55,7 +55,7 @@ public class XMLResourceBundleControl extends ResourceBundle.Control {
 			return null;
 		}
 
-		String bundleName = toBundleName("tim.res.lang", locale);
+		String bundleName = toBundleName("calendar.core.res", locale);
 
 		String resourceName = toResourceName(bundleName, format);
 		URL url = loader.getResource(resourceName);
