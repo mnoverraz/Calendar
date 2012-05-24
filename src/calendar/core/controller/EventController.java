@@ -18,7 +18,7 @@ import calendar.core.model.EventDate;
 
 public class EventController extends Controller<Event> {	
 	@Override
-	public synchronized void create(Event event) throws CoreException {
+	public void create(Event event) throws CoreException {
 		
 		boolean available = checkAvailability(event);
 		
@@ -73,13 +73,13 @@ public class EventController extends Controller<Event> {
 	}
 
 	@Override
-	public synchronized void update(Event event) throws CoreException {
+	public void update(Event event) throws CoreException {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public synchronized void delete(Event event) throws CoreException {
+	public void delete(Event event) throws CoreException {
 		// TODO Auto-generated method stub
 		
 	}
