@@ -6,4 +6,4 @@ build
 .settings
 .project
 WebContent/lib/**/*
-
+/res/**/*
