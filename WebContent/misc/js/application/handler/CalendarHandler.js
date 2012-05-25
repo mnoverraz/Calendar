@@ -1,3 +1,4 @@
+/*
 $(document).ready(function(e) {
 	$('.fc-widget-content').click(function() {
 	    buttonOpts = {};
@@ -21,3 +22,4 @@ $(document).ready(function(e) {
         
     });
 });
+*/
