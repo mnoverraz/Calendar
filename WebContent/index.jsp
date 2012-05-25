@@ -1,9 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page pageEncoding="UTF-8"%>
-<%@ page import="java.util.ResourceBundle"  %>
 
 <jsp:useBean id="ui" class="calendar.web.bean.UIBean" scope="session" />
-<jsp:setProperty name="ui" property="lang" value="<%=request.getParameter(\"lang\") %>" />
+<%
+String lang = request.getParameter("lang");
+if (lang != null && !lang.equals(ui.getLang())) 
+	ui.setLang(lang);
+%>
+
 <html>
 <head>
 <title>CALENDAR</title>
@@ -15,6 +19,6 @@
 </head>
 <body>
 
-<%=ui.getLangText("applicationMenuAsbout") %>
+<%=ui.getLangText("applicationMenuAbout") %>
 </body>
 </html>
