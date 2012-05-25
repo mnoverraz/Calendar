@@ -14,9 +14,7 @@
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 </head>
 <body>
-<%
-ResourceBundle bundle = ui.getResourceBundle();
-%>
-<%=bundle.getString("applicationMenuAbout") %>
+
+<%=ui.getLangText("applicationMenuAsbout") %>
 </body>
 </html>

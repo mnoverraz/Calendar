@@ -19,5 +19,12 @@ public class UIBean {
 		return resourceBundle;
 	}
 	
+	public String getLangText(String attribute) {
+		if (resourceBundle.containsKey(attribute))
+			return resourceBundle.getString(attribute);
+		else
+			return "Attribute '" + attribute + "' not found.";
+	}
+	
 	
 }
