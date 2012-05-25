@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<urlrewrite>   
+<urlrewrite>  
+    <rule>
+        <from>^/([a-z]+)/$</from>
+        <to>/index.jsp?lang=$1</to>
+    </rule> 
     <rule>
         <from>^/rest/([a-z0-9]+)/$</from>
         <to>/rest?ressource=$1</to>

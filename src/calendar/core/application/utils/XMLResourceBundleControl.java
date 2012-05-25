@@ -56,7 +56,6 @@ public class XMLResourceBundleControl extends ResourceBundle.Control {
 		}
 
 		String bundleName = toBundleName(baseName, locale);
-		System.out.println(bundleName);
 
 		String resourceName = toResourceName(bundleName, format);
 		URL url = loader.getResource(resourceName);
