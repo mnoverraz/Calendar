@@ -7,9 +7,11 @@ import calendar.core.application.utils.XMLResourceBundleControl;
 
 public class UIBean {
 	private ResourceBundle resourceBundle;
-	
-	public UIBean(String lang) {
-		resourceBundle = ResourceBundle.getBundle("lang", new Locale(lang), 
+		
+	public void setLang(String lang) {
+		if (lang == null)
+			lang = "fr";
+		resourceBundle = ResourceBundle.getBundle("calendar.core.res.lang", new Locale(lang), 
 				 new XMLResourceBundleControl());
 	}
 
