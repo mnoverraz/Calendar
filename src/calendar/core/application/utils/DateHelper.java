@@ -3,9 +3,15 @@ package calendar.core.application.utils;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+
+import org.joda.time.DateTime;
+import org.joda.time.Days;
+import org.joda.time.Months;
+import org.joda.time.Years;
 
 import calendar.core.application.Config;
 
@@ -139,5 +145,57 @@ public class DateHelper {
 		return cal.get(Calendar.DAY_OF_WEEK);
 	}
 	
+	
+	public static int getTimeBetween(Date start, Date end, String mode) {
+		int diff = 0;
+		DateTime dtStart = new DateTime(start);
+		DateTime dtEnd = new DateTime(end);
+		
+		if ("d".equals(mode)) {
+			diff = 	Days.daysBetween(dtStart, dtEnd).getDays();
+		}
+		else if ("w".equals(mode)) {
+			diff = 	Days.daysBetween(dtStart, dtEnd).getDays() / 7;
+		}
+		else if ("2w".equals(mode)) {
+			diff = 	Days.daysBetween(dtStart, dtEnd).getDays() / 14;
+		}
+		else if ("m".equals(mode)) {
+			diff = 	Months.monthsBetween(dtStart, dtEnd).getMonths();
+		}
+		else if ("y".equals("mode")) {
+			diff = Years.yearsBetween(dtStart, dtEnd).getYears();
+		}
+		return diff;
+	}
+	
+	public static ArrayList<Date> calculateRecurrentDates(Date start, Date end, String mode) {
+		ArrayList<Date> dates = new ArrayList<Date>();
+		GregorianCalendar cal = (GregorianCalendar) GregorianCalendar.getInstance();   
+		cal.setTime(start);
+		
+		int diff = DateHelper.getTimeBetween(start, end, mode);
+		
+		for (int i = 1; i <= diff; i++) {
+			if ("d".equals(mode)) {
+				cal.add(GregorianCalendar.DATE, +1);
+			}
+			else if ("w".equals(mode)) {
+				cal.add(GregorianCalendar.DATE, + 7);
+			}
+			else if ("2w".equals(mode)) {
+				cal.add(GregorianCalendar.DATE, + 14);
+			}
+			else if ("m".equals(mode)) {
+				cal.add(GregorianCalendar.MONTH, +1);
+			}
+			else if ("y".equals("mode")) {
+				cal.add(GregorianCalendar.YEAR, +1);
+			}
 
+			dates.add(cal.getTime());
+		}
+		
+		return dates;
+	}
 }

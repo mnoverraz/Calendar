@@ -47,24 +47,29 @@ public class EventController extends Controller<Event> {
 		/*
 		 * Dummy data for test, real data access should be here
 		 */
-		ArrayList<EventDate> eventDates = new ArrayList<EventDate>();
-		Calendar calendar = Calendar.getInstance();
-
-		Date date2 = null;
 		
 		try {
-			date2 = DateHelper.StringToDate("2012-05-15 10:00", Config.DATE_FORMAT_LONG);
+		ArrayList<EventDate> eventDates = new ArrayList<EventDate>();
+		eventDates.add(new EventDate(DateHelper.StringToDate("2012-05-15 08:00", Config.DATE_FORMAT_LONG), DateHelper.StringToDate("2012-05-15 10:00", Config.DATE_FORMAT_LONG)));
+		eventDates.add(new EventDate(DateHelper.getToday(), DateHelper.getToday()));
+		
+		events.add(new Event(1, eventDates, "event 1 (récurrent)", "description 1"));
+		
+		eventDates = new ArrayList<EventDate>();
+		eventDates.add(new EventDate(DateHelper.StringToDate("2012-05-16 11:00", Config.DATE_FORMAT_LONG), DateHelper.StringToDate("2012-05-16 13:00", Config.DATE_FORMAT_LONG)));
+		
+		events.add(new Event(2, eventDates, "event 2", "description 2"));
+		
+		eventDates = new ArrayList<EventDate>();
+		eventDates.add(new EventDate(DateHelper.StringToDate("2012-05-05 22:00", Config.DATE_FORMAT_LONG), DateHelper.StringToDate("2012-05-05 23:00", Config.DATE_FORMAT_LONG)));
+		
+		events.add(new Event(3, eventDates, "event 3", "description 3"));
+		
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		eventDates.add(new EventDate(calendar.getTime(), date2));
-		eventDates.add(new EventDate(DateHelper.getToday(), DateHelper.getToday()));
-		
-		Event event1 = new Event(1, eventDates, "reccurent 1", "description");
-		
-		events.add(event1);
+
 		/*
 		 * End dummy
 		 */
@@ -107,6 +112,8 @@ public class EventController extends Controller<Event> {
 					Date existingStart = existingEventDate.getStart();
 					Date existingEnd = existingEventDate.getEnd();
 					
+
+					
 					/*
 					 * If the current event has the same id as the retrieved event or
 					 * if the events end takes place before or at the same time as the existing event or
@@ -118,7 +125,7 @@ public class EventController extends Controller<Event> {
 							|| newStart.equals(existingEnd));
 					
 					if (!available)
-						unavailableEvents.add(existingEventDate);
+						unavailableEvents.add(eventDate);
 					
 				}	
 			}	
