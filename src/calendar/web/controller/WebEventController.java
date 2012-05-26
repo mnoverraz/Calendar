@@ -30,7 +30,7 @@ public class WebEventController extends WebController<EventController> {
 	public Message read(HashMap<String, String> params) {
 		ArrayList<Event> events = null;
 		Message message = new Message();
-		message.success = true;
+		message.state = true;
 		
 		
 		try {
@@ -40,14 +40,12 @@ public class WebEventController extends WebController<EventController> {
 			Object detailInformation = e.detailInformation;
 			@SuppressWarnings("unchecked")
 			ArrayList<EventDate> eventDates = (ArrayList<EventDate>)detailInformation;
-			message.success = false;
+			message.state = false;
 
 		}
 		catch (CoreException e) {
 			
 		}
-
-		ArrayList<HashMap<String, Object>> ret = new ArrayList<HashMap<String, Object>>();
 				
 		for (Event event : events) {
 			HashMap<String, Object> eventMap = null;
@@ -59,10 +57,9 @@ public class WebEventController extends WebController<EventController> {
 				eventMap.put("end", DateHelper.DateToString(eventDate.getEnd(), Config.DATE_FORMAT_LONG));
 				eventMap.put("allDay", eventDate.isAllDay());
 				
-				ret.add(eventMap);
+				message.addElementToBody(eventMap);
 			}
 		}
-		message.body = ret;
 
 		return message;
 	}

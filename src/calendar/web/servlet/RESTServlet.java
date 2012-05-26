@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import calendar.web.controller.WebController;
 import calendar.web.renderer.Message;
-import calendar.web.renderer.Renderer;
 
 /**
  * Servlet implementation class CalendarServlet
@@ -76,6 +75,7 @@ public class RESTServlet extends HttpServlet {
 		String contentType = "";
 
 		String format = null;
+		boolean showState = true;
 		
 		String ressource = null;
 		HashMap<String, String> params = new HashMap<String, String>();
@@ -98,6 +98,8 @@ public class RESTServlet extends HttpServlet {
 					format = paramValues[0];
 				else if ("ressource".equals(paramName))
 					ressource = paramValues[0];
+				else if ("showState".equals(paramName))
+					showState = Boolean.parseBoolean(paramValues[0]);
 				else
 					params.put(paramName, paramValues[0]);
 
@@ -121,14 +123,13 @@ public class RESTServlet extends HttpServlet {
 			else if ("DELETE".equals(method))
 				message = (Message) controller.delete(params);
 		} catch (Exception e) {
-			ArrayList<HashMap<String, Object>> body = new ArrayList<HashMap<String, Object>>();
 			HashMap<String, Object> error = new HashMap<String, Object>();
 			error.put("error", e.getMessage());
-			body.add(error);
-			message.body = body;
-			message.success = false;
+
+			message.addElementToBody(error);
+			message.state = false;
 		} finally {
-			content.append(Renderer.toJSON(message));
+			content.append(message.toJSON(showState));
 
 			response.setContentType(contentType);
 			out.write(content.toString());

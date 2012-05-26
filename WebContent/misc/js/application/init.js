@@ -60,7 +60,7 @@ $(document).ready(function() {
 		},
 		editable : true,
 		//defaultView: 'agendaWeek',
-		events: 'rest/event/?example',
+		events: 'rest/event/?example&showState=false',
 		selectable: true,
 		selectHelper: true,
 		select: function(start, end, allDay) {

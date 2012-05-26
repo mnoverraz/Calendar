@@ -22,8 +22,8 @@ import calendar.core.application.Config;
  * of date manipulations
  * 
  * 
- * @author BELLATALLA Alain, MEIER Stefan, NOVERRAZ Mathieu
- * @version 2011.0704
+ * @author MEIER Stefan
+ * @version 20120526
  */
 public class DateHelper {
 

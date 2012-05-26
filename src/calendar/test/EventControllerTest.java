@@ -18,7 +18,6 @@ import calendar.core.model.Event;
 import calendar.core.model.EventDate;
 import calendar.web.controller.WebEventController;
 import calendar.web.renderer.Message;
-import calendar.web.renderer.Renderer;
 
 public class EventControllerTest {
 
@@ -42,7 +41,7 @@ public class EventControllerTest {
 		Message message = new Message();
 		message = (Message) webEventController.read(new HashMap<String, String>());
 
-		String output = Renderer.toJSON(message);
+		String output = message.toJSON(true);
 		
 		System.out.println(output);
 	}	
