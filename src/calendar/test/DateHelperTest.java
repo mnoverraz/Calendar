@@ -29,13 +29,22 @@ public class DateHelperTest {
 
 	@Test
 	public void test_calulateDiff() {
-		System.out.println(DateHelper.getTimeBetween(start, end, "y"));	
+		int y = DateHelper.getIntervalSizeBetween(start, end, "y");	
+		int m = DateHelper.getIntervalSizeBetween(start, end, "m");	
+		int d = DateHelper.getIntervalSizeBetween(start, end, "d");	
+		int twoW = DateHelper.getIntervalSizeBetween(start, end, "2w");	
+		int w = DateHelper.getIntervalSizeBetween(start, end, "w");	
+		assertEquals(366, d);
+		assertEquals(52, w);
+		assertEquals(26, twoW);
+		assertEquals(0, y);
+		assertEquals(12, m);
 	}
 
 	@Test
 	public void test_repeatDate() {
 				
-		ArrayList<Date> dates = DateHelper.calculateRecurrentDates(start, end, "m");
+		ArrayList<Date> dates = DateHelper.calculateRecurrentDates(start, end, "2w");
 		
 		for (Date d : dates) {
 			System.out.println(d);

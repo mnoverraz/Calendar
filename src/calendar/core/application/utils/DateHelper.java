@@ -10,6 +10,7 @@ import java.util.GregorianCalendar;
 
 import org.joda.time.DateTime;
 import org.joda.time.Days;
+import org.joda.time.Weeks;
 import org.joda.time.Months;
 import org.joda.time.Years;
 
@@ -145,22 +146,29 @@ public class DateHelper {
 		return cal.get(Calendar.DAY_OF_WEEK);
 	}
 	
-	
-	public static int getTimeBetween(Date start, Date end, String mode) {
+	/**
+	 * 
+	 * Gets the size of the interval between start and end 
+	 * (if interval is 'w', the number of weeks are returned
+	 * @param start
+	 * @param end
+	 * @param interval
+	 */
+	public static int getIntervalSizeBetween(Date start, Date end, String interval) {
 		int diff = 0;
 		DateTime dtStart = new DateTime(start);
 		DateTime dtEnd = new DateTime(end);
 		
-		if ("d".equals(mode)) {
+		if ("d".equals(interval)) {
 			diff = 	Days.daysBetween(dtStart, dtEnd).getDays();
 		}
-		else if ("w".equals(mode)) {
-			diff = 	Days.daysBetween(dtStart, dtEnd).getDays() / 7;
+		else if ("w".equals(interval)) {
+			diff = 	Weeks.weeksBetween(dtStart, dtEnd).getWeeks();
 		}
-		else if ("2w".equals(mode)) {
-			diff = 	Days.daysBetween(dtStart, dtEnd).getDays() / 14;
+		else if ("2w".equals(interval)) {
+			diff = 	Weeks.weeksBetween(dtStart, dtEnd).getWeeks() / 2;
 		}
-		else if ("m".equals(mode)) {
+		else if ("m".equals(interval)) {
 			diff = 	Months.monthsBetween(dtStart, dtEnd).getMonths();
 		}
 		else if ("y".equals("mode")) {
@@ -169,24 +177,31 @@ public class DateHelper {
 		return diff;
 	}
 	
-	public static ArrayList<Date> calculateRecurrentDates(Date start, Date end, String mode) {
+	/**
+	 * Calculates recurrent dates between start and end for specified interval
+	 * 
+	 * @param start
+	 * @param end
+	 * @param interval
+	 */
+	public static ArrayList<Date> calculateRecurrentDates(Date start, Date end, String interval) {
 		ArrayList<Date> dates = new ArrayList<Date>();
 		GregorianCalendar cal = (GregorianCalendar) GregorianCalendar.getInstance();   
 		cal.setTime(start);
 		
-		int diff = DateHelper.getTimeBetween(start, end, mode);
+		int diff = DateHelper.getIntervalSizeBetween(start, end, interval);
 		
 		for (int i = 1; i <= diff; i++) {
-			if ("d".equals(mode)) {
+			if ("d".equals(interval)) {
 				cal.add(GregorianCalendar.DATE, +1);
 			}
-			else if ("w".equals(mode)) {
+			else if ("w".equals(interval)) {
 				cal.add(GregorianCalendar.DATE, + 7);
 			}
-			else if ("2w".equals(mode)) {
+			else if ("2w".equals(interval)) {
 				cal.add(GregorianCalendar.DATE, + 14);
 			}
-			else if ("m".equals(mode)) {
+			else if ("m".equals(interval)) {
 				cal.add(GregorianCalendar.MONTH, +1);
 			}
 			else if ("y".equals("mode")) {
