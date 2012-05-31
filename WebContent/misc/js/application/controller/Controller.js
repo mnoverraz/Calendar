@@ -9,7 +9,7 @@ function send(url, method) {
 		success : function(msg) {
 			$('#log').append("<br/>method: " + method);
 			$('#log').append("<br/>result" + msg);
-			$('#log').append("<br/>--------------")
+			$('#log').append("<br/>--------------");
 		}
 	});
 }
@@ -24,7 +24,6 @@ function showDialog(url, dialogTitle, buttonOpts) {
         width: 290,
         buttons: buttonOpts,
         close: function(ev, ui) {
-            calendar();
             $(this).remove();
             $('#dialog-confirm').remove();
         },

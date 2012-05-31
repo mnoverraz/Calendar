@@ -77,9 +77,6 @@ $(document).ready(function() {
 			    });
 			    
 				
-			    //alert($(this).attr('class'));
-			    //alert($(".fc-day-number").val());
-			    
 		        showDialog('eventdialog.jsp', 'Editer évenement', buttonOpts);
 		        
 			calendar.fullCalendar('unselect');
