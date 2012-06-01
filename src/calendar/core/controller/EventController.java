@@ -2,7 +2,6 @@ package calendar.core.controller;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -10,10 +9,10 @@ import java.util.Map.Entry;
 
 import calendar.core.application.Config;
 import calendar.core.application.utils.DateHelper;
+import calendar.core.entity.Event;
+import calendar.core.entity.EventDate;
 import calendar.core.exception.CoreException;
 import calendar.core.exception.TimeSlotException;
-import calendar.core.model.Event;
-import calendar.core.model.EventDate;
 
 
 public class EventController extends Controller<Event> {	
@@ -50,20 +49,20 @@ public class EventController extends Controller<Event> {
 		
 		try {
 		ArrayList<EventDate> eventDates = new ArrayList<EventDate>();
-		eventDates.add(new EventDate(DateHelper.StringToDate("2012-05-15 08:00", Config.DATE_FORMAT_LONG), DateHelper.StringToDate("2012-05-15 10:00", Config.DATE_FORMAT_LONG)));
+		eventDates.add(new EventDate(DateHelper.StringToDate("2012-06-15 08:00", Config.DATE_FORMAT_LONG), DateHelper.StringToDate("2012-06-15 10:00", Config.DATE_FORMAT_LONG)));
 		eventDates.add(new EventDate(DateHelper.getToday(), DateHelper.getToday()));
 		
-		events.add(new Event(1, eventDates, "event 1 (récurrent)", "description 1"));
+		events.add(new Event(1, eventDates, "event 1 (récurrent)", "description 1", "m"));
 		
 		eventDates = new ArrayList<EventDate>();
-		eventDates.add(new EventDate(DateHelper.StringToDate("2012-05-16 11:00", Config.DATE_FORMAT_LONG), DateHelper.StringToDate("2012-05-16 13:00", Config.DATE_FORMAT_LONG)));
+		eventDates.add(new EventDate(DateHelper.StringToDate("2012-06-16 11:00", Config.DATE_FORMAT_LONG), DateHelper.StringToDate("2012-06-16 13:00", Config.DATE_FORMAT_LONG)));
 		
-		events.add(new Event(2, eventDates, "event 2", "description 2"));
+		events.add(new Event(2, eventDates, "event 2", "description 2", ""));
 		
 		eventDates = new ArrayList<EventDate>();
-		eventDates.add(new EventDate(DateHelper.StringToDate("2012-05-05 22:00", Config.DATE_FORMAT_LONG), DateHelper.StringToDate("2012-05-05 23:00", Config.DATE_FORMAT_LONG)));
+		eventDates.add(new EventDate(DateHelper.StringToDate("2012-06-05 22:00", Config.DATE_FORMAT_LONG), DateHelper.StringToDate("2012-06-05 23:00", Config.DATE_FORMAT_LONG)));
 		
-		events.add(new Event(3, eventDates, "event 3", "description 3"));
+		events.add(new Event(3, eventDates, "event 3", "description 3", ""));
 		
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
@@ -89,6 +88,18 @@ public class EventController extends Controller<Event> {
 		
 	}
 	
+	private synchronized void doAction(String action, Event event) {
+		if ("delete".equals(action)) {
+			
+		}
+		else if ("create".equals(	action)) {
+			
+		}
+		else if ("update".equals(action)) {
+			
+		}
+	}
+	
 	private boolean checkAvailability(Event event) throws CoreException, TimeSlotException {
 		boolean available = true;
 		
@@ -111,8 +122,6 @@ public class EventController extends Controller<Event> {
 				for (EventDate existingEventDate : existingEvent.getEventDates()) {
 					Date existingStart = existingEventDate.getStart();
 					Date existingEnd = existingEventDate.getEnd();
-					
-
 					
 					/*
 					 * If the current event has the same id as the retrieved event or

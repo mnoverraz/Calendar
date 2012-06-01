@@ -23,7 +23,7 @@ public class DateHelperTest {
      */
     @Before
     public void setUp() throws ParseException {
-    	start = DateHelper.StringToDate("2011-05-05 22:50", Config.DATE_FORMAT_LONG);
+    	start = DateHelper.StringToDate("2011-05-05 21:50", Config.DATE_FORMAT_LONG);
 		end = DateHelper.StringToDate("2012-05-05 22:50", Config.DATE_FORMAT_LONG);
     }
 

@@ -12,10 +12,10 @@ import calendar.core.application.BootStrap;
 import calendar.core.application.Config;
 import calendar.core.application.utils.DateHelper;
 import calendar.core.controller.EventController;
+import calendar.core.entity.Event;
+import calendar.core.entity.EventDate;
 import calendar.core.exception.CoreException;
 import calendar.core.exception.TimeSlotException;
-import calendar.core.model.Event;
-import calendar.core.model.EventDate;
 import calendar.web.controller.WebEventController;
 import calendar.web.renderer.Message;
 
@@ -61,7 +61,7 @@ public class EventControllerTest {
 			e.printStackTrace();
 		}
 		
-		eventToTest = new Event(4, eventDates, "event 3", "description 3");
+		eventToTest = new Event(4, eventDates, "event 3", "description 3", "m");
 		
 
 		eventController.create(eventToTest);
