@@ -1,6 +1,7 @@
 #BRANCHES
-master				source of last stable version
-release				source of version to be next stable version candidate
+master				not used
+master-web			master branch of web application project
+master-ejb			master branch of backend application (enterpise java bean)
 feature-template	feature branch for client template
 feature-event-handling	feature branch for calendar core
 
