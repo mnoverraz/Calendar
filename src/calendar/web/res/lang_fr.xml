@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd"> 
+
+<properties>  
+	<comment>This is a Langugae Property file</comment>  
+	<entry key="month-1-full">Janvier</entry>  
+	<entry key="month-2-full">Février</entry> 
+	<entry key="month-3-full">Mars</entry> 
+	<entry key="month-4-full">Avril</entry> 
+	<entry key="month-5-full">Mai</entry> 
+	<entry key="month-6-full">Juin</entry> 
+	<entry key="month-7-full">Juillet</entry> 
+	<entry key="month-8-full">Août</entry> 
+	<entry key="month-9-full">Septembre</entry> 
+	<entry key="month-10-full">Octobre</entry> 
+	<entry key="month-11-full">Novembre</entry> 
+	<entry key="month-12-full">Décembre</entry> 
+	
+	<entry key="month-1-short">Jan</entry>  
+	<entry key="month-2-short">Fév</entry> 
+	<entry key="month-3-short">Mar</entry> 
+	<entry key="month-4-short">Avr</entry> 
+	<entry key="month-5-short">Mai</entry> 
+	<entry key="month-6-short">Juin</entry> 
+	<entry key="month-7-short">Juil</entry> 
+	<entry key="month-8-short">Août</entry> 
+	<entry key="month-9-short">Sept</entry> 
+	<entry key="month-10-short">Oct</entry> 
+	<entry key="month-11-short">Nov</entry> 
+	<entry key="month-12-short">Déc</entry> 
+	
+	<entry key="day-1-full">Dimanche</entry>
+	<entry key="day-2-full">Lundi</entry>
+	<entry key="day-3-full">Mardi</entry>
+	<entry key="day-4-full">Mercredi</entry>
+	<entry key="day-5-full">Jeudi</entry>
+	<entry key="day-6-full">Vendredi</entry>
+	<entry key="day-7-full">Samedi</entry>	
+	
+	<entry key="day-1-short">Dim</entry>
+	<entry key="day-2-short">Lun</entry>
+	<entry key="day-3-short">Mar</entry>
+	<entry key="day-4-short">Mer</entry>
+	<entry key="day-5-short">Jeu</entry>
+	<entry key="day-6-short">Ven</entry>
+	<entry key="day-7-short">Sam</entry>	
+	
+	<entry key="today">Aujourd'hui</entry>	
+	
+	<entry key="application-title">Système de réservation</entry>
+	<entry key="calendar-information">Information</entry>
+	<entry key="calendar-choice">Choisir</entry>  
+	<entry key="calendar-goTo">Aller à</entry> 
+	
+	<entry key="room-category-other">Autre</entry>
+	<entry key="room-category-scientificSetup">Appareils de mesure scientifique</entry> 
+	<entry key="room-category-seminarRoom">Salles</entry> 
+	<entry key="room-category-animalLab">Laboratoire d'expérimentation animale</entry> 
+	<entry key="room-category-animalFacility">Animalerie</entry> 
+	<entry key="room-category-p2">Laboratoires sécurisés P2</entry> 
+	<entry key="room-category-microscope">Microscope</entry> 
+	<entry key="room-category-machineRoom">Salle des appareils</entry> 
+	<entry key="room-category-rental">Matériel de prêt</entry> 
+	<entry key="room-category-metabolicCages">Cages métaboliques</entry>	
+	 
+	<entry key="calendar-error-time">L'heure de fin doit être supérieure à l'heure de début.</entry> 
+	<entry key="calendar-error-unavailable-title">Plages horaires indisponibles</entry> 
+	<entry key="calendar-error-unavailable">Les dates suivantes sont indisponibles.</entry> 
+	<entry key="calendar-error-user">Cet événement ne peut pas être modifié car il appartient à un autre utilisateur.</entry> 
+	<entry key="calendar-error-access">Vous n'avez pas d'autorisation pour effectuer cette action.</entry>
+	<entry key="calendar-error-room">La salle n'existe pas.</entry>
+	<entry key="calendar-error-action">Cette action n'existe pas (choisir add | edit | delete)</entry>	
+	<entry key="calendar-error-invalid">Veuillez ne pas utiliser de caractères spéciaux dans les champs de saisie.</entry>	
+	<entry key="calendar-error-dateFormat">Format de date invalid.</entry>	
+	<entry key="calendar-error-system">Erreur système</entry>
+	<entry key="calendar-error-aclReadCalendar">Vous n'avez pas accès à ce calendrier.</entry>			
+	<entry key="calendar-error-login">Veuillez vous authentifier.</entry>			
+	
+	<entry key="calendar-message-check">Veuillez corriger les champs en rouge.</entry> 
+	<entry key="calendar-message-repeatInfo">Cet événement est répétitif. Toutes les dates seront modifiées.</entry> 
+	<entry key="calendar-message-confirm-title">Confirmation</entry> 
+	<entry key="calendar-message-confirm-repeat-update">Souhaitez-vous vraiment mettre à jour cet événement ainsi que toutes ses réservations futures?</entry>
+	<entry key="calendar-message-confirm-repeat-delete">Souhaitez-vous supprimer cet événement ainsi que toutes ses résevations futures ou uniquement celle sélectionnée ?</entry> 	
+	<entry key="calendar-message-confirm-button-ok">Ok</entry> 
+	<entry key="calendar-message-confirm-button-yes">Oui</entry> 
+	<entry key="calendar-message-confirm-button-no">Non</entry> 
+	<entry key="calendar-message-confirm-button-allFuture">Toutes les réservations futures</entry> 
+	<entry key="calendar-message-confirm-button-thisEvent">Seulement cet événement</entry> 
+	<entry key="calendar-message-checkAvailability">Test de chevauchement de dates</entry> 	
+	
+	<entry key="calendar-event-owner">Propriétaire</entry> 
+	<entry key="calendar-event-new">Nouvel événement</entry> 
+	<entry key="calendar-event-edit">Editer événement</entry> 
+	<entry key="calendar-event-save">Sauvegarder</entry> 
+	<entry key="calendar-event-delete">Supprimer</entry> 
+	<entry key="calendar-event-cancel">Annuler</entry>
+	<entry key="calendar-event-user">Utilisateur</entry>
+	<entry key="calendar-event-title">Titre</entry>
+	<entry key="calendar-event-date">Date</entry>
+	<entry key="calendar-event-wholeDay">Jour entier</entry>
+	<entry key="calendar-event-start">Début</entry>
+	<entry key="calendar-event-end">Fin</entry>	
+	<entry key="calendar-event-repeat">Répéter</entry>	
+	<entry key="calendar-event-never">Jamais</entry>	
+	<entry key="calendar-event-daily">Chaque jour</entry>	
+	<entry key="calendar-event-weekly">Même jour - Chaque semaine</entry>	
+	<entry key="calendar-event-halfMonthly">Même jour - Toutes les deux semaines</entry>	
+	<entry key="calendar-event-monthly">Même jour - Chaque mois</entry>	
+	<entry key="calendar-event-yearly">Même jour - Chaque année</entry>	
+	<entry key="calendar-event-until">Jusqu'à</entry>	
+	<entry key="calendar-event-description">Description</entry>
+</properties> 	

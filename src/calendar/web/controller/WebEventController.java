@@ -38,79 +38,64 @@ public class WebEventController extends WebController<EventController> {
 			boolean allDay = false;
 			String repeatMode = "n";
 			Date repeatEnd = null;
+			String title = null;
 			String description = null;
-			
+
 			Iterator<Entry<String, String>> it = params.entrySet().iterator();
 			try {
-			while (it.hasNext()) {
-				Object key = it.next().getKey();
-				Object value = params.get(key);
-				
+				while (it.hasNext()) {
+					Object key = it.next().getKey();
+					Object value = params.get(key);
 
-				if ("startH".equals(key))
-					startH = Integer.parseInt((String)value);
-				if ("endH".equals(key))
-					endH = Integer.parseInt((String)value);
-				if ("startM".equals(key))
-					startM = Integer.parseInt((String)value);
-				if ("endM".equals(key))
-					endM = Integer.parseInt((String)value);
-				if ("date".equals(key)) {
-					try {
-						date = DateHelper.StringToDate((String)value);
-					} catch (ParseException e) {
-						GenericCoreException coreException = new GenericCoreException();
-						coreException.detailInformation = e.getMessage();
-						throw coreException;
-					}
+					if ("startH".equals(key))
+						startH = Integer.parseInt((String) value);
+					if ("endH".equals(key))
+						endH = Integer.parseInt((String) value);
+					if ("startM".equals(key))
+						startM = Integer.parseInt((String) value);
+					if ("endM".equals(key))
+						endM = Integer.parseInt((String) value);
+					if ("date".equals(key))
+						date = DateHelper.StringToDate((String) value);
+					if ("allDay".equals(key) && "true".equals((String) value))
+						allDay = true;
+					if ("repeatMode".equals(key) && !"n".equals(value))
+						repeatMode = (String) value;
+					if ("repeatEnd".equals(key) && !"n".equals(repeatMode))
+						repeatEnd = DateHelper.StringToDate((String) value);
+					if ("description".equals(key))
+						description = (String) value;
+					if ("title".equals(key)) 
+						title = (String)value;
 				}
-				if ("allDay".equals(key) && "true".equals((String)value))
-					allDay = true;
-				if ("repeatMode".equals(key) && !"n".equals(value))
-					repeatMode = (String)value;
-				if ("repeatEnd".equals(key) && !"n".equals(repeatMode)) {
-					try {
-						repeatEnd = DateHelper.StringToDate((String)value);
-					} catch (ParseException e) {
-						GenericCoreException coreException = new GenericCoreException();
-						coreException.detailInformation = e.getMessage();
-						throw coreException;
-					}
-				}
-				if ("description".equals(key))
-					description = (String)value;
-			}
-			
+
 				String sDate = "2012-06-01";
 				String sRepeatEnd = "2012-06-20";
-				
+
 				String sStartHour = "21:50";
 				String sEndHour = "23:50";
 
 				Date dDate = null;
 				Date rEnd = null;
 
-					dDate = DateHelper.StringToDate(sDate);
-					rEnd = DateHelper.StringToDate(sRepeatEnd);
+				dDate = DateHelper.StringToDate(sDate);
+				rEnd = DateHelper.StringToDate(sRepeatEnd);
 
 				ArrayList<Date> dates = DateHelper.calculateRecurrentDates(
 						dDate, rEnd, "d");
 
 				ArrayList<EventDate> eventDates = new ArrayList<EventDate>();
 
-				//eventDates.add(new EventDate(start, end));
+				// eventDates.add(new EventDate(start, end));
 				for (Date d : dates) {
 					String dateString = DateHelper.DateToString(d);
 					Date eStart = null;
 					Date eEnd = null;
 
-						eStart = DateHelper.StringToDate(dateString
-								+ " "
-								+ sStartHour, Config.DATE_FORMAT_LONG);
-						eEnd = DateHelper.StringToDate(dateString
-								+ " "
-								+ sEndHour, Config.DATE_FORMAT_LONG);
-
+					eStart = DateHelper.StringToDate(dateString + " "
+							+ sStartHour, Config.DATE_FORMAT_LONG);
+					eEnd = DateHelper.StringToDate(dateString + " " + sEndHour,
+							Config.DATE_FORMAT_LONG);
 
 					eventDates.add(new EventDate(eStart, eEnd));
 				}

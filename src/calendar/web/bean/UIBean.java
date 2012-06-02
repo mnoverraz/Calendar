@@ -8,14 +8,22 @@ import calendar.core.application.utils.XMLResourceBundleControl;
 public class UIBean {
 	private ResourceBundle resourceBundle;
 	private String lang;
+	private String resourcePath;
 	
 	public UIBean() {
+		this.resourcePath = "calendar.web.res.lang";
 		setLang("fr");
 	}
+	
+	public UIBean(String resourcePath, String defaultLang) {
+		this.resourcePath = resourcePath;
+		setLang(defaultLang);
+	}
+	
 		
 	public void setLang(String lang) {
 		this.lang = lang;
-		resourceBundle = ResourceBundle.getBundle("calendar.core.res.lang", new Locale(this.lang), 
+		resourceBundle = ResourceBundle.getBundle(resourcePath, new Locale(this.lang), 
 				 new XMLResourceBundleControl());
 	}
 	
