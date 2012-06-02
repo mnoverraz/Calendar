@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>JSON dialog test</title>
+<script type='text/javascript' src='../misc/js/jquery/jquery-1.7.1.min.js'></script>
+<script type='text/javascript' src='../misc/js/jquery/jquery.ui.core.js'></script>
+<script type='text/javascript' src='../misc/js/jquery/jquery.plugin.js'></script>
+<link rel="stylesheet" type="text/css" href="../misc/css/jquery-ui-1.8.4.custom.css" media="screen" />
+<script type='text/javascript'>
+	$(document).ready(function() {
+		$('#timeSlotException').click(function() {
+			res = getMessage("timeSlotException");
+			showDialog(res);
+			//log(res);
+		});
+		$('#formNotValidException').click(function() {
+			res = getMessage("formNotValidException");
+			showDialog(res);
+			//log(res);
+		});
+		$('#eventAdded').click(function() {
+			res = getMessage("eventAdded");
+			showDialog(res);
+			//log(res);
+		});
+	});
+
+	function showDialog(res) {
+		$("#test-dialog").html(jsonToString(null, res));
+		buttonsOpts = {}
+	    buttonsOpts["Fermer"] = function() {
+	        $(this).dialog( "close" );
+	    };
+	    $("#test-dialog").dialog({
+	        resizable: false,
+	        width: 350,
+	        modal: true,
+	        buttons: buttonsOpts
+	    });
+	}
+	
+	function jsonToString(key, value) {
+		res = "";
+		if (value != null) {
+			if (key != null) 
+				res += "\"" + key + "\":";
+			if (value instanceof Object) {
+				$.each(value, function(k, v) {
+					res +="<br />";
+					res += jsonToString(k, v);
+				});
+			}
+			else {
+				res += "\"" +value + "\"";
+			}
+		}
+		
+		return res;
+	}
+	
+	function log(res) {
+		//content = res["content"];
+		$('#log').append("<br/>result" + jsonToString(null, res));
+		$('#log').append("<br/>--------------");
+	}
+	function getMessage(messageType) {
+		timeSlotException = {
+			    "success": false,
+			    "content": [
+			        {
+			            "FormNotValidException": {
+			                "title": "'null'",
+			                "startH": "'null'",
+			                "repeatMode": "'null'",
+			                "allDay": "'null'",
+			                "endH": "'null'",
+			                "endM": "'null'",
+			                "date": "'null'",
+			                "startM": "'null'"
+			            }
+			        }
+			    ]
+			};
+		formNotValidException = {
+			    "success": false,
+			    "content": [
+			        {
+			            "FormNotValidException": {
+			                "title": "'null'",
+			                "startH": "'null'",
+			                "repeatMode": "'null'",
+			                "allDay": "'null'",
+			                "endH": "'null'",
+			                "endM": "'null'",
+			                "date": "'null'",
+			                "startM": "'null'"
+			            }
+			        }
+			    ]
+			};
+		eventAdded = {
+			    "success": true,
+			    "content": [
+			        {
+			            "id": "1",
+			            "title": "event 1 (récurrent)",
+			            "allDay": false,
+			            "start": "2012-06-15 08:00",
+			            "end": "2012-06-15 10:00"
+			        },
+			        {
+			            "id": "1",
+			            "title": "event 1 (récurrent)",
+			            "allDay": true,
+			            "start": "2012-06-02 22:13",
+			            "end": "2012-06-02 22:13"
+			        },
+			        {
+			            "id": "2",
+			            "title": "event 2",
+			            "allDay": false,
+			            "start": "2012-06-16 11:00",
+			            "end": "2012-06-16 13:00"
+			        },
+			        {
+			            "id": "3",
+			            "title": "event 3",
+			            "allDay": false,
+			            "start": "2012-06-05 22:00",
+			            "end": "2012-06-05 23:00"
+			        },
+			        {
+			            "id": "3",
+			            "title": "event 3",
+			            "allDay": false,
+			            "start": "2012-06-07 22:30",
+			            "end": "2012-06-07 23:45"
+			        }
+			    ]
+			};
+
+		if ("timeSlotException" == messageType)
+			return timeSlotException;
+		else if ("eventAdded" == messageType)
+			return eventAdded;
+		else if ("formNotValidException")
+			return formNotValidException
+
+	}
+</script>
+</head>
+<body>
+<div id="test-dialog" title="TestDialog"></div>
+	<a href="#" id="formNotValidException">Get FormNotValidException</a>
+	<br />
+	<br />
+	<a href="#" id="timeSlotException">Get TimeSlotException</a>
+	<br />
+	<br />
+	<a href="#" id="eventAdded">Get EventAdded</a>
+	<br />
+	<br />
+	Log: <br/>
+	<pre id="log"></pre>
+</body>
+</html>

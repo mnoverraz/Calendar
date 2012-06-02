@@ -47,10 +47,33 @@ public class EventControllerTest {
 	}	
 	
 	@Test(expected=TimeSlotException.class)
-	public void testAvailability_shouldTrowCoreException() throws CoreException {
+	public void testAvailability_throwsTimeSlotException() throws CoreException {
 		BootStrap.init();
 		EventController eventController = new EventController();
 		Event eventToTest = null;
+		
+		ArrayList<EventDate>eventDates = new ArrayList<EventDate>();
+		try {
+			eventDates.add(new EventDate(DateHelper.StringToDate("2012-06-05 22:50", Config.DATE_FORMAT_LONG), DateHelper.StringToDate("2012-06-05 23:30", Config.DATE_FORMAT_LONG)));
+			eventDates.add(new EventDate(DateHelper.StringToDate("2012-06-05 21:40", Config.DATE_FORMAT_LONG), DateHelper.StringToDate("2012-06-05 22:10", Config.DATE_FORMAT_LONG)));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		eventToTest = new Event(4, eventDates, "event 3", "description 3", "m");
+		
+
+		eventController.create(eventToTest);
+	}
+	
+
+	public void testWebEventController_throwsNoException() {
+		BootStrap.init();
+		EventController eventController = new EventController();
+		WebEventController controller = new WebEventController(eventController);
+		Event eventToTest = null;
+		Message message = null;
 		
 		ArrayList<EventDate>eventDates = new ArrayList<EventDate>();
 		try {
@@ -63,7 +86,13 @@ public class EventControllerTest {
 		
 		eventToTest = new Event(4, eventDates, "event 3", "description 3", "m");
 		
+		
+		
 
-		eventController.create(eventToTest);
+		try {
+			eventController.create(eventToTest);
+		} catch (CoreException e) {
+			
+		}
 	}
 }

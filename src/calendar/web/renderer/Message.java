@@ -1,18 +1,17 @@
 package calendar.web.renderer;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Message {
 	public boolean state = true;
 	
-	private ArrayList<HashMap<String, Object>> message;
+	private ArrayList<Object> message;
 	
 	public Message() {
-		message = new ArrayList<HashMap<String, Object>>();
+		message = new ArrayList<Object>();
 	}
 	
-	public void addElementToBody(HashMap<String, Object> element) {
+	public void addElementToBody(Object element) {
 		message.add(element);
 	}
 	
