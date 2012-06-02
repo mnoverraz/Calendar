@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import calendar.web.controller.WebController;
+import calendar.web.renderer.ExceptionRenderer;
 import calendar.web.renderer.Message;
 
 /**
@@ -122,11 +123,8 @@ public class RESTServlet extends HttpServlet {
 			else if ("DELETE".equals(method))
 				message = (Message) controller.delete(params);
 		} catch (Exception e) {
-			HashMap<String, Object> error = new HashMap<String, Object>();
-			error.put("error", e.getMessage());
-
-			message.addElementToBody(error);
-			message.state = false;
+			ExceptionRenderer exRenderer = new ExceptionRenderer(e);
+			message = exRenderer.getMessage();
 		} finally {
 			content.append(message.toJSON(showState));
 

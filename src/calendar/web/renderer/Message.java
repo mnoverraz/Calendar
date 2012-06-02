@@ -2,9 +2,6 @@ package calendar.web.renderer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
 
 public class Message {
 	public boolean state = true;
@@ -19,14 +16,7 @@ public class Message {
 		message.add(element);
 	}
 	
-	public ArrayList<HashMap<String, Object>> getRawContent() {
-		return message;
-	}
-	
-	
-	
 	public String toJSON(boolean showState) {
-
 		StringBuilder sb = new StringBuilder();
 		
 		if (showState) {
@@ -39,8 +29,7 @@ public class Message {
 		else {
 			sb.append(Renderer.toJSON(null, message));
 		}
-		
-		
+
 		return sb.toString();
 	}
 }

@@ -8,7 +8,6 @@ import java.util.Map.Entry;
 public class Renderer {
 	public static String toJSON (String key, Object value) {
 		StringBuilder sb = new StringBuilder();
-		System.out.println("key: " + key + " object:" + value.getClass().toString());
 		if (value != null) {
 			if (null != key) {
 				sb.append("\"" + key + "\":");

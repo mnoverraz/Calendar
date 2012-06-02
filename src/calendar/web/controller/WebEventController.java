@@ -89,13 +89,10 @@ public class WebEventController extends WebController<EventController> {
 
 				Date dDate = null;
 				Date rEnd = null;
-				try {
+
 					dDate = DateHelper.StringToDate(sDate);
 					rEnd = DateHelper.StringToDate(sRepeatEnd);
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+
 				ArrayList<Date> dates = DateHelper.calculateRecurrentDates(
 						dDate, rEnd, "d");
 
@@ -106,17 +103,14 @@ public class WebEventController extends WebController<EventController> {
 					String dateString = DateHelper.DateToString(d);
 					Date eStart = null;
 					Date eEnd = null;
-					try {
+
 						eStart = DateHelper.StringToDate(dateString
 								+ " "
 								+ sStartHour, Config.DATE_FORMAT_LONG);
 						eEnd = DateHelper.StringToDate(dateString
 								+ " "
 								+ sEndHour, Config.DATE_FORMAT_LONG);
-					} catch (ParseException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+
 
 					eventDates.add(new EventDate(eStart, eEnd));
 				}
@@ -137,10 +131,9 @@ public class WebEventController extends WebController<EventController> {
 					message.addElementToBody(eventMap);
 				}
 
-			} catch (TimeSlotException e) {
-				message = ExceptionRenderer.TimeSlotExceptionRenderer(e);
-			} catch (CoreException e) {
-
+			} catch (Exception e) {
+				ExceptionRenderer exRenderer = new ExceptionRenderer(e);
+				message = exRenderer.getMessage();
 			}
 		}
 
