@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map.Entry;
 
 import calendar.core.application.Config;
 import calendar.core.application.utils.DateHelper;
@@ -11,13 +13,12 @@ import calendar.core.controller.EventController;
 import calendar.core.entity.Event;
 import calendar.core.entity.EventDate;
 import calendar.core.exception.CoreException;
+import calendar.core.exception.GenericCoreException;
 import calendar.core.exception.TimeSlotException;
+import calendar.web.renderer.ExceptionRenderer;
 import calendar.web.renderer.Message;
-import calendar.web.renderer.TimeSlotExceptionRenderer;
-
 
 public class WebEventController extends WebController<EventController> {
-	
 
 	public WebEventController(EventController controller) {
 		super(controller);
@@ -27,57 +28,122 @@ public class WebEventController extends WebController<EventController> {
 	public Message create(HashMap<String, String> params) {
 		Event event = null;
 		Message message = new Message();
-		
-		try {
-			Date start = null;
-			Date end = null;
+
+		if (params != null) {
+			Date date = null;
+			int startH = 0;
+			int endH = 0;
+			int startM = 0;
+			int endM = 0;
+			boolean allDay = false;
+			String repeatMode = "n";
+			Date repeatEnd = null;
+			String description = null;
+			
+			Iterator<Entry<String, String>> it = params.entrySet().iterator();
 			try {
-				start = DateHelper.StringToDate("2012-06-01 21:50", Config.DATE_FORMAT_LONG);
-				end = DateHelper.StringToDate("2012-06-20 23:50", Config.DATE_FORMAT_LONG);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			while (it.hasNext()) {
+				Object key = it.next().getKey();
+				Object value = params.get(key);
+				
+
+				if ("startH".equals(key))
+					startH = Integer.parseInt((String)value);
+				if ("endH".equals(key))
+					endH = Integer.parseInt((String)value);
+				if ("startM".equals(key))
+					startM = Integer.parseInt((String)value);
+				if ("endM".equals(key))
+					endM = Integer.parseInt((String)value);
+				if ("date".equals(key)) {
+					try {
+						date = DateHelper.StringToDate((String)value);
+					} catch (ParseException e) {
+						GenericCoreException coreException = new GenericCoreException();
+						coreException.detailInformation = e.getMessage();
+						throw coreException;
+					}
+				}
+				if ("allDay".equals(key) && "true".equals((String)value))
+					allDay = true;
+				if ("repeatMode".equals(key) && !"n".equals(value))
+					repeatMode = (String)value;
+				if ("repeatEnd".equals(key) && !"n".equals(repeatMode)) {
+					try {
+						repeatEnd = DateHelper.StringToDate((String)value);
+					} catch (ParseException e) {
+						GenericCoreException coreException = new GenericCoreException();
+						coreException.detailInformation = e.getMessage();
+						throw coreException;
+					}
+				}
+				if ("description".equals(key))
+					description = (String)value;
 			}
-			ArrayList<Date> dates = DateHelper.calculateRecurrentDates(start, end, "d");
 			
-			ArrayList<EventDate> eventDates = new ArrayList<EventDate>();
-			
-			eventDates.add(new EventDate(start, end));
-			for(Date d : dates) {
-				String dateString = DateHelper.DateToString(d, Config.DATE_FORMAT_SHORT);
-				Date eStart = null;
-				Date eEnd = null;
+				String sDate = "2012-06-01";
+				String sRepeatEnd = "2012-06-20";
+				
+				String sStartHour = "21:50";
+				String sEndHour = "23:50";
+
+				Date dDate = null;
+				Date rEnd = null;
 				try {
-					eStart = DateHelper.StringToDate(dateString + " " + DateHelper.DateToString(start, Config.TIME_FORMAT));
-					eEnd = DateHelper.StringToDate(dateString + " " + DateHelper.DateToString(end, Config.TIME_FORMAT));
+					dDate = DateHelper.StringToDate(sDate);
+					rEnd = DateHelper.StringToDate(sRepeatEnd);
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				ArrayList<Date> dates = DateHelper.calculateRecurrentDates(
+						dDate, rEnd, "d");
 
-				eventDates.add(new EventDate(eEnd, eStart));
+				ArrayList<EventDate> eventDates = new ArrayList<EventDate>();
+
+				//eventDates.add(new EventDate(start, end));
+				for (Date d : dates) {
+					String dateString = DateHelper.DateToString(d);
+					Date eStart = null;
+					Date eEnd = null;
+					try {
+						eStart = DateHelper.StringToDate(dateString
+								+ " "
+								+ sStartHour, Config.DATE_FORMAT_LONG);
+						eEnd = DateHelper.StringToDate(dateString
+								+ " "
+								+ sEndHour, Config.DATE_FORMAT_LONG);
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+					eventDates.add(new EventDate(eStart, eEnd));
+				}
+				event = new Event(4, eventDates, "event 3", "description 3",
+						"d");
+				controller.create(event);
+				HashMap<String, Object> eventMap = null;
+				for (EventDate eventDate : event.getEventDates()) {
+					eventMap = new HashMap<String, Object>();
+					eventMap.put("id", event.getId());
+					eventMap.put("title", event.getTitle());
+					eventMap.put("start", DateHelper.DateToString(
+							eventDate.getStart(), Config.DATE_FORMAT_LONG));
+					eventMap.put("end", DateHelper.DateToString(
+							eventDate.getEnd(), Config.DATE_FORMAT_LONG));
+					eventMap.put("allDay", eventDate.isAllDay());
+
+					message.addElementToBody(eventMap);
+				}
+
+			} catch (TimeSlotException e) {
+				message = ExceptionRenderer.TimeSlotExceptionRenderer(e);
+			} catch (CoreException e) {
+
 			}
-			event = new Event(4, eventDates, "event 3", "description 3", "m");
-			controller.create(event);
-			HashMap<String, Object> eventMap = null;
-			for (EventDate eventDate : event.getEventDates()) {
-				eventMap = new HashMap<String, Object>();
-				eventMap.put("id", event.getId());
-				eventMap.put("title", event.getTitle());
-				eventMap.put("start", DateHelper.DateToString(eventDate.getStart(), Config.DATE_FORMAT_LONG));
-				eventMap.put("end", DateHelper.DateToString(eventDate.getEnd(), Config.DATE_FORMAT_LONG));
-				eventMap.put("allDay", eventDate.isAllDay());
-				
-				message.addElementToBody(eventMap);
-			}
-			
-		} catch (TimeSlotException e) {
-			message = TimeSlotExceptionRenderer.render(e);
 		}
-		catch (CoreException e) {
-			
-		}
-		
+
 		return message;
 	}
 
@@ -86,32 +152,31 @@ public class WebEventController extends WebController<EventController> {
 		ArrayList<Event> events = null;
 		Message message = new Message();
 		message.state = true;
-		
-		
+
 		try {
 			events = (ArrayList<Event>) controller.read(null);
-		} 
-		catch (TimeSlotException e) {
+		} catch (TimeSlotException e) {
 			Object detailInformation = e.detailInformation;
 			@SuppressWarnings("unchecked")
-			ArrayList<EventDate> eventDates = (ArrayList<EventDate>)detailInformation;
+			ArrayList<EventDate> eventDates = (ArrayList<EventDate>) detailInformation;
 			message.state = false;
 
+		} catch (CoreException e) {
+
 		}
-		catch (CoreException e) {
-			
-		}
-				
+
 		for (Event event : events) {
 			HashMap<String, Object> eventMap = null;
 			for (EventDate eventDate : event.getEventDates()) {
 				eventMap = new HashMap<String, Object>();
 				eventMap.put("id", event.getId());
 				eventMap.put("title", event.getTitle());
-				eventMap.put("start", DateHelper.DateToString(eventDate.getStart(), Config.DATE_FORMAT_LONG));
-				eventMap.put("end", DateHelper.DateToString(eventDate.getEnd(), Config.DATE_FORMAT_LONG));
+				eventMap.put("start", DateHelper.DateToString(
+						eventDate.getStart(), Config.DATE_FORMAT_LONG));
+				eventMap.put("end", DateHelper.DateToString(eventDate.getEnd(),
+						Config.DATE_FORMAT_LONG));
 				eventMap.put("allDay", eventDate.isAllDay());
-				
+
 				message.addElementToBody(eventMap);
 			}
 		}
@@ -130,6 +195,5 @@ public class WebEventController extends WebController<EventController> {
 		System.out.println("delete");
 		return null;
 	}
-
 
 }

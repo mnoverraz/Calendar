@@ -64,6 +64,11 @@ public class EventController extends Controller<Event> {
 		
 		events.add(new Event(3, eventDates, "event 3", "description 3", ""));
 		
+		eventDates = new ArrayList<EventDate>();
+		eventDates.add(new EventDate(DateHelper.StringToDate("2012-06-07 22:30", Config.DATE_FORMAT_LONG), DateHelper.StringToDate("2012-06-07 23:45", Config.DATE_FORMAT_LONG)));
+		
+		events.add(new Event(3, eventDates, "event 3", "description 3", ""));
+		
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
