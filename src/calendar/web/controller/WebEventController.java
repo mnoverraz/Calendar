@@ -1,8 +1,6 @@
 package calendar.web.controller;
 
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
@@ -13,10 +11,11 @@ import calendar.core.controller.EventController;
 import calendar.core.entity.Event;
 import calendar.core.entity.EventDate;
 import calendar.core.exception.CoreException;
-import calendar.core.exception.GenericCoreException;
 import calendar.core.exception.TimeSlotException;
+import calendar.web.exception.FormNotValidException;
 import calendar.web.renderer.ExceptionRenderer;
 import calendar.web.renderer.Message;
+import calendar.web.utils.FormUtils;
 
 public class WebEventController extends WebController<EventController> {
 
@@ -30,93 +29,73 @@ public class WebEventController extends WebController<EventController> {
 		Message message = new Message();
 
 		if (params != null) {
-			Date date = null;
-			int startH = 0;
-			int endH = 0;
-			int startM = 0;
-			int endM = 0;
-			boolean allDay = false;
-			String repeatMode = "n";
-			Date repeatEnd = null;
+			String date = null;
+			String startH = null;
+			String startM = null;
+			String endH = null;
+			String endM = null;
+			String allDay = null;
+			String repeatMode = null;
+			String repeatEnd = null;
 			String title = null;
 			String description = null;
 
 			Iterator<Entry<String, String>> it = params.entrySet().iterator();
+			
+			//System.out.println(params.get("startH"));
 			try {
 				while (it.hasNext()) {
 					Object key = it.next().getKey();
 					Object value = params.get(key);
 
 					if ("startH".equals(key))
-						startH = Integer.parseInt((String) value);
+						startH = (String) value;
 					if ("endH".equals(key))
-						endH = Integer.parseInt((String) value);
+						endH = (String) value;
 					if ("startM".equals(key))
-						startM = Integer.parseInt((String) value);
+						startM = (String) value;
 					if ("endM".equals(key))
-						endM = Integer.parseInt((String) value);
+						endM = (String) value;
 					if ("date".equals(key))
-						date = DateHelper.StringToDate((String) value);
-					if ("allDay".equals(key) && "true".equals((String) value))
-						allDay = true;
-					if ("repeatMode".equals(key) && !"n".equals(value))
+						date = (String) value;
+					if ("allDay".equals(key))
+						allDay = (String) value;
+					if ("repeatMode".equals(key))
 						repeatMode = (String) value;
-					if ("repeatEnd".equals(key) && !"n".equals(repeatMode))
-						repeatEnd = DateHelper.StringToDate((String) value);
+					if ("repeatEnd".equals(key))
+						repeatEnd = (String) value;
 					if ("description".equals(key))
 						description = (String) value;
 					if ("title".equals(key)) 
 						title = (String)value;
 				}
-
-				String sDate = "2012-06-01";
-				String sRepeatEnd = "2012-06-20";
-
-				String sStartHour = "21:50";
-				String sEndHour = "23:50";
-
-				Date dDate = null;
-				Date rEnd = null;
-
-				dDate = DateHelper.StringToDate(sDate);
-				rEnd = DateHelper.StringToDate(sRepeatEnd);
-
-				ArrayList<Date> dates = DateHelper.calculateRecurrentDates(
-						dDate, rEnd, "d");
-
-				ArrayList<EventDate> eventDates = new ArrayList<EventDate>();
-
-				// eventDates.add(new EventDate(start, end));
-				for (Date d : dates) {
-					String dateString = DateHelper.DateToString(d);
-					Date eStart = null;
-					Date eEnd = null;
-
-					eStart = DateHelper.StringToDate(dateString + " "
-							+ sStartHour, Config.DATE_FORMAT_LONG);
-					eEnd = DateHelper.StringToDate(dateString + " " + sEndHour,
-							Config.DATE_FORMAT_LONG);
-
-					eventDates.add(new EventDate(eStart, eEnd));
+				
+				try {
+				event = FormUtils.createEventFromForm(date, startH, startM, endH, endM, allDay, repeatMode, repeatEnd, title, description);
+					controller.create(event);
+					HashMap<String, Object> eventMap = null;
+					for (EventDate eventDate : event.getEventDates()) {
+						eventMap = new HashMap<String, Object>();
+						eventMap.put("id", event.getId());
+						eventMap.put("title", event.getTitle());
+						eventMap.put("start", DateHelper.DateToString(
+								eventDate.getStart(), Config.DATE_FORMAT_LONG));
+						eventMap.put("end", DateHelper.DateToString(
+								eventDate.getEnd(), Config.DATE_FORMAT_LONG));
+						eventMap.put("allDay", eventDate.isAllDay());
+	
+						message.addElementToBody(eventMap);
+					}
 				}
-				event = new Event(4, eventDates, "event 3", "description 3",
-						"d");
-				controller.create(event);
-				HashMap<String, Object> eventMap = null;
-				for (EventDate eventDate : event.getEventDates()) {
-					eventMap = new HashMap<String, Object>();
-					eventMap.put("id", event.getId());
-					eventMap.put("title", event.getTitle());
-					eventMap.put("start", DateHelper.DateToString(
-							eventDate.getStart(), Config.DATE_FORMAT_LONG));
-					eventMap.put("end", DateHelper.DateToString(
-							eventDate.getEnd(), Config.DATE_FORMAT_LONG));
-					eventMap.put("allDay", eventDate.isAllDay());
-
-					message.addElementToBody(eventMap);
+				catch (FormNotValidException fe) {
+					message.state = false;
+					ExceptionRenderer exRenderer = new ExceptionRenderer(fe);
+					message = exRenderer.getMessage();
 				}
+				
 
 			} catch (Exception e) {
+				message.state = false;
 				ExceptionRenderer exRenderer = new ExceptionRenderer(e);
 				message = exRenderer.getMessage();
 			}
@@ -140,7 +119,9 @@ public class WebEventController extends WebController<EventController> {
 			message.state = false;
 
 		} catch (CoreException e) {
-
+			message.state = false;
+			ExceptionRenderer exRenderer = new ExceptionRenderer(e);
+			message = exRenderer.getMessage();
 		}
 
 		for (Event event : events) {
@@ -164,14 +145,14 @@ public class WebEventController extends WebController<EventController> {
 
 	@Override
 	public Message update(HashMap<String, String> params) {
-		System.out.println("update");
-		return null;
+		Message message = new Message();
+		return message;
 	}
 
 	@Override
 	public Message delete(HashMap<String, String> params) {
-		System.out.println("delete");
-		return null;
+		Message message = new Message();
+		return message;
 	}
 
 }
