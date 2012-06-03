@@ -16,6 +16,7 @@ if (lang != null && !lang.equals(ui.getLang()))
 <meta content="0" http-equiv="expires">
 <meta content="no-cache" http-equiv="pragma">
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<script type='text/javascript' src='misc/js/lang.jsp'></script>
 </head>
 <body>
 
