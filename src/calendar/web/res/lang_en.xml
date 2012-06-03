@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd"> 
+
+<properties>  
+	<comment>This is a Langugae Property file</comment>  
+	<entry key="month-1-full">January</entry>  
+	<entry key="month-2-full">February</entry> 
+	<entry key="month-3-full">March</entry> 
+	<entry key="month-4-full">April</entry> 
+	<entry key="month-5-full">May</entry> 
+	<entry key="month-6-full">June</entry> 
+	<entry key="month-7-full">July</entry> 
+	<entry key="month-8-full">August</entry> 
+	<entry key="month-9-full">September</entry> 
+	<entry key="month-10-full">October</entry> 
+	<entry key="month-11-full">November</entry> 
+	<entry key="month-12-full">December</entry> 
+	
+	<entry key="month-1-short">Jan</entry>  
+	<entry key="month-2-short">Feb</entry> 
+	<entry key="month-3-short">Mar</entry> 
+	<entry key="month-4-short">Apr</entry> 
+	<entry key="month-5-short">May</entry> 
+	<entry key="month-6-short">June</entry> 
+	<entry key="month-7-short">July</entry> 
+	<entry key="month-8-short">Aug</entry> 
+	<entry key="month-9-short">Sept</entry> 
+	<entry key="month-10-short">Oct</entry> 
+	<entry key="month-11-short">Nov</entry> 
+	<entry key="month-12-short">Dec</entry> 
+	
+	<entry key="day-1-full">Sunday</entry>
+	<entry key="day-2-full">Monday</entry>
+	<entry key="day-3-full">Tuesday</entry>
+	<entry key="day-4-full">Wednesday</entry>
+	<entry key="day-5-full">Thursday</entry>
+	<entry key="day-6-full">Friday</entry>
+	<entry key="day-7-full">Saturday</entry>	
+	
+	<entry key="day-1-short">Sun</entry>
+	<entry key="day-2-short">Mon</entry>
+	<entry key="day-3-short">Tue</entry>
+	<entry key="day-4-short">Wed</entry>
+	<entry key="day-5-short">Thu</entry>
+	<entry key="day-6-short">Fri</entry>
+	<entry key="day-7-short">Sat</entry>	
+	
+	<entry key="today">Today</entry>
+	
+	<entry key="application-title">Room reservation system</entry>
+	<entry key="calendar-information">Information</entry>
+	<entry key="calendar-choice">Choose</entry>  
+	<entry key="calendar-goTo">Go to</entry> 
+	
+	<entry key="room-category-other">Other</entry>
+	<entry key="room-category-scientificSetup">Scientific setup</entry> 
+	<entry key="room-category-seminarRoom">Room</entry> 
+	<entry key="room-category-animalLab">Animal experimentation lab</entry> 
+	<entry key="room-category-animalFacility">Animal facility</entry> 
+	<entry key="room-category-p2">Secured Lab P2</entry> 
+	<entry key="room-category-microscope">Microscope</entry> 
+	<entry key="room-category-machineRoom">Machine room</entry> 
+	<entry key="room-category-metabolicCages">Metabolic cages</entry>
+	<entry key="room-category-rental">Rental</entry> 
+	 
+	<entry key="calendar-error-time">The end time must be bigger than the start time.</entry> 
+	<entry key="calendar-error-unavailable-title">Dates unavailable</entry> 
+	<entry key="calendar-error-unavailable">The following dates bellow are unavailable.</entry> 
+	<entry key="calendar-error-user">This event can not be modified because it belongs to an other user.</entry> 
+	<entry key="calendar-error-access">You don't have access to perform this action.</entry>
+	<entry key="calendar-error-room">Wrong room number.</entry>
+	<entry key="calendar-error-action">This action doesn't exist (choose add | edit | delete)</entry>	
+	<entry key="calendar-error-invalid">Don't use special characters in text fields.</entry>	
+	<entry key="calendar-error-dateFormat">Invalid date format.</entry>	
+	<entry key="calendar-error-system">System error.</entry>	
+	<entry key="calendar-error-aclReadCalendar">You don't have permission for this calendar.</entry>		
+	<entry key="calendar-error-login">Please login.</entry>		
+	
+	<entry key="calendar-message-check">Please correct the fields in red.</entry> 
+	<entry key="calendar-message-repeatInfo">This is a repeating event. Every entry will be modified.</entry> 
+	<entry key="calendar-message-confirm-title">Confirmation</entry> 
+	<entry key="calendar-message-confirm-repeat-update">Do you want to change only this event, or this and all its future reservations?</entry> 
+	<entry key="calendar-message-confirm-repeat-delete">Do you want to delete this and all future reservations of this event, or only the selected event?</entry> 
+	<entry key="calendar-message-confirm-button-ok">Ok</entry>
+	<entry key="calendar-message-confirm-button-yes">Yes</entry> 
+	<entry key="calendar-message-confirm-button-no">No</entry> 
+	<entry key="calendar-message-confirm-button-allFuture">All future reservations</entry> 
+	<entry key="calendar-message-confirm-button-thisEvent">Only this reservation</entry> 
+	<entry key="calendar-message-checkAvailability">Verify date overlap</entry> 
+
+
+	<entry key="calendar-event-owner">Owner</entry> 
+	<entry key="calendar-event-new">New event</entry> 
+	<entry key="calendar-event-edit">Edit event</entry> 
+	<entry key="calendar-event-save">Save</entry> 
+	<entry key="calendar-event-delete">Delete</entry> 
+	<entry key="calendar-event-cancel">Cancel</entry>
+	<entry key="calendar-event-user">User</entry>
+	<entry key="calendar-event-title">Title</entry>
+	<entry key="calendar-event-date">Date</entry>
+	<entry key="calendar-event-wholeDay">Whole day</entry>
+	<entry key="calendar-event-start">Start</entry>
+	<entry key="calendar-event-end">End</entry>	
+	<entry key="calendar-event-repeat">Repeat</entry>	
+	<entry key="calendar-event-never">Never</entry>	
+	<entry key="calendar-event-daily">Daily</entry>	
+	<entry key="calendar-event-weekly">Same day - Weekly</entry>	
+	<entry key="calendar-event-halfMonthly">Same day - Every two weeks</entry>	
+	<entry key="calendar-event-monthly">Same day - Monthly</entry>	
+	<entry key="calendar-event-yearly">Same day - Yearly</entry>	
+	<entry key="calendar-event-until">Until</entry>	
+	<entry key="calendar-event-description">Description</entry>
+</properties> 

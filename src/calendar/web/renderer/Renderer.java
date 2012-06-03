@@ -6,46 +6,46 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 
 public class Renderer {
-	public Renderer() {
-		
-	}
-	
-	public static String toJSON(Message message) {
-		ArrayList<HashMap<String, Object>> content = message.body;
-		
+	public static String toJSON (String key, Object value) {
 		StringBuilder sb = new StringBuilder();
-		
-		sb.append("[");
-		
-		if (content != null) {
-			for (int i = 0; i < content.size(); i++) {
-				HashMap<String, Object> inner = content.get(i);
-				Iterator<Entry<String, Object>> it = inner.entrySet().iterator();
+		if (value != null) {
+			if (null != key) {
+				sb.append("\"" + key + "\":");
+
+			}
+			if (value instanceof HashMap) {
 				sb.append("{");
-	
-				
+				Iterator<Entry<String, Object>> it = ((HashMap<String, Object>)value).entrySet().iterator();
 				while (it.hasNext()) {
-					Object key = it.next().getKey();
-					Object value = inner.get(key);
-					
-					sb.append("\"" + key + "\":");
-					
-					if (value instanceof Boolean)
-						sb.append(value);
-					else
-						sb.append("\"" + value + "\"");
-					
+					String sKey = it.next().getKey();
+					Object sValue = ((HashMap<String, Object>)value).get(sKey);
+					sb.append(toJSON(sKey, sValue));
 					if (it.hasNext())
 						sb.append(",");
 				}
+
 				sb.append("}");
-				
-				if (content.size() - (i+1) > 0) {
-					sb.append(",");
+			}
+			else if (value instanceof ArrayList) {
+				sb.append("[");
+				int size = 0;
+				ArrayList<Object> elements = (ArrayList<Object>)value;
+				for (Object o : elements) {
+					sb.append(toJSON(null, o));
+					if (elements.size() - (size+1) > 0) {
+						sb.append(",");
+					}
+					size++;
 				}
+				sb.append("]");
+			}
+			else {				
+				if (value instanceof Boolean)
+					sb.append(value);
+				else
+					sb.append("\"" +value + "\"");
 			}
 		}
-		sb.append("]");
 		
 		return sb.toString();
 	}

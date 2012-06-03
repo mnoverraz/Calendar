@@ -1,8 +1,9 @@
 build
 .git
+.mgc
 .DS_Store
 .classpath
 .settings
 .project
 WebContent/lib/**/*
-
+/res/**/*

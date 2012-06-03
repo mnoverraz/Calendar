@@ -5,7 +5,7 @@ import java.util.HashMap;
 import calendar.core.controller.Controller;
 import calendar.web.renderer.Message;
 
-public abstract class WebController<C extends Controller> {
+public abstract class WebController<C extends Controller<?>> {
 	
 	protected C controller;
 	

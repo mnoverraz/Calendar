@@ -1,8 +1,11 @@
 #BRANCHES
-master				source of last stable version
-release				source of version to be next stable version candidate
+master				not used
+master-web			master branch of web application project
+master-ejb			master branch of backend application (enterpise java bean)
 feature-template	feature branch for client template
 feature-event-handling	feature branch for calendar core
 
 #DEPENDENCIES
 urlrewrite-3.2.0 (http://www.tuckey.org/urlrewrite/)
+joda-time-2.1 (http://joda-time.sourceforge.net/)
+commons-lang3-3.1 (http://commons.apache.org/lang/)
