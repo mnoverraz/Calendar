@@ -1,15 +1,13 @@
 function send(url, method) {
-	$.ajax({
+	return $.ajax({
 		type : method,
 		url : url,
-		dataType: "text",
+		dataType: "json",
 		data : {
 			example : ""
 		},
 		success : function(msg) {
-			$('#log').append("<br/>method: " + method);
-			$('#log').append("<br/>result" + msg);
-			$('#log').append("<br/>--------------");
+			return msg;
 		}
 	});
 }
@@ -26,6 +24,7 @@ function showDialog(url, dialogTitle, buttonOpts) {
         close: function(ev, ui) {
             $(this).remove();
             $('#dialog-confirm').remove();
+            addEvents(send('rest/event/?example','get'));
         },
         resizable: false,
         modal: true,
@@ -40,3 +39,11 @@ function showDialog(url, dialogTitle, buttonOpts) {
     }*/
     return false;
 }
+
+function addEvents(json){
+	
+	eric = '{\'id\':\'9\',\'title\':\'reccurent 1\',\'allDay\':false,\'start\':\'2012-05-31 21:42\',\'end\':\'2012-05-31 23:00\'}';
+	alert(eric);
+	calendar.fullCalendar( 'renderEvent', eric);
+}
+

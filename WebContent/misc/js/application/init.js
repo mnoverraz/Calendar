@@ -1,3 +1,5 @@
+var calendar = null;
+
 $(document).ready(function() {
 	/*Fonction pour réécrire le buttonpane afin de pouvoir
      *définir l'id, la classe et le titre. Dévleoppée par
@@ -52,7 +54,7 @@ $(document).ready(function() {
 	/*var d = date.getDate();
 	var m = date.getMonth();
 	var y = date.getFullYear();*/
-	var calendar = $('#calendar').fullCalendar({
+	calendar = $('#calendar').fullCalendar({
 		header : {
 			left : 'prev,next today',
 			center : 'title',
@@ -82,5 +84,7 @@ $(document).ready(function() {
 			calendar.fullCalendar('unselect');
 		},
 	});
+	
+	
 	
 });
