@@ -47,7 +47,7 @@ $(document).ready(function() {
 
     })();
 	
-	//appel fonction dans contrôleur
+	//appel fonction dans contr�leur
 	
     //fullcalendar
 	//var date = new Date();
@@ -56,9 +56,19 @@ $(document).ready(function() {
 	var y = date.getFullYear();*/
 	calendar = $('#calendar').fullCalendar({
 		header : {
-			left : 'prev,next today',
+			left : 'prev,next today, next-year',
 			center : 'title',
 			right : 'month,agendaWeek,agendaDay'
+		},
+		buttonText :{
+		    prev:     '&nbsp;&#9668;&nbsp;',  // left triangle
+		    next:     '&nbsp;&#9658;&nbsp;',  // right triangle
+		    prevYear: '&nbsp;&lt;&lt;&nbsp;', // <<
+		    nextYear: '&nbsp;&gt;&gt;&nbsp;', // >>
+		    today:    'today',
+		    month:    'month',
+		    week:     '<%=ui.getLangText("month-1-full") %>',
+		    day:      'day'
 		},
 		editable : true,
 		//defaultView: 'agendaWeek',
@@ -84,7 +94,6 @@ $(document).ready(function() {
 			calendar.fullCalendar('unselect');
 		},
 	});
-	
 	
 	
 });
