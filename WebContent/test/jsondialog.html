@@ -11,7 +11,7 @@
 	$(document).ready(function() {
 		$('#timeSlotException').click(function() {
 			res = getMessage("timeSlotException");
-			message = timeSlotExceptionToUL(res["content"][0]["TimeSlotException"]);
+			message = exceptionToUI("TimeSlotException", res["content"][0]["TimeSlotException"]);
 			showDialog(message);
 			log(var_dump(null, res));
 		});
@@ -41,16 +41,22 @@
 	    });
 	}
 	
-	function timeSlotExceptionToUL(message) {
+	function exceptionToUI(exceptionType, detail) {
 		out = "";
-		out += "<ul>";
-		$.each(message, function(k, v) {
-			out += "<li>";
-			out += v["start"] + " " + v["end"];
-			out += "</li>";
-		});
-
-		out += "</ul>";
+		switch(exceptionType) {
+        	case 'TimeSlotException' :
+				out += "<ul>";
+				$.each(detail, function(k, v) {
+					out += "<li>";
+					out += v["start"] + " " + v["end"];
+					out += "</li>";
+				});
+				out += "</ul>";
+				break;
+        	default :
+        		out += "Other exception";
+        		break;
+		}
 		return out;
 	}
 	
@@ -77,7 +83,6 @@
 	}
 	
 	function log(res) {
-		//content = res["content"];
 		$('#log').append("<br/>result" + var_dump(null, res));
 		$('#log').append("<br/>--------------");
 	}
