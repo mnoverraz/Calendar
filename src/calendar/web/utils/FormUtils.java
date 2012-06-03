@@ -33,31 +33,41 @@ public class FormUtils {
 		ArrayList<Date> dates = new ArrayList<Date>();
 		ArrayList<EventDate> eventDates = new ArrayList<EventDate>();
 
-		HashMap<String, Object> errors = new HashMap<String, Object>();
+		HashMap<String, Object> validation = new HashMap<String, Object>();
+		validation.put("date", true);
+		validation.put("startH",  true);
+		validation.put("startM",  true);
+		validation.put("endH", true);
+		validation.put("endM", true);
+		validation.put("allDay", true);
+		validation.put("repeatMode", true);
+		validation.put("repeatEnd", true);
+		validation.put("title", true);
+		validation.put("description", false);
 
 		try {
 			start = DateHelper.StringToDate(fDate + " " + fStartH + ":"
 					+ fStartM, Config.DATE_FORMAT_LONG);
 		} catch (ParseException e) {
-			errors.put("date", "'" + fDate + "'");
-			errors.put("startH",  "'" + fStartH +  "'");
-			errors.put("startM",  "'" + fStartM +  "'");
+			validation.put("date", false);
+			validation.put("startH",  false);
+			validation.put("startM",  false);
 		}
 		try {
 			end = DateHelper.StringToDate(fDate + " " + fEndH + ":" + fEndM,
 					Config.DATE_FORMAT_LONG);
 		} catch (ParseException e) {
-			errors.put("date", "'" + fDate + "'");
-			errors.put("endH", "'" + fEndH + "'");
-			errors.put("endM", "'" + fEndM + "'");
+			validation.put("date", false);
+			validation.put("endH", false);
+			validation.put("endM", false);
 		}
 
 		if (start != null && end != null) {
 			if (start.after(end)) {
-				errors.put("startH",  "'" + fStartH +  "'");
-				errors.put("startM",  "'" + fStartM +  "'");
-				errors.put("endH", "'" + fEndH + "'");
-				errors.put("endM", "'" + fEndM + "'");
+				validation.put("startH",  false);
+				validation.put("startM",  false);
+				validation.put("endH", false);
+				validation.put("endM", false);
 			} else if (start == end)
 				allDay = true;
 		}
@@ -68,7 +78,7 @@ public class FormUtils {
 			else if ("false".equals(fAllDay))
 				allDay = false;
 			else
-				errors.put("allDay", "'" + fAllDay + "'");
+				validation.put("allDay", false);
 		}
 
 		if ("n".equals(fRepeatMode))
@@ -84,12 +94,12 @@ public class FormUtils {
 		else if ("y".equals(fRepeatMode))
 			repeatMode = "y";
 		else
-			errors.put("repeatMode", "'" + fRepeatMode + "'");
+			validation.put("repeatMode", false);
 
 		if (fTitle != null && !"".equals(fTitle))
 			title = StringUtils.replaceEach(fTitle, new String[]{"&", "\"", "<", ">"}, new String[]{"&amp;", "&quot;", "&lt;", "&gt;"});
 		else 
-			errors.put("title", "'" + fTitle + "'");
+			validation.put("title", false);
 		if (fDescription != null && !"".equals(fDescription))
 			description = StringUtils.replaceEach(fDescription, new String[]{"&", "\"", "<", ">"}, new String[]{"&amp;", "&quot;", "&lt;", "&gt;"});
 
@@ -97,18 +107,18 @@ public class FormUtils {
 			try {
 				repeatEnd = DateHelper.StringToDate(fRepeatEnd);
 				if (!repeatEnd.after(start)) {
-					errors.put("date", fDate);
-					errors.put("repeatEnd", fRepeatEnd);
+					validation.put("date", false);
+					validation.put("repeatEnd", false);
 				}
 			} catch (ParseException e) {
-				errors.put("repeatEnd", "'" + fRepeatEnd + "'");
+				validation.put("repeatEnd", false);
 			}
 		}
 
-		if (errors.size() > 0) {
+		if (validation.size() > 0) {
 			FormNotValidException fe = new FormNotValidException();
-			fe.detailInformation = errors;
-			System.out.println(errors);
+			fe.detailInformation = validation;
+			System.out.println(validation);
 			throw fe;
 		}
 		try {

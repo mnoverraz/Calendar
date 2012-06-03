@@ -11,23 +11,24 @@
 	$(document).ready(function() {
 		$('#timeSlotException').click(function() {
 			res = getMessage("timeSlotException");
-			showDialog(res);
-			//log(res);
+			message = timeSlotExceptionToUL(res["content"][0]["TimeSlotException"]);
+			showDialog(message);
+			log(var_dump(null, res));
 		});
 		$('#formNotValidException').click(function() {
 			res = getMessage("formNotValidException");
 			showDialog(res);
-			//log(res);
+			log(var_dump(null, res));
 		});
 		$('#eventAdded').click(function() {
 			res = getMessage("eventAdded");
 			showDialog(res);
-			//log(res);
+			log(var_dump(null, res));
 		});
 	});
 
-	function showDialog(res) {
-		$("#test-dialog").html(jsonToString(null, res));
+	function showDialog(message) {
+		$("#test-dialog").html(message);
 		buttonsOpts = {}
 	    buttonsOpts["Fermer"] = function() {
 	        $(this).dialog( "close" );
@@ -40,28 +41,44 @@
 	    });
 	}
 	
-	function jsonToString(key, value) {
-		res = "";
+	function timeSlotExceptionToUL(message) {
+		out = "";
+		out += "<ul>";
+		$.each(message, function(k, v) {
+			out += "<li>";
+			out += v["start"] + " " + v["end"];
+			out += "</li>";
+		});
+
+		out += "</ul>";
+		return out;
+	}
+	
+	function var_dump(key, value) {
+		res = "<ul>";
 		if (value != null) {
+			res += "<li>";
 			if (key != null) 
-				res += "\"" + key + "\":";
+				res += key + ": ";
 			if (value instanceof Object) {
 				$.each(value, function(k, v) {
-					res +="<br />";
-					res += jsonToString(k, v);
+					res += "<ul>";
+					res += var_dump(k, v);
+					res += "</ul>";
 				});
 			}
 			else {
-				res += "\"" +value + "\"";
+				res += value;
 			}
+			res += "</li>"
 		}
-		
+		res += "</ul>";
 		return res;
 	}
 	
 	function log(res) {
 		//content = res["content"];
-		$('#log').append("<br/>result" + jsonToString(null, res));
+		$('#log').append("<br/>result" + var_dump(null, res));
 		$('#log').append("<br/>--------------");
 	}
 	function getMessage(messageType) {
@@ -69,32 +86,36 @@
 			    "success": false,
 			    "content": [
 			        {
-			            "FormNotValidException": {
-			                "title": "'null'",
-			                "startH": "'null'",
-			                "repeatMode": "'null'",
-			                "allDay": "'null'",
-			                "endH": "'null'",
-			                "endM": "'null'",
-			                "date": "'null'",
-			                "startM": "'null'"
-			            }
+			            "TimeSlotException": [
+			                {
+			                    "start": "2012-06-02 21:50",
+			                    "end": "2012-06-02 23:50"
+			                },
+			                {
+			                    "start": "2012-06-05 21:50",
+			                    "end": "2012-06-05 23:50"
+			                },
+			                {
+			                    "start": "2012-06-07 21:50",
+			                    "end": "2012-06-07 23:50"
+			                }
+			            ]
 			        }
 			    ]
 			};
-		formNotValidException = {
+		formNotValidException ={
 			    "success": false,
 			    "content": [
 			        {
 			            "FormNotValidException": {
-			                "title": "'null'",
-			                "startH": "'null'",
-			                "repeatMode": "'null'",
-			                "allDay": "'null'",
-			                "endH": "'null'",
-			                "endM": "'null'",
-			                "date": "'null'",
-			                "startM": "'null'"
+			                "title": false,
+			                "startH": false,
+			                "repeatMode": false,
+			                "allDay": true,
+			                "endH": false,
+			                "endM": false,
+			                "date": false,
+			                "startM": false
 			            }
 			        }
 			    ]
