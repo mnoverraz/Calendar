@@ -1,54 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
-  <display-name>Calendar</display-name>
-  <filter>
-    <filter-name>UrlRewriteFilter</filter-name>
-    <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>UrlRewriteFilter</filter-name>
-    <url-pattern>/*</url-pattern>
-    <dispatcher>REQUEST</dispatcher>
-    <dispatcher>FORWARD</dispatcher>
-  </filter-mapping>
+  <display-name>calendarEARWeb</display-name>
   <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
     <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  <servlet>
-    <description></description>
-    <display-name>RESTServlet</display-name>
-    <servlet-name>RESTServlet</servlet-name>
-    <servlet-class>calendar.web.servlet.RESTServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>RESTServlet</servlet-name>
-    <url-pattern>/rest</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>BootServlet</display-name>
-    <servlet-name>BootServlet</servlet-name>
-    <servlet-class>calendar.web.servlet.BootServlet</servlet-class>
-    <init-param>
-      <description>Resource Path</description>
-      <param-name>resourcePath</param-name>
-      <param-value>calendar.web.res</param-value>
-    </init-param>
-      <init-param>
-      <description>Default lang</description>
-      <param-name>lang</param-name>
-      <param-value>fr</param-value>
-    </init-param>
-    <load-on-startup>0</load-on-startup>
-  </servlet>
-  <servlet>
-    <description></description>
-    <display-name>ConfigServlet</display-name>
-    <servlet-name>ConfigServlet</servlet-name>
-    <servlet-class>calendar.web.servlet.ConfigServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ConfigServlet</servlet-name>
-    <url-pattern>/config</url-pattern>
-  </servlet-mapping>
 </web-app>

@@ -24,7 +24,6 @@ public class RemoteEvent {
 		try {
 			context = new InitialContext();
 			eventHandler = (EventHandlerLocal) context.lookup("calendarEAR/EventHandler/local");
-			System.out.println("hello");
 			events = eventHandler.get();
 			for (Event event : events) {
 				System.out.println(event.getTitle());
