@@ -30,8 +30,7 @@ public class EventController extends Controller<Event> {
 		Date end = null;
 		
 		if (filter != null) {
-			Iterator<Entry<String, Object>> it = filter.entrySet().iterator();
-			
+			Iterator<Entry<String, Object>> it = filter.entrySet().iterator();			
 			while (it.hasNext()) {
 				Object key = it.next().getKey();
 				Object value = filter.get(key);

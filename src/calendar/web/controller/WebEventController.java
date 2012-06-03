@@ -1,6 +1,9 @@
 package calendar.web.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
@@ -109,35 +112,57 @@ public class WebEventController extends WebController<EventController> {
 		ArrayList<Event> events = null;
 		Message message = new Message();
 		message.state = true;
+		
+		HashMap<String, Object> filter = new HashMap<String, Object>();
 
 		try {
-			events = (ArrayList<Event>) controller.read(null);
-		} catch (TimeSlotException e) {
-			Object detailInformation = e.detailInformation;
-			@SuppressWarnings("unchecked")
-			ArrayList<EventDate> eventDates = (ArrayList<EventDate>) detailInformation;
-			message.state = false;
+			if (params != null) {
+				long timeStamp = Long.parseLong(params.get("start"));
 
+				Date date = new Date(timeStamp*1000);
+				filter.put("start", date);
+			}
+			
+			Iterator<Entry<String, String>> it = params.entrySet().iterator();
+			
+			
+			while (it.hasNext()) {
+				String key = it.next().getKey();
+				String value = params.get(key);
+				
+				if ("start".equals(key)) {
+					long timeStamp = Long.parseLong(value);
+
+					Date date = new Date(timeStamp*1000);
+					filter.put("start", date);
+				}
+				if ("end".equals(key)) {
+					long timeStamp = Long.parseLong(value);
+
+					Date date = new Date(timeStamp*1000);
+					filter.put("end", date);
+				}
+			}	
+			events = (ArrayList<Event>) controller.read(filter);
+			for (Event event : events) {
+				HashMap<String, Object> eventMap = null;
+				for (EventDate eventDate : event.getEventDates()) {
+					eventMap = new HashMap<String, Object>();
+					eventMap.put("id", event.getId());
+					eventMap.put("title", event.getTitle());
+					eventMap.put("start", DateHelper.DateToString(
+							eventDate.getStart(), Config.DATE_FORMAT_LONG));
+					eventMap.put("end", DateHelper.DateToString(eventDate.getEnd(),
+							Config.DATE_FORMAT_LONG));
+					eventMap.put("allDay", eventDate.isAllDay());
+
+					message.addElementToBody(eventMap);
+				}
+			}
 		} catch (CoreException e) {
 			message.state = false;
 			ExceptionRenderer exRenderer = new ExceptionRenderer(e);
 			message = exRenderer.getMessage();
-		}
-
-		for (Event event : events) {
-			HashMap<String, Object> eventMap = null;
-			for (EventDate eventDate : event.getEventDates()) {
-				eventMap = new HashMap<String, Object>();
-				eventMap.put("id", event.getId());
-				eventMap.put("title", event.getTitle());
-				eventMap.put("start", DateHelper.DateToString(
-						eventDate.getStart(), Config.DATE_FORMAT_LONG));
-				eventMap.put("end", DateHelper.DateToString(eventDate.getEnd(),
-						Config.DATE_FORMAT_LONG));
-				eventMap.put("allDay", eventDate.isAllDay());
-
-				message.addElementToBody(eventMap);
-			}
 		}
 
 		return message;
