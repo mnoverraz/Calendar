@@ -44,8 +44,8 @@ public class WebEventController extends WebController<EventController> {
 			String description = null;
 
 			Iterator<Entry<String, String>> it = params.entrySet().iterator();
-			
-			//System.out.println(params.get("startH"));
+
+			// System.out.println(params.get("startH"));
 			try {
 				while (it.hasNext()) {
 					Object key = it.next().getKey();
@@ -69,12 +69,14 @@ public class WebEventController extends WebController<EventController> {
 						repeatEnd = (String) value;
 					if ("description".equals(key))
 						description = (String) value;
-					if ("title".equals(key)) 
-						title = (String)value;
+					if ("title".equals(key))
+						title = (String) value;
 				}
-				
+
 				try {
-				event = FormUtils.createEventFromForm(date, startH, startM, endH, endM, allDay, repeatMode, repeatEnd, title, description);
+					event = FormUtils.createEventFromForm(date, startH, startM,
+							endH, endM, allDay, repeatMode, repeatEnd, title,
+							description);
 					controller.create(event);
 					HashMap<String, Object> eventMap = null;
 					for (EventDate eventDate : event.getEventDates()) {
@@ -86,16 +88,14 @@ public class WebEventController extends WebController<EventController> {
 						eventMap.put("end", DateHelper.DateToString(
 								eventDate.getEnd(), Config.DATE_FORMAT_LONG));
 						eventMap.put("allDay", eventDate.isAllDay());
-	
+
 						message.addElementToBody(eventMap);
 					}
-				}
-				catch (FormNotValidException fe) {
+				} catch (FormNotValidException fe) {
 					message.state = false;
 					ExceptionRenderer exRenderer = new ExceptionRenderer(fe);
 					message = exRenderer.getMessage();
 				}
-				
 
 			} catch (Exception e) {
 				message.state = false;
@@ -112,37 +112,33 @@ public class WebEventController extends WebController<EventController> {
 		ArrayList<Event> events = null;
 		Message message = new Message();
 		message.state = true;
-		
+
 		HashMap<String, Object> filter = new HashMap<String, Object>();
 
 		try {
 			if (params != null) {
-				long timeStamp = Long.parseLong(params.get("start"));
 
-				Date date = new Date(timeStamp*1000);
-				filter.put("start", date);
+				Iterator<Entry<String, String>> it = params.entrySet()
+						.iterator();
+
+				while (it.hasNext()) {
+					String key = it.next().getKey();
+					String value = params.get(key);
+
+					if ("start".equals(key)) {
+						long timeStamp = Long.parseLong(value);
+
+						Date date = new Date(timeStamp * 1000);
+						filter.put("start", date);
+					}
+					if ("end".equals(key)) {
+						long timeStamp = Long.parseLong(value);
+
+						Date date = new Date(timeStamp * 1000);
+						filter.put("end", date);
+					}
+				}
 			}
-			
-			Iterator<Entry<String, String>> it = params.entrySet().iterator();
-			
-			
-			while (it.hasNext()) {
-				String key = it.next().getKey();
-				String value = params.get(key);
-				
-				if ("start".equals(key)) {
-					long timeStamp = Long.parseLong(value);
-
-					Date date = new Date(timeStamp*1000);
-					filter.put("start", date);
-				}
-				if ("end".equals(key)) {
-					long timeStamp = Long.parseLong(value);
-
-					Date date = new Date(timeStamp*1000);
-					filter.put("end", date);
-				}
-			}	
 			events = (ArrayList<Event>) controller.read(filter);
 			for (Event event : events) {
 				HashMap<String, Object> eventMap = null;
@@ -152,8 +148,8 @@ public class WebEventController extends WebController<EventController> {
 					eventMap.put("title", event.getTitle());
 					eventMap.put("start", DateHelper.DateToString(
 							eventDate.getStart(), Config.DATE_FORMAT_LONG));
-					eventMap.put("end", DateHelper.DateToString(eventDate.getEnd(),
-							Config.DATE_FORMAT_LONG));
+					eventMap.put("end", DateHelper.DateToString(
+							eventDate.getEnd(), Config.DATE_FORMAT_LONG));
 					eventMap.put("allDay", eventDate.isAllDay());
 
 					message.addElementToBody(eventMap);
