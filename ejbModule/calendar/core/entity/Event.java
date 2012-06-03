@@ -57,8 +57,7 @@ public class Event implements Serializable {
 	
 	public List<EventDate> getEventDates() {
 		return eventDates;
-	}
-	
+	}	
 
 	public String getTitle() {
 		return title;
