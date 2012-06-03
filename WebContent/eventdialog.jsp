@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<jsp:useBean id="ui" class="calendar.web.bean.UIBean" scope="session" />
 
 <script type='text/javascript' src='misc/js/application/handler/EventDialog.js'></script>
 
@@ -9,7 +10,7 @@
 
 
     <div class="input text">
-        <label for="name" id="event-title">Titre</label>
+        <label for="name" id="event-title"><%=ui.getLangText("calendar-event-title") %></label>
         <input type="text" name="name" id="name" class="required" value=""/>
         <input type="hidden" name="uid" id="uid" value="uid"/>
         <input type="hidden" name="action" id="action" value="action" />
@@ -19,16 +20,16 @@
         <input type="hidden" name="modifyall" id="modifyall" value="true" />
     </div>
     <div class="input text">
-        <label for="edate" id="event-date">Date</label>
+        <label for="edate" id="event-date"><%=ui.getLangText("calendar-event-date") %></label>
         <input type="text" name="edate" id="edate" class="datepicker" value=" " required="required" />
     </div>
     <div class="input">
-        <label for="whole_day" id="event-whole-day">Jour entier</label>
+        <label for="whole_day" id="event-whole-day"><%=ui.getLangText("calendar-event-wholeDay") %></label>
         <input type="checkbox" name="whole_day" id="whole_day" />
     </div>
     <div class="input time" id="start">
 
-        <label for="start_hour" id="event-start">Début</label>
+        <label for="start_hour" id="event-start"><%=ui.getLangText("calendar-event-start") %></label>
 
         <select name="start_hour" id="start_hour">
             <%
@@ -58,7 +59,7 @@
     </div>
 
     <div class="input time" id="end">
-        <label for="end_hour" id="event-end">Fin</label>
+        <label for="end_hour" id="event-end"><%=ui.getLangText("calendar-event-end") %></label>
         <select name="end_hour" id="end_hour">
             <%
             for (int i = 0; i <= 23; i++) {
@@ -87,24 +88,24 @@
     </div>
 
     <div class="input select">
-        <label for="repeat" id="event-repeat">Répéter</label>
+        <label for="repeat" id="event-repeat"><%=ui.getLangText("calendar-event-repeat") %></label>
         <select name="repeat" id="repeat">
-            <option selected="selected" value="Jamais" id="repeat-n"></option>
-            <option value="d" id="repeat-d">Tous les jours</option>
-            <option value="w" id="repeat-w">Toutes les semaines</option>
-            <option value="2w" id="repeat-2w">Toutes les deux semaines</option>
-            <option value="m" id="repeat-m">Tous les mois</option>
-            <option value="y" id="repeat-y">Toutes les années</option>
+            <option selected="selected" value="<%=ui.getLangText("calendar-event-never") %>" id="repeat-n"></option>
+            <option value="d" id="repeat-d"><%=ui.getLangText("calendar-event-daily") %></option>
+            <option value="w" id="repeat-w"><%=ui.getLangText("calendar-event-weekly") %></option>
+            <option value="2w" id="repeat-2w"><%=ui.getLangText("calendar-event-halfMonthly") %></option>
+            <option value="m" id="repeat-m"><%=ui.getLangText("calendar-event-monthly") %></option>
+            <option value="y" id="repeat-y"><%=ui.getLangText("calendar-event-yearly") %></option>
         </select>
     </div>
     <div class="input text" id="repeat_date">
-        <label for="repeat_end" id="repeat-until">Jusqu'à</label>
+        <label for="repeat_end" id="repeat-until"><%=ui.getLangText("calendar-event-until") %></label>
         <input type="text" name="repeat_end" id="repeat_end" class="datepicker" value="repeat_end" readonly="readonly"/>
     </div>
 
     <div class="input textarea">
-        <label for="description" id="event-description">Description</label>
-        <textarea name="description" id="description" cols="20" rows="20">description</textarea>
+        <label for="description" id="event-description"><%=ui.getLangText("calendar-event-description") %></label>
+        <textarea name="description" id="description" cols="20" rows="20"></textarea>
     </div>
 </form>
 
