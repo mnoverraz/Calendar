@@ -7,15 +7,24 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
+import javax.naming.Context;
+import javax.naming.NamingException;
+
 import calendar.core.application.Config;
 import calendar.core.application.utils.DateHelper;
 import calendar.core.entity.Event;
 import calendar.core.entity.EventDate;
 import calendar.core.exception.CoreException;
 import calendar.core.exception.TimeSlotException;
+import calendar.core.session.EventHandlerLocal;
+import calendar.core.session.PersistException;
 
 
 public class EventController extends Controller<Event> {	
+	public EventController(Context context) {
+		super(context);
+	}
+
 	@Override
 	public void create(Event event) throws CoreException {
 		
@@ -30,8 +39,7 @@ public class EventController extends Controller<Event> {
 		Date end = null;
 		
 		if (filter != null) {
-			Iterator<Entry<String, Object>> it = filter.entrySet().iterator();
-			
+			Iterator<Entry<String, Object>> it = filter.entrySet().iterator();			
 			while (it.hasNext()) {
 				Object key = it.next().getKey();
 				Object value = filter.get(key);
@@ -42,12 +50,35 @@ public class EventController extends Controller<Event> {
 					end = (Date) value;
 			}
 		}
-		
+		EventHandlerLocal eventHandler;
+		try {
+			eventHandler = (EventHandlerLocal) context.lookup("calendarEAR/EventBean/local");
+			events = (ArrayList<Event>) eventHandler.read(null);
+			
+			for (Event event : events) {
+				System.out.println(event.getId());
+				System.out.println(event.getTitle());
+				System.out.println(event.getMode());
+				System.out.println(event.getDescription());
+				for (EventDate dates : event.getEventDates()) {
+					System.out.println(dates.getStart());
+					System.out.println(dates.getEnd());
+				}
+				
+			}
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (PersistException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		/*
 		 * Dummy data for test, real data access should be here
 		 */
 		
-		try {
+		/*try {
 		ArrayList<EventDate> eventDates = new ArrayList<EventDate>();
 		eventDates.add(new EventDate(DateHelper.StringToDate("2012-06-15 08:00", Config.DATE_FORMAT_LONG), DateHelper.StringToDate("2012-06-15 10:00", Config.DATE_FORMAT_LONG)));
 		eventDates.add(new EventDate(DateHelper.getToday(), DateHelper.getToday()));
@@ -73,7 +104,7 @@ public class EventController extends Controller<Event> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+*/
 		/*
 		 * End dummy
 		 */

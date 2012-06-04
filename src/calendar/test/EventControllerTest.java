@@ -6,6 +6,9 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
 import org.junit.Test;
 
 import calendar.core.application.BootStrap;
@@ -35,9 +38,9 @@ public class EventControllerTest {
 
 	
 	@Test
-	public void testWebEventController_shouldReturnEventsAsJSON() {
+	public void testWebEventController_shouldReturnEventsAsJSON() throws NamingException {
 		BootStrap.init();
-		WebEventController webEventController = new WebEventController(new EventController());
+		WebEventController webEventController = new WebEventController(new EventController(new InitialContext()));
 		Message message = new Message();
 		message = (Message) webEventController.read(new HashMap<String, String>());
 
@@ -47,9 +50,9 @@ public class EventControllerTest {
 	}	
 	
 	@Test(expected=TimeSlotException.class)
-	public void testAvailability_throwsTimeSlotException() throws CoreException {
+	public void testAvailability_throwsTimeSlotException() throws CoreException, NamingException {
 		BootStrap.init();
-		EventController eventController = new EventController();
+		EventController eventController = new EventController(new InitialContext());
 		Event eventToTest = null;
 		
 		ArrayList<EventDate>eventDates = new ArrayList<EventDate>();
@@ -68,9 +71,9 @@ public class EventControllerTest {
 	}
 	
 
-	public void testWebEventController_throwsNoException() {
+	public void testWebEventController_throwsNoException() throws NamingException {
 		BootStrap.init();
-		EventController eventController = new EventController();
+		EventController eventController = new EventController(new InitialContext());
 		WebEventController controller = new WebEventController(eventController);
 		Event eventToTest = null;
 		Message message = null;

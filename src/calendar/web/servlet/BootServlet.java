@@ -1,5 +1,6 @@
 package calendar.web.servlet;
 
+import javax.naming.NamingException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +14,12 @@ public class BootServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	public void init(ServletConfig config) throws ServletException {
-		BootStrap.init();
+		try {
+			BootStrap.init();
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		ResourceRegistry registry = BootStrap.ResourceRegistry;
 		EventController eventController = (EventController)registry.getController("EventController");

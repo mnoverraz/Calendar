@@ -65,7 +65,7 @@ $(document).ready(function() {
 		    next:     '&nbsp;&#9658;&nbsp;',  // right triangle
 		    prevYear: '&nbsp;&lt;&lt;&nbsp;', // <<
 		    nextYear: '&nbsp;&gt;&gt;&nbsp;', // >>
-		    today:    'today',
+		    today:    resourceBundle['today'],
 		    month:    'month',
 		    week:     'week',
 		    day:      'day'

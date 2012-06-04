@@ -118,7 +118,6 @@ public class FormUtils {
 		if (validation.size() > 0) {
 			FormNotValidException fe = new FormNotValidException();
 			fe.detailInformation = validation;
-			System.out.println(validation);
 			throw fe;
 		}
 		try {
