@@ -23,8 +23,8 @@ public class RemoteEvent {
 		EventHandlerLocal eventHandler;
 		try {
 			context = new InitialContext();
-			eventHandler = (EventHandlerLocal) context.lookup("calendarEAR/EventHandler/local");
-			events = eventHandler.get();
+			eventHandler = (EventHandlerLocal) context.lookup("calendarEAR/EventBean/local");
+			events = eventHandler.read(null);
 			for (Event event : events) {
 				System.out.println(event.getTitle());
 			}
@@ -32,7 +32,7 @@ public class RemoteEvent {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		catch (PersistanceException e) {
+		catch (PersistException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

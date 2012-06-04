@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import calendar.core.entity.Event;
 import calendar.core.session.EventHandlerLocal;
-import calendar.core.session.PersistanceException;
+import calendar.core.session.PersistException;
 import calendar.web.controller.WebController;
 import calendar.web.renderer.ExceptionRenderer;
 import calendar.web.renderer.Message;
@@ -40,8 +40,8 @@ public class RESTServlet extends HttpServlet {
 		EventHandlerLocal eventHandler;
 		try {
 			context = new InitialContext();
-			eventHandler = (EventHandlerLocal) context.lookup("calendarEAR/EventHandler/local");
-			events = eventHandler.get();
+			eventHandler = (EventHandlerLocal) context.lookup("calendarEAR/EventBean/local");
+			events = eventHandler.read(null);
 			for (Event event : events) {
 				System.out.println(event.getTitle());
 			}
@@ -49,7 +49,7 @@ public class RESTServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		catch (PersistanceException e) {
+		catch (PersistException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
