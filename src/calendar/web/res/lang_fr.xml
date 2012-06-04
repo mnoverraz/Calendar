@@ -46,6 +46,12 @@
 	<entry key="day-7-short">Sam</entry>	
 	
 	<entry key="today">Aujourd'hui</entry>
+	<entry key="month">Mois</entry>
+	<entry key="week">Semaine</entry>
+	<entry key="day">Jour</entry>
+	<entry key="month-names">['January', 'February', 'March', 'April', 'May', 'toto44', 'July','August', 'September', 'October', 'November', 'December']</entry>
+	
+	
 	
 	<entry key="application-title">Système de réservation</entry>
 	<entry key="calendar-information">Information</entry>

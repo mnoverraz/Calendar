@@ -11,6 +11,10 @@ HashMap<String, String> lang = new HashMap<String, String>();
 lang.put("mont-1-full", ui.getLangText("month-1-full"));
 lang.put("mont-2-full", ui.getLangText("month-2-full"));
 lang.put("today", ui.getLangText("today"));
+lang.put("month", ui.getLangText("month"));
+lang.put("week", ui.getLangText("week"));
+lang.put("day", ui.getLangText("day"));
+lang.put("month-names", ui.getLangText("month-names"));
 
 /*
 Generate JavaScript Array

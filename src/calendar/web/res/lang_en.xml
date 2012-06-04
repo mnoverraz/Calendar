@@ -46,6 +46,9 @@
 	<entry key="day-7-short">Sat</entry>	
 	
 	<entry key="today">Today</entry>
+	<entry key="month">Month</entry>
+	<entry key="week">Week</entry>
+	<entry key="day">Day</entry>
 	
 	<entry key="application-title">Room reservation system</entry>
 	<entry key="calendar-information">Information</entry>

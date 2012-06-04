@@ -66,11 +66,16 @@ $(document).ready(function() {
 		    prevYear: '&nbsp;&lt;&lt;&nbsp;', // <<
 		    nextYear: '&nbsp;&gt;&gt;&nbsp;', // >>
 		    today:    resourceBundle['today'],
-		    month:    'month',
-		    week:     'week',
-		    day:      'day'
+		    month:    resourceBundle['month'],
+		    week:     resourceBundle['week'],
+		    day:      resourceBundle['day']
 		},
+		firstDay : 1,
 		editable : true,
+		monthNames : ['January', 'February', 'March', 'April', 'May', 'Juin', 'July', 'August', 'September', 'October', 'November', 'December'],
+		monthAbbrevs : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Juin', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+		dayNames : ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+		dayNamesShort : ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
 		//defaultView: 'agendaWeek',
 		//events: 'rest/event/?example&showState=false',
 		selectable: true,
