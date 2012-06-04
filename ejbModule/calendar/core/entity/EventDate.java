@@ -39,7 +39,11 @@ public class EventDate implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date end;
 	@Column
-	private boolean allDay = false;;
+	private boolean allDay = false;
+	
+	public EventDate() {
+		
+	}
 	
 	public EventDate(Date start, Date end) {
 		this.start = start;
