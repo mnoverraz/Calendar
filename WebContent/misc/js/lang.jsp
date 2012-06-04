@@ -10,19 +10,6 @@
 HashMap<String, String> lang = new HashMap<String, String>();
 lang.put("mont-1-full", ui.getLangText("month-1-full"));
 lang.put("mont-2-full", ui.getLangText("month-2-full"));
-lang.put("calendar-event-title", ui.getLangText("calendar-event-title"));
-lang.put("calendar-event-date", ui.getLangText("calendar-event-date"));
-lang.put("calendar-event-wholeDay", ui.getLangText("calendar-event-wholeDay"));
-lang.put("calendar-event-start", ui.getLangText("calendar-event-start"));
-lang.put("calendar-event-end", ui.getLangText("calendar-event-end"));
-lang.put("calendar-event-repeat", ui.getLangText("calendar-event-repeat"));
-lang.put("calendar-event-never", ui.getLangText("calendar-event-never"));
-lang.put("calendar-event-daily", ui.getLangText("calendar-event-daily"));
-lang.put("calendar-event-weekly", ui.getLangText("calendar-event-weekly"));
-lang.put("calendar-event-halfMonthly", ui.getLangText("calendar-event-halfMonthly"));
-lang.put("calendar-event-monthly", ui.getLangText("calendar-event-monthly"));
-lang.put("calendar-event-yearly", ui.getLangText("calendar-event-yearly"));
-lang.put("today", ui.getLangText("today"));
 lang.put("today", ui.getLangText("today"));
 
 /*

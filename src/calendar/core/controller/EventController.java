@@ -54,6 +54,18 @@ public class EventController extends Controller<Event> {
 		try {
 			eventHandler = (EventHandlerLocal) context.lookup("calendarEAR/EventBean/local");
 			events = (ArrayList<Event>) eventHandler.read(null);
+			
+			for (Event event : events) {
+				System.out.println(event.getId());
+				System.out.println(event.getTitle());
+				System.out.println(event.getMode());
+				System.out.println(event.getDescription());
+				for (EventDate dates : event.getEventDates()) {
+					System.out.println(dates.getStart());
+					System.out.println(dates.getEnd());
+				}
+				
+			}
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

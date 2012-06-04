@@ -65,9 +65,9 @@ $(document).ready(function() {
 		    next:     '&nbsp;&#9658;&nbsp;',  // right triangle
 		    prevYear: '&nbsp;&lt;&lt;&nbsp;', // <<
 		    nextYear: '&nbsp;&gt;&gt;&nbsp;', // >>
-		    today:    'today',
+		    today:    resourceBundle['today'],
 		    month:    'month',
-		    week:     '<%=ui.getLangText("month-1-full") %>',
+		    week:     'week',
 		    day:      'day'
 		},
 		editable : true,
