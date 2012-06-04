@@ -4,23 +4,16 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import calendar.core.entity.Event;
-import calendar.core.session.EventHandlerLocal;
-import calendar.core.session.PersistException;
 import calendar.web.controller.WebController;
 import calendar.web.renderer.ExceptionRenderer;
 import calendar.web.renderer.Message;
@@ -35,24 +28,6 @@ public class RESTServlet extends HttpServlet {
 
 	public void init(ServletConfig config) throws ServletException {
 		this.config = config;
-		Context context;
-		List<Event> events;
-		EventHandlerLocal eventHandler;
-		try {
-			context = new InitialContext();
-			eventHandler = (EventHandlerLocal) context.lookup("calendarEAR/EventBean/local");
-			events = eventHandler.read(null);
-			for (Event event : events) {
-				System.out.println(event.getTitle());
-			}
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		catch (PersistException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	/**
@@ -92,6 +67,7 @@ public class RESTServlet extends HttpServlet {
 
 	private void proceed(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
+		
 		PrintWriter out = response.getWriter();
 		StringBuilder content = new StringBuilder();
 		WebController<?> controller = null;
