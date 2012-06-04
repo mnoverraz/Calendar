@@ -20,6 +20,9 @@ function repeatSelector() {
 
 $(document).ready(function() {
 	
+	
+	
+	
     $('#name').focus();
 
     if ($("#edate").val() == '') {

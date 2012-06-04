@@ -2,14 +2,14 @@ function send(url, method) {
 	return $.ajax({
 		type : method,
 		url : url,
-		dataType: "json",
+		dataType: "text",
 		data : {
 			example : ""
 		},
 		success : function(msg) {
 			return msg;
 		}
-	});
+	});	
 }
 //foreach $.each(errors, function(key, val) {
 
@@ -42,8 +42,8 @@ function showDialog(url, dialogTitle, buttonOpts) {
 
 function addEvents(json){
 	
-	eric = '{\'id\':\'9\',\'title\':\'reccurent 1\',\'allDay\':false,\'start\':\'2012-05-31 21:42\',\'end\':\'2012-05-31 23:00\'}';
-	alert(eric);
-	calendar.fullCalendar( 'renderEvent', eric);
+	alert(json[0][0]);
+
+	//calendar.fullCalendar( 'renderEvent', eric);
 }
 

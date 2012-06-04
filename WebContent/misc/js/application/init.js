@@ -67,12 +67,12 @@ $(document).ready(function() {
 		    nextYear: '&nbsp;&gt;&gt;&nbsp;', // >>
 		    today:    'today',
 		    month:    'month',
-		    week:     '<%=ui.getLangText("month-1-full") %>',
+		    week:     'week',
 		    day:      'day'
 		},
 		editable : true,
 		//defaultView: 'agendaWeek',
-		events: 'rest/event/?example&showState=false',
+		//events: 'rest/event/?example&showState=false',
 		selectable: true,
 		selectHelper: true,
 		select: function(start, end, allDay) {
@@ -87,8 +87,7 @@ $(document).ready(function() {
 			    }, {
 			        id : 'delete'
 			    });
-			    
-				
+			  
 		        showDialog('eventdialog.jsp', 'Editer évenement', buttonOpts);
 		        
 			calendar.fullCalendar('unselect');
