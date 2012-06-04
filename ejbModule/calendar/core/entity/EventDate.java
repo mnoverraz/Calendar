@@ -25,7 +25,6 @@ public class EventDate implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column (name="event_date_id")
 	private int id;
 	
 	@ManyToOne

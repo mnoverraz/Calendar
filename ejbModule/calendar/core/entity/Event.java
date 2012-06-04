@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,10 +23,9 @@ public class Event implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column (name="event_id")
 	private long id;
 	
-	@OneToMany(mappedBy="event")
+	@OneToMany(mappedBy="event", fetch = FetchType.EAGER)
 	private List<EventDate> eventDates;
 	@Column
 	private String title;

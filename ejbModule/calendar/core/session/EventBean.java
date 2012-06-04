@@ -36,19 +36,19 @@ public class EventBean implements EventHandlerLocal, EventHandlerRemote {
 		StringBuffer query = new StringBuffer();
 		//query.append("SELECT e FROM Event e");
 
-		query.append("SELECT");
-		query.append("E.event_id,");
-		query.append("E.title,");
-		query.append("E.description,");
-		query.append("D.start,");
+		query.append("SELECT ");
+		/*query.append("E.id,");*/
+		query.append("E ");
+		//query.append("E.description,");
+		/*query.append("D.start,");
 		query.append("D.end,");
-		query.append("D.event_date_id,");
-		query.append("E.mode");
-		query.append("FROM events E, event_dates D");
-		query.append("WHERE E.event_id = D.event_event_id");
-		/*query.append("FROM events E");
-		query.append("   LEFT OUTER JOIN event_dates D");
-		query.append("        ON E.event_id = D.event_event_id ");*/
+		query.append(" .id,");*/
+		//query.append("E.mode");
+		//query.append("FROM Event E, EventDate D");
+		//query.append("WHERE E.id = D.event_id");
+		query.append("FROM Event E ");
+		query.append("LEFT OUTER JOIN e.eventDates");
+		//query.append("E.id = D.event_id ");
 		try {
 			events = em.createQuery(query.toString()).getResultList();
 		} catch (PersistenceException ex) {
