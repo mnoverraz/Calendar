@@ -35,6 +35,22 @@ public class Event implements Serializable {
 	@Column 
 	private String mode;	
 	
+	public Event() {
+		
+	}
+	
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setMode(String mode) {
+		this.mode = mode;
+	}
+
 	public Event(long id, List<EventDate> eventDates, String title,
 			String description, String mode) {
 		initialize(id, eventDates, title);
