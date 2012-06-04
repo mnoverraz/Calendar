@@ -101,7 +101,7 @@ public class Event implements Serializable {
 		return  ret;
 	}
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
