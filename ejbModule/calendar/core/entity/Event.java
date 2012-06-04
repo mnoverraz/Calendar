@@ -3,6 +3,7 @@ package calendar.core.entity;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -23,9 +24,9 @@ public class Event implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long id;
+	private int id;
 	
-	@OneToMany(mappedBy="event", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="event", fetch = FetchType.EAGER, cascade={CascadeType.MERGE})
 	private List<EventDate> eventDates;
 	@Column
 	private String title;
@@ -51,19 +52,19 @@ public class Event implements Serializable {
 		this.mode = mode;
 	}
 
-	public Event(long id, List<EventDate> eventDates, String title,
+	public Event(int id, List<EventDate> eventDates, String title,
 			String description, String mode) {
 		initialize(id, eventDates, title);
 		this.description = description;
 		this.mode = mode;
 	}
 	
-	public Event(long id, List<EventDate> eventDates, String title) {
+	public Event(int id, List<EventDate> eventDates, String title) {
 		
 		initialize(id, eventDates, title);
 	}
 
-	private void initialize(long id, List<EventDate> eventDates, String title) {
+	private void initialize(int id, List<EventDate> eventDates, String title) {
 		this.id = id;
 		this.setEventDates(eventDates);
 		this.title = title;
@@ -104,7 +105,7 @@ public class Event implements Serializable {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
