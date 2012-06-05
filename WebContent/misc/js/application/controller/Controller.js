@@ -1,17 +1,28 @@
-function send(url, method) {
+function send(url, data, method) {
 	$.ajax({
 		type : method,
 		url : url,
 		dataType: "json",
-		data : {
-			example : ""
-		},
+		data : data,
 		success : function(msg) {
 			getMessage(msg);
 		}
 	});	
 }
+
+/*
+ * 
+ * 		{
+			example : ""
+		}
+	
+ * 
+ */
 //foreach $.each(errors, function(key, val) {
+
+toto = {
+		example : ""
+};
 
 function showDialog(url, dialogTitle, buttonOpts) {
 	var $dialog = $('<div id=\"dialog\"></div>')
@@ -24,7 +35,7 @@ function showDialog(url, dialogTitle, buttonOpts) {
         close: function(ev, ui) {
             $(this).remove();
             $('#dialog-confirm').remove();
-            send('rest/event/?example','get');
+            send('rest/event/?example', toto,'get');
         },
         resizable: false,
         modal: true,

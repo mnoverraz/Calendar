@@ -72,22 +72,23 @@ $(document).ready(function() {
 		},
 		timeFormat :{
 		    // for agendaWeek and agendaDay
-		    agenda: 'h:mm{ - h:mm}', // 5:00 - 6:30
-
-		    // for all other views
-		    '': 'h(:mm)t'            // 7p
+		    agenda: 'H:mm{ - H:mm}',
+		    '': 'H:mm'
 		},
 		titleFormat :{
-		    month: 'MMMM yyyy',                             // September 2009
-		    week: "MMM d[ yyyy]{ '&#8212;'[ MMM] d yyyy}", // Sep 7 - 13 2009
-		    day: 'dddd d MMM yyyy'                  // Tuesday, Sep 8, 2009
+		    month: 'MMMM yyyy',
+		    week: "d MMM yyyy - {dd MMM yyyy}",
+		    day: 'dddd d MMMM yyyy'
 		},
 		columnFormat :{
 		    month: 'ddd',    // Mon
-		    week: 'ddd md mm', // Mon 9/7
-		    day: 'dddd dd mm'  // Monday 9/7
+		    week: 'ddd d mm', // Mon 9/7
+		    day: 'dddd d MM'  // Monday 9/7
 		},
+		axisFormat : 'HH:mm',
+		slotMinutes : 30,
 		firstDay : 1,
+		firstHour : 7,
 		editable : true,
 		monthNames : eval(resourceBundle['month-names']),
 		monthAbbrevs : eval(resourceBundle['month-names-short']),
@@ -104,8 +105,8 @@ $(document).ready(function() {
 			    },{
 			        id : 'monId'
 			    });
-			    buttonOpts['Button 2'] = $.extend(function() {                    
-			    	//action à faire
+			    buttonOpts['Valider'] = $.extend(function() {                    
+			    	send('rest/event/?example', $('eventform').serialize(),'post');
 			    }, {
 			        id : 'delete'
 			    });

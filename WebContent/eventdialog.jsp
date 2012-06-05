@@ -4,7 +4,7 @@
 <script type='text/javascript' src='misc/js/application/handler/EventDialog.js'></script>
 
 
-<form id="eventform" name="eventform" action="#" method="post">
+<form id="eventform" name="eventform">
 
 
 
