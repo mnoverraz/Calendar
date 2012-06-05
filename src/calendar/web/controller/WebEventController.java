@@ -140,6 +140,7 @@ public class WebEventController extends WebController<EventController> {
 				}
 			}
 			events = (ArrayList<Event>) controller.read(filter);
+
 			for (Event event : events) {
 				HashMap<String, Object> eventMap = null;
 				for (EventDate eventDate : event.getEventDates()) {
@@ -160,7 +161,6 @@ public class WebEventController extends WebController<EventController> {
 			ExceptionRenderer exRenderer = new ExceptionRenderer(e);
 			message = exRenderer.getMessage();
 		}
-
 		return message;
 	}
 
