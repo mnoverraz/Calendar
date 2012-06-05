@@ -31,10 +31,10 @@ public class EventBean implements EventHandlerLocal, EventHandlerRemote {
 		List<Event> events = null;
 		StringBuffer query = new StringBuffer();
 
-		query.append("SELECT ");
-		query.append("event ");
+		//query.append("SELECT ");
+		//query.append("event ");
 		query.append("FROM Event event ");
-		query.append("LEFT OUTER JOIN event.eventDates ");
+		//query.append("LEFT OUTER JOIN event.eventDates ");
 		//query.append("WHERE event.id=:id");
 		
 		try {

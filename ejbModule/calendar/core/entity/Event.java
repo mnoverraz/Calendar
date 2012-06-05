@@ -13,7 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@Entity (name="Event")
+@Entity
 @Table (name="events")
 public class Event implements Serializable {
 	
