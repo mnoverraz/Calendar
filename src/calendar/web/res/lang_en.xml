@@ -49,6 +49,10 @@
 	<entry key="month">Month</entry>
 	<entry key="week">Week</entry>
 	<entry key="day">Day</entry>
+	<entry key="day-names">['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']</entry>
+	<entry key="day-names-short">['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']</entry>
+	<entry key="month-names">['January', 'February', 'March', 'April', 'May', 'June', 'July','August', 'September', 'October', 'November', 'December']</entry>
+	<entry key="month-names-short">['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']</entry>
 	
 	<entry key="application-title">Room reservation system</entry>
 	<entry key="calendar-information">Information</entry>

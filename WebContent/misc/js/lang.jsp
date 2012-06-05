@@ -14,7 +14,10 @@ lang.put("today", ui.getLangText("today"));
 lang.put("month", ui.getLangText("month"));
 lang.put("week", ui.getLangText("week"));
 lang.put("day", ui.getLangText("day"));
+lang.put("day-names", ui.getLangText("day-names"));
+lang.put("day-names-short", ui.getLangText("day-names-short"));
 lang.put("month-names", ui.getLangText("month-names"));
+lang.put("month-names-short", ui.getLangText("month-names-short"));
 
 /*
 Generate JavaScript Array

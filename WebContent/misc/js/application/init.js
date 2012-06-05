@@ -70,12 +70,29 @@ $(document).ready(function() {
 		    week:     resourceBundle['week'],
 		    day:      resourceBundle['day']
 		},
+		timeFormat :{
+		    // for agendaWeek and agendaDay
+		    agenda: 'h:mm{ - h:mm}', // 5:00 - 6:30
+
+		    // for all other views
+		    '': 'h(:mm)t'            // 7p
+		},
+		titleFormat :{
+		    month: 'MMMM yyyy',                             // September 2009
+		    week: "MMM d[ yyyy]{ '&#8212;'[ MMM] d yyyy}", // Sep 7 - 13 2009
+		    day: 'dddd d MMM yyyy'                  // Tuesday, Sep 8, 2009
+		},
+		columnFormat :{
+		    month: 'ddd',    // Mon
+		    week: 'ddd md mm', // Mon 9/7
+		    day: 'dddd dd mm'  // Monday 9/7
+		},
 		firstDay : 1,
 		editable : true,
-		monthNames : ['January', 'February', 'March', 'April', 'May', 'Juin', 'July', 'August', 'September', 'October', 'November', 'December'],
-		monthAbbrevs : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Juin', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-		dayNames : ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-		dayNamesShort : ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+		monthNames : eval(resourceBundle['month-names']),
+		monthAbbrevs : eval(resourceBundle['month-names-short']),
+		dayNames : eval(resourceBundle['day-names']),
+		dayNamesShort : eval(resourceBundle['day-names-short']),
 		//defaultView: 'agendaWeek',
 		//events: 'rest/event/?example&showState=false',
 		selectable: true,
