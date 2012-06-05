@@ -1,13 +1,13 @@
 function send(url, method) {
-	return $.ajax({
+	$.ajax({
 		type : method,
 		url : url,
-		dataType: "text",
+		dataType: "json",
 		data : {
 			example : ""
 		},
 		success : function(msg) {
-			return msg;
+			getMessage(msg);
 		}
 	});	
 }
@@ -24,7 +24,7 @@ function showDialog(url, dialogTitle, buttonOpts) {
         close: function(ev, ui) {
             $(this).remove();
             $('#dialog-confirm').remove();
-            addEvents(send('rest/event/?example','get'));
+            send('rest/event/?example','get');
         },
         resizable: false,
         modal: true,
@@ -40,10 +40,78 @@ function showDialog(url, dialogTitle, buttonOpts) {
     return false;
 }
 
-function addEvents(json){
+function getMessage(json){
+	this.toto = json;
 	
-	alert(json[0][0]);
+	
+	if(json['success']){
+		/*if(json['content'] == ''){
+			alert('empty');
+		}else{*/
+			addEvents(json);
+		//}
+		
+	}else{
+		processError(json);
+	}
+	
 
 	//calendar.fullCalendar( 'renderEvent', eric);
+}
+
+function addEvents(json){
+	
+	this.ev = {
+		    "success": true,
+		    "content": [
+		        {
+		            "id": "1",
+		            "title": "event 1 (récurrent)",
+		            "allDay": false,
+		            "start": "2012-06-15 08:00",
+		            "end": "2012-06-15 10:00"
+		        },
+		        {
+		            "id": "1",
+		            "title": "event 1 (récurrent)",
+		            "allDay": true,
+		            "start": "2012-06-02 22:13",
+		            "end": "2012-06-02 22:13"
+		        },
+		        {
+		            "id": "2",
+		            "title": "event 2",
+		            "allDay": false,
+		            "start": "2012-06-16 11:00",
+		            "end": "2012-06-16 13:00"
+		        },
+		        {
+		            "id": "3",
+		            "title": "event 3",
+		            "allDay": false,
+		            "start": "2012-06-05 22:00",
+		            "end": "2012-06-05 23:00"
+		        },
+		        {
+		            "id": "3",
+		            "title": "event 3",
+		            "allDay": false,
+		            "start": "2012-06-07 22:30",
+		            "end": "2012-06-07 23:45"
+		        }
+		    ]
+		};
+	
+	
+	for(var i= 0; i < ev['content'].length; i++)
+	{
+	     calendar.fullCalendar('renderEvent', ev['content'][i], true);
+	}
+	//calendar.fullCalendar('renderEvent', ev , true);
+	
+}
+
+function processError(error){
+	alert('processError');
 }
 
