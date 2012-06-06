@@ -66,13 +66,36 @@ $(document).ready(function() {
 		    prevYear: '&nbsp;&lt;&lt;&nbsp;', // <<
 		    nextYear: '&nbsp;&gt;&gt;&nbsp;', // >>
 		    today:    resourceBundle['today'],
-		    month:    'month',
-		    week:     'week',
-		    day:      'day'
+		    month:    resourceBundle['month'],
+		    week:     resourceBundle['week'],
+		    day:      resourceBundle['day']
 		},
+		timeFormat :{
+		    // for agendaWeek and agendaDay
+		    agenda: 'H:mm{ - H:mm}',
+		    '': 'H:mm'
+		},
+		titleFormat :{
+		    month: 'MMMM yyyy',
+		    week: "d MMM yyyy - {dd MMM yyyy}",
+		    day: 'dddd d MMMM yyyy'
+		},
+		columnFormat :{
+		    month: 'ddd',    // Mon
+		    week: 'ddd d mm', // Mon 9/7
+		    day: 'dddd d MM'  // Monday 9/7
+		},
+		axisFormat : 'HH:mm',
+		slotMinutes : 30,
+		firstDay : 1,
+		firstHour : 7,
 		editable : true,
+		monthNames : eval(resourceBundle['month-names']),
+		monthAbbrevs : eval(resourceBundle['month-names-short']),
+		dayNames : eval(resourceBundle['day-names']),
+		dayNamesShort : eval(resourceBundle['day-names-short']),
 		//defaultView: 'agendaWeek',
-		events: 'rest/event/?example&showState=false',
+		//events: 'rest/event/?example&showState=false',
 		selectable: true,
 		selectHelper: true,
 		select: function(start, end, allDay) {
@@ -82,13 +105,12 @@ $(document).ready(function() {
 			    },{
 			        id : 'monId'
 			    });
-			    buttonOpts['Button 2'] = $.extend(function() {                    
-			    	//action à faire
+			    buttonOpts['Valider'] = $.extend(function() {                    
+			    	send('rest/event/?example', $('eventform').serialize(),'post');
 			    }, {
 			        id : 'delete'
 			    });
-			    
-				
+			  
 		        showDialog('eventdialog.jsp', 'Editer évenement', buttonOpts);
 		        
 			calendar.fullCalendar('unselect');

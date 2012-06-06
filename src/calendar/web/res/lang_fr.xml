@@ -46,6 +46,15 @@
 	<entry key="day-7-short">Sam</entry>	
 	
 	<entry key="today">Aujourd'hui</entry>
+	<entry key="month">Mois</entry>
+	<entry key="week">Semaine</entry>
+	<entry key="day">Jour</entry>
+	<entry key="day-names">['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi']</entry>
+	<entry key="day-names-short">['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa']</entry>
+	<entry key="month-names">['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet','Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']</entry>
+	<entry key="month-names-short">['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jui', 'Juil', 'Aou', 'Sept', 'Oct', 'Nov', 'Déc']</entry>
+	
+	
 	
 	<entry key="application-title">Système de réservation</entry>
 	<entry key="calendar-information">Information</entry>

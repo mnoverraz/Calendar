@@ -1,17 +1,28 @@
-function send(url, method) {
-	return $.ajax({
+function send(url, data, method) {
+	$.ajax({
 		type : method,
 		url : url,
 		dataType: "json",
-		data : {
-			example : ""
-		},
+		data : data,
 		success : function(msg) {
-			return msg;
+			getMessage(msg);
 		}
-	});
+	});	
 }
+
+/*
+ * 
+ * 		{
+			example : ""
+		}
+	
+ * 
+ */
 //foreach $.each(errors, function(key, val) {
+
+toto = {
+		example : ""
+};
 
 function showDialog(url, dialogTitle, buttonOpts) {
 	var $dialog = $('<div id=\"dialog\"></div>')
@@ -24,7 +35,7 @@ function showDialog(url, dialogTitle, buttonOpts) {
         close: function(ev, ui) {
             $(this).remove();
             $('#dialog-confirm').remove();
-            addEvents(send('rest/event/?example','get'));
+            send('rest/event/?example', toto,'get');
         },
         resizable: false,
         modal: true,
@@ -40,10 +51,78 @@ function showDialog(url, dialogTitle, buttonOpts) {
     return false;
 }
 
+function getMessage(json){
+	this.toto = json;
+	
+	
+	if(json['success']){
+		/*if(json['content'] == ''){
+			alert('empty');
+		}else{*/
+			addEvents(json);
+		//}
+		
+	}else{
+		processError(json);
+	}
+	
+
+	//calendar.fullCalendar( 'renderEvent', eric);
+}
+
 function addEvents(json){
 	
-	eric = '{\'id\':\'9\',\'title\':\'reccurent 1\',\'allDay\':false,\'start\':\'2012-05-31 21:42\',\'end\':\'2012-05-31 23:00\'}';
-	alert(eric);
-	calendar.fullCalendar( 'renderEvent', eric);
+	this.ev = {
+		    "success": true,
+		    "content": [
+		        {
+		            "id": "1",
+		            "title": "event 1 (récurrent)",
+		            "allDay": false,
+		            "start": "2012-06-15 08:00",
+		            "end": "2012-06-15 10:00"
+		        },
+		        {
+		            "id": "1",
+		            "title": "event 1 (récurrent)",
+		            "allDay": true,
+		            "start": "2012-06-02 22:13",
+		            "end": "2012-06-02 22:13"
+		        },
+		        {
+		            "id": "2",
+		            "title": "event 2",
+		            "allDay": false,
+		            "start": "2012-06-16 11:00",
+		            "end": "2012-06-16 13:00"
+		        },
+		        {
+		            "id": "3",
+		            "title": "event 3",
+		            "allDay": false,
+		            "start": "2012-06-05 22:00",
+		            "end": "2012-06-05 23:00"
+		        },
+		        {
+		            "id": "3",
+		            "title": "event 3",
+		            "allDay": false,
+		            "start": "2012-06-07 22:30",
+		            "end": "2012-06-07 23:45"
+		        }
+		    ]
+		};
+	
+	
+	for(var i= 0; i < ev['content'].length; i++)
+	{
+	     calendar.fullCalendar('renderEvent', ev['content'][i], true);
+	}
+	//calendar.fullCalendar('renderEvent', ev , true);
+	
+}
+
+function processError(error){
+	alert('processError');
 }
 
