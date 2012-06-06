@@ -90,12 +90,34 @@ $(document).ready(function() {
 		firstDay : 1,
 		firstHour : 7,
 		editable : true,
+		//Language options
 		monthNames : eval(resourceBundle['month-names']),
 		monthAbbrevs : eval(resourceBundle['month-names-short']),
 		dayNames : eval(resourceBundle['day-names']),
 		dayNamesShort : eval(resourceBundle['day-names-short']),
 		//defaultView: 'agendaWeek',
 		//events: 'rest/event/?example&showState=false',
+		events: function(start, end, callback) {
+	        $.ajax({
+	            url: 'rest/event/?example&showState=false',
+	            dataType: 'json',
+	            data: {
+	                // our hypothetical feed requires UNIX timestamps
+	                start: Math.round(start.getTime() / 1000),
+	                end: Math.round(end.getTime() / 1000)
+	            },
+	            success: function(doc) {
+	                var events = [];
+	                $(doc).find('event').each(function() {
+	                    events.push({
+	                        title: $(this).attr('title'),
+	                        start: $(this).attr('start') // will be parsed
+	                    });
+	                });
+	                callback(events);
+	            }
+	        });
+	    },
 		selectable: true,
 		selectHelper: true,
 		select: function(start, end, allDay) {
