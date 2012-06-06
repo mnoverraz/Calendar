@@ -25,17 +25,14 @@ public class EventBean implements EventHandlerLocal, EventHandlerRemote {
 		em.merge(event);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Event> read(HashMap<String, Object> params)
 			throws PersistException {
 		List<Event> events = null;
 		StringBuffer query = new StringBuffer();
 
-		//query.append("SELECT ");
-		//query.append("event ");
 		query.append("FROM Event event ");
-		//query.append("LEFT OUTER JOIN event.eventDates ");
-		//query.append("WHERE event.id=:id");
 		
 		try {
 			Query q = em.createQuery(query.toString());
@@ -51,14 +48,17 @@ public class EventBean implements EventHandlerLocal, EventHandlerRemote {
 
 	@Override
 	public void update(Event event) throws PersistException {
-		// TODO Auto-generated method stub
-
+		Event origEvent = em.find(Event.class, event.getId());
+		origEvent.setMode(event.getMode());
+		origEvent.setTitle(event.getTitle());
+		origEvent.setDescription(event.getDescription());
+		origEvent.setEventDates(event.getEventDates());
 	}
 
 	@Override
 	public void delete(Event event) throws PersistException {
-		// TODO Auto-generated method stub
-
+		Event origEvent = em.find(Event.class, event.getId());
+		em.remove(origEvent);
 	}
 
 }

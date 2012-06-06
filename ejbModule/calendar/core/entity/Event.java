@@ -109,7 +109,7 @@ public class Event implements Serializable {
 		this.id = id;
 	}
 
-	private void setEventDates(List<EventDate> eventDates) {
+	public void setEventDates(List<EventDate> eventDates) {
 		this.eventDates = eventDates;
 	}
 
