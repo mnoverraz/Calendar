@@ -3,8 +3,6 @@ package calendar.core.controller;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map.Entry;
 
 import javax.naming.Context;
 import javax.naming.NamingException;
@@ -20,6 +18,7 @@ import calendar.core.session.PersistException;
 
 public class EventController extends Controller<Event> {	
 	private EventHandlerLocal eventHandler;
+	
 	public EventController(Context context) throws NamingException {
 		super(context);
 		this.eventHandler = (EventHandlerLocal) context.lookup("calendarEAR/EventBean/local");
@@ -27,39 +26,14 @@ public class EventController extends Controller<Event> {
 
 	@Override
 	public void create(Event event) throws CoreException {
-		
-		if (checkAvailability(event)) {
-			try {
-				eventHandler.create(event);
-			} catch (PersistException e) {
-				SystemException se = new SystemException();
-				se.detailInformation = e;
-			}
-		}
-
-		
+		doAction("create", event);
 	}
 
 	@Override
 	public ArrayList<Event> read(HashMap<String, Object> filter) throws CoreException {
 		ArrayList<Event> events = new ArrayList<Event>();
-		Date start = null;
-		Date end = null;
-		
-		if (filter != null) {
-			Iterator<Entry<String, Object>> it = filter.entrySet().iterator();			
-			while (it.hasNext()) {
-				Object key = it.next().getKey();
-				Object value = filter.get(key);
-				
-				if ("start".equals(key))
-					start = (Date) value;
-				if ("end".equals(key))
-					end = (Date) value;
-			}
-		}
 		try {
-			events = (ArrayList<Event>) eventHandler.read(null);
+			events = (ArrayList<Event>) eventHandler.read(filter);
 		} catch (PersistException e) {
 			SystemException se = new SystemException();
 			se.detailInformation = e;
@@ -69,25 +43,28 @@ public class EventController extends Controller<Event> {
 
 	@Override
 	public void update(Event event) throws CoreException {
-		// TODO Auto-generated method stub
-		
+		doAction("update", event);
 	}
 
 	@Override
 	public void delete(Event event) throws CoreException {
-		// TODO Auto-generated method stub
-		
+		doAction("delete", event);
 	}
 	
-	private synchronized void doAction(String action, Event event) {
-		if ("delete".equals(action)) {
-			
-		}
-		else if ("create".equals(	action)) {
-			
-		}
-		else if ("update".equals(action)) {
-			
+	private synchronized void doAction(String action, Event event) throws TimeSlotException, CoreException {
+		try {
+		if ("delete".equals(action))
+			eventHandler.delete(event);
+		else
+			if (checkAvailability(event)) {
+				if ("create".equals(action))
+					eventHandler.create(event);
+				else if ("update".equals(action))
+					eventHandler.update(event);
+			}
+		} catch (PersistException e) {
+			SystemException se = new SystemException();
+			se.detailInformation = e;
 		}
 	}
 	
@@ -126,7 +103,6 @@ public class EventController extends Controller<Event> {
 					
 					if (!available)
 						unavailableEvents.add(eventDate);
-					
 				}	
 			}	
 		}

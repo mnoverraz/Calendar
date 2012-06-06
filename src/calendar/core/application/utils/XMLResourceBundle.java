@@ -12,8 +12,9 @@ import java.util.Set;
  * This class gives a ResourceBundle the ability to parse XML files
  * 
  * 
- * @author BELLATALLA Alain, MEIER Stefan, NOVERRAZ Mathieu
- * @version 2011.0704
+ * @author AFFOLTER Nicolas, MEIER Stefan, NOVERRAZ Mathieu
+ * @version 2011.06.06
+ * @see java.util.ResourceBundle.Control
  */
 public class XMLResourceBundle extends ResourceBundle {
 
