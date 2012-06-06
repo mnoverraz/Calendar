@@ -25,11 +25,6 @@ public class BootServlet extends HttpServlet {
 		EventController eventController = (EventController)registry.getController("EventController");
 		WebEventController webEventController = new WebEventController(eventController);
 		config.getServletContext().setAttribute("event", webEventController);
-		String resourcePath = config.getInitParameter("resourcePath");
-		config.getServletContext().setAttribute("resourcePath", resourcePath);
-		
-		String defaultLang = config.getInitParameter("defaultLang");
-		config.getServletContext().setAttribute("defaultLang", defaultLang);
 	}
 
 }

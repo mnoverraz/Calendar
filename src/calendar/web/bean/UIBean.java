@@ -11,6 +11,7 @@ public class UIBean {
 	private String resourcePath;
 	
 	public UIBean() {
+		System.out.println("bean");
 		this.resourcePath = "calendar.web.res.lang";
 		setLang("fr");
 	}

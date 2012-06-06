@@ -1,13 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page pageEncoding="UTF-8"%>
 <jsp:useBean id="ui" class="calendar.web.bean.UIBean" scope="session" />
-<% 
-String lang = request.getParameter("lang");
-if (lang != null && !lang.equals(ui.getLang())) 
-	ui.setLang(lang);
-
-
- %>
 <html>
 <head>
 <title>UNIL - FBM CALENDAR</title>
@@ -48,7 +41,7 @@ if (lang != null && !lang.equals(ui.getLang()))
 		<div id="header">
 			<img id="login" src="https://wwwfbm.unil.ch/html/img/login.gif"
 				alt="login" />
-			<div id="language">English | Français</div>
+			<div id="language"><a href="config?lang=en">English</a> | Français</div>
 			<div id="bar">Room reservation system</div>
 		</div>
 		
