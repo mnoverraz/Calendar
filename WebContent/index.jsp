@@ -41,7 +41,7 @@
 		<div id="header">
 			<img id="login" src="https://wwwfbm.unil.ch/html/img/login.gif"
 				alt="login" />
-			<div id="language"><a href="config?lang=en">English</a> | Français</div>
+			<div id="language"><a href="config?lang=fr">Français</a> | <a href="config?lang=en">English</a> | <a href="config?lang=ja">日本語</a></div>
 			<div id="bar">Room reservation system</div>
 		</div>
 		

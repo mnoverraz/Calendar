@@ -46,20 +46,20 @@
 	<entry key="day-7-short">土</entry>	
 	
 	<entry key="today">今日</entry>
-	<entry key="month">Mois</entry>
-	<entry key="week">Week</entry>
-	<entry key="day">Day</entry>
-	<entry key="day-names">['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']</entry>
-	<entry key="day-names-short">['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']</entry>
-	<entry key="month-names">['January', 'February', 'March', 'April', 'May', 'June', 'July','August', 'September', 'October', 'November', 'December']</entry>
-	<entry key="month-names-short">['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']</entry>
+	<entry key="month">月</entry>
+	<entry key="week">週</entry>
+	<entry key="day">日</entry>
+	<entry key="day-names">['日曜日', '月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日']</entry>
+	<entry key="day-names-short">['日', '月', '火', '水', '木', '金', '土']</entry>
+	<entry key="month-names">['１月', '２月', '３月', '４月', '５月', '６月', '７月','８月', '９月', '１０月', '１１月', '１２月']</entry>
+	<entry key="month-names-short">['１月', '２月', '３月', '４月', '５月', '６月', '７月','８月', '９月', '１０月', '１１月', '１２月']</entry>
 	
 	<entry key="application-title">ルーム予約システム</entry>
 	<entry key="calendar-information">情報</entry>
 	<entry key="calendar-choice">選択</entry>  
 	<entry key="calendar-goTo">日付</entry> 
 	
-	<entry key="room-category-other">Other</entry>
+	<entry key="room-category-other">その他</entry>
 	<entry key="room-category-scientifcSetup">Scientific setup</entry> 
 	<entry key="room-category-seminarRoom">Room</entry> 
 	<entry key="room-category-animalLab">Animal experimentation lab</entry> 
