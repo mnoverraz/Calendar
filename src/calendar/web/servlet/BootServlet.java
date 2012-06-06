@@ -2,6 +2,7 @@ package calendar.web.servlet;
 
 import javax.naming.NamingException;
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
@@ -20,11 +21,15 @@ public class BootServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		ServletContext context = config.getServletContext();
 		
 		ResourceRegistry registry = BootStrap.ResourceRegistry;
 		EventController eventController = (EventController)registry.getController("EventController");
 		WebEventController webEventController = new WebEventController(eventController);
-		config.getServletContext().setAttribute("event", webEventController);
+		context.setAttribute("event", webEventController);
+		
+		String resourcePath = (String)config.getInitParameter("resource-path");
+		context.setAttribute("resourcePath", resourcePath);
 	}
 
 }

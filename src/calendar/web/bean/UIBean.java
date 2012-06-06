@@ -10,11 +10,7 @@ public class UIBean {
 	private String lang;
 	private String resourcePath;
 	
-	public UIBean() {
-		System.out.println("bean");
-		this.resourcePath = "calendar.web.res.lang";
-		setLang("fr");
-	}
+	public UIBean() {}
 	
 	public UIBean(String resourcePath, String defaultLang) {
 		this.resourcePath = resourcePath;

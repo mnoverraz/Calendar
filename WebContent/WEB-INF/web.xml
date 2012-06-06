@@ -28,7 +28,12 @@
     <description></description>
     <display-name>BootServlet</display-name>
     <servlet-name>BootServlet</servlet-name>
-    <servlet-class>calendar.web.servlet.BootServlet</servlet-class>
+    <servlet-class>calendar.web.servlet.BootServlet</servlet-class>   
+    <init-param>
+      <description>ResourcePath</description>
+      <param-name>resource-path</param-name>
+      <param-value>calendar.web.res.lang</param-value>
+    </init-param>
     <load-on-startup>0</load-on-startup>
   </servlet>
   <servlet>
@@ -36,16 +41,6 @@
     <display-name>ConfigServlet</display-name>
     <servlet-name>ConfigServlet</servlet-name>
     <servlet-class>calendar.web.servlet.ConfigServlet</servlet-class>
-    <init-param>
-      <description>Resource Path</description>
-      <param-name>resourcePath</param-name>
-      <param-value>calendar.web.res</param-value>
-    </init-param>
-    <init-param>
-      <description>Default lang</description>
-      <param-name>lang</param-name>
-      <param-value>fr</param-value>
-    </init-param>
     <init-param>
       <description>Default Redirect</description>
       <param-name>default-redirect</param-name>
