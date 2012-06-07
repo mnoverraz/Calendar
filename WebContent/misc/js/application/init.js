@@ -111,14 +111,17 @@ $(document).ready(function() {
 	                $(doc).find('event').each(function() {
 	                    events.push({
 	                        title: $(this).attr('title'),
-	                        start: $(this).attr('start') // will be parsed
+	                        start: $(this).attr('start'), // will be parsed
+	                        end: $(this).attr('end'),
+	                        id: $(this).attr('id'),
+	                        allDay: $(this).attr('allDay')
 	                    });
 	                });
-	                
-	                addEvents(events);
+	                addEvents(doc);
 	            }
 	        });
 	    },
+	    
 		selectable: true,
 		selectHelper: true,
 		select: function(start, end, allDay) {
@@ -136,8 +139,54 @@ $(document).ready(function() {
 			  
 		        showDialog('eventdialog.jsp', 'Editer évenement', buttonOpts);
 		        
+		        $("#edate").val('too');
+		        $("#repeat_end").val('toto');
+		        
 			calendar.fullCalendar('unselect');
 		},
+		eventClick: function(calEvent, jsEvent, view) {
+	    	alert('Event: ' + calEvent.title);
+	    	alert('time start: ' + calEvent.start);
+	    	alert('time end: ' + calEvent.end);
+	        alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+	        alert('View: ' + view.name);
+
+	        // change the border color just for fun
+	        $(this).css('border-color', 'red');
+
+	    },
+	    eventDrop: function(event,dayDelta,minuteDelta,allDay,revertFunc) {
+
+	        alert(
+	            event.title + " was moved " +
+	            dayDelta + " days and " +
+	            minuteDelta + " minutes."
+	        );
+
+	        if (allDay) {
+	            alert("Event is now all-day");
+	        }else{
+	            alert("Event has a time-of-day");
+	        }
+
+	        if (!confirm("Are you sure about this change?")) {
+	            revertFunc();
+	        }
+
+	    },
+		eventResize: function(event,dayDelta,minuteDelta,revertFunc) {
+
+	        alert(
+	            "The end date of " + event.title + "has been moved " +
+	            dayDelta + " days and " +
+	            minuteDelta + " minutes."
+	        );
+
+	        if (!confirm("is this okay?")) {
+	            revertFunc();
+	        }
+
+	    }
 	});
 	
 	

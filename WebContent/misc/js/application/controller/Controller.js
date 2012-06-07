@@ -35,7 +35,6 @@ function showDialog(url, dialogTitle, buttonOpts) {
         close: function(ev, ui) {
             $(this).remove();
             $('#dialog-confirm').remove();
-            send('rest/event/?example', toto,'get');
         },
         resizable: false,
         modal: true,
@@ -71,54 +70,11 @@ function getMessage(json){
 }
 
 function addEvents(json){
-	
-	this.ev = {
-		    "success": true,
-		    "content": [
-		        {
-		            "id": "1",
-		            "title": "event 1 (récurrent)",
-		            "allDay": false,
-		            "start": "2012-06-15 08:00",
-		            "end": "2012-06-15 10:00"
-		        },
-		        {
-		            "id": "1",
-		            "title": "event 1 (récurrent)",
-		            "allDay": true,
-		            "start": "2012-06-02 22:13",
-		            "end": "2012-06-02 22:13"
-		        },
-		        {
-		            "id": "2",
-		            "title": "event 2",
-		            "allDay": false,
-		            "start": "2012-06-16 11:00",
-		            "end": "2012-06-16 13:00"
-		        },
-		        {
-		            "id": "3",
-		            "title": "event 3",
-		            "allDay": false,
-		            "start": "2012-06-05 22:00",
-		            "end": "2012-06-05 23:00"
-		        },
-		        {
-		            "id": "3",
-		            "title": "event 3",
-		            "allDay": false,
-		            "start": "2012-06-07 22:30",
-		            "end": "2012-06-07 23:45"
-		        }
-		    ]
-		};
-	
-	
-	for(var i= 0; i < ev['content'].length; i++)
+	alert('ok');
+	for(var i= 0; i < json['content'].length; i++)
 	{
-	     calendar.fullCalendar('renderEvent', ev['content'][i], true);
+	     calendar.fullCalendar('renderEvent', json['content'][i], true);
 	}
-	calendar.fullCalendar('renderEvent', ev , true);
 	
 }
 
