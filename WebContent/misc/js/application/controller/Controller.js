@@ -59,7 +59,7 @@ function getMessage(json){
 		/*if(json['content'] == ''){
 			alert('empty');
 		}else{*/
-			addEvents(json);
+			//addEvents(json);
 		//}
 		
 	}else{
@@ -118,7 +118,7 @@ function addEvents(json){
 	{
 	     calendar.fullCalendar('renderEvent', ev['content'][i], true);
 	}
-	//calendar.fullCalendar('renderEvent', ev , true);
+	calendar.fullCalendar('renderEvent', ev , true);
 	
 }
 

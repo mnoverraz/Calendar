@@ -97,7 +97,7 @@ $(document).ready(function() {
 		dayNamesShort : eval(resourceBundle['day-names-short']),
 		//defaultView: 'agendaWeek',
 		//events: 'rest/event/?example&showState=false',
-		events: function(start, end, callback) {
+		events: function(start, end, addEvents) {
 	        $.ajax({
 	            url: 'rest/event/?example&showState=false',
 	            dataType: 'json',
@@ -114,7 +114,8 @@ $(document).ready(function() {
 	                        start: $(this).attr('start') // will be parsed
 	                    });
 	                });
-	                callback(events);
+	                
+	                addEvents(events);
 	            }
 	        });
 	    },
