@@ -3,7 +3,12 @@ package calendar.core.application;
 import java.util.HashMap;
 
 import calendar.core.controller.Controller;
-
+/**
+ * Holds all controllers needed by application components
+ * 
+ * @author AFFOLTER Nicolas, MEIER Stefan, NOVERRAZ Mathieu
+ * @version 2011.06.06
+ */
 public class ResourceRegistry {
 	private HashMap<String, Controller<?>> controllers;
 	

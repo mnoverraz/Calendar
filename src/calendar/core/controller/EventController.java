@@ -1,138 +1,70 @@
 package calendar.core.controller;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map.Entry;
 
 import javax.naming.Context;
 import javax.naming.NamingException;
 
-import calendar.core.application.Config;
-import calendar.core.application.utils.DateHelper;
 import calendar.core.entity.Event;
 import calendar.core.entity.EventDate;
 import calendar.core.exception.CoreException;
+import calendar.core.exception.SystemException;
 import calendar.core.exception.TimeSlotException;
 import calendar.core.session.EventHandlerLocal;
 import calendar.core.session.PersistException;
 
 
 public class EventController extends Controller<Event> {	
-	public EventController(Context context) {
+	private EventHandlerLocal eventHandler;
+	
+	public EventController(Context context) throws NamingException {
 		super(context);
+		this.eventHandler = (EventHandlerLocal) context.lookup("calendarEAR/EventBean/local");
 	}
 
 	@Override
 	public void create(Event event) throws CoreException {
-		
-		boolean available = checkAvailability(event);
-		
+		doAction("create", event);
 	}
 
 	@Override
 	public ArrayList<Event> read(HashMap<String, Object> filter) throws CoreException {
 		ArrayList<Event> events = new ArrayList<Event>();
-		Date start = null;
-		Date end = null;
-		
-		if (filter != null) {
-			Iterator<Entry<String, Object>> it = filter.entrySet().iterator();			
-			while (it.hasNext()) {
-				Object key = it.next().getKey();
-				Object value = filter.get(key);
-				
-				if ("start".equals(key))
-					start = (Date) value;
-				if ("end".equals(key))
-					end = (Date) value;
-			}
-		}
-		EventHandlerLocal eventHandler;
 		try {
-			eventHandler = (EventHandlerLocal) context.lookup("calendarEAR/EventBean/local");
-			events = (ArrayList<Event>) eventHandler.read(null);
-			
-			for (Event event : events) {
-				System.out.println(event.getId());
-				System.out.println(event.getTitle());
-				System.out.println(event.getMode());
-				System.out.println(event.getDescription());
-				for (EventDate dates : event.getEventDates()) {
-					System.out.println(dates.getStart());
-					System.out.println(dates.getEnd());
-				}
-				
-			}
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			events = (ArrayList<Event>) eventHandler.read(filter);
 		} catch (PersistException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		/*
-		 * Dummy data for test, real data access should be here
-		 */
-		
-		/*try {
-		ArrayList<EventDate> eventDates = new ArrayList<EventDate>();
-		eventDates.add(new EventDate(DateHelper.StringToDate("2012-06-15 08:00", Config.DATE_FORMAT_LONG), DateHelper.StringToDate("2012-06-15 10:00", Config.DATE_FORMAT_LONG)));
-		eventDates.add(new EventDate(DateHelper.getToday(), DateHelper.getToday()));
-		
-		events.add(new Event(1, eventDates, "event 1 (récurrent)", "description 1", "m"));
-		
-		eventDates = new ArrayList<EventDate>();
-		eventDates.add(new EventDate(DateHelper.StringToDate("2012-06-16 11:00", Config.DATE_FORMAT_LONG), DateHelper.StringToDate("2012-06-16 13:00", Config.DATE_FORMAT_LONG)));
-		
-		events.add(new Event(2, eventDates, "event 2", "description 2", ""));
-		
-		eventDates = new ArrayList<EventDate>();
-		eventDates.add(new EventDate(DateHelper.StringToDate("2012-06-05 22:00", Config.DATE_FORMAT_LONG), DateHelper.StringToDate("2012-06-05 23:00", Config.DATE_FORMAT_LONG)));
-		
-		events.add(new Event(3, eventDates, "event 3", "description 3", ""));
-		
-		eventDates = new ArrayList<EventDate>();
-		eventDates.add(new EventDate(DateHelper.StringToDate("2012-06-07 22:30", Config.DATE_FORMAT_LONG), DateHelper.StringToDate("2012-06-07 23:45", Config.DATE_FORMAT_LONG)));
-		
-		events.add(new Event(3, eventDates, "event 3", "description 3", ""));
-		
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-*/
-		/*
-		 * End dummy
-		 */
-		
+			SystemException se = new SystemException();
+			se.detailInformation = e;
+		}		
 		return events;
 	}
 
 	@Override
 	public void update(Event event) throws CoreException {
-		// TODO Auto-generated method stub
-		
+		doAction("update", event);
 	}
 
 	@Override
 	public void delete(Event event) throws CoreException {
-		// TODO Auto-generated method stub
-		
+		doAction("delete", event);
 	}
 	
-	private synchronized void doAction(String action, Event event) {
-		if ("delete".equals(action)) {
-			
-		}
-		else if ("create".equals(	action)) {
-			
-		}
-		else if ("update".equals(action)) {
-			
+	private synchronized void doAction(String action, Event event) throws TimeSlotException, CoreException {
+		try {
+		if ("delete".equals(action))
+			eventHandler.delete(event);
+		else
+			if (checkAvailability(event)) {
+				if ("create".equals(action))
+					eventHandler.create(event);
+				else if ("update".equals(action))
+					eventHandler.update(event);
+			}
+		} catch (PersistException e) {
+			SystemException se = new SystemException();
+			se.detailInformation = e;
 		}
 	}
 	
@@ -171,7 +103,6 @@ public class EventController extends Controller<Event> {
 					
 					if (!available)
 						unavailableEvents.add(eventDate);
-					
 				}	
 			}	
 		}

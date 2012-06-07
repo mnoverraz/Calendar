@@ -16,8 +16,8 @@ import java.util.ResourceBundle;
  * This class reads the property from an XML file
  * 
  * 
- * @author BELLATALLA Alain, MEIER Stefan, NOVERRAZ Mathieu
- * @version 2011.0704
+ * @author AFFOLTER Nicolas, MEIER Stefan, NOVERRAZ Mathieu
+ * @version 2011.06.06
  * @see java.util.ResourceBundle.Control
  */
 public class XMLResourceBundleControl extends ResourceBundle.Control {

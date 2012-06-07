@@ -133,7 +133,9 @@ public class FormUtils {
 				eEnd = DateHelper.StringToDate(dateString + " " + fEndH + ":"
 						+ fEndM, Config.DATE_FORMAT_LONG);
 
-				eventDates.add(new EventDate(eStart, eEnd));
+				EventDate eventDate = new EventDate(eStart, eEnd);
+				eventDate.setEvent(event);
+				eventDates.add(eventDate);
 			}
 			event = new Event(0, eventDates, title, description, repeatMode);
 		} catch (Exception ex) {

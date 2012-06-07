@@ -22,8 +22,8 @@ import calendar.core.application.Config;
  * of date manipulations
  * 
  * 
- * @author MEIER Stefan
- * @version 20120526
+ * @author AFFOLTER Nicolas, MEIER Stefan, NOVERRAZ Mathieu
+ * @version 2011.06.06
  */
 public class DateHelper {
 
@@ -149,7 +149,7 @@ public class DateHelper {
 	/**
 	 * 
 	 * Gets the size of the interval between start and end 
-	 * (if interval is 'w', the number of weeks are returned
+	 * (if interval is 'w', the number of weeks between and and start is returned
 	 * @param start
 	 * @param end
 	 * @param interval
@@ -182,7 +182,7 @@ public class DateHelper {
 	 * 
 	 * @param start
 	 * @param end
-	 * @param interval
+	 * @param interval (every day, every week, twice a month, every month, every year)
 	 */
 	public static ArrayList<Date> calculateRecurrentDates(Date start, Date end, String interval) {
 		ArrayList<Date> dates = new ArrayList<Date>();

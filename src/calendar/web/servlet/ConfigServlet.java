@@ -17,19 +17,11 @@ import calendar.web.bean.UIBean;
 public class ConfigServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	private String lang = "fr";
-	private String resourcePath;
+	private String defaultRedirect = "";
 	
-	private UIBean uiBean;
-
-	public void init(ServletConfig config) throws ServletException {
-		if (null != config.getServletContext().getAttribute("lang")) {
-			lang = (String)config.getServletContext().getAttribute("lang");
-		}
-		if (null != config.getServletContext().getAttribute("resourcePath")) {
-			resourcePath = (String)config.getServletContext().getAttribute("resourcePath");
-		}
-		uiBean = new UIBean(resourcePath, lang);
+	public void init(ServletConfig config) throws ServletException {		
+		if (null != config.getInitParameter("default-redirect"))
+			defaultRedirect = (String)config.getInitParameter("default-redirect");
     }
 
 	/**
@@ -38,12 +30,19 @@ public class ConfigServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(true);
 		
-		lang = request.getParameter("lang");
+		String lang = request.getParameter("lang");
 		
-		if (null != lang && !lang.equals(uiBean.getLang())) 
-			uiBean = new UIBean(resourcePath, lang);
+		UIBean ui = (UIBean) session.getAttribute("ui");
+			
+		if (ui != null && !lang.equals(ui.getLang()))
+			ui.setLang(lang);
+
+		String redirectTo = request.getHeader("Referer");
 		
-		session.setAttribute("ui", uiBean);
+		if (redirectTo == null)
+			redirectTo = defaultRedirect;
+
+		response.sendRedirect(redirectTo);
 	}
 
 	/**

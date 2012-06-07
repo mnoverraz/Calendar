@@ -1,6 +1,9 @@
+Version 2012.06.06
+
 #BRANCHES
 master				not used
-master-web			master branch of web application project
+master-client		master branch of console application
+master-web			master branch of web application
 master-ejb			master branch of backend application (enterpise java bean)
 feature-template	feature branch for client template
 feature-event-handling	feature branch for calendar core
