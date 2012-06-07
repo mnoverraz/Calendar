@@ -1,4 +1,5 @@
 function send(url, data, method) {
+	alert('data send ' + data);
 	$.ajax({
 		type : method,
 		url : url,
@@ -6,8 +7,12 @@ function send(url, data, method) {
 		data : data,
 		success : function(msg) {
 			getMessage(msg);
+			$('.ui-dialog').unblock();
+			if (msg["success"]) {
+                $('#dialog').dialog("close");
+            }
 		}
-	});	
+	});
 }
 
 /*
@@ -50,8 +55,7 @@ function showDialogEvent(url, mode){
 					example : "id: 1"
 				};
 			buttonOpts['Créer'] = $.extend(function() {                    
-		    	send('rest/event/?example', $('eventform').serialize(),'post');
-		    	alert($('eventform').serialize());
+		    	sendForm('rest/event/?example', data,'post');
 		    }, {
 		        id : 'update'
 		    });
@@ -62,7 +66,7 @@ function showDialogEvent(url, mode){
 					example : "id: 1"
 				};
 			buttonOpts['Modifier'] = $.extend(function() {                    
-		    	send('rest/event/?example', $('eventform').serialize(),'put');
+		    	sendForm('rest/event/?example', data,'put');
 		    }, {
 		        id : 'update'
 		    });
@@ -104,7 +108,6 @@ function showDialog(url, dialogTitle, buttonOpts) {
     });
 
     $dialog.dialog('open');
-    alert($('eventform').serialize());
 
     /*if (eventMode != 'edit') {
         $("#delete").hide();
@@ -118,7 +121,8 @@ function getMessage(json){
 	
 	if(json['success']){
 		if(json['content'] == ''){
-			alert('empty');
+			//success mais rien n'arrive
+			//soit la création ok soit dataset vide
 		}else{
 			addEvents(json);
 		}

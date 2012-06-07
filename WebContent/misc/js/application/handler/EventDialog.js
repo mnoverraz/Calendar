@@ -92,4 +92,18 @@ function wholeDay() {
 		$("#start").show();
 		$("#end").show();
 	}
-} 
+}
+
+function sendForm(url, data, method) {
+    if (action == 'delete') {
+        $("#action").val("delete");
+    }
+    $('.ui-dialog').block({ 
+        message: '<img src="misc/img/loading.gif" />', 
+        css: { border: 'none' } 
+    }); 
+    dataString = $('#eventform').serialize();
+    send(url, dataString, method);
+    
+
+}
