@@ -22,7 +22,7 @@ public class EventBean implements EventHandlerLocal, EventHandlerRemote {
 
 	@Override
 	public void create(Event event) throws PersistException {
-		em.merge(event);
+		em.persist(event);
 	}
 
 	@SuppressWarnings("unchecked")

@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-@Entity (name="EventDate")
+@Entity
 @Table (name="event_dates")
 public class EventDate implements Serializable {
 	
