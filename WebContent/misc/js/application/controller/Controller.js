@@ -24,6 +24,67 @@ toto = {
 		example : ""
 };
 
+
+function showDialogEvent(url, mode){
+	
+	//Definitions
+	dialogTitle = null;
+	buttonOpts = {};
+    buttonOpts['Fermer'] = $.extend(function() {
+        $(this).dialog("close");
+    },{
+        id : 'close'
+    });
+    
+	
+	switch(mode){
+		case 'consult':
+			dialogTitle = 'Nom de l événement';
+			data = {
+					example : ""
+				};
+			break;
+		case 'create':
+			dialogTitle = 'Création événement';
+			data = {
+					example : "id: 1"
+				};
+			buttonOpts['Créer'] = $.extend(function() {                    
+		    	send('rest/event/?example', $('eventform').serialize(),'post');
+		    	alert($('eventform').serialize());
+		    }, {
+		        id : 'update'
+		    });
+			break;
+		case 'update':
+			dialogTitle = 'Modifier événement';
+			data = {
+					example : "id: 1"
+				};
+			buttonOpts['Modifier'] = $.extend(function() {                    
+		    	send('rest/event/?example', $('eventform').serialize(),'put');
+		    }, {
+		        id : 'update'
+		    });
+			break;
+		case 'delete':
+			dialogTitle = 'Suppression événement';
+			data = {
+				example : "id: 1"
+			};
+			
+			buttonOpts['Supprimer'] = $.extend(function() {                    
+		    	send('rest/event/?example', data,'delete');
+		    }, {
+		        id : 'delete'
+		    });
+			break;
+	
+	}
+	showDialog(url, dialogTitle, buttonOpts);
+	
+}
+
 function showDialog(url, dialogTitle, buttonOpts) {
 	var $dialog = $('<div id=\"dialog\"></div>')
     .load(url)
@@ -43,6 +104,7 @@ function showDialog(url, dialogTitle, buttonOpts) {
     });
 
     $dialog.dialog('open');
+    alert($('eventform').serialize());
 
     /*if (eventMode != 'edit') {
         $("#delete").hide();
@@ -55,18 +117,16 @@ function getMessage(json){
 	
 	
 	if(json['success']){
-		/*if(json['content'] == ''){
+		if(json['content'] == ''){
 			alert('empty');
-		}else{*/
-			//addEvents(json);
-		//}
+		}else{
+			addEvents(json);
+		}
 		
 	}else{
 		processError(json);
 	}
-	
 
-	//calendar.fullCalendar( 'renderEvent', eric);
 }
 
 function addEvents(json){
