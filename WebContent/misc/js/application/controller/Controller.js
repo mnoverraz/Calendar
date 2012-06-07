@@ -1,5 +1,22 @@
 function send(url, data, method) {
-	alert('data send ' + data);
+	if(method == 'post'){
+		$.ajax({
+			type : method,
+			url : url,
+			dataType: "text",
+			data : data,
+			success : function(msg) {
+				getMessage(msg);
+				$('.ui-dialog').unblock();
+				if (msg["success"]) {
+	                $('#dialog').dialog("close");
+	            }
+			}
+		});
+		
+	}
+	
+	
 	$.ajax({
 		type : method,
 		url : url,
@@ -52,12 +69,12 @@ function showDialogEvent(url, mode){
 		case 'create':
 			dialogTitle = 'Création événement';
 			data = {
-					example : "id: 1"
+					example : "id: 34"
 				};
 			buttonOpts['Créer'] = $.extend(function() {                    
 		    	sendForm('rest/event/?example', data,'post');
 		    }, {
-		        id : 'update'
+		        id : 'create'
 		    });
 			break;
 		case 'update':
@@ -123,7 +140,9 @@ function getMessage(json){
 		if(json['content'] == ''){
 			//success mais rien n'arrive
 			//soit la création ok soit dataset vide
+			alert('success mais retour vide');
 		}else{
+			alert(json['content']);
 			addEvents(json);
 		}
 		
