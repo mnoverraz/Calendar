@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -33,13 +35,14 @@ public class FormUtils {
 		ArrayList<Date> dates = new ArrayList<Date>();
 		ArrayList<EventDate> eventDates = new ArrayList<EventDate>();
 
-		HashMap<String, Object> validation = new HashMap<String, Object>();
+		HashMap<String, Boolean> validation = new HashMap<String, Boolean>();
+		//id
 		validation.put("date", true);
 		validation.put("startH",  true);
 		validation.put("startM",  true);
 		validation.put("endH", true);
 		validation.put("endM", true);
-		validation.put("allDay", true);
+		//validation.put("allDay", true);
 		validation.put("repeatMode", true);
 		validation.put("repeatEnd", true);
 		validation.put("title", true);
@@ -114,15 +117,27 @@ public class FormUtils {
 				validation.put("repeatEnd", false);
 			}
 		}
+		
+		System.out.println("test");
+		System.out.println(validation.containsValue(false));
+		Iterator<Entry<String, Boolean>> it = validation.entrySet().iterator();
 
-		if (validation.size() > 0) {
+			while (it.hasNext()) {
+				Object key = it.next().getKey();
+				Object value = validation.get(key);
+				System.out.println("key: " + key + " value: " + value);
+			}
+
+		if (validation.containsValue(false)) {
 			FormNotValidException fe = new FormNotValidException();
 			fe.detailInformation = validation;
 			throw fe;
 		}
 		try {
+			event = new Event(0, eventDates, title, description, repeatMode);
 			dates = DateHelper.calculateRecurrentDates(start, repeatEnd,
 					repeatMode);
+			
 			for (Date d : dates) {
 				String dateString = DateHelper.DateToString(d);
 				Date eStart = null;
@@ -137,7 +152,6 @@ public class FormUtils {
 				eventDate.setEvent(event);
 				eventDates.add(eventDate);
 			}
-			event = new Event(0, eventDates, title, description, repeatMode);
 		} catch (Exception ex) {
 			SystemException se = new SystemException();
 			se.detailInformation = "Form not valid unknow exception";

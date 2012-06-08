@@ -67,7 +67,7 @@ public class RESTServlet extends HttpServlet {
 
 	private void proceed(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
-		
+
 		PrintWriter out = response.getWriter();
 		StringBuilder content = new StringBuilder();
 		WebController<?> controller = null;

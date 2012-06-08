@@ -74,6 +74,7 @@ public class WebEventController extends WebController<EventController> {
 				}
 
 				try {
+					System.out.println("webEventController.create");
 					event = FormUtils.createEventFromForm(date, startH, startM,
 							endH, endM, allDay, repeatMode, repeatEnd, title,
 							description);
