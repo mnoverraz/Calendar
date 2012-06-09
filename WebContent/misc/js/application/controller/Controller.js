@@ -1,9 +1,10 @@
 function send(url, data, method) {
-	if(method == 'post'){
+	alert(method);
+	if(method == 'put'){
 		$.ajax({
 			type : method,
 			url : url,
-			dataType: "text",
+			dataType: "json",
 			data : data,
 			success : function(msg) {
 				getMessage(msg);
@@ -17,7 +18,7 @@ function send(url, data, method) {
 	}
 	
 	
-	$.ajax({
+	/*$.ajax({
 		type : method,
 		url : url,
 		dataType: "json",
@@ -29,7 +30,7 @@ function send(url, data, method) {
                 $('#dialog').dialog("close");
             }
 		}
-	});
+	});*/
 }
 
 /*
@@ -41,10 +42,6 @@ function send(url, data, method) {
  * 
  */
 //foreach $.each(errors, function(key, val) {
-
-toto = {
-		example : ""
-};
 
 
 function showDialogEvent(url, mode){
@@ -68,22 +65,20 @@ function showDialogEvent(url, mode){
 			break;
 		case 'create':
 			dialogTitle = 'Création événement';
-			data = {
-					example : "id: 34"
-				};
+			data = $('#eventform').serialize();
 			buttonOpts['Créer'] = $.extend(function() {                    
-		    	sendForm('rest/event/?example', data,'post');
+		    	sendForm('rest/event/', data,'put');
 		    }, {
-		        id : 'create'
+		        id : 'put'
 		    });
 			break;
 		case 'update':
 			dialogTitle = 'Modifier événement';
 			data = {
-					example : "id: 1"
+					id : "34"
 				};
 			buttonOpts['Modifier'] = $.extend(function() {                    
-		    	sendForm('rest/event/?example', data,'put');
+		    	sendForm('rest/event/?example', data,'post');
 		    }, {
 		        id : 'update'
 		    });
@@ -162,6 +157,6 @@ function addEvents(json){
 }
 
 function processError(error){
-	alert('processError');
+	alert(error['content'][0]);
 }
 
