@@ -53,18 +53,18 @@ public class EventControllerTest {
 	public void testAvailability_throwsTimeSlotException() throws CoreException, NamingException {
 		BootStrap.init();
 		EventController eventController = new EventController(new InitialContext());
-		Event eventToTest = null;
+		Event eventToTest = new Event(4, "event 3", "description 3", "m");
 		
-		ArrayList<EventDate>eventDates = new ArrayList<EventDate>();
+
 		try {
-			eventDates.add(new EventDate(DateHelper.StringToDate("2012-06-05 22:50", Config.DATE_FORMAT_LONG), DateHelper.StringToDate("2012-06-05 23:30", Config.DATE_FORMAT_LONG)));
-			eventDates.add(new EventDate(DateHelper.StringToDate("2012-06-05 21:40", Config.DATE_FORMAT_LONG), DateHelper.StringToDate("2012-06-05 22:10", Config.DATE_FORMAT_LONG)));
+			eventToTest.addEventDate(new EventDate(DateHelper.StringToDate("2012-06-05 22:50", Config.DATE_FORMAT_LONG), DateHelper.StringToDate("2012-06-05 23:30", Config.DATE_FORMAT_LONG)));
+			eventToTest.addEventDate(new EventDate(DateHelper.StringToDate("2012-06-05 21:40", Config.DATE_FORMAT_LONG), DateHelper.StringToDate("2012-06-05 22:10", Config.DATE_FORMAT_LONG)));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		eventToTest = new Event(4, eventDates, "event 3", "description 3", "m");
+
 		
 
 		eventController.create(eventToTest);
@@ -75,19 +75,18 @@ public class EventControllerTest {
 		BootStrap.init();
 		EventController eventController = new EventController(new InitialContext());
 		WebEventController controller = new WebEventController(eventController);
-		Event eventToTest = null;
+		Event eventToTest  = new Event(4, "event 3", "description 3", "m");
 		Message message = null;
 		
-		ArrayList<EventDate>eventDates = new ArrayList<EventDate>();
 		try {
-			eventDates.add(new EventDate(DateHelper.StringToDate("2012-05-05 22:50", Config.DATE_FORMAT_LONG), DateHelper.StringToDate("2012-05-05 23:30", Config.DATE_FORMAT_LONG)));
-			eventDates.add(new EventDate(DateHelper.StringToDate("2012-05-05 21:40", Config.DATE_FORMAT_LONG), DateHelper.StringToDate("2012-05-05 22:10", Config.DATE_FORMAT_LONG)));
+			eventToTest.addEventDate(new EventDate(DateHelper.StringToDate("2012-05-05 22:50", Config.DATE_FORMAT_LONG), DateHelper.StringToDate("2012-05-05 23:30", Config.DATE_FORMAT_LONG)));
+			eventToTest.addEventDate(new EventDate(DateHelper.StringToDate("2012-05-05 21:40", Config.DATE_FORMAT_LONG), DateHelper.StringToDate("2012-05-05 22:10", Config.DATE_FORMAT_LONG)));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		eventToTest = new Event(4, eventDates, "event 3", "description 3", "m");
+
 		
 		
 		

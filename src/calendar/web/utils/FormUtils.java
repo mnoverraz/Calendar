@@ -34,7 +34,6 @@ public class FormUtils {
 		String title = null;
 		String description = null;
 		ArrayList<Date> dates = new ArrayList<Date>();
-		ArrayList<EventDate> eventDates = new ArrayList<EventDate>();
 
 		HashMap<String, Boolean> validation = new HashMap<String, Boolean>();
 		validation.put("date", true);
@@ -136,7 +135,7 @@ public class FormUtils {
 			throw fe;
 		}
 		try {
-			event = new Event(id, eventDates, title, description, repeatMode);
+			event = new Event(id, title, description, repeatMode);
 			dates = DateHelper.calculateRecurrentDates(start, repeatEnd,
 					repeatMode);
 			
@@ -149,10 +148,7 @@ public class FormUtils {
 						+ ":" + fStartM, Config.DATE_FORMAT_LONG);
 				eEnd = DateHelper.StringToDate(dateString + " " + fEndH + ":"
 						+ fEndM, Config.DATE_FORMAT_LONG);
-
-				EventDate eventDate = new EventDate(eStart, eEnd);
-				eventDate.setEvent(event);
-				eventDates.add(eventDate);
+				event.addEventDate(new EventDate(eStart, eEnd));
 			}
 		} catch (Exception ex) {
 			SystemException se = new SystemException();
