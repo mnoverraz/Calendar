@@ -112,11 +112,11 @@ $(document).ready(function() {
 		                var events = [];
 		                $(doc).find('event').each(function() {
 		                    events.push({
+		                    	id: $(this).attr('id'),
 		                        title: $(this).attr('title'),
-		                        start: $(this).attr('start'), // will be parsed
-		                        end: $(this).attr('end'),
-		                        id: $(this).attr('id'),
-		                        allDay: $(this).attr('allDay')
+		                        allDay: $(this).attr('allDay'),
+		                        start: $(this).attr('start'),
+		                        end: $(this).attr('end')
 		                    });
 		                });
 		                addEvents(doc);
@@ -171,8 +171,7 @@ $(document).ready(function() {
 			  
 		        showDialog('eventdialog.jsp', 'Modifier évenement', buttonOpts);
 		        */
-				showDialogEvent('eventdialog.jsp', 'consult');
-		        
+				showDialogEvent('eventdialog.jsp', 'consult', calEvent);
 		        
 	
 		    },

@@ -44,10 +44,10 @@ function send(url, data, method) {
 //foreach $.each(errors, function(key, val) {
 
 
-function showDialogEvent(url, mode){
+function showDialogEvent(url, mode, event){
 	
 	//Definitions
-	dialogTitle = null;
+	this.eventData = event;
 	buttonOpts = {};
     buttonOpts['Fermer'] = $.extend(function() {
         $(this).dialog("close");
@@ -60,28 +60,31 @@ function showDialogEvent(url, mode){
 		case 'consult':
 			dialogTitle = 'Nom de l événement';
 			data = {
-					example : ""
+					title : "toto"
 				};
+			showDialog(url, event, buttonOpts);
 			break;
 		case 'create':
 			dialogTitle = 'Création événement';
 			data = $('#eventform').serialize();
 			buttonOpts['Créer'] = $.extend(function() {                    
-		    	sendForm('rest/event/', data,'put');
+		    	sendForm('rest/event/', 'Création événement','put');
 		    }, {
-		        id : 'put'
+		        action : 'put'
 		    });
+			showDialog(url, null, buttonOpts);
 			break;
 		case 'update':
 			dialogTitle = 'Modifier événement';
 			data = {
-					id : "34"
+					method : 'post'
 				};
 			buttonOpts['Modifier'] = $.extend(function() {                    
 		    	sendForm('rest/event/?example', data,'post');
 		    }, {
-		        id : 'update'
+		        method : 'post'
 		    });
+			showDialog(url, event, buttonOpts);
 			break;
 		case 'delete':
 			dialogTitle = 'Suppression événement';
@@ -97,15 +100,14 @@ function showDialogEvent(url, mode){
 			break;
 	
 	}
-	showDialog(url, dialogTitle, buttonOpts);
 	
 }
 
-function showDialog(url, dialogTitle, buttonOpts) {
+function showDialog(url, event, buttonOpts) {
 	var $dialog = $('<div id=\"dialog\"></div>')
     .load(url)
     .dialog({
-        title: dialogTitle,
+        title: 'titre',
         autoOpen: false,
         width: 290,
         buttons: buttonOpts,
@@ -116,10 +118,12 @@ function showDialog(url, dialogTitle, buttonOpts) {
         resizable: false,
         modal: true,
         closeOnEscape: true,
-        position: 'center'
+        position: 'center',
+        
     });
 
     $dialog.dialog('open');
+
 
     /*if (eventMode != 'edit') {
         $("#delete").hide();
