@@ -32,6 +32,7 @@ public class WebEventController extends WebController<EventController> {
 		Message message = new Message();
 
 		if (params != null) {
+			String id = null;
 			String date = null;
 			String startH = null;
 			String startM = null;
@@ -51,6 +52,8 @@ public class WebEventController extends WebController<EventController> {
 					Object key = it.next().getKey();
 					Object value = params.get(key);
 
+					if ("id".equals(key))
+						id = (String) value;
 					if ("startH".equals(key))
 						startH = (String) value;
 					if ("endH".equals(key))
@@ -75,7 +78,7 @@ public class WebEventController extends WebController<EventController> {
 
 				try {
 					System.out.println("webEventController.create");
-					event = FormUtils.createEventFromForm(date, startH, startM,
+					event = FormUtils.createEventFromForm(id, date, startH, startM,
 							endH, endM, allDay, repeatMode, repeatEnd, title,
 							description);
 					controller.create(event);

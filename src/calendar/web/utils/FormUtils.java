@@ -19,12 +19,13 @@ import calendar.web.exception.FormNotValidException;
 
 public class FormUtils {
 
-	public static Event createEventFromForm(String fDate, String fStartH,
+	public static Event createEventFromForm(String fId, String fDate, String fStartH,
 			String fStartM, String fEndH, String fEndM, String fAllDay,
 			String fRepeatMode, String fRepeatEnd, String fTitle,
 			String fDescription) throws FormNotValidException, SystemException
 	{
 		Event event = null;
+		int id = 0;
 		Date start = null;
 		Date end = null;
 		boolean allDay = false;
@@ -36,13 +37,11 @@ public class FormUtils {
 		ArrayList<EventDate> eventDates = new ArrayList<EventDate>();
 
 		HashMap<String, Boolean> validation = new HashMap<String, Boolean>();
-		//id
 		validation.put("date", true);
 		validation.put("startH",  true);
 		validation.put("startM",  true);
 		validation.put("endH", true);
 		validation.put("endM", true);
-		//validation.put("allDay", true);
 		validation.put("repeatMode", true);
 		validation.put("repeatEnd", true);
 		validation.put("title", true);
@@ -98,6 +97,9 @@ public class FormUtils {
 			repeatMode = "y";
 		else
 			validation.put("repeatMode", false);
+		
+		if (fId != null)
+			id = Integer.parseInt(fId);
 
 		if (fTitle != null && !"".equals(fTitle))
 			title = StringUtils.replaceEach(fTitle, new String[]{"&", "\"", "<", ">"}, new String[]{"&amp;", "&quot;", "&lt;", "&gt;"});
@@ -134,7 +136,7 @@ public class FormUtils {
 			throw fe;
 		}
 		try {
-			event = new Event(0, eventDates, title, description, repeatMode);
+			event = new Event(id, eventDates, title, description, repeatMode);
 			dates = DateHelper.calculateRecurrentDates(start, repeatEnd,
 					repeatMode);
 			
