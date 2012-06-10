@@ -32,10 +32,10 @@ public class EventDate implements Serializable {
 	private Event event;
 	
 	@Column
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date start;
 	@Column
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date end;
 	@Column
 	private boolean allDay = false;
