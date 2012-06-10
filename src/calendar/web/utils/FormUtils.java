@@ -45,6 +45,7 @@ public class FormUtils {
 		validation.put("repeatEnd", true);
 		validation.put("title", true);
 		validation.put("description", true);
+		validation.put("allDay", true);
 
 		try {
 			start = DateHelper.StringToDate(fDate + " " + fStartH + ":"
@@ -76,8 +77,6 @@ public class FormUtils {
 		if (!allDay) {
 			if ("true".equals(fAllDay) || "on".equals(fAllDay))
 				allDay = true;
-			else
-				validation.put("allDay", false);
 		}
 
 		if ("n".equals(fRepeatMode))
@@ -95,7 +94,7 @@ public class FormUtils {
 		else
 			validation.put("repeatMode", false);
 		
-		if (fId != null)
+		if (fId != null && !"".equals(fId))
 			id = Integer.parseInt(fId);
 
 		if (fTitle != null && !"".equals(fTitle))
