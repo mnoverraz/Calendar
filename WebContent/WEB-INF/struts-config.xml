@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE struts-config PUBLIC 
+ "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" 
+ "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+  <!-- ========== Définition des beans de formulaire =============== -->
+  <form-beans>
+    <form-bean name="roomForm" type="calendar.web.struts.RoomForm" />
+  </form-beans>
+
+  <!-- ========== Définition des enchainements ================ -->
+  <global-forwards>
+<!--     <forward name="addRoom" path="/addRoom.jsp"/> -->
+  </global-forwards>
+
+  <!-- ========== Définition du mappage d'action ==================== -->
+  <action-mappings>
+    <action path="/addRoom"
+      type="calendar.web.struts.AddRoomAction"
+      name="roomForm"
+      scope="request"
+      input="/addRoom.jsp"
+      validate="true">
+      <forward name="success" path="/roomManagement.jsp"/>
+      <forward name="failure" path="/addRoom.jsp"/>
+    </action> 
+  </action-mappings>
+ 
+  <!-- ========== Définition Messages et  plug-in ==================== -->
+  <message-resources parameter="web.Messages"/>
+  <plug-in className="calendar.web.struts.RoomManagerPlug"/>
+
+</struts-config>
