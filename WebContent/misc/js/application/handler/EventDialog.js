@@ -20,6 +20,9 @@ function repeatSelector() {
 $(document).ready(function() {
 	
     $('#title').focus();
+    
+    
+    
 
     if ($("#date").val() == '') {
         $("#date").val(caldate);
@@ -77,6 +80,10 @@ $(document).ready(function() {
     $('#repeatMode').change(function() {
         repeatSelector();
     });
+    
+    if(typeof(eventData)!='undefined'){
+    	fillEvent();
+	}
 });
 
 function wholeDay() {
@@ -105,4 +112,24 @@ function sendForm(url, data, method) {
     send(url, dataString, method);
     
 
+}
+
+function fillEvent(){
+	alert(
+			'id=' + eventData['id'] +
+			'| title=' + eventData['title'] +
+			'| date=' + eventData['start'].getFullYear() +
+			'| allDay=' + eventData['allDay']
+	);
+	
+	
+	$("#id").val(eventData['id']);
+	$("#title").val(eventData['title']);
+	$("#date").val(eventData['start'].getFullYear() + '-' + eventData['start'].getMonth() + '-' + eventData['start'].getDate());
+	if(eventData['allDay']){
+		wholeDay();
+	}
+	//$("#repeatEnd").val(eventData['end'].getFullYear() + '-' + eventData['end'].getMonth() + '-' + eventData['end'].getDate());
+	//eventData = null;
+	
 }
