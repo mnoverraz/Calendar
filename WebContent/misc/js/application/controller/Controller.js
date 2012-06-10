@@ -1,5 +1,5 @@
 function send(url, data, method) {
-	alert(method);
+	console.log(method);
 	if(method == 'put'){
 		$.ajax({
 			type : method,
@@ -65,13 +65,14 @@ function showDialogEvent(url, mode, event){
 			showDialog(url, event, buttonOpts);
 			break;
 		case 'create':
+			console.log(mode);
 			dialogTitle = 'Création événement';
 			data = $('#eventform').serialize();
-			buttonOpts['Créer'] = $.extend(function() {                    
-		    	sendForm('rest/event/', 'Création événement','put');
-		    }, {
-		        action : 'put'
-		    });
+			 buttonOpts['Créer'] = $.extend(function() {
+				 sendForm('rest/event/', data,'put');
+			    },{
+			        id : 'create'
+			    });
 			showDialog(url, null, buttonOpts);
 			break;
 		case 'update':
