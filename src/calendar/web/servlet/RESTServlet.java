@@ -44,6 +44,7 @@ public class RESTServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		createParameterMap(request.getParameterMap());
@@ -51,6 +52,7 @@ public class RESTServlet extends HttpServlet {
 		proceed(request, response);
 	}
 
+	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		createParameterMap(request.getParameterMap());
@@ -87,6 +89,7 @@ public class RESTServlet extends HttpServlet {
 		proceed(request, response);
 	}
 
+	@SuppressWarnings("unchecked")
 	protected void doDelete(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		createParameterMap(request.getParameterMap());
