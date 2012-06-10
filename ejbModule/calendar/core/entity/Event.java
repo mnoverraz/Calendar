@@ -1,6 +1,7 @@
 package calendar.core.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -60,11 +61,11 @@ public class Event implements Serializable {
 	}
 	
 	public Event(int id, List<EventDate> eventDates, String title) {
-		
 		initialize(id, eventDates, title);
 	}
 
 	private void initialize(int id, List<EventDate> eventDates, String title) {
+		eventDates = new ArrayList<EventDate>();
 		this.id = id;
 		this.setEventDates(eventDates);
 		this.title = title;
