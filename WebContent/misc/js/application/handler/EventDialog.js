@@ -108,8 +108,8 @@ function sendForm(url, data, method) {
         message: '<img src="misc/img/loading.gif" />', 
         css: { border: 'none' } 
     }); */
-    //dataString = $('#eventform').serialize();
-    send(url, data, method);
+    dataString = $('#eventform').serialize();
+    send(url, dataString, method);
     
 
 }

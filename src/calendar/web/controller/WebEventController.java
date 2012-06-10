@@ -49,7 +49,7 @@ public class WebEventController extends WebController<EventController> {
 			// System.out.println(params.get("startH"));
 			try {
 				while (it.hasNext()) {
-					Object key = it.next().getKey();
+					String key = it.next().getKey();
 					Object value = params.get(key);
 
 					if ("id".equals(key))

@@ -118,16 +118,6 @@ public class FormUtils {
 				validation.put("repeatEnd", false);
 			}
 		}
-		
-		System.out.println("test");
-		System.out.println(validation.containsValue(false));
-		Iterator<Entry<String, Boolean>> it = validation.entrySet().iterator();
-
-			while (it.hasNext()) {
-				Object key = it.next().getKey();
-				Object value = validation.get(key);
-				System.out.println("key: " + key + " value: " + value);
-			}
 
 		if (validation.containsValue(false)) {
 			FormNotValidException fe = new FormNotValidException();
