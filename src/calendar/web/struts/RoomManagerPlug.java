@@ -1,10 +1,7 @@
 package calendar.web.struts;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.sql.DataSource;
 
 //import metier.RoomManager;
 
@@ -12,10 +9,12 @@ import org.apache.struts.action.ActionServlet;
 import org.apache.struts.action.PlugIn;
 import org.apache.struts.config.ModuleConfig;
 
+import calendar.core.controller.RoomController;
+
 //import persist.RoomDB;
 
 public class RoomManagerPlug implements PlugIn {
-
+	
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
@@ -25,6 +24,9 @@ public class RoomManagerPlug implements PlugIn {
 	@Override
 	public void init(ActionServlet servlet, ModuleConfig config)
 			throws ServletException {
+		
+		ServletContext context = servlet.getServletConfig().getServletContext();
+		RoomController roomController = (RoomController) context.getAttribute("room");
 /*		try {
 		      Context initCtx = new InitialContext();
 		      Context envCtx = (Context) initCtx.lookup("java:comp/env");

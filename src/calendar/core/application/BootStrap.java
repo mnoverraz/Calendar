@@ -4,6 +4,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import calendar.core.controller.EventController;
+import calendar.core.controller.RoomController;
 
 /**
  * Loads and makes available ResourceRegistry
@@ -17,5 +18,6 @@ public class BootStrap {
 	public static void init() throws NamingException {
 		ResourceRegistry = new ResourceRegistry();
 		ResourceRegistry.registerController("EventController", new EventController(new InitialContext()));
+		ResourceRegistry.registerController("RoomController", new RoomController(new InitialContext()));
 	}
 }

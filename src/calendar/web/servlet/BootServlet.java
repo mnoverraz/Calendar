@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import calendar.core.application.BootStrap;
 import calendar.core.application.ResourceRegistry;
 import calendar.core.controller.EventController;
+import calendar.core.controller.RoomController;
 import calendar.web.controller.WebEventController;
 
 public class BootServlet extends HttpServlet {
@@ -27,6 +28,9 @@ public class BootServlet extends HttpServlet {
 		EventController eventController = (EventController)registry.getController("EventController");
 		WebEventController webEventController = new WebEventController(eventController);
 		context.setAttribute("event", webEventController);
+		
+		RoomController roomController = (RoomController)registry.getController("RoomController");
+		context.setAttribute("roomController", roomController);
 		
 		String resourcePath = (String)config.getInitParameter("resource-path");
 		context.setAttribute("resourcePath", resourcePath);
