@@ -8,13 +8,18 @@ import calendar.core.application.Config;
 import calendar.core.application.utils.DateHelper;
 import calendar.core.entity.Event;
 import calendar.core.entity.EventDate;
+import calendar.core.entity.Room;
+import calendar.core.entity.RoomCategory;
 import calendar.core.session.EventHandlerRemote;
 import calendar.core.session.PersistException;
+import calendar.core.session.RoomCategoryHandlerRemote;
+import calendar.core.session.RoomHandlerRemote;
 
 public class Main {
 	public static void main(String[] args) throws NamingException,
 			ParseException, PersistException {
 		addEvents();
+		addRoomsAndCategories();
 	}
 	
 	public static void addEvents() throws NamingException, ParseException, PersistException {
@@ -67,4 +72,39 @@ public class Main {
 		eventHandler.create(event);
 
 	}
+	
+	public static void addRoomsAndCategories() throws NamingException, ParseException, PersistException {
+		
+		Context context;
+		RoomHandlerRemote roomHandler;
+		RoomCategoryHandlerRemote roomCategoryHandler;
+		context = new InitialContext();
+		roomHandler = (RoomHandlerRemote) context
+				.lookup("calendarEAR/RoomBean/remote");
+		roomCategoryHandler = (RoomCategoryHandlerRemote) context
+				.lookup("calendarEAR/RoomCategoryBean/remote");
+		/*
+		 * Dummy data for test, real data access should be here
+		 */
+
+		Room room1 = new Room(0, "T101", "FEE Classroom", "25 seats, 1 beamer");
+		Room room2 = new Room(0, "T103", "FEE Classroom", "50 seats, 1 beamer");
+		Room room3 = new Room(0, "R102", "HEIG-VD Auditorium", "120 seats, 1 beamer");
+		
+//		roomHandler.create(room1);
+//		roomHandler.create(room2);
+//		roomHandler.create(room3);
+
+		RoomCategory roomCategory1 = new RoomCategory(0, "Room");
+		RoomCategory roomCategory2 = new RoomCategory(0, "Hall");
+
+		roomCategory1.addRoom(room1);
+		roomCategory1.addRoom(room2);
+		roomCategory2.addRoom(room3);
+
+		roomCategoryHandler.create(roomCategory1);
+		roomCategoryHandler.create(roomCategory2);
+		
+	}
+	
 }
