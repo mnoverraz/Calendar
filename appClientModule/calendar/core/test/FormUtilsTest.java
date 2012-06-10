@@ -26,16 +26,16 @@ public class FormUtilsTest {
 		/**
 		 * title=sadf&id=&date=2012-06-27&allDay=on&startH=00&startM=00&endH=00&endM=00&repeatMode=n&repeatEnd=2012-06-27&description=
 		 */
-		String fId = null;
+		String fId = "";
 		String fDate = "2012-06-22";
 		String fStartH = "00";
 		String fStartM = "00";
 		String fEndH = "00";
 		String fEndM = "00";
 		String fAllDay = "on";
-		String fRepeatMode = "n";
-		String fRepeatEnd = "2012-06-22";
-		String fTitle = "sdf";
+		String fRepeatMode = "d";
+		String fRepeatEnd = "2012-06-30";
+		String fTitle = "repeatDaily";
 		String fDescription = "";
 
 		try {

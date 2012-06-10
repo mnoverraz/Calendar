@@ -30,16 +30,16 @@ public class WebEventControllerTest {
 			/**
 			 * title=sadf&id=&date=2012-06-27&allDay=on&startH=00&startM=00&endH=00&endM=00&repeatMode=n&repeatEnd=2012-06-27&description=
 			 */
-			String fId = null;
-			String fDate = "2012-06-21";
-			String fStartH = "08";
-			String fStartM = "00";
-			String fEndH = "10";
-			String fEndM = "00";
-			String fAllDay = "on";
+			String fId = "";
+			String fDate = "2012-06-22";
+			String fStartH = "04";
+			String fStartM = "30";
+			String fEndH = "15";
+			String fEndM = "40";
+			String fAllDay = "off";
 			String fRepeatMode = "d";
 			String fRepeatEnd = "2012-06-30";
-			String fTitle = "test5";
+			String fTitle = "repeatDaily 2";
 			String fDescription = "";
 
 			HashMap<String, String> params = new HashMap<String, String>();
