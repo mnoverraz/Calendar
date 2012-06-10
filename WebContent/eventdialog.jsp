@@ -3,16 +3,11 @@
 
 <script type='text/javascript' src='misc/js/application/handler/EventDialog.js'></script>
 
-
 <form id="eventform" name="eventform">
-
-
-
-
     <div class="input text">
         <label for="name" id="label-title"><%=ui.getLangText("calendar-event-title") %></label>
         <input type="text" name="title" id="title" class="required" value="" />
-        <input type="hidden" name="id" id="id" value="id" />
+        <input type="hidden" name="id" id="id" value="" />
         <!-- needs to be set to true otherwise single events will not be correctly deleted (orphelin) -->
     </div>
     <div class="input text">
@@ -30,12 +25,15 @@
         <select name="startH" id="startH">
             <%
             for (int i = 0; i <= 23; i++) {
-                out.print("<option value=\""+ i +"\">");
+            	String val = "";
                 if (i < 10) {
-                    out.print("0");
+                    val += "0";
                 }
+                val += String.valueOf(i);
+                out.print("<option value=\""+ val +"\">");
+
                 
-                out.print(i + "</option>\n");
+                out.print(val + "</option>\n");
             }
             %>
         </select>
@@ -43,12 +41,14 @@
         <select name="startM" id="startM">
             <%
             for (int i = 0; i <= 60; i+=5) {
-                out.print("<option value=\""+ i +"\">");
+            	String val = "";
                 if (i < 10) {
-                    out.print("0");
+                    val += "0";
                 }
+                val += String.valueOf(i);
+                out.print("<option value=\""+ val +"\">");
                 
-                out.print(i + "</option>\n");
+                out.print(val + "</option>\n");
             }
             %>
         </select>
@@ -59,12 +59,15 @@
         <select name="endH" id="endH">
             <%
             for (int i = 0; i <= 23; i++) {
-                out.print("<option value=\""+ i +"\">");
+            	String val = "";
                 if (i < 10) {
-                    out.print("0");
+                    val += "0";
                 }
+                val += String.valueOf(i);
+                out.print("<option value=\""+ val +"\">");
+
                 
-                out.print(i + "</option>\n");
+                out.print(val + "</option>\n");
             }
             %>
         </select>
@@ -72,12 +75,14 @@
         <select name="endM" id="endM">
             <%
             for (int i = 0; i <= 60; i+=5) {
-                out.print("<option value=\""+ i +"\">");
+            	String val = "";
                 if (i < 10) {
-                    out.print("0");
+                    val += "0";
                 }
+                val += String.valueOf(i);
+                out.print("<option value=\""+ val +"\">");
                 
-                out.print(i + "</option>\n");
+                out.print(val + "</option>\n");
             }
             %>
         </select>

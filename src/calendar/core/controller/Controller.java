@@ -24,6 +24,7 @@ public abstract class Controller<T> {
 	public Controller(Context context) {
 		this.context = context;
 	}
+	
 	/**
 	 * Creates an object of the specified type
 	 * 

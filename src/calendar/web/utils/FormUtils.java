@@ -44,7 +44,7 @@ public class FormUtils {
 		validation.put("repeatMode", true);
 		validation.put("repeatEnd", true);
 		validation.put("title", true);
-		validation.put("description", false);
+		validation.put("description", true);
 
 		try {
 			start = DateHelper.StringToDate(fDate + " " + fStartH + ":"
@@ -74,10 +74,8 @@ public class FormUtils {
 		}
 
 		if (!allDay) {
-			if ("true".equals(fAllDay))
+			if ("true".equals(fAllDay) || "on".equals(fAllDay))
 				allDay = true;
-			else if ("false".equals(fAllDay))
-				allDay = false;
 			else
 				validation.put("allDay", false);
 		}
@@ -107,7 +105,7 @@ public class FormUtils {
 		if (fDescription != null && !"".equals(fDescription))
 			description = StringUtils.replaceEach(fDescription, new String[]{"&", "\"", "<", ">"}, new String[]{"&amp;", "&quot;", "&lt;", "&gt;"});
 
-		if (repeatMode != null && "n".equals(repeatMode)) {
+		if (repeatMode != null && !"n".equals(repeatMode)) {
 			try {
 				repeatEnd = DateHelper.StringToDate(fRepeatEnd);
 				if (!repeatEnd.after(start)) {
@@ -126,6 +124,7 @@ public class FormUtils {
 		}
 		try {
 			event = new Event(id, title, description, repeatMode);
+			event.addEventDate(new EventDate(start, end));
 			dates = DateHelper.calculateRecurrentDates(start, repeatEnd,
 					repeatMode);
 			

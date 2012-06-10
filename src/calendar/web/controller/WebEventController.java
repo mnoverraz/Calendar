@@ -50,34 +50,33 @@ public class WebEventController extends WebController<EventController> {
 			try {
 				while (it.hasNext()) {
 					String key = it.next().getKey();
-					Object value = params.get(key);
+					String value = params.get(key);
 
 					if ("id".equals(key))
-						id = (String) value;
+						id = value;
 					if ("startH".equals(key))
-						startH = (String) value;
+						startH = value;
 					if ("endH".equals(key))
-						endH = (String) value;
+						endH = value;
 					if ("startM".equals(key))
-						startM = (String) value;
+						startM = value;
 					if ("endM".equals(key))
-						endM = (String) value;
+						endM = value;
 					if ("date".equals(key))
-						date = (String) value;
+						date = value;
 					if ("allDay".equals(key))
-						allDay = (String) value;
+						allDay = value;
 					if ("repeatMode".equals(key))
-						repeatMode = (String) value;
+						repeatMode = value;
 					if ("repeatEnd".equals(key))
-						repeatEnd = (String) value;
+						repeatEnd = value;
 					if ("description".equals(key))
-						description = (String) value;
+						description = value;
 					if ("title".equals(key))
-						title = (String) value;
+						title = value;
 				}
 
 				try {
-					System.out.println("webEventController.create");
 					event = FormUtils.createEventFromForm(id, date, startH, startM,
 							endH, endM, allDay, repeatMode, repeatEnd, title,
 							description);
