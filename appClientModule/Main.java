@@ -16,6 +16,10 @@ import calendar.core.session.PersistException;
 public class Main {
 	public static void main(String[] args) throws NamingException,
 			ParseException, PersistException {
+		addEvents();
+	}
+	
+	public static void addEvents() throws NamingException, ParseException, PersistException {
 		Context context;
 		List<Event> events;
 		EventHandlerRemote eventHandler;
