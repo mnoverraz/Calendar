@@ -6,44 +6,41 @@
  * This script is a listener for all eventdialog events
  */
 
-
 function repeatSelector() {
-    if ($("#repeat :selected").val() == 'n') {
+    if ($("#repeatMode :selected").val() == 'n') {
         $("#repeat_date").hide();
-        $("#repeat_end").removeClass('required');
+        $("#repeatEnd").removeClass('required');
     }
     else {
         $("#repeat_date").show();
-        $("#repeat_end").addClass('required');
+        $("#repeatEnd").addClass('required');
     }
 }
 
 $(document).ready(function() {
 	
-	
-	
-	
-    $('#name').focus();
+    $('#title').focus();
 
-    if ($("#edate").val() == '') {
+    if ($("#date").val() == '') {
+        $("#date").val(caldate);
+    }
 
-        $("#edate").val(caldate);
+    if ($("#repeatEnd").val() == '') {
+        $("#repeatEnd").val(caldate);
     }
-    if ($("#repeat_end").val() == '') {
-        $("#repeat_end").val(caldate);
-    }
-    $("#edate").change(function() {
-        eventDate = $("#edate").val();
-        repeatEnd = $("#repeat_end").val();
+    
+    $("#date").change(function() {
+        eventDate = $("#date").val();
+        repeatEnd = $("#repeatEnd").val();
         
         if (eventDate > repeatEnd) {
-        	$("#repeat_end").val(eventDate);
+        	$("#repeatEnd").val(eventDate);
         }
         
     });
 
-    $("#start_hour").change(function() {
-        startHour = $("#start_hour").val();
+    $("#startH").change(function() {
+        startHour = $("#startH").val();
 		startHour = parseInt(startHour);
 		endHour = 23;
 
@@ -53,10 +50,12 @@ $(document).ready(function() {
                 endHour = '0' + endHour;
             }
         }
-		$("#end_hour").val(endHour);
+		$("#endH").val(endHour);
     });
-
-    $("#repeat_date").hide();
+    
+    //Let this line commented to show for the first time the repeat date.
+    //$("#repeatEnd").hide();
+    
     // Datepicker
     $(".datepicker").datepicker({
         //dayNamesMin: [resourceBundle["day-1-short"], resourceBundle["day-2-short"], resourceBundle["day-3-short"], resourceBundle["day-4-short"], resourceBundle["day-5-short"], resourceBundle["day-6-short"], resourceBundle["day-7-short"]],
@@ -71,23 +70,23 @@ $(document).ready(function() {
 
     wholeDay();
 
-    $('#whole_day').change(function() {
+    $('#allDay').change(function() {
         wholeDay();
     });
     repeatSelector();
-    $('#repeat').change(function() {
+    $('#repeatMode').change(function() {
         repeatSelector();
     });
 });
 
 function wholeDay() {
-	if ($("#whole_day").is(":checked")) {
+	if ($("#allDay").is(":checked")) {
 		$("#start").hide();
-		$("#start_hour option[text=00]").attr("selected", true);
-		$("#start_min option[text=00]").attr("selected", true);
+		$("#startH option[text=00]").attr("selected", true);
+		$("#startM option[text=00]").attr("selected", true);
 		$("#end").hide();
-		$("#end_hour option[text=00]").attr("selected", true);
-		$("#end_min option[text=00]").attr("selected", true);
+		$("#endH option[text=00]").attr("selected", true);
+		$("#endM option[text=00]").attr("selected", true);
 	} else {
 		$("#start").show();
 		$("#end").show();

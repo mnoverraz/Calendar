@@ -110,7 +110,7 @@
 	<entry key="calendar-event-start">Début</entry>
 	<entry key="calendar-event-end">Fin</entry>	
 	<entry key="calendar-event-repeat">Répéter</entry>	
-	<entry key="calendar-event-never">Jamais</entry>	
+	<entry key="calendar-event-never">Jamais</entry>
 	<entry key="calendar-event-daily">Chaque jour</entry>	
 	<entry key="calendar-event-weekly">Même jour - Chaque semaine</entry>	
 	<entry key="calendar-event-halfMonthly">Même jour - Toutes les deux semaines</entry>	
