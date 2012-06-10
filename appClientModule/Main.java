@@ -8,6 +8,8 @@ import calendar.core.application.Config;
 import calendar.core.application.utils.DateHelper;
 import calendar.core.entity.Event;
 import calendar.core.entity.EventDate;
+import calendar.core.entity.ImportantEvent;
+import calendar.core.entity.NormalEvent;
 import calendar.core.session.EventHandlerRemote;
 import calendar.core.session.PersistException;
 
@@ -28,7 +30,7 @@ public class Main {
 		 */
 
 
-		Event event = new Event(0, "event 1",
+		Event event = new NormalEvent(0, "event 1",
 				"description 1", "m");
 		EventDate eventDate = new EventDate(DateHelper.StringToDate(
 				"2012-06-15 08:00", Config.DATE_FORMAT_LONG),
@@ -39,7 +41,7 @@ public class Main {
 
 		eventHandler.create(event);
 
-		event = new Event(0, "event 2", "description 2", "");
+		event = new ImportantEvent(0, "event 2", "description 2", "");
 		eventDate = new EventDate(DateHelper.StringToDate("2012-06-16 11:00",
 				Config.DATE_FORMAT_LONG), DateHelper.StringToDate(
 				"2012-06-16 13:00", Config.DATE_FORMAT_LONG));
