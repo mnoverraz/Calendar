@@ -38,9 +38,13 @@ public class Event implements Serializable {
 	private String mode;	
 	
 	public Event() {
-		
+		eventDates = new ArrayList<EventDate>();
 	}
 	
+	public void setEventDates(List<EventDate> eventDates) {
+		this.eventDates = eventDates;
+	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
@@ -53,21 +57,20 @@ public class Event implements Serializable {
 		this.mode = mode;
 	}
 
-	public Event(int id, List<EventDate> eventDates, String title,
+	public Event(int id, String title,
 			String description, String mode) {
-		initialize(id, eventDates, title);
+		initialize(id, title);
 		this.description = description;
 		this.mode = mode;
 	}
 	
-	public Event(int id, List<EventDate> eventDates, String title) {
-		initialize(id, eventDates, title);
+	public Event(int id, String title) {
+		initialize(id, title);
 	}
 
-	private void initialize(int id, List<EventDate> eventDates, String title) {
+	private void initialize(int id, String title) {
 		eventDates = new ArrayList<EventDate>();
 		this.id = id;
-		this.setEventDates(eventDates);
 		this.title = title;
 	}
 	
@@ -110,8 +113,9 @@ public class Event implements Serializable {
 		this.id = id;
 	}
 
-	public void setEventDates(List<EventDate> eventDates) {
-		this.eventDates = eventDates;
+	public void addEventDate(EventDate eventDate) {
+		eventDate.setEvent(this);
+		eventDates.add(eventDate);
 	}
 
 	public String getMode() {
