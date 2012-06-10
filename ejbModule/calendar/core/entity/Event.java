@@ -40,22 +40,6 @@ public class Event implements Serializable {
 	public Event() {
 		eventDates = new ArrayList<EventDate>();
 	}
-	
-	public void setEventDates(List<EventDate> eventDates) {
-		this.eventDates = eventDates;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public void setMode(String mode) {
-		this.mode = mode;
-	}
 
 	public Event(int id, String title,
 			String description, String mode) {
@@ -74,7 +58,21 @@ public class Event implements Serializable {
 		this.title = title;
 	}
 	
-	
+	public void setEventDates(List<EventDate> eventDates) {
+		this.eventDates = eventDates;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setMode(String mode) {
+		this.mode = mode;
+	}	
 	
 	public List<EventDate> getEventDates() {
 		return eventDates;
@@ -86,23 +84,6 @@ public class Event implements Serializable {
 
 	public String getDescription() {
 		return description;
-	}
-
-	public String toString() {
-		String ret = "";
-		ret += "id:\t\t" + String.valueOf(id) + "\n";
-		ret += "title:\t\t" + title + "\n";
-		ret += "description:\t" + String.valueOf(description) + "\n";
-		
-		ret += "dates\n";
-		ret += "-------\n";
-		for (EventDate eventDate : getEventDates()) {
-			ret += "start:\t\t" + eventDate.getEnd() + "\n"; 
-			ret += "end:\t\t" + eventDate.getStart();
-		}
-		ret += "-------";
-		
-		return  ret;
 	}
 
 	public int getId() {
@@ -120,5 +101,21 @@ public class Event implements Serializable {
 
 	public String getMode() {
 		return mode;
+	}
+	public String toString() {
+		String ret = "";
+		ret += "id:\t\t" + String.valueOf(id) + "\n";
+		ret += "title:\t\t" + title + "\n";
+		ret += "description:\t" + String.valueOf(description) + "\n";
+		
+		ret += "dates\n";
+		ret += "-------\n";
+		for (EventDate eventDate : getEventDates()) {
+			ret += "start:\t\t" + eventDate.getEnd() + "\n"; 
+			ret += "end:\t\t" + eventDate.getStart();
+		}
+		ret += "-------";
+		
+		return  ret;
 	}
 }
