@@ -23,25 +23,25 @@
 	    <th>Category</th>
 	    <th>Actions</th>
 	  </tr>
-<%--   <logic:iterate id="room" name="rooms"> --%>
-<!--     <tr> -->
-<!--       <td> -->
-<%--         <bean:write name="room" property="local" /> --%>
-<!--       </td> -->
-<!--       <td> -->
-<%--         <bean:write name="room" property="name" /> --%>
-<!--       </td> -->
-<!--       <td> -->
-<%--         <bean:write name="room" property="description" /> --%>
-<!--       </td> -->
-<!--       <td> -->
-<%--         <bean:write name="room" property="roomCategory" /> --%>
-<!--       </td>       -->
-<!--       <td> -->
-<%--          --%>
-<!--       </td>       -->
-<!--     </tr> -->
-<%--   </logic:iterate> --%>
+    <logic:iterate id="room" name="rooms">
+      <tr>
+        <td>
+          <bean:write name="room" property="local" />
+        </td>
+        <td>
+          <bean:write name="room" property="name" />
+        </td>
+        <td>
+          <bean:write name="room" property="description" />
+        </td>
+        <td>
+          <bean:write name="room" property="roomCategory" />
+          </td>      
+          <td>
+      
+          </td>      
+      </tr>
+    </logic:iterate>
     </table>
   </body>
 </html>
