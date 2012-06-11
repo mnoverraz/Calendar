@@ -101,7 +101,7 @@ $(document).ready(function() {
 		//---------
 			events: function(start, end, addEvents) {
 		        $.ajax({
-		            url: 'rest/event/?example&showState=false',
+		            url: 'rest/event/?showState=false',
 		            dataType: 'json',
 		            data: {
 		                // our hypothetical feed requires UNIX timestamps
