@@ -58,6 +58,7 @@ function showDialogEvent(url, mode, event){
 	
 	switch(mode){
 		case 'consult':
+			alert(event['id']);
 			dialogTitle = 'Nom de l événement';
 			data = {
 					id : event['id']
