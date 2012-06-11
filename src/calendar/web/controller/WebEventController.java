@@ -88,6 +88,8 @@ public class WebEventController extends WebController<EventController> {
 						eventMap.put("end", DateHelper.DateToString(
 								eventDate.getEnd(), Config.DATE_FORMAT_LONG));
 						eventMap.put("allDay", eventDate.isAllDay());
+						eventMap.put("description", event.getDescription());
+						eventMap.put("repeatMode", event.getMode());
 
 						message.addElementToBody(eventMap);
 					}
@@ -130,12 +132,14 @@ public class WebEventController extends WebController<EventController> {
 
 						Date date = new Date(timeStamp * 1000);
 						filter.put("start", date);
+						System.out.println("start " + date);
 					}
 					if ("end".equals(key)) {
 						long timeStamp = Long.parseLong(value);
 
 						Date date = new Date(timeStamp * 1000);
 						filter.put("end", date);
+						System.out.println("end " + date);
 					}
 				}
 			}
@@ -152,7 +156,8 @@ public class WebEventController extends WebController<EventController> {
 					eventMap.put("end", DateHelper.DateToString(
 							eventDate.getEnd(), Config.DATE_FORMAT_LONG));
 					eventMap.put("allDay", eventDate.isAllDay());
-
+					eventMap.put("description", event.getDescription());
+					eventMap.put("repeatMode", event.getMode());
 					message.addElementToBody(eventMap);
 				}
 			}
