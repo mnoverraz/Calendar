@@ -36,13 +36,11 @@ public class Room implements Serializable {
 		
 	}
 	
-	public Room(long id, String local, String name, String description,
-			RoomCategory roomCategory) {
+	public Room(long id, String local, String name, String description) {
 		this.id = id;
 		this.local = local;
 		this.name = name;
 		this.description = description;
-		this.roomCategory = roomCategory;
 	}
 
 	public long getId() {
@@ -82,6 +80,7 @@ public class Room implements Serializable {
 	}
 
 	public void setRoomCategory(RoomCategory roomCategory) {
+		//roomCategory.addRoom(this);
 		this.roomCategory = roomCategory;
 	}
 

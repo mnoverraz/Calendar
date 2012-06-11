@@ -1,6 +1,7 @@
 package calendar.core.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -29,12 +30,13 @@ public class RoomCategory implements Serializable {
 	private List<Room> rooms;
 	
 	public RoomCategory() {
+		rooms = new ArrayList<Room>();
 	}
 
-	public RoomCategory(long id, String name, List<Room> rooms) {
+	public RoomCategory(long id, String name) {
+		rooms = new ArrayList<Room>();
 		this.id = id;
 		this.name = name;
-		this.rooms = rooms;
 	}
 	
 
@@ -56,6 +58,11 @@ public class RoomCategory implements Serializable {
 
 	public List<Room> getRooms() {
 		return rooms;
+	}
+	
+	public void addRoom(Room room) {
+		room.setRoomCategory(this);
+		rooms.add(room);
 	}
 
 	public void setRooms(List<Room> rooms) {
