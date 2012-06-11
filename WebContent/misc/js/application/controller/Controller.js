@@ -1,6 +1,6 @@
 function send(url, data, method) {
 	console.log(method);
-	if(method == 'put'){
+	//if(method == 'put'){
 		$.ajax({
 			type : method,
 			url : url,
@@ -15,7 +15,7 @@ function send(url, data, method) {
 			}
 		});
 		
-	}
+	//}
 	
 	
 	/*$.ajax({
@@ -60,8 +60,14 @@ function showDialogEvent(url, mode, event){
 		case 'consult':
 			dialogTitle = 'Nom de l événement';
 			data = {
-					title : "toto"
-				};
+					id : event['id']
+			};
+				
+			buttonOpts['Supprimer'] = $.extend(function() {                    
+			    	send('rest/event/', data,'delete');
+			}, {
+			        id : 'delete'
+			});
 			showDialog(url, event, buttonOpts);
 			break;
 		case 'create':
@@ -81,7 +87,7 @@ function showDialogEvent(url, mode, event){
 					method : 'post'
 				};
 			buttonOpts['Modifier'] = $.extend(function() {                    
-		    	sendForm('rest/event/?example', data,'post');
+		    	sendForm('rest/event/', data,'post');
 		    }, {
 		        method : 'post'
 		    });
@@ -90,11 +96,11 @@ function showDialogEvent(url, mode, event){
 		case 'delete':
 			dialogTitle = 'Suppression événement';
 			data = {
-				example : "id: 1"
+				id : event['id']
 			};
 			
 			buttonOpts['Supprimer'] = $.extend(function() {                    
-		    	send('rest/event/?example', data,'delete');
+		    	send('rest/event/', data,'delete');
 		    }, {
 		        id : 'delete'
 		    });
@@ -132,9 +138,7 @@ function showDialog(url, event, buttonOpts) {
     return false;
 }
 
-function getMessage(json){
-	this.toto = json;
-	
+function getMessage(json){	
 	
 	if(json['success']){
 		if(json['content'] == ''){
@@ -149,7 +153,6 @@ function getMessage(json){
 	}else{
 		processError(json);
 	}
-
 }
 
 function addEvents(json){

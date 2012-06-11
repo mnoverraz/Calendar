@@ -127,71 +127,24 @@ $(document).ready(function() {
 			selectable: true,
 			selectHelper: true,
 			select: function(start, end, allDay) { //Trigger when sb click on a day
-				    /*buttonOpts = {};
-				    buttonOpts['Fermer'] = $.extend(function() {
-				        $(this).dialog("close");
-				    },{
-				        id : 'monId'
-				    });
-				    buttonOpts['Valider'] = $.extend(function() {                    
-				    	send('rest/event/?example', $('eventform').serialize(),'post');
-				    }, {
-				        id : 'delete'
-				    });*/
+					eventData = {
+						id: null,
+						title: ' ',
+				        start: start,
+				        end: end,
+				        allDay: false
+				    };
 				
-					showDialogEvent('eventdialog.jsp', 'create');
-				  
-			        //showDialog('eventdialog.jsp', 'Editer évenement', buttonOpts);
+					showDialogEvent('eventdialog.jsp', 'create', eventData);
 
 			        calendar.fullCalendar('unselect');
 			},
 			eventClick: function(calEvent, jsEvent, view) { //Trigger when sb click on the event
-		    	/*alert('Event: ' + calEvent.title);
-		    	alert('time start: ' + calEvent.start);
-		    	alert('time end: ' + calEvent.end);
-		        alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-		        alert('View: ' + view.name);
-				*/
-		        // change the border color just for fun
-		        //$(this).css('border-color', 'red');
-		        //test = new Date(calEvent.start);
-		        //alert(test.getDay());
-		        
-				/*buttonOpts = {};
-			    buttonOpts['Fermer'] = $.extend(function() {
-			        $(this).dialog("close");
-			    },{
-			        id : 'monId'
-			    });
-			    buttonOpts['Modifier'] = $.extend(function() {                    
-			    	send('rest/event/?example', $('eventform').serialize(),'post');
-			    }, {
-			        id : 'delete'
-			    });
-			  
-		        showDialog('eventdialog.jsp', 'Modifier évenement', buttonOpts);
-		        */
+
 				showDialogEvent('eventdialog.jsp', 'consult', calEvent);
-		        
 	
 		    },
 		    eventDrop: function(event,dayDelta,minuteDelta,allDay,revertFunc) { //Trigger when sb drop a event
-	
-		        alert(
-		            event.title + " was moved " +
-		            dayDelta + " days and " +
-		            minuteDelta + " minutes."
-		        );
-	
-		        if (allDay) {
-		            alert("Event is now all-day");
-		        }else{
-		            alert("Event has a time-of-day");
-		        }
-	
-		        if (!confirm("Are you sure about this change?")) {
-		            revertFunc();
-		        }
 		        
 		        showDialogEvent('eventdialog.jsp', 'update');
 	
@@ -208,7 +161,7 @@ $(document).ready(function() {
 		            revertFunc();
 		        }
 		        
-		        showDialogEvent('eventdialog.jsp', 'update');
+		        showDialogEvent('eventdialog.jsp', 'update', event);
 	
 		    }
 	});
