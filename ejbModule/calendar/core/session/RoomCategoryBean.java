@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
+import calendar.core.entity.Room;
 import calendar.core.entity.RoomCategory;
 
 /**
@@ -22,7 +23,7 @@ public class RoomCategoryBean implements RoomCategoryHandlerRemote, RoomCategory
 	
 	@Override
 	public void create(RoomCategory roomCategory) throws PersistException {
-		em.persist(roomCategory);
+		em.merge(roomCategory);
 	}
 
 	@SuppressWarnings("unchecked")

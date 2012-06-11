@@ -80,7 +80,6 @@ public class Room implements Serializable {
 	}
 
 	public void setRoomCategory(RoomCategory roomCategory) {
-		//roomCategory.addRoom(this);
 		this.roomCategory = roomCategory;
 	}
 
