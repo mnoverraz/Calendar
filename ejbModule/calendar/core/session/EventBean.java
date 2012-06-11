@@ -32,12 +32,21 @@ public class EventBean implements EventHandlerLocal, EventHandlerRemote {
 		List<Event> events = null;
 		StringBuffer query = new StringBuffer();
 
-		query.append("FROM Event event ");
+		query.append("SELECT event");
+		query.append(" FROM Event as event");
+		if (params.containsKey("start") || params.containsKey("end"))
+			query.append(" LEFT OUTER JOIN event.eventDates as date");
+		if (params.containsKey("start"))
+			query.append(" WHERE date.start >= :start");
+		if (params.containsKey("end"))
+			query.append(" AND date.end <= :end");
 		
 		try {
 			Query q = em.createQuery(query.toString());
-			//q.setParameter("id", null);
-			
+			if (params.containsKey("start"))
+				q.setParameter("start", params.get("start"));
+			if (params.containsKey("end"))
+				q.setParameter("end", params.get("end"));
 			events = q.getResultList();
 		} catch (PersistenceException ex) {
 			ex.printStackTrace();
