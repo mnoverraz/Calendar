@@ -16,19 +16,26 @@
 
   <!-- ========== Définition du mappage d'action ==================== -->
   <action-mappings>
+  
     <action path="/addRoom"
       type="calendar.web.struts.AddRoomAction"
       name="roomForm"
       scope="request"
       input="/addRoom.jsp"
       validate="true">
-      <forward name="success" path="/roomManagement.jsp"/>
+      <forward name="success" path="/roomManagement.do"/>
       <forward name="failure" path="/addRoom.jsp"/>
+    </action>
+    
+    <action path="/roomManagement"
+      type="calendar.web.struts.ListRoomAction">
+      <forward name="success" path="/roomManagement.jsp" />
     </action> 
+    
   </action-mappings>
  
   <!-- ========== Définition Messages et  plug-in ==================== -->
-  <message-resources parameter="web.Messages"/>
-  <plug-in className="calendar.web.struts.RoomManagerPlug"/>
+<!--   <message-resources parameter="web.Messages"/> -->
+<!--   <plug-in className="calendar.web.struts.RoomManagerPlug"/> -->
 
 </struts-config>

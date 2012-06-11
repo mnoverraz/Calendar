@@ -26,7 +26,7 @@ import calendar.web.renderer.Message;
 public class RESTServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private String method;
-	private HashMap<String, String> paramMap = new HashMap<String, String>();
+	private HashMap<String, String> paramMap;
 	private ServletConfig config;
 
 	public void init(ServletConfig config) throws ServletException {
@@ -44,15 +44,19 @@ public class RESTServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		paramMap =new HashMap<String, String>();
 		createParameterMap(request.getParameterMap());
 		this.method = "GET";
 		proceed(request, response);
 	}
 
+	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		paramMap =new HashMap<String, String>();
 		createParameterMap(request.getParameterMap());
 		this.method = "POST";
 		proceed(request, response);
@@ -60,7 +64,7 @@ public class RESTServlet extends HttpServlet {
 
 	protected void doPut(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-
+		paramMap =new HashMap<String, String>();
 		if (request.getContentLength() > 0) {
 			BufferedReader br = new BufferedReader(new InputStreamReader(
 					request.getInputStream()));
@@ -87,8 +91,10 @@ public class RESTServlet extends HttpServlet {
 		proceed(request, response);
 	}
 
+	@SuppressWarnings("unchecked")
 	protected void doDelete(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		paramMap =new HashMap<String, String>();
 		createParameterMap(request.getParameterMap());
 		this.method = "DELETE";
 		proceed(request, response);

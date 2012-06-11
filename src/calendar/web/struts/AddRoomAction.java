@@ -5,12 +5,7 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//import metier.Bottin;
-//import metier.Contact;
-//import metier.PersistException;
-//import metier.Room;
 import calendar.core.entity.Room;
-//import metier.RoomManager;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;

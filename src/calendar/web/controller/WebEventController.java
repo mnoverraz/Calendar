@@ -1,7 +1,5 @@
 package calendar.web.controller;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -14,7 +12,6 @@ import calendar.core.controller.EventController;
 import calendar.core.entity.Event;
 import calendar.core.entity.EventDate;
 import calendar.core.exception.CoreException;
-import calendar.core.exception.TimeSlotException;
 import calendar.web.exception.FormNotValidException;
 import calendar.web.renderer.ExceptionRenderer;
 import calendar.web.renderer.Message;
@@ -77,9 +74,9 @@ public class WebEventController extends WebController<EventController> {
 				}
 
 				try {
-					event = FormUtils.createEventFromForm(id, date, startH, startM,
-							endH, endM, allDay, repeatMode, repeatEnd, title,
-							description);
+					event = FormUtils.createEventFromForm(id, date, startH,
+							startM, endH, endM, allDay, repeatMode, repeatEnd,
+							title, description);
 					controller.create(event);
 					HashMap<String, Object> eventMap = null;
 					for (EventDate eventDate : event.getEventDates()) {
@@ -91,6 +88,8 @@ public class WebEventController extends WebController<EventController> {
 						eventMap.put("end", DateHelper.DateToString(
 								eventDate.getEnd(), Config.DATE_FORMAT_LONG));
 						eventMap.put("allDay", eventDate.isAllDay());
+						eventMap.put("description", event.getDescription());
+						eventMap.put("repeatMode", event.getMode());
 
 						message.addElementToBody(eventMap);
 					}
@@ -117,29 +116,25 @@ public class WebEventController extends WebController<EventController> {
 		message.state = true;
 
 		HashMap<String, Object> filter = new HashMap<String, Object>();
-
+		System.out.println(params);
 		try {
 			if (params != null) {
+				if ("start".equals(params.containsKey("start"))) {
+					long timeStamp = Long.parseLong(params.get("start"));
 
-				Iterator<Entry<String, String>> it = params.entrySet()
-						.iterator();
+					Date date = new Date(timeStamp * 1000);
+					filter.put("start", date);
+				}
+				if ("end".equals(params.containsKey("end"))) {
+					long timeStamp = Long.parseLong(params.get("end"));
 
-				while (it.hasNext()) {
-					String key = it.next().getKey();
-					String value = params.get(key);
-
-					if ("start".equals(key)) {
-						long timeStamp = Long.parseLong(value);
-
-						Date date = new Date(timeStamp * 1000);
-						filter.put("start", date);
-					}
-					if ("end".equals(key)) {
-						long timeStamp = Long.parseLong(value);
-
-						Date date = new Date(timeStamp * 1000);
-						filter.put("end", date);
-					}
+					Date date = new Date(timeStamp * 1000);
+					filter.put("end", date);
+				}
+				if ("id".equals(params.containsKey("id"))) {
+					System.out.println("id: " + params.get("id"));
+					int id = Integer.parseInt(params.get("id"));
+					filter.put("id", id);
 				}
 			}
 			events = (ArrayList<Event>) controller.read(filter);
@@ -155,7 +150,8 @@ public class WebEventController extends WebController<EventController> {
 					eventMap.put("end", DateHelper.DateToString(
 							eventDate.getEnd(), Config.DATE_FORMAT_LONG));
 					eventMap.put("allDay", eventDate.isAllDay());
-
+					eventMap.put("description", event.getDescription());
+					eventMap.put("repeatMode", event.getMode());
 					message.addElementToBody(eventMap);
 				}
 			}

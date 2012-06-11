@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 
 public class Renderer {
+	@SuppressWarnings("unchecked")
 	public static String toJSON (String key, Object value) {
 		StringBuilder sb = new StringBuilder();
 		if (value != null) {
