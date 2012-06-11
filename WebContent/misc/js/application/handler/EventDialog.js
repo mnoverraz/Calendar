@@ -123,6 +123,13 @@ function fillEvent(){
 	);*/
 	console.log('------------------');
 	console.log('----FillEvent-----');
+	console.log('	id: ' + eventData['id']);
+	console.log('	title: ' + eventData['title']);
+	console.log('	start: ' + eventData['start']);
+	console.log('	end: ' + eventData['end']);
+	console.log('	repeatMode: ' + eventData['repeatMode']);
+	console.log('	description: ' + eventData['description']);
+	console.log('------------------');
 	
 	$("#id").val(eventData['id']);
 	$("#title").val(eventData['title']);
@@ -137,13 +144,13 @@ function fillEvent(){
 		
 	}else{
 		
-		$("#startH").val(eventData['start'].getHours());
-		$("#startM").val(eventData['start'].getMinutes());
-		$("#endH").val(eventData['end'].getHours());
-		$("#endM").val(eventData['end'].getMinutes());
+		$("#startH").val(intOn2Digit(eventData['start'].getHours()));
+		$("#startM").val(intOn2Digit(eventData['start'].getMinutes()));
+		$("#endH").val(intOn2Digit(eventData['end'].getHours()));
+		$("#endM").val(intOn2Digit(eventData['end'].getMinutes()));
 	}
 	
-	//$("#repeatMode").val(eventData['repeatMode'].);
+	$("#repeatMode").attr('value',eventData['repeatMode']);
 	//$("#repeatEnd").val(eventData['start'].);
 	$("#description").val(eventData['description']);
 	

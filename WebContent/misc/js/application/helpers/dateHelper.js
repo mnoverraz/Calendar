@@ -17,6 +17,17 @@ function stringToDate(dateString) {
     return realDate;
 }
 
+function intOn2Digit(number){
+	
+	if(number.lenth == 1){
+		console.log('0' + String(number));
+		return '0' + String(number);
+	}else{
+		console.log(number);
+		return number;
+	}
+}
+
 function dateToString(date) {
         dateString = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
         return dateString;
