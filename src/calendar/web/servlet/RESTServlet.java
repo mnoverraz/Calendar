@@ -147,7 +147,6 @@ public class RESTServlet extends HttpServlet {
 				else
 					params.put(key, value);
 			}
-			System.out.println(params);
 
 			if (("xml").equals(format))
 				contentType = "text/xml";
