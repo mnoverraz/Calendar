@@ -116,7 +116,8 @@ $(document).ready(function() {
 		                        title: $(this).attr('title'),
 		                        allDay: $(this).attr('allDay'),
 		                        start: $(this).attr('start'),
-		                        end: $(this).attr('end')
+		                        end: $(this).attr('end'),
+		                        description: $(this).attr('description')
 		                    });
 		                });
 		                addEvents(doc);

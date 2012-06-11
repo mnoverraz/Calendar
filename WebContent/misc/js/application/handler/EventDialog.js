@@ -145,12 +145,12 @@ function fillEvent(){
 	
 	//$("#repeatMode").val(eventData['repeatMode'].);
 	//$("#repeatEnd").val(eventData['start'].);
-	//$("#description").val(eventData['description']);
+	$("#description").val(eventData['description']);
 	
 	if(eventData['allDay']){
 		$('#allDay').attr('checked', true);
 	}
 	//$("#repeatEnd").val(eventData['end'].getFullYear() + '-' + eventData['end'].getMonth() + '-' + eventData['end'].getDate());
-	//eventData = null;
+	eventData = null;
 	
 }
