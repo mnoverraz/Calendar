@@ -116,25 +116,24 @@ public class WebEventController extends WebController<EventController> {
 		message.state = true;
 
 		HashMap<String, Object> filter = new HashMap<String, Object>();
-		System.out.println(params);
+
 		try {
 			if (params != null) {
-				if ("start".equals(params.containsKey("start"))) {
+				if (params.containsKey("id")) {
+					int id = Integer.parseInt(params.get("id"));
+					filter.put("id", id);
+				}
+				if (params.containsKey("start")) {
 					long timeStamp = Long.parseLong(params.get("start"));
 
 					Date date = new Date(timeStamp * 1000);
 					filter.put("start", date);
 				}
-				if ("end".equals(params.containsKey("end"))) {
+				if (params.containsKey("end")) {
 					long timeStamp = Long.parseLong(params.get("end"));
 
 					Date date = new Date(timeStamp * 1000);
 					filter.put("end", date);
-				}
-				if ("id".equals(params.containsKey("id"))) {
-					System.out.println("id: " + params.get("id"));
-					int id = Integer.parseInt(params.get("id"));
-					filter.put("id", id);
 				}
 			}
 			events = (ArrayList<Event>) controller.read(filter);
