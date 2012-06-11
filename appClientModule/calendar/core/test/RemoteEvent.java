@@ -20,10 +20,10 @@ public class RemoteEvent {
 	public void receivesEvensAsList() {
 		Context context;
 		List<Event> events;
-		EventHandlerLocal eventHandler;
+		EventHandler eventHandler;
 		try {
 			context = new InitialContext();
-			eventHandler = (EventHandlerLocal) context.lookup("calendarEAR/EventBean/local");
+			eventHandler = (EventHandler) context.lookup("calendarEAR/EventBean/remote");
 			events = eventHandler.read(null);
 			for (Event event : events) {
 				System.out.println(event.getTitle());
@@ -36,8 +36,5 @@ public class RemoteEvent {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-
 	}
-
 }

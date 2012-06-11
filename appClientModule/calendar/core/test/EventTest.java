@@ -19,7 +19,7 @@ import calendar.core.session.PersistException;
 import calendar.core.session.RoomCategoryHandlerRemote;
 import calendar.core.session.RoomHandlerRemote;
 
-public class EntityTest {
+public class EventTest {
 
 	@Test
 	public void testReceptionAllEvents() {

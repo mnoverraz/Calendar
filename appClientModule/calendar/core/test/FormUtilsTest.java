@@ -2,30 +2,24 @@ package calendar.core.test;
 
 import static org.junit.Assert.*;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import javax.naming.NamingException;
-
 import org.junit.Test;
 
-import calendar.core.controller.EventController;
 import calendar.core.entity.Event;
 import calendar.core.exception.SystemException;
-import calendar.web.controller.WebEventController;
 import calendar.web.exception.FormNotValidException;
 import calendar.web.utils.FormUtils;
 
 public class FormUtilsTest {
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testFormUtilsValidate() {
 		Event event = null;
-		/**
-		 * title=sadf&id=&date=2012-06-27&allDay=on&startH=00&startM=00&endH=00&endM=00&repeatMode=n&repeatEnd=2012-06-27&description=
-		 */
+
 		String fId = "";
 		String fDate = "2012-06-22";
 		String fStartH = "00";

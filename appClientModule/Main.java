@@ -18,8 +18,8 @@ import calendar.core.session.RoomHandlerRemote;
 public class Main {
 	public static void main(String[] args) throws NamingException,
 			ParseException, PersistException {
-		addEvents();
-		//addRoomsAndCategories();
+		//addEvents();
+		addRoomsAndCategories();
 	}
 	
 	public static void addEvents() throws NamingException, ParseException, PersistException {

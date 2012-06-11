@@ -10,7 +10,6 @@ import javax.naming.NamingException;
 import org.junit.Test;
 
 import calendar.core.controller.EventController;
-import calendar.core.entity.Event;
 import calendar.web.controller.WebEventController;
 import calendar.web.renderer.Message;
 
@@ -26,7 +25,6 @@ public class WebEventControllerTest {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			Event event = null;
 			/**
 			 * title=sadf&id=&date=2012-06-27&allDay=on&startH=00&startM=00&endH=00&endM=00&repeatMode=n&repeatEnd=2012-06-27&description=
 			 */
