@@ -100,6 +100,11 @@ $(document).ready(function() {
 		//Actions
 		//---------
 			events: function(start, end, addEvents) {
+				console.log('------------------');
+				console.log('----Chargement des events-----');
+				console.log('	start: ' + start);
+				console.log('	end: ' + end);
+
 		        $.ajax({
 		            url: 'rest/event/?showState=false',
 		            dataType: 'json',
@@ -147,21 +152,29 @@ $(document).ready(function() {
 		    },
 		    eventDrop: function(event,dayDelta,minuteDelta,allDay,revertFunc) { //Trigger when sb drop a event
 		        
-		        showDialogEvent('eventdialog.jsp', 'update');
+		    	console.log('------------------');
+				console.log('----Update by eventDrop-----');
+				console.log('	id: ' + event['id']);
+				console.log('	title: ' + event['title']);
+				console.log('	start: ' + event['start']);
+				console.log('	end: ' + event['end']);
+				console.log('	repeatMode: ' + event['repeatMode']);
+				console.log('	description: ' + event['description']);
+				console.log('------------------');
+		        showDialogEvent('eventdialog.jsp', 'update', event);
 	
 		    },
 			eventResize: function(event,dayDelta,minuteDelta,revertFunc) { //Trigger when sb resize an event (only on weekView and dayView)
-	
-		        alert(
-		            "The end date of " + event.title + "has been moved " +
-		            dayDelta + " days and " +
-		            minuteDelta + " minutes."
-		        );
-	
-		        if (!confirm("is this okay?")) {
-		            revertFunc();
-		        }
-		        
+				
+				console.log('------------------');
+				console.log('----Update by eventResize-----');
+				console.log('	id: ' + event['id']);
+				console.log('	title: ' + event['title']);
+				console.log('	start: ' + event['start']);
+				console.log('	end: ' + event['end']);
+				console.log('	repeatMode: ' + event['repeatMode']);
+				console.log('	description: ' + event['description']);
+				console.log('------------------');
 		        showDialogEvent('eventdialog.jsp', 'update', event);
 	
 		    }
