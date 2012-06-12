@@ -1,6 +1,7 @@
 package calendar.web.struts;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -27,27 +28,47 @@ public class InputRoomAddAction extends Action {
 		
 		ServletContext context = servlet.getServletConfig().getServletContext();
 		RoomController roomController = (RoomController) context.getAttribute("roomController");
-    
+		RoomCategoryController roomCategoryController = (RoomCategoryController) context.getAttribute("roomCategoryController");
+		
 		Room room = new Room();
 		
-		room.setLocal(inputRoomForm.getLocal());
-		System.out.println(room.getLocal());
-		room.setName(inputRoomForm.getName());
-		System.out.println(room.getName());
-		room.setDescription(inputRoomForm.getDescription());
-		System.out.println(room.getDescription());
-		//room.setLocal(inputRoomForm.getLocal());
-
-			    
+		HashMap<String, Object> filter = new HashMap<String, Object>();
+		
+		Long id = Long.parseLong(inputRoomForm.getRoomCategory());
+		
+		System.out.println("id " + id);
+		
+		filter.put("id", id);
+		
+		try {
+			RoomCategory roomCategory = roomCategoryController.read(filter).get(0);
+			
+			
+			room.setLocal(inputRoomForm.getLocal());
+			room.setName(inputRoomForm.getName());
+			room.setDescription(inputRoomForm.getDescription());
+			room.setRoomCategory(roomCategory);
+			
+			roomController.create(room);
+		} catch (CoreException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//RoomCategory roomCategory = new RoomCategory(Integer.parseInt(inputRoomForm.getRoomCategory()), null);
+		// ORIGINAL
+//		
+//		room.setRoomCategory(roomCategory);
 //		try {
 //			roomController.create(room);
 //		} catch (CoreException e) {
+//			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //			return mapping.findForward("failure");
 //		}
 		
 		
-		//request.setAttribute("roomCategoryList", roomCategoryList);
+		
 	    return mapping.findForward("success");
 
 	}
