@@ -28,6 +28,7 @@
 <!-- BEGIN APPLICATION -->
 
 <script type='text/javascript' src='misc/js/lang.jsp'></script>
+<script type='text/javascript' src='misc/js/application/helpers/dateHelper.js'></script>
 <script type='text/javascript' src='misc/js/application/init.js'></script>
 <script type='text/javascript' src='misc/js/application/controller/Controller.js'></script>
 <!--script type='text/javascript' src='misc/js/application/handler/CalendarHandler.js'></script-->

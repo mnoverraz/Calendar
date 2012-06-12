@@ -21,7 +21,9 @@ $(document).ready(function() {
 	
     $('#title').focus();
     
-    
+    if(typeof(eventData)!='undefined'){
+    	fillEvent();
+	}
     
 
     if ($("#date").val() == '') {
@@ -71,7 +73,7 @@ $(document).ready(function() {
 		changeYear: true
     });
 
-    wholeDay();
+    
 
     $('#allDay').change(function() {
         wholeDay();
@@ -81,9 +83,7 @@ $(document).ready(function() {
         repeatSelector();
     });
     
-    if(typeof(eventData)!='undefined'){
-    	fillEvent();
-	}
+    wholeDay();
 });
 
 function wholeDay() {
@@ -108,28 +108,56 @@ function sendForm(url, data, method) {
         message: '<img src="misc/img/loading.gif" />', 
         css: { border: 'none' } 
     }); */
-    //dataString = $('#eventform').serialize();
-    send(url, data, method);
+    dataString = $('#eventform').serialize();
+    send(url, dataString, method);
     
 
 }
 
 function fillEvent(){
-	alert(
+	/*alert(
 			'id=' + eventData['id'] +
 			'| title=' + eventData['title'] +
 			'| date=' + eventData['start'].getFullYear() +
 			'| allDay=' + eventData['allDay']
-	);
-	
+	);*/
+	console.log('------------------');
+	console.log('----FillEvent-----');
+	console.log('	id: ' + eventData['id']);
+	console.log('	title: ' + eventData['title']);
+	console.log('	start: ' + eventData['start']);
+	console.log('	end: ' + eventData['end']);
+	console.log('	repeatMode: ' + eventData['repeatMode']);
+	console.log('	description: ' + eventData['description']);
+	console.log('------------------');
 	
 	$("#id").val(eventData['id']);
 	$("#title").val(eventData['title']);
-	$("#date").val(eventData['start'].getFullYear() + '-' + eventData['start'].getMonth() + '-' + eventData['start'].getDate());
+	//$("#date").val(eventData['start'].getFullYear() + '-' + eventData['start'].getMonth() + '-' + eventData['start'].getDate());
+	$("#date").val(dateToString(eventData['start']));
+	
+	if(eventData['start'].getHours() == 0 && eventData['start'].getMinutes() == 0){
+		$("#startH").val(new Date().getHours());
+		$("#startM").val(new Date().getMinutes());
+		$("#endH").val(new Date().getHours());
+		$("#endM").val(new Date().getMinutes());
+		
+	}else{
+		
+		$("#startH").val(intOn2Digit(eventData['start'].getHours()));
+		$("#startM").val(intOn2Digit(eventData['start'].getMinutes()));
+		$("#endH").val(intOn2Digit(eventData['end'].getHours()));
+		$("#endM").val(intOn2Digit(eventData['end'].getMinutes()));
+	}
+	
+	$("#repeatMode").attr('value',eventData['repeatMode']);
+	//$("#repeatEnd").val(eventData['start'].);
+	$("#description").val(eventData['description']);
+	
 	if(eventData['allDay']){
-		wholeDay();
+		$('#allDay').attr('checked', true);
 	}
 	//$("#repeatEnd").val(eventData['end'].getFullYear() + '-' + eventData['end'].getMonth() + '-' + eventData['end'].getDate());
-	//eventData = null;
+	eventData = null;
 	
 }

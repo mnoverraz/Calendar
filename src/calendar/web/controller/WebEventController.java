@@ -1,7 +1,5 @@
 package calendar.web.controller;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -14,7 +12,6 @@ import calendar.core.controller.EventController;
 import calendar.core.entity.Event;
 import calendar.core.entity.EventDate;
 import calendar.core.exception.CoreException;
-import calendar.core.exception.TimeSlotException;
 import calendar.web.exception.FormNotValidException;
 import calendar.web.renderer.ExceptionRenderer;
 import calendar.web.renderer.Message;
@@ -49,38 +46,37 @@ public class WebEventController extends WebController<EventController> {
 			// System.out.println(params.get("startH"));
 			try {
 				while (it.hasNext()) {
-					Object key = it.next().getKey();
-					Object value = params.get(key);
+					String key = it.next().getKey();
+					String value = params.get(key);
 
 					if ("id".equals(key))
-						id = (String) value;
+						id = value;
 					if ("startH".equals(key))
-						startH = (String) value;
+						startH = value;
 					if ("endH".equals(key))
-						endH = (String) value;
+						endH = value;
 					if ("startM".equals(key))
-						startM = (String) value;
+						startM = value;
 					if ("endM".equals(key))
-						endM = (String) value;
+						endM = value;
 					if ("date".equals(key))
-						date = (String) value;
+						date = value;
 					if ("allDay".equals(key))
-						allDay = (String) value;
+						allDay = value;
 					if ("repeatMode".equals(key))
-						repeatMode = (String) value;
+						repeatMode = value;
 					if ("repeatEnd".equals(key))
-						repeatEnd = (String) value;
+						repeatEnd = value;
 					if ("description".equals(key))
-						description = (String) value;
+						description = value;
 					if ("title".equals(key))
-						title = (String) value;
+						title = value;
 				}
 
 				try {
-					System.out.println("webEventController.create");
-					event = FormUtils.createEventFromForm(id, date, startH, startM,
-							endH, endM, allDay, repeatMode, repeatEnd, title,
-							description);
+					event = FormUtils.createEventFromForm(id, date, startH,
+							startM, endH, endM, allDay, repeatMode, repeatEnd,
+							title, description);
 					controller.create(event);
 					HashMap<String, Object> eventMap = null;
 					for (EventDate eventDate : event.getEventDates()) {
@@ -92,6 +88,8 @@ public class WebEventController extends WebController<EventController> {
 						eventMap.put("end", DateHelper.DateToString(
 								eventDate.getEnd(), Config.DATE_FORMAT_LONG));
 						eventMap.put("allDay", eventDate.isAllDay());
+						eventMap.put("description", event.getDescription());
+						eventMap.put("repeatMode", event.getMode());
 
 						message.addElementToBody(eventMap);
 					}
@@ -121,26 +119,21 @@ public class WebEventController extends WebController<EventController> {
 
 		try {
 			if (params != null) {
+				if (params.containsKey("id")) {
+					int id = Integer.parseInt(params.get("id"));
+					filter.put("id", id);
+				}
+				if (params.containsKey("start")) {
+					long timeStamp = Long.parseLong(params.get("start"));
 
-				Iterator<Entry<String, String>> it = params.entrySet()
-						.iterator();
+					Date date = new Date(timeStamp * 1000);
+					filter.put("start", date);
+				}
+				if (params.containsKey("end")) {
+					long timeStamp = Long.parseLong(params.get("end"));
 
-				while (it.hasNext()) {
-					String key = it.next().getKey();
-					String value = params.get(key);
-
-					if ("start".equals(key)) {
-						long timeStamp = Long.parseLong(value);
-
-						Date date = new Date(timeStamp * 1000);
-						filter.put("start", date);
-					}
-					if ("end".equals(key)) {
-						long timeStamp = Long.parseLong(value);
-
-						Date date = new Date(timeStamp * 1000);
-						filter.put("end", date);
-					}
+					Date date = new Date(timeStamp * 1000);
+					filter.put("end", date);
 				}
 			}
 			events = (ArrayList<Event>) controller.read(filter);
@@ -156,7 +149,8 @@ public class WebEventController extends WebController<EventController> {
 					eventMap.put("end", DateHelper.DateToString(
 							eventDate.getEnd(), Config.DATE_FORMAT_LONG));
 					eventMap.put("allDay", eventDate.isAllDay());
-
+					eventMap.put("description", event.getDescription());
+					eventMap.put("repeatMode", event.getMode());
 					message.addElementToBody(eventMap);
 				}
 			}

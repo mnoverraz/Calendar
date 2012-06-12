@@ -12,16 +12,25 @@ import calendar.core.entity.EventDate;
 import calendar.core.exception.CoreException;
 import calendar.core.exception.SystemException;
 import calendar.core.exception.TimeSlotException;
-import calendar.core.session.EventHandlerLocal;
+import calendar.core.session.EventHandler;
 import calendar.core.session.PersistException;
 
 
 public class EventController extends Controller<Event> {	
-	private EventHandlerLocal eventHandler;
+	private EventHandler eventHandler;
 	
 	public EventController(Context context) throws NamingException {
 		super(context);
-		this.eventHandler = (EventHandlerLocal) context.lookup("calendarEAR/EventBean/local");
+		initialize("local");
+	}
+	
+	public EventController(Context context, String source) throws NamingException {
+		super(context);
+		initialize("remote");
+	}
+	
+	private void initialize(String source) throws NamingException {
+		this.eventHandler = (EventHandler) context.lookup("calendarEAR/EventBean/" + source);
 	}
 
 	@Override

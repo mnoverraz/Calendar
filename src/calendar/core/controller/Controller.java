@@ -24,6 +24,7 @@ public abstract class Controller<T> {
 	public Controller(Context context) {
 		this.context = context;
 	}
+	
 	/**
 	 * Creates an object of the specified type
 	 * 
@@ -35,8 +36,8 @@ public abstract class Controller<T> {
 	/**
 	 * Returns all objects found for specified filter in an ArrayList
 	 * 
-	 * @param params
-	 * @return
+	 * @param filter
+	 * @return ArrayList<T>
 	 * @throws CoreException
 	 */
 	public abstract ArrayList<T> read(HashMap<String, Object> filter) throws CoreException;

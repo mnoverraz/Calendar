@@ -4,8 +4,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -44,7 +42,8 @@ public class FormUtils {
 		validation.put("repeatMode", true);
 		validation.put("repeatEnd", true);
 		validation.put("title", true);
-		validation.put("description", false);
+		validation.put("description", true);
+		validation.put("allDay", true);
 
 		try {
 			start = DateHelper.StringToDate(fDate + " " + fStartH + ":"
@@ -74,12 +73,8 @@ public class FormUtils {
 		}
 
 		if (!allDay) {
-			if ("true".equals(fAllDay))
+			if ("true".equals(fAllDay) || "on".equals(fAllDay))
 				allDay = true;
-			else if ("false".equals(fAllDay))
-				allDay = false;
-			else
-				validation.put("allDay", false);
 		}
 
 		if ("n".equals(fRepeatMode))
@@ -97,7 +92,7 @@ public class FormUtils {
 		else
 			validation.put("repeatMode", false);
 		
-		if (fId != null)
+		if (fId != null && !"".equals(fId))
 			id = Integer.parseInt(fId);
 
 		if (fTitle != null && !"".equals(fTitle))
@@ -107,7 +102,7 @@ public class FormUtils {
 		if (fDescription != null && !"".equals(fDescription))
 			description = StringUtils.replaceEach(fDescription, new String[]{"&", "\"", "<", ">"}, new String[]{"&amp;", "&quot;", "&lt;", "&gt;"});
 
-		if (repeatMode != null && "n".equals(repeatMode)) {
+		if (repeatMode != null && !"n".equals(repeatMode)) {
 			try {
 				repeatEnd = DateHelper.StringToDate(fRepeatEnd);
 				if (!repeatEnd.after(start)) {
@@ -118,16 +113,6 @@ public class FormUtils {
 				validation.put("repeatEnd", false);
 			}
 		}
-		
-		System.out.println("test");
-		System.out.println(validation.containsValue(false));
-		Iterator<Entry<String, Boolean>> it = validation.entrySet().iterator();
-
-			while (it.hasNext()) {
-				Object key = it.next().getKey();
-				Object value = validation.get(key);
-				System.out.println("key: " + key + " value: " + value);
-			}
 
 		if (validation.containsValue(false)) {
 			FormNotValidException fe = new FormNotValidException();
@@ -136,6 +121,7 @@ public class FormUtils {
 		}
 		try {
 			event = new Event(id, title, description, repeatMode);
+			event.addEventDate(new EventDate(start, end));
 			dates = DateHelper.calculateRecurrentDates(start, repeatEnd,
 					repeatMode);
 			

@@ -7,11 +7,11 @@
     </rule> 
     <rule>
         <from>^/rest/([a-z0-9]+)/$</from>
-        <to>/rest?ressource=$1</to>
+        <to>/rest?resource=$1</to>
     </rule>
     <rule>
         <from>^/rest/([a-z0-9]+)/(.*)$</from>
-        <to>/rest?ressource=$1/$2</to>
+        <to>/rest?resource=$1/$2</to>
     </rule>
 </urlrewrite>
 
