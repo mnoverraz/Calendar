@@ -58,7 +58,6 @@ function showDialogEvent(url, mode, event){
 	
 	switch(mode){
 		case 'consult':
-			alert(event['id']);
 			dialogTitle = 'Nom de l événement';
 			data = {
 					id : event['id']
@@ -69,6 +68,11 @@ function showDialogEvent(url, mode, event){
 			}, {
 			        id : 'delete'
 			});
+			buttonOpts['Modifier'] = $.extend(function() {                    
+		    	sendForm('rest/event/', data,'post');
+		    }, {
+		        method : 'post'
+		    });
 			showDialog(url, event, buttonOpts);
 			break;
 		case 'create':
@@ -84,9 +88,7 @@ function showDialogEvent(url, mode, event){
 			break;
 		case 'update':
 			dialogTitle = 'Modifier événement';
-			data = {
-					method : 'post'
-				};
+			data = $('#eventform').serialize();
 			buttonOpts['Modifier'] = $.extend(function() {                    
 		    	sendForm('rest/event/', data,'post');
 		    }, {
@@ -96,12 +98,10 @@ function showDialogEvent(url, mode, event){
 			break;
 		case 'delete':
 			dialogTitle = 'Suppression événement';
-			data = {
-				id : event['id']
-			};
+			data = $('#eventform').serialize();
 			
 			buttonOpts['Supprimer'] = $.extend(function() {                    
-		    	send('rest/event/', data,'delete');
+				 sendForm('rest/event/', data,'delete');
 		    }, {
 		        id : 'delete'
 		    });
