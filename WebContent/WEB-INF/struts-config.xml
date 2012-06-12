@@ -6,7 +6,8 @@
 <struts-config>
   <!-- ========== Définition des beans de formulaire =============== -->
   <form-beans>
-    <form-bean name="roomForm" type="calendar.web.struts.RoomForm" />
+<!--     <form-bean name="roomFormBean" type="calendar.web.struts.RoomFormBean" /> -->
+    <form-bean name="inputRoomForm" type="calendar.web.struts.InputRoomForm" />
   </form-beans>
 
   <!-- ========== Définition des enchainements ================ -->
@@ -17,25 +18,55 @@
   <!-- ========== Définition du mappage d'action ==================== -->
   <action-mappings>
   
-    <action path="/addRoom"
-      type="calendar.web.struts.AddRoomAction"
-      name="roomForm"
-      scope="request"
-      input="/addRoom.jsp"
-      validate="true">
-      <forward name="success" path="/roomManagement.do"/>
-      <forward name="failure" path="/addRoom.jsp"/>
-    </action>
+<!--     <action path="/addRoomPrepare" -->
+<!--       type="calendar.web.struts.AddRoomPrepareAction" -->
+<!--       name="roomFormBean" -->
+<!--       scope="request" -->
+<!--       input="/addRoom.jsp" -->
+<!--       validate="true"> -->
+<!--       <forward name="success" path="/roomManagement.do"/> -->
+<!--       <forward name="failure" path="/addRoom.do"/> -->
+<!--     </action> -->
     
+<!--     <action path="/addRoom" -->
+<!--       type="calendar.web.struts.AddRoomAction" -->
+<!--       name="roomFormBean" -->
+<!--       scope="request" -->
+<!--       input="/addRoom.jsp" -->
+<!--       validate="true"> -->
+<!--       <forward name="success" path="/roomManagement.do"/> -->
+<!--       <forward name="failure" path="/addRoom.do"/> -->
+<!--     </action> -->
+
     <action path="/roomManagement"
       type="calendar.web.struts.ListRoomAction">
       <forward name="success" path="/roomManagement.jsp" />
     </action> 
     
+    <action path="/inputRoom"
+      type="calendar.web.struts.InputRoomAction"
+      name="inputRoomForm"
+      scope="request"
+      input="/inputRoom.jsp"
+      validate="true">
+      <forward name="success" path="/inputRoom.jsp"/>
+<!--       <forward name="failure" path="/inputRoom.do"/> -->
+    </action>
+    
+    <action path="/inputRoomAdd"
+      type="calendar.web.struts.InputRoomAddAction"
+      name="inputRoomForm"
+      scope="request"
+      input="/inputRoom.jsp"
+      validate="true">
+      <forward name="success" path="/roomManagement.do"/>
+      <forward name="failure" path="/inputRoom.do"/>
+    </action>
+    
   </action-mappings>
  
   <!-- ========== Définition Messages et  plug-in ==================== -->
-<!--   <message-resources parameter="web.Messages"/> -->
+  <message-resources parameter="calendar.web.struts.FormMessages"/>
 <!--   <plug-in className="calendar.web.struts.RoomManagerPlug"/> -->
 
 </struts-config>

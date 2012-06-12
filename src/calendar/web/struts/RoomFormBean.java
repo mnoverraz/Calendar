@@ -1,37 +1,28 @@
 package calendar.web.struts;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
 
 
-public class RoomForm extends ActionForm {
+public class RoomFormBean extends ActionForm {
 
 	private String id;
 	private String local;
 	private String name;
 	private String description;
 	private String roomCategory;
+	private ArrayList<RoomCategoryData> roomCategoryList;
 	
-	public RoomForm() {
+
+	public RoomFormBean() {
 	  super();
 	}
-
-	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
-        ActionErrors errors = new ActionErrors();
-        
-             
-//        if ((password == null) || (password.length() < 3)) 
-//        {
-//          errors.add("applicationConfig.menu.txt.manageUsers.UpdateNOK", new ActionMessage("applicationConfig.menu.txt.manageUsers.UpdateNOK"));
-//        }
- 
-        System.out.print(errors); 
-        
-        return errors;
-    }
 	
 	public String getId() {
 		return id;
@@ -73,4 +64,25 @@ public class RoomForm extends ActionForm {
 		this.roomCategory = roomCategory;
 	}
 	  
+	public ArrayList<RoomCategoryData> getRoomCategoryList() {
+		return roomCategoryList;
+	}
+	
+	public void setRoomCategoryList(ArrayList<RoomCategoryData> roomCategoryList) {
+		this.roomCategoryList = roomCategoryList;
+	}
+	
+	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
+		
+		ActionErrors errors = new ActionErrors();
+		
+		if ( getLocal() == null || getLocal().length() < 1 ) {
+			errors.add("local", new ActionMessage("local.error"));
+		}
+		
+		System.out.print(errors); 
+		
+		return errors;
+	}
+	
 }

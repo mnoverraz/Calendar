@@ -13,7 +13,7 @@
   <body>
     <h1>Room Management</h1>
     <br/>
-    <input type="button" value="Add room" onclick="self.location.href='addRoom.jsp'" />
+    <input type="button" value="Add room" onclick="self.location.href='inputRoom.do'" />
     <br/>
     <hr/>
     <table border="1">
@@ -43,8 +43,13 @@
 		  %>
         </td>      
         <td>
-      
-          </td>      
+        	<bean:define id="idValue" name="room" property="id" type="Long" />  
+		  <%
+		  	long i = idValue;
+		  	out.print("<input type=\"button\" value=\"Edit room\" onclick=\"self.location.href=''\" />");
+		  	out.print("<input type=\"button\" value=\"Delete room\" onclick=\"self.location.href=''\" />");
+		  %>
+        </td>      
       </tr>
     </logic:iterate>
     </table>
