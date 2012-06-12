@@ -161,6 +161,8 @@ $(document).ready(function() {
 				console.log('	repeatMode: ' + event['repeatMode']);
 				console.log('	description: ' + event['description']);
 				console.log('------------------');
+				
+				
 		        showDialogEvent('eventdialog.jsp', 'update', event);
 	
 		    },

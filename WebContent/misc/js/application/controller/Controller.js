@@ -1,11 +1,14 @@
 function send(url, data, method) {
-	
+		console.log(url);
+		console.log(data);
+		console.log(method);
 		$.ajax({
 			type : method,
 			url : url,
 			dataType: "json",
 			data : data,
 			success : function(msg) {
+				console.log('bien été envoyé');
 				getMessage(msg);
 				$('.ui-dialog').unblock();
 				if (msg["success"]) {
@@ -78,9 +81,8 @@ function showDialogEvent(url, mode, event){
 		    });
 			showDialog(url, event, buttonOpts);
 			 */
-			
-			
-			send('rest/event/', event,'update');
+			console.log('ShowdialogEvent send()');
+			send('rest/event/', event,'post');
 			
 			break;
 		case 'delete':
