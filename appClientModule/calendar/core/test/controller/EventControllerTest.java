@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 import javax.naming.InitialContext;
@@ -72,11 +73,34 @@ public class EventControllerTest {
 	}*/
 
 	@Test
-	public void testGetEvents() throws CoreException {
+	public void testReadAll() throws CoreException {
+		System.out.println("testReadAll");
 		HashMap<String, Object> filter = new HashMap<String, Object>();
 
 		ArrayList<Event> events = eventController.read(filter);
 		
+
+		for (Event event : events) {
+			System.out.println(event);
+		}
+
+	}
+	
+	@Test
+	public void testReadWithStartEndFilter() throws CoreException {
+		System.out.println("testReadWithStartEndFilter");
+		HashMap<String, Object> filter = new HashMap<String, Object>();
+		
+		long startS = 1338156000L;
+		long endS = 1341784800L;
+		
+		Date start = new Date(startS * 1000);
+		filter.put("start", start);
+		
+		Date end = new Date(endS * 1000);
+		filter.put("end", end);
+
+		ArrayList<Event> events = eventController.read(filter);
 
 		for (Event event : events) {
 			System.out.println(event);
