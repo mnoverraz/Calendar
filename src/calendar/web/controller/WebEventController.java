@@ -127,6 +127,7 @@ public class WebEventController extends WebController<EventController> {
 					long timeStamp = Long.parseLong(params.get("start"));
 
 					Date date = new Date(timeStamp * 1000);
+					System.out.println(date);
 					filter.put("start", date);
 				}
 				if (params.containsKey("end")) {
@@ -219,10 +220,10 @@ public class WebEventController extends WebController<EventController> {
 				}
 
 				try {
-					event = new Event(Integer.parseInt(id), null);
-					/*event = FormUtils.createEventFromForm(id, date, startH,
+					//event = new Event(Integer.parseInt(id), null);
+					event = FormUtils.createEventFromForm(id, date, startH,
 							startM, endH, endM, allDay, repeatMode, repeatEnd,
-							title, description);*/
+							title, description);
 					controller.delete(event);
 					HashMap<String, Object> eventMap = null;
 					for (EventDate eventDate : event.getEventDates()) {

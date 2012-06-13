@@ -110,8 +110,8 @@ $(document).ready(function() {
 		            dataType: 'json',
 		            data: {
 		                // our hypothetical feed requires UNIX timestamps
-		                start: Math.round(start.getTime() / 1000),
-		                end: Math.round(end.getTime() / 1000)
+		                /*start: Math.round(start.getTime() / 1000),
+		                end: Math.round(end.getTime() / 1000)*/
 		            },
 		            success: function(doc) {
 		                var events = [];

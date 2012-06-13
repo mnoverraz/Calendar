@@ -67,7 +67,7 @@ public class RESTServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		paramMap =new HashMap<String, String>();
 		createParameterMap(request.getParameterMap());
-		/*if (request.getContentLength() > 0) {
+		if (request.getContentLength() > 0) {
 			BufferedReader br = new BufferedReader(new InputStreamReader(
 					request.getInputStream()));
 
@@ -88,7 +88,7 @@ public class RESTServlet extends HttpServlet {
 				paramMap.put(name, value);
 
 			}
-		}*/
+		}
 		this.method = "PUT";
 		proceed(request, response);
 	}

@@ -4,9 +4,9 @@ function send(url, data, method) {
 		console.log(method);
 		$.ajax({
 			type : method,
-			url : url + '?' + data,
+			url : url /*+ '?' + data*/,
 			dataType: "json",
-			//data : data,
+			data : data,
 			success : function(msg) {
 				console.log('bien été envoyé');
 				getMessage(msg);
