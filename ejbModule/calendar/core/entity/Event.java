@@ -122,9 +122,9 @@ public class Event implements Serializable {
 		ret += "-------\n";
 		for (EventDate eventDate : getEventDates()) {
 			ret += "start:\t\t" + eventDate.getEnd() + "\n"; 
-			ret += "end:\t\t" + eventDate.getStart();
+			ret += "end:\t\t" + eventDate.getStart() + "\n";
 		}
-		ret += "-------";
+		ret += "-------\n";
 		
 		return  ret;
 	}
