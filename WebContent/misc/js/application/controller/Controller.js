@@ -1,12 +1,14 @@
 function send(url, data, method) {
-	console.log(method);
-	//if(method == 'put'){
+		console.log(url);
+		console.log(data);
+		console.log(method);
 		$.ajax({
 			type : method,
 			url : url + '?' + data,
 			dataType: "json",
 			//data : data,
 			success : function(msg) {
+				console.log('bien été envoyé');
 				getMessage(msg);
 				$('.ui-dialog').unblock();
 				if (msg["success"]) {
@@ -14,23 +16,6 @@ function send(url, data, method) {
 	            }
 			}
 		});
-		
-	//}
-	
-	
-	/*$.ajax({
-		type : method,
-		url : url,
-		dataType: "json",
-		data : data,
-		success : function(msg) {
-			getMessage(msg);
-			$('.ui-dialog').unblock();
-			if (msg["success"]) {
-                $('#dialog').dialog("close");
-            }
-		}
-	});*/
 }
 
 /*
@@ -87,7 +72,7 @@ function showDialogEvent(url, mode, event){
 			showDialog(url, null, buttonOpts);
 			break;
 		case 'update':
-			dialogTitle = 'Modifier événement';
+			/*dialogTitle = 'Modifier événement';
 			data = $('#eventform').serialize();
 			buttonOpts['Modifier'] = $.extend(function() {                    
 		    	sendForm('rest/event/', data,'post');
@@ -95,6 +80,10 @@ function showDialogEvent(url, mode, event){
 		        method : 'post'
 		    });
 			showDialog(url, event, buttonOpts);
+			 */
+			console.log('ShowdialogEvent send()');
+			send('rest/event/', event,'post');
+			
 			break;
 		case 'delete':
 			dialogTitle = 'Suppression événement';

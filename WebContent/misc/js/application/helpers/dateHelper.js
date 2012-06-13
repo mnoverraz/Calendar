@@ -20,10 +20,8 @@ function stringToDate(dateString) {
 function intOn2Digit(number){
 	
 	if(number <= 9){
-		console.log('0' + String(number));
 		return '0' + String(number);
 	}else{
-		console.log(number);
 		return number;
 	}
 }
