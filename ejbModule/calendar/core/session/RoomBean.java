@@ -29,21 +29,48 @@ public class RoomBean implements RoomHandlerRemote, RoomHandlerLocal {
 	@Override
 	public List<Room> read(HashMap<String, Object> params)
 			throws PersistException {
+		
+		/* ORIGINAL */
+//		List<Room> rooms = null;
+//		StringBuffer query = new StringBuffer();
+//
+//		query.append("FROM Room room ");
+//		
+//		try {
+//			Query q = em.createQuery(query.toString());
+//			//q.setParameter("id", null);
+//			
+//			rooms = q.getResultList();
+//		} catch (PersistenceException ex) {
+//			ex.printStackTrace();
+//			throw new PersistException();
+//		}
+//		return rooms;
+		/* ----------------------------------------------- */
+		
 		List<Room> rooms = null;
 		StringBuffer query = new StringBuffer();
 
-		query.append("FROM Room room ");
+		query.append("SELECT r");
+		query.append(" FROM Room as r ");
+		
+		if (params != null)
+			if (params.containsKey("id"))
+				query.append(" WHERE r.id = :id");
 		
 		try {
 			Query q = em.createQuery(query.toString());
-			//q.setParameter("id", null);
-			
+			if (params != null)
+				if (params.containsKey("id"))
+					q.setParameter("id", params.get("id"));
 			rooms = q.getResultList();
 		} catch (PersistenceException ex) {
 			ex.printStackTrace();
 			throw new PersistException();
 		}
+		
 		return rooms;
+		
 	}
 
 	@Override

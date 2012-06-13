@@ -62,7 +62,7 @@ public class RoomCategoryBean implements RoomCategoryHandlerRemote, RoomCategory
 		try {
 			Query q = em.createQuery(query.toString());
 			if (params != null)
-			if (params.containsKey("id"))
+				if (params.containsKey("id"))
 					q.setParameter("id", params.get("id"));
 			
 			roomCategories = q.getResultList();
