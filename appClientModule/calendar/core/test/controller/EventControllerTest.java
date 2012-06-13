@@ -1,4 +1,4 @@
-package calendar.core.test;
+package calendar.core.test.controller;
 
 import static org.junit.Assert.*;
 
@@ -9,6 +9,7 @@ import java.util.HashMap;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import calendar.core.application.BootStrap;
@@ -19,40 +20,24 @@ import calendar.core.entity.Event;
 import calendar.core.entity.EventDate;
 import calendar.core.exception.CoreException;
 import calendar.core.exception.TimeSlotException;
-import calendar.web.controller.WebEventController;
-import calendar.web.renderer.Message;
 
 public class EventControllerTest {
+	
+	private EventController eventController = null;
 
-	/*@Test
-	public void testGetEvents() {
-		EventController eventController = new EventController();
-		ArrayList<Event> events = eventController.getEvents();
-		
-
-		for (Event event : events) {
-			System.out.println(event);
+	@Before
+	public void setUp() throws Exception {
+		try {
+			eventController = new EventController(
+					new InitialContext(), "remote");
+		} catch (NamingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
+	}
 
-	}*/
-
-	
-	@Test
-	public void testWebEventController_shouldReturnEventsAsJSON() throws NamingException {
-		BootStrap.init();
-		WebEventController webEventController = new WebEventController(new EventController(new InitialContext()));
-		Message message = new Message();
-		message = (Message) webEventController.read(new HashMap<String, String>());
-
-		String output = message.toJSON(true);
-		
-		System.out.println(output);
-	}	
-	
-	@Test(expected=TimeSlotException.class)
+	/*@Test(expected=TimeSlotException.class)
 	public void testAvailability_throwsTimeSlotException() throws CoreException, NamingException {
-		BootStrap.init();
-		EventController eventController = new EventController(new InitialContext());
 		Event eventToTest = new Event(4, "event 3", "description 3", "m");
 		
 
@@ -63,20 +48,13 @@ public class EventControllerTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-
-		
 
 		eventController.create(eventToTest);
 	}
 	
 
-	public void testWebEventController_throwsNoException() throws NamingException {
-		BootStrap.init();
-		EventController eventController = new EventController(new InitialContext());
-		WebEventController controller = new WebEventController(eventController);
+/*	public void testWebEventController_throwsNoException() throws NamingException {
 		Event eventToTest  = new Event(4, "event 3", "description 3", "m");
-		Message message = null;
 		
 		try {
 			eventToTest.addEventDate(new EventDate(DateHelper.StringToDate("2012-05-05 22:50", Config.DATE_FORMAT_LONG), DateHelper.StringToDate("2012-05-05 23:30", Config.DATE_FORMAT_LONG)));
@@ -86,15 +64,23 @@ public class EventControllerTest {
 			e.printStackTrace();
 		}
 		
-
-		
-		
-		
-
 		try {
 			eventController.create(eventToTest);
 		} catch (CoreException e) {
 			
 		}
+	}*/
+
+	@Test
+	public void testGetEvents() throws CoreException {
+		HashMap<String, Object> filter = new HashMap<String, Object>();
+
+		ArrayList<Event> events = eventController.read(filter);
+		
+
+		for (Event event : events) {
+			System.out.println(event);
+		}
+
 	}
 }
