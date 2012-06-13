@@ -4,12 +4,12 @@
 
 <html>
   <head>
-    <title>Room Management - Add room</title>
+    <title>Room Management - Edit room</title>
   </head>
   <body>
-    <h1>Add room</h1>
-    <html:errors/>
-    <html:form action="/addRoom.do" method="POST">
+    <h1>Edit room</h1>
+<%--     <html:errors/> --%>
+    <html:form action="/inputRoomUpdate.do" method="POST">
       <html:hidden property="id" />
       <table>
         <tr>
@@ -41,14 +41,14 @@
             Category:
           </td>
           <td>
-<%--             <html:text property="roomCategory" /> --%>
-            <html:select property="roomCategory" />
+          	<html:select property="roomCategory">
+          	  <html:option value="0">Select a room category</html:option>
+			  <html:optionsCollection name="inputRoomForm" property="roomCategoryList" value="roomCategoryId" label="roomCategoryName" />
+          	</html:select>
           </td>
         </tr>
         <tr>
-          <td>
-            
-          </td>
+          <td></td>
           <td>
             <html:submit value="Validate"/>
           </td>
