@@ -24,9 +24,10 @@
 		$.ajax({
 			type : method,
 			url : "../rest/event/",
-			dataType: "text",
+			dataType: "json",
 			data : {
-				example : ""
+				"id" : "12",
+				"example" : "adsf"
 			},
 			success : function(msg) {
 				$('#log').append("<br/>method: " + method);

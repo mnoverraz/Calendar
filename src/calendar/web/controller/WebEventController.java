@@ -170,7 +170,88 @@ public class WebEventController extends WebController<EventController> {
 
 	@Override
 	public Message delete(HashMap<String, String> params) {
+		Event event = null;
 		Message message = new Message();
+
+		if (params != null) {
+			String id = null;
+			String date = null;
+			String startH = null;
+			String startM = null;
+			String endH = null;
+			String endM = null;
+			String allDay = null;
+			String repeatMode = null;
+			String repeatEnd = null;
+			String title = null;
+			String description = null;
+
+			Iterator<Entry<String, String>> it = params.entrySet().iterator();
+
+			// System.out.println(params.get("startH"));
+			try {
+				while (it.hasNext()) {
+					String key = it.next().getKey();
+					String value = params.get(key);
+
+					if ("id".equals(key))
+						id = value;
+					if ("startH".equals(key))
+						startH = value;
+					if ("endH".equals(key))
+						endH = value;
+					if ("startM".equals(key))
+						startM = value;
+					if ("endM".equals(key))
+						endM = value;
+					if ("date".equals(key))
+						date = value;
+					if ("allDay".equals(key))
+						allDay = value;
+					if ("repeatMode".equals(key))
+						repeatMode = value;
+					if ("repeatEnd".equals(key))
+						repeatEnd = value;
+					if ("description".equals(key))
+						description = value;
+					if ("title".equals(key))
+						title = value;
+				}
+
+				try {
+					event = new Event(Integer.parseInt(id), null);
+					/*event = FormUtils.createEventFromForm(id, date, startH,
+							startM, endH, endM, allDay, repeatMode, repeatEnd,
+							title, description);*/
+					controller.delete(event);
+					HashMap<String, Object> eventMap = null;
+					for (EventDate eventDate : event.getEventDates()) {
+						eventMap = new HashMap<String, Object>();
+						eventMap.put("id", event.getId());
+						eventMap.put("title", event.getTitle());
+						eventMap.put("start", DateHelper.DateToString(
+								eventDate.getStart(), Config.DATE_FORMAT_LONG));
+						eventMap.put("end", DateHelper.DateToString(
+								eventDate.getEnd(), Config.DATE_FORMAT_LONG));
+						eventMap.put("allDay", eventDate.isAllDay());
+						eventMap.put("description", event.getDescription());
+						eventMap.put("repeatMode", event.getMode());
+
+						message.addElementToBody(eventMap);
+					}
+				} catch (FormNotValidException fe) {
+					message.state = false;
+					ExceptionRenderer exRenderer = new ExceptionRenderer(fe);
+					message = exRenderer.getMessage();
+				}
+
+			} catch (Exception e) {
+				message.state = false;
+				ExceptionRenderer exRenderer = new ExceptionRenderer(e);
+				message = exRenderer.getMessage();
+			}
+		}
+		
 		return message;
 	}
 

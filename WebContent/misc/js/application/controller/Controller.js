@@ -3,9 +3,9 @@ function send(url, data, method) {
 	//if(method == 'put'){
 		$.ajax({
 			type : method,
-			url : url,
+			url : url + '?' + data,
 			dataType: "json",
-			data : data,
+			//data : data,
 			success : function(msg) {
 				getMessage(msg);
 				$('.ui-dialog').unblock();

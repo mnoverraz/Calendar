@@ -62,10 +62,12 @@ public class RESTServlet extends HttpServlet {
 		proceed(request, response);
 	}
 
+	@SuppressWarnings("unchecked")
 	protected void doPut(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		paramMap =new HashMap<String, String>();
-		if (request.getContentLength() > 0) {
+		createParameterMap(request.getParameterMap());
+		/*if (request.getContentLength() > 0) {
 			BufferedReader br = new BufferedReader(new InputStreamReader(
 					request.getInputStream()));
 
@@ -86,7 +88,7 @@ public class RESTServlet extends HttpServlet {
 				paramMap.put(name, value);
 
 			}
-		}
+		}*/
 		this.method = "PUT";
 		proceed(request, response);
 	}
