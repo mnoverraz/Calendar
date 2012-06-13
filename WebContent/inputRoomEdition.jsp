@@ -1,20 +1,15 @@
-<%@page import="calendar.core.entity.RoomCategory"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="calendar.core.controller.RoomCategoryController"%>
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 
 <html>
   <head>
-    <title>Room Management - Add room</title>
+    <title>Room Management - Edit room</title>
   </head>
   <body>
-    <h1>Add room</h1>
-    
+    <h1>Edit room</h1>
 <%--     <html:errors/> --%>
-    
-    <html:form action="/addRoom.do" method="POST">
+    <html:form action="/inputRoomUpdate.do" method="POST">
       <html:hidden property="id" />
       <table>
         <tr>
@@ -48,12 +43,11 @@
           <td>
           	<html:select property="roomCategory">
           	  <html:option value="0">Select a room category</html:option>
-<%--           	  <html:options property="roomCategoryList" value="roomCategoryId" label="roomCategoryName" /> --%>
-<%-- 				  <html:options property="roomCategoryList" name="roomFormBean" /> --%>
+			  <html:optionsCollection name="inputRoomForm" property="roomCategoryList" value="roomCategoryId" label="roomCategoryName" />
           	</html:select>
           </td>
         </tr>
-        <td>
+        <tr>
           <td></td>
           <td>
             <html:submit value="Validate"/>

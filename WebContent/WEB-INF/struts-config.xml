@@ -68,6 +68,26 @@
       <forward name="success" path="/roomManagement.do" redirect="true" />
     </action>
     
+    <action path="/editRoom"
+      type="calendar.web.struts.InputRoomAction"
+      name="inputRoomForm"
+      scope="request"
+      input="/inputRoomEdition.jsp"
+      validate="true">
+      <forward name="success" path="/inputRoomEdition.jsp"/>
+<!--       <forward name="failure" path="/inputRoom.do"/> -->
+	</action>
+
+	<action path="/inputRoomUpdate"
+      type="calendar.web.struts.InputRoomUpdateAction"
+      name="inputRoomForm"
+      scope="request"
+      input="/inputRoomEdition.jsp"
+      validate="true">
+      <forward name="success" path="/roomManagement.do" redirect="true" />
+<!--       <forward name="failure" path="/editRoom.do"/> -->
+    </action>
+
   </action-mappings>
  
   <!-- ========== Définition Messages et  plug-in ==================== -->

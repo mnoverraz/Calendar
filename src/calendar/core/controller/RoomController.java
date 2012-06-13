@@ -13,7 +13,9 @@ import calendar.core.session.PersistException;
 import calendar.core.session.RoomHandlerLocal;
 
 public class RoomController extends Controller<Room> {
+	
 	private RoomHandlerLocal roomHandler;
+	
 	public RoomController(Context context) throws NamingException {
 		super(context);
 		this.roomHandler = (RoomHandlerLocal) context.lookup("calendarEAR/RoomBean/local");
@@ -44,8 +46,12 @@ public class RoomController extends Controller<Room> {
 
 	@Override
 	public void update(Room object) throws CoreException {
-		// TODO Auto-generated method stub
-		
+		try {
+			roomHandler.update(object);
+		} catch (PersistException e) {
+			SystemException se = new SystemException();
+			se.detailInformation = e;
+		}
 	}
 
 	@Override

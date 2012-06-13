@@ -13,6 +13,7 @@ import calendar.core.session.PersistException;
 import calendar.core.session.RoomCategoryHandlerLocal;
 
 public class RoomCategoryController extends Controller<RoomCategory> {
+	
 	private RoomCategoryHandlerLocal roomCategoryHandler;
 	public RoomCategoryController(Context context) throws NamingException {
 		super(context);
