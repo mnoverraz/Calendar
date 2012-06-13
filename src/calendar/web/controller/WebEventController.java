@@ -127,7 +127,6 @@ public class WebEventController extends WebController<EventController> {
 					long timeStamp = Long.parseLong(params.get("start"));
 
 					Date date = new Date(timeStamp * 1000);
-					System.out.println(date);
 					filter.put("start", date);
 				}
 				if (params.containsKey("end")) {
