@@ -41,8 +41,8 @@ public class InputRoomAddAction extends Action {
 		filter.put("id", id);
 		
 		try {
-			RoomCategory roomCategory = roomCategoryController.read(filter).get(0);
 			
+			RoomCategory roomCategory = roomCategoryController.read(filter).get(0);
 			
 			room.setLocal(inputRoomForm.getLocal());
 			room.setName(inputRoomForm.getName());
@@ -50,6 +50,7 @@ public class InputRoomAddAction extends Action {
 			room.setRoomCategory(roomCategory);
 			
 			roomController.create(room);
+			
 		} catch (CoreException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

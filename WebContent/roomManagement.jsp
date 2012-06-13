@@ -45,9 +45,9 @@
         <td>
         	<bean:define id="idValue" name="room" property="id" type="Long" />  
 		  <%
-		  	long i = idValue;
+		  	String id = String.valueOf(idValue);
 		  	out.print("<input type=\"button\" value=\"Edit room\" onclick=\"self.location.href=''\" />");
-		  	out.print("<input type=\"button\" value=\"Delete room\" onclick=\"self.location.href=''\" />");
+		  	out.print("<input type=\"button\" value=\"Delete room\" onclick=\"self.location.href='inputRoomRemove.do?id=" + id + "'\" />");
 		  %>
         </td>      
       </tr>

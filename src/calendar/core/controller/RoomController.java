@@ -20,14 +20,13 @@ public class RoomController extends Controller<Room> {
 	}
 
 	@Override
-	public void create(Room room) throws CoreException {
+	public void create(Room object) throws CoreException {
 		try {
-			roomHandler.create(room);
+			roomHandler.create(object);
 		} catch (PersistException e) {
 			SystemException se = new SystemException();
 			se.detailInformation = e;
 		}
-		
 	}
 
 	@Override
@@ -51,8 +50,12 @@ public class RoomController extends Controller<Room> {
 
 	@Override
 	public void delete(Room object) throws CoreException {
-		// TODO Auto-generated method stub
-		
+		try {
+			roomHandler.delete(object);
+		} catch (PersistException e) {
+			SystemException se = new SystemException();
+			se.detailInformation = e;
+		}
 	}
 
 }

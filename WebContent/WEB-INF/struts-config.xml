@@ -59,8 +59,13 @@
       scope="request"
       input="/inputRoom.jsp"
       validate="true">
-      <forward name="success" path="/roomManagement.do"/>
+      <forward name="success" path="/roomManagement.do" redirect="true" />
       <forward name="failure" path="/inputRoom.do"/>
+    </action>
+    
+    <action path="/inputRoomRemove"
+      type="calendar.web.struts.InputRoomRemoveAction">
+      <forward name="success" path="/roomManagement.do" redirect="true" />
     </action>
     
   </action-mappings>
