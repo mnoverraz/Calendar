@@ -136,7 +136,6 @@ function getMessage(json){
 			//soit la création ok soit dataset vide
 			alert('success mais retour vide');
 		}else{
-			alert(json['content']);
 			addEvents(json);
 		}
 		
@@ -155,6 +154,30 @@ function addEvents(json){
 }
 
 function processError(error){
-	alert(error['content'][0]);
+	this.jose = error.content;
+	//alert(jose.content[0].FormNotValidException.title);
+	this.exceptionType = Array;
+	for(var i in error.content) {
+	    exceptionType.push(i);
+	}
+}
+
+function exceptionToUI(exceptionType, detail) {
+	out = "";
+	switch(exceptionType) {
+    	case 'TimeSlotException' :
+			out += "<ul>";
+			$.each(detail, function(k, v) {
+				out += "<li>";
+				out += v["start"] + " " + v["end"];
+				out += "</li>";
+			});
+			out += "</ul>";
+			break;
+    	default :
+    		out += "Other exception";
+    		break;
+	}
+	return out;
 }
 
