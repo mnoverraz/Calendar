@@ -133,7 +133,6 @@ function fillEvent(){
 	
 	$("#id").val(eventData['id']);
 	$("#title").val(eventData['title']);
-	//$("#date").val(eventData['start'].getFullYear() + '-' + eventData['start'].getMonth() + '-' + eventData['start'].getDate());
 	$("#date").val(dateToString(eventData['start']));
 	
 	if(eventData['start'].getHours() == 0 && eventData['start'].getMinutes() == 0){
@@ -151,7 +150,7 @@ function fillEvent(){
 	}
 	
 	$("#repeatMode").attr('value',eventData['repeatMode']);
-	//$("#repeatEnd").val(eventData['start'].);
+	$("#repeatEnd").val(dateToString(eventData['end']));
 	$("#description").val(eventData['description']);
 	
 	if(eventData['allDay']){

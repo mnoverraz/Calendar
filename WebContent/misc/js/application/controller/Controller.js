@@ -43,7 +43,7 @@ function showDialogEvent(url, mode, event){
 	
 	switch(mode){
 		case 'consult':
-			dialogTitle = 'Nom de l événement';
+			dialogTitle = event.title;
 			data = {
 					id : event['id']
 			};
@@ -58,7 +58,7 @@ function showDialogEvent(url, mode, event){
 		    }, {
 		        method : 'post'
 		    });
-			showDialog(url, event, buttonOpts);
+			showDialog(url, event, dialogTitle, buttonOpts);
 			break;
 		case 'create':
 			console.log(mode);
@@ -69,18 +69,9 @@ function showDialogEvent(url, mode, event){
 			    },{
 			        id : 'create'
 			    });
-			showDialog(url, null, buttonOpts);
+			showDialog(url, null, dialogTitle, buttonOpts);
 			break;
 		case 'update':
-			/*dialogTitle = 'Modifier événement';
-			data = $('#eventform').serialize();
-			buttonOpts['Modifier'] = $.extend(function() {                    
-		    	sendForm('rest/event/', data,'post');
-		    }, {
-		        method : 'post'
-		    });
-			showDialog(url, event, buttonOpts);
-			 */
 			console.log('ShowdialogEvent send()');
 			send('rest/event/', event,'post');
 			
@@ -100,11 +91,11 @@ function showDialogEvent(url, mode, event){
 	
 }
 
-function showDialog(url, event, buttonOpts) {
+function showDialog(url, event, dialogTitle, buttonOpts) {
 	var $dialog = $('<div id=\"dialog\"></div>')
     .load(url)
     .dialog({
-        title: 'titre',
+        title: dialogTitle,
         autoOpen: false,
         width: 290,
         buttons: buttonOpts,
