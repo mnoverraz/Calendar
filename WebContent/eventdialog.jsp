@@ -6,7 +6,7 @@
 <form id="eventform" name="eventform">
     <div class="input text">
         <label for="name" id="label-title"><%=ui.getLangText("calendar-event-title") %></label>
-        <input type="text" name="title" id="title" class="required" value="" />
+        <input type="text" name="title" id="title" class="required" />
         <input type="hidden" name="id" id="id" value="" />
         <!-- needs to be set to true otherwise single events will not be correctly deleted (orphelin) -->
     </div>

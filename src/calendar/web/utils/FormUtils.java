@@ -23,7 +23,7 @@ public class FormUtils {
 			String fDescription) throws FormNotValidException, SystemException
 	{
 		Event event = null;
-		int id = 0;
+		long id = 0;
 		Date start = null;
 		Date end = null;
 		boolean allDay = false;
@@ -120,7 +120,7 @@ public class FormUtils {
 			throw fe;
 		}
 		try {
-			event = new Event(id, title, description, repeatMode);
+			event = new Event(id, title, description, repeatMode, repeatEnd);
 			event.addEventDate(new EventDate(start, end));
 			dates = DateHelper.calculateRecurrentDates(start, repeatEnd,
 					repeatMode);

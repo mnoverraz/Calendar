@@ -135,7 +135,7 @@ $(document).ready(function() {
 			select: function(start, end, allDay) { //Trigger when sb click on a day
 					eventData = {
 						id: null,
-						title: ' ',
+						title: '',
 				        start: start,
 				        end: end,
 				        allDay: false
