@@ -26,27 +26,46 @@ public class InputRoomAction extends Action {
 			HttpServletResponse response) {
 		
 		InputRoomForm inputRoomForm = (InputRoomForm) form;
-		
 		ServletContext context = servlet.getServletConfig().getServletContext();
-		RoomCategoryController roomCategoryController = (RoomCategoryController) context.getAttribute("roomCategoryController");
-    
-		ArrayList<RoomCategory> roomCategories = null;
-		ArrayList<RoomCategoryData> roomCategoryList = new ArrayList<RoomCategoryData>();
-	    
-		try {
-			roomCategories = roomCategoryController.read(null);			
-		} catch (CoreException e) {
-			e.printStackTrace();
-			return mapping.findForward("failure");
-		}
 		
-		for (RoomCategory rc : roomCategories) {
-			roomCategoryList.add(new RoomCategoryData(String.valueOf(rc.getId()), rc.getName()));
-		}
+		/* The roomCategoryList was instanced and populated here but when 
+		 * the RoomFormBean implemented the 'validate' method, tomcat complained with
+		 * a JspException: Failed to obtain specified collection, although roomCategoryList
+		 * wasn't null.
+		 * 
+		 * I discovered that the problem lay in the sequence in which the methods are executed.
+		 * 
+		 * 1. ActionForm.reset (initialise objects here)
+		 * 2. ActionForm.validate (is validate is set to true in the action mapping)
+		 * 3. Action.execute (finally)
+		 * 
+		 * So the whole roomCategoryList thing is now in the reset method of InputRoomAction
+		 * 
+		 */
 		
-		inputRoomForm.setRoomCategoryList(roomCategoryList);
+		/* ORIGINAL */
+//		RoomCategoryController roomCategoryController = (RoomCategoryController) context.getAttribute("roomCategoryController");
+//		ArrayList<RoomCategory> roomCategories = null;
+//		ArrayList<RoomCategoryData> roomCategoryList = new ArrayList<RoomCategoryData>();
+//	    
+//		try {
+//			roomCategories = roomCategoryController.read(null);			
+//		} catch (CoreException e) {
+//			e.printStackTrace();
+//			return mapping.findForward("failure");
+//		}
+//		
+//		for (RoomCategory rc : roomCategories) {
+//			roomCategoryList.add(new RoomCategoryData(String.valueOf(rc.getId()), rc.getName()));
+//		}
+//		
+//		inputRoomForm.setRoomCategoryList(roomCategoryList);
+		/* --------------------------------------------------------------------------------------- */
 		
-		// if 'id' is specified, set form
+		
+
+		
+		// if 'id' is specified, reload data in form
 		String param = request.getParameter("id");
 		RoomController roomController = (RoomController) context.getAttribute("roomController");
 		if (param != null) {			

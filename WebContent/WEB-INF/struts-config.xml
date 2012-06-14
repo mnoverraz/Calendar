@@ -6,38 +6,16 @@
 <struts-config>
   <!-- ========== Définition des beans de formulaire =============== -->
   <form-beans>
-<!--     <form-bean name="roomFormBean" type="calendar.web.struts.RoomFormBean" /> -->
     <form-bean name="inputRoomForm" type="calendar.web.struts.InputRoomForm" />
   </form-beans>
 
   <!-- ========== Définition des enchainements ================ -->
   <global-forwards>
-<!--     <forward name="addRoom" path="/addRoom.jsp"/> -->
   </global-forwards>
 
   <!-- ========== Définition du mappage d'action ==================== -->
   <action-mappings>
   
-<!--     <action path="/addRoomPrepare" -->
-<!--       type="calendar.web.struts.AddRoomPrepareAction" -->
-<!--       name="roomFormBean" -->
-<!--       scope="request" -->
-<!--       input="/addRoom.jsp" -->
-<!--       validate="true"> -->
-<!--       <forward name="success" path="/roomManagement.do"/> -->
-<!--       <forward name="failure" path="/addRoom.do"/> -->
-<!--     </action> -->
-    
-<!--     <action path="/addRoom" -->
-<!--       type="calendar.web.struts.AddRoomAction" -->
-<!--       name="roomFormBean" -->
-<!--       scope="request" -->
-<!--       input="/addRoom.jsp" -->
-<!--       validate="true"> -->
-<!--       <forward name="success" path="/roomManagement.do"/> -->
-<!--       <forward name="failure" path="/addRoom.do"/> -->
-<!--     </action> -->
-
     <action path="/roomManagement"
       type="calendar.web.struts.ListRoomAction">
       <forward name="success" path="/roomManagement.jsp" />
@@ -48,7 +26,7 @@
       name="inputRoomForm"
       scope="request"
       input="/inputRoom.jsp"
-      validate="true">
+      validate="false">
       <forward name="success" path="/inputRoom.jsp"/>
 <!--       <forward name="failure" path="/inputRoom.do"/> -->
     </action>
@@ -73,7 +51,7 @@
       name="inputRoomForm"
       scope="request"
       input="/inputRoomEdition.jsp"
-      validate="true">
+      validate="false">
       <forward name="success" path="/inputRoomEdition.jsp"/>
 <!--       <forward name="failure" path="/inputRoom.do"/> -->
 	</action>
@@ -92,6 +70,5 @@
  
   <!-- ========== Définition Messages et  plug-in ==================== -->
   <message-resources parameter="calendar.web.struts.FormMessages"/>
-<!--   <plug-in className="calendar.web.struts.RoomManagerPlug"/> -->
 
 </struts-config>

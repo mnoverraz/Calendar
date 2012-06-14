@@ -1,6 +1,5 @@
 package calendar.web.struts;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.ServletContext;
@@ -33,11 +32,7 @@ public class InputRoomAddAction extends Action {
 		Room room = new Room();
 		
 		HashMap<String, Object> filter = new HashMap<String, Object>();
-		
 		Long id = Long.parseLong(inputRoomForm.getRoomCategory());
-		
-		System.out.println("id " + id);
-		
 		filter.put("id", id);
 		
 		try {
@@ -52,26 +47,12 @@ public class InputRoomAddAction extends Action {
 			roomController.create(room);
 			
 		} catch (CoreException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return mapping.findForward("failure");
 		}
 		
-		//RoomCategory roomCategory = new RoomCategory(Integer.parseInt(inputRoomForm.getRoomCategory()), null);
-		// ORIGINAL
-//		
-//		room.setRoomCategory(roomCategory);
-//		try {
-//			roomController.create(room);
-//		} catch (CoreException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//			return mapping.findForward("failure");
-//		}
-		
-		
-		
 	    return mapping.findForward("success");
-
+	    
 	}
 	
 }
