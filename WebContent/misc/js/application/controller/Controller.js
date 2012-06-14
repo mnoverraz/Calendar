@@ -18,6 +18,28 @@ function send(url, data, method) {
 		});
 }
 
+function test(json){
+	alert('toto');
+}
+
+function loadRooms(){
+	$.ajax({
+		type : 'get',
+		url : 'rest/room/?id=1',
+		dataType: "json",
+		data : null,
+		success : function(msg) {
+			console.log('bien été envoyé');
+			getMessage(msg);
+			$('.ui-dialog').unblock();
+			if (msg["success"]) {
+                $('#dialog').dialog("close");
+            }
+			test(msg);
+		}
+	});
+}
+
 /*
  * 
  * 		{

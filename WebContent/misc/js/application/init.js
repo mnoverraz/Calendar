@@ -183,4 +183,6 @@ $(document).ready(function() {
 	});
 	
 	
+	loadRooms();
+	
 });
