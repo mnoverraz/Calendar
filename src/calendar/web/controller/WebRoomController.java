@@ -43,7 +43,7 @@ public class WebRoomController extends WebController<RoomController> {
 		try {
 			if (params != null) {
 				if (params.containsKey("id")) {
-					int id = Integer.parseInt(params.get("id"));
+					long id = Integer.parseInt(params.get("id"));
 					filter.put("id", id);
 				}
 			}
@@ -55,7 +55,7 @@ public class WebRoomController extends WebController<RoomController> {
 				roomMap.put("id", room.getId());
 				roomMap.put("local", room.getLocal());
 				roomMap.put("description", room.getDescription());
-				roomMap.put("roomCategory", room.getRoomCategory());
+				roomMap.put("roomCategory", room.getRoomCategory().getName());
 				message.addElementToBody(roomMap);
 			}
 		} catch (CoreException e) {
