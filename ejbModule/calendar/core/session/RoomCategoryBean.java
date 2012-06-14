@@ -29,14 +29,41 @@ public class RoomCategoryBean implements RoomCategoryHandlerRemote, RoomCategory
 	@Override
 	public List<RoomCategory> read(HashMap<String, Object> params)
 			throws PersistException {
+
+		/* ORIGINAL */
+//		List<RoomCategory> roomCategories = null;
+//		StringBuffer query = new StringBuffer();
+//
+//		query.append("FROM RoomCategory roomCategory ");
+//		
+//		try {
+//			Query q = em.createQuery(query.toString());
+//			//q.setParameter("id", null);
+//			
+//			roomCategories = q.getResultList();
+//		} catch (PersistenceException ex) {
+//			ex.printStackTrace();
+//			throw new PersistException();
+//		}
+//		return roomCategories;
+		/* ----------------------------------------------- */
+		
+		
 		List<RoomCategory> roomCategories = null;
 		StringBuffer query = new StringBuffer();
-
-		query.append("FROM RoomCategory roomCategory ");
+		
+		query.append("SELECT rc");
+		query.append(" FROM RoomCategory as rc ");
+		
+		if (params != null)
+			if (params.containsKey("id"))
+				query.append(" WHERE rc.id = :id");
 		
 		try {
 			Query q = em.createQuery(query.toString());
-			//q.setParameter("id", null);
+			if (params != null)
+				if (params.containsKey("id"))
+					q.setParameter("id", params.get("id"));
 			
 			roomCategories = q.getResultList();
 		} catch (PersistenceException ex) {

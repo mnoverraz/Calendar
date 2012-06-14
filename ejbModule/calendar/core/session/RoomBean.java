@@ -19,7 +19,7 @@ public class RoomBean implements RoomHandlerRemote, RoomHandlerLocal {
 
 	@PersistenceContext
 	private EntityManager em;
-	
+
 	@Override
 	public void create(Room room) throws PersistException {
 		em.persist(room);
@@ -29,30 +29,48 @@ public class RoomBean implements RoomHandlerRemote, RoomHandlerLocal {
 	@Override
 	public List<Room> read(HashMap<String, Object> params)
 			throws PersistException {
+
+		/* ORIGINAL */
+//		List<Room> rooms = null;
+//		StringBuffer query = new StringBuffer();
+//
+//		query.append("FROM Room room ");
+//		
+//		try {
+//			Query q = em.createQuery(query.toString());
+//			//q.setParameter("id", null);
+//			
+//			rooms = q.getResultList();
+//		} catch (PersistenceException ex) {
+//			ex.printStackTrace();
+//			throw new PersistException();
+//		}
+//		return rooms;
+		/* ----------------------------------------------- */
+
 		List<Room> rooms = null;
 		StringBuffer query = new StringBuffer();
-		
-		if (params == null)
-			params = new HashMap<String, Object>();
 
-		query.append("FROM Room room ");
-		query.append(" WHERE");
-		query.append(" 1=1");
-		if (params.containsKey("id")) 
-			query.append(" AND room.id = :id");
-		
+		query.append("SELECT r");
+		query.append(" FROM Room as r ");
+
+		if (params != null)
+			if (params.containsKey("id"))
+				query.append(" WHERE r.id = :id");
+
 		try {
 			Query q = em.createQuery(query.toString());
-			if (params.containsKey("id"))
-				q.setParameter("id", params.get("id"));
-			//q.setParameter("id", null);
-			
+			if (params != null)
+				if (params.containsKey("id"))
+					q.setParameter("id", params.get("id"));
 			rooms = q.getResultList();
 		} catch (PersistenceException ex) {
 			ex.printStackTrace();
 			throw new PersistException();
 		}
+
 		return rooms;
+
 	}
 
 	@Override
