@@ -2,6 +2,7 @@ package calendar.core.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -18,6 +19,8 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
@@ -35,7 +38,7 @@ public class Event implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private long id;
 	
 	@OneToMany(mappedBy="event", fetch = FetchType.EAGER, cascade={CascadeType.MERGE})
 	private List<EventDate> eventDates;
@@ -47,22 +50,38 @@ public class Event implements Serializable {
 	@Column 
 	private String mode;	
 	
+	@Column
+	@Temporal(TemporalType.DATE)
+	private Date repeatEnd;
+	
 	public Event() {
 		eventDates = new ArrayList<EventDate>();
 	}
 
-	public Event(int id, String title,
+	public Event(long id, String title,
+			String description, String mode, Date repeatEnd) {
+		initialize(id, title);
+		this.description = description;
+		this.mode = mode;
+		this.setRepeatEnd(repeatEnd);
+	}
+	
+	public Event(long id, String title,
 			String description, String mode) {
 		initialize(id, title);
 		this.description = description;
 		this.mode = mode;
 	}
 	
-	public Event(int id, String title) {
+	public Event(long id, String title) {
 		initialize(id, title);
 	}
+	
+	public Event(long id) {
+		initialize(id, null);
+	}
 
-	private void initialize(int id, String title) {
+	private void initialize(long id, String title) {
 		eventDates = new ArrayList<EventDate>();
 		this.id = id;
 		this.title = title;
@@ -96,11 +115,11 @@ public class Event implements Serializable {
 		return description;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -128,5 +147,13 @@ public class Event implements Serializable {
 		ret += "-------\n";
 		
 		return  ret;
+	}
+
+	public Date getRepeatEnd() {
+		return repeatEnd;
+	}
+
+	public void setRepeatEnd(Date repeatEnd) {
+		this.repeatEnd = repeatEnd;
 	}
 }
