@@ -2,12 +2,17 @@ package calendar.web.struts;
 
 import java.util.ArrayList;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
+
+import calendar.core.controller.RoomCategoryController;
+import calendar.core.entity.RoomCategory;
+import calendar.core.exception.CoreException;
 
 
 @SuppressWarnings("serial")
@@ -72,17 +77,49 @@ public class InputRoomForm extends ActionForm {
 		this.roomCategoryList = roomCategoryList;
 	}
 	
-//	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
-//		
-//		ActionErrors errors = new ActionErrors();
-//		
-//		if ( getLocal() == null || getLocal().length() < 1 ) {
-//			errors.add("local", new ActionMessage("local.error"));
-//		}
-//		
-//		System.out.print(errors); 
-//		
-//		return errors;
-//	}
+	public void reset(ActionMapping mapping, HttpServletRequest request) {
+		
+		ServletContext context = servlet.getServletConfig().getServletContext();
+		RoomCategoryController roomCategoryController = (RoomCategoryController) context.getAttribute("roomCategoryController");
+    
+		ArrayList<RoomCategory> roomCategories = null;
+		ArrayList<RoomCategoryData> roomCategoryList = new ArrayList<RoomCategoryData>();
+	    
+		try {
+			roomCategories = roomCategoryController.read(null);			
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
+		
+		for (RoomCategory rc : roomCategories) {
+			roomCategoryList.add(new RoomCategoryData(String.valueOf(rc.getId()), rc.getName()));
+		}
+		
+		setRoomCategoryList(roomCategoryList);
+	}
+	
+	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
+		
+		ActionErrors errors = new ActionErrors();
+		
+		if (getLocal() == null || getLocal().length() < 1) {
+            errors.add("local", new ActionMessage("error.local.required"));
+        } else if (getLocal().length() > 255 ) {
+        	errors.add("local", new ActionMessage("error.local.maxchars"));
+        }
+		
+		if (getName().length() > 255 ) 
+        	errors.add("name", new ActionMessage("error.name.maxchars"));
+        
+        
+		if (getDescription().length() > 255 ) 
+        	errors.add("description", new ActionMessage("error.description.maxchars"));
+        
+		
+		if (getRoomCategory().equals("0"))
+			errors.add("roomCategory", new ActionMessage("error.roomCategory.required"));
+		
+		return errors;
+	}
 	
 }
