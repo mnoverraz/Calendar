@@ -150,6 +150,7 @@ public class WebEventController extends WebController<EventController> {
 					eventMap.put("allDay", eventDate.isAllDay());
 					eventMap.put("description", event.getDescription());
 					eventMap.put("repeatMode", event.getMode());
+					eventMap.put("repeatEnd", event.getRepeatEnd());
 					message.addElementToBody(eventMap);
 				}
 			}
