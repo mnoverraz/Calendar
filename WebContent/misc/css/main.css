@@ -114,3 +114,14 @@ select {
     padding: 2px;
     width: 185px;
 }
+
+.language{
+	color: #FFFFFF;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.language:hover{
+	font-weight: bold;
+	text-shadow: 0px 0px 9px #222;
+}
