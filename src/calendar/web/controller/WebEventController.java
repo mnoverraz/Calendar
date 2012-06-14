@@ -89,6 +89,7 @@ public class WebEventController extends WebController<EventController> {
 						eventMap.put("allDay", eventDate.isAllDay());
 						eventMap.put("description", event.getDescription());
 						eventMap.put("repeatMode", event.getMode());
+						eventMap.put("repeatEnd", event.getRepeatEnd());
 
 						message.addElementToBody(eventMap);
 					}
@@ -119,7 +120,7 @@ public class WebEventController extends WebController<EventController> {
 		try {
 			if (params != null) {
 				if (params.containsKey("id")) {
-					int id = Integer.parseInt(params.get("id"));
+					long id = Long.parseLong(params.get("id"));
 					filter.put("id", id);
 				}
 				if (params.containsKey("start")) {
@@ -150,7 +151,11 @@ public class WebEventController extends WebController<EventController> {
 					eventMap.put("allDay", eventDate.isAllDay());
 					eventMap.put("description", event.getDescription());
 					eventMap.put("repeatMode", event.getMode());
-					eventMap.put("repeatEnd", event.getRepeatEnd());
+					if (event.getRepeatEnd() == null) 
+						eventMap.put("repeatEnd", "");
+					else
+						eventMap.put("repeatEnd", event.getRepeatEnd());
+					
 					message.addElementToBody(eventMap);
 				}
 			}
@@ -177,8 +182,8 @@ public class WebEventController extends WebController<EventController> {
 
 			if (params.containsKey("id")) {
 				try {
-					int id = Integer.parseInt(params.get("id"));
-					event = new Event(id, null);
+					long id = Long.parseLong(params.get("id"));
+					event = new Event(id);
 
 					controller.delete(event);
 					
