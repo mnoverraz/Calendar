@@ -4,7 +4,7 @@ function send(url, data, method) {
 		console.log(method);
 		$.ajax({
 			type : method,
-			url : url /*+ '?' + data*/,
+			url : url,
 			dataType: "json",
 			data : data,
 			success : function(msg) {

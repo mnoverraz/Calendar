@@ -30,7 +30,7 @@ public class FormUtils {
 		String repeatMode = null;
 		Date repeatEnd = null;
 		String title = null;
-		String description = null;
+		String description = "";
 		ArrayList<Date> dates = new ArrayList<Date>();
 
 		HashMap<String, Boolean> validation = new HashMap<String, Boolean>();

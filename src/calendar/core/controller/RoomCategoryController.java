@@ -6,15 +6,14 @@ import java.util.HashMap;
 import javax.naming.Context;
 import javax.naming.NamingException;
 
-import calendar.core.entity.Room;
 import calendar.core.entity.RoomCategory;
 import calendar.core.exception.CoreException;
 import calendar.core.exception.SystemException;
 import calendar.core.session.PersistException;
 import calendar.core.session.RoomCategoryHandlerLocal;
-import calendar.core.session.RoomHandlerLocal;
 
 public class RoomCategoryController extends Controller<RoomCategory> {
+	
 	private RoomCategoryHandlerLocal roomCategoryHandler;
 	public RoomCategoryController(Context context) throws NamingException {
 		super(context);
@@ -23,8 +22,12 @@ public class RoomCategoryController extends Controller<RoomCategory> {
 
 	@Override
 	public void create(RoomCategory object) throws CoreException {
-		// TODO Auto-generated method stub
-		
+		try {
+			roomCategoryHandler.create(object);
+		} catch (PersistException e) {
+			SystemException se = new SystemException();
+			se.detailInformation = e;
+		}
 	}
 
 	@Override
