@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import calendar.core.controller.RoomController;
 import calendar.core.entity.Room;
 import calendar.core.exception.CoreException;
+import calendar.core.exception.SystemException;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
@@ -30,8 +31,9 @@ public class ListRoomAction extends Action {
 			rooms = roomController.read(null);
 			request.setAttribute("rooms", rooms);
 		} catch (CoreException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			SystemException se = new SystemException();
+			se.detailInformation = e;
+
 			return mapping.findForward("failure");
 		}
 		

@@ -13,6 +13,7 @@ import org.apache.struts.action.ActionMessage;
 import calendar.core.controller.RoomCategoryController;
 import calendar.core.entity.RoomCategory;
 import calendar.core.exception.CoreException;
+import calendar.core.exception.SystemException;
 
 
 @SuppressWarnings("serial")
@@ -88,7 +89,8 @@ public class InputRoomForm extends ActionForm {
 		try {
 			roomCategories = roomCategoryController.read(null);			
 		} catch (CoreException e) {
-			e.printStackTrace();
+			SystemException se = new SystemException();
+			se.detailInformation = e;
 		}
 		
 		for (RoomCategory rc : roomCategories) {
