@@ -63,20 +63,17 @@
 				<div id="room">
 					<!-- BEGIN INFORMATION -->
 					<div class="box">
-						<h1>Information</h1>
+						<h1>Information <span id="room_category"></span> <span id="room_local"></span></h1>
 						<div>
-							Ceci est une description de test. Ne veuillez pas en tenir
-							compte. <br /> <br /> Max. réservations: 1
+							<span id="room_description"></span>
 						</div>
 					</div>
 					<!-- END INFORMATION -->
 					<!-- BEGIN CONTACT -->
 					<div class="box">
-						<h1>Contact</h1>
+						<h1>Admin Room</h1>
 						<div>
-							Stefan Meier<br /> Décanat<br /> Rue du Bugnon 21 | bureau 5246<br />
-							CH-1011 Lausanne<br /> stefan.r.meier@unil.ch<br /> +41 21 692
-							54 19
+							<a href="roomManagement.do">Administration</a>
 						</div>
 					</div>
 					<!-- END CONTACT -->

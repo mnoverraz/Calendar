@@ -1,3 +1,6 @@
+loadRooms();
+
+
 function send(url, data, method) {
 		console.log(url);
 		console.log(data);
@@ -19,7 +22,9 @@ function send(url, data, method) {
 }
 
 function test(json){
-	alert('toto');
+	$("#room_description").html(json.content[0].description);
+	$("#room_local").html(json.content[0].local);
+	$("#room_category").html(json.content[0].roomCategory);
 }
 
 function loadRooms(){
@@ -29,8 +34,7 @@ function loadRooms(){
 		dataType: "json",
 		data : null,
 		success : function(msg) {
-			console.log('bien été envoyé');
-			getMessage(msg);
+			console.log('room bien été envoyé');
 			$('.ui-dialog').unblock();
 			if (msg["success"]) {
                 $('#dialog').dialog("close");
