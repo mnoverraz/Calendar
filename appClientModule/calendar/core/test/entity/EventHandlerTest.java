@@ -2,6 +2,7 @@ package calendar.core.test.entity;
 
 import static org.junit.Assert.*;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -41,10 +42,13 @@ public class EventHandlerTest {
 		System.out.println("testReadWithStartEndFilter");
 		HashMap<String, Object> filter = new HashMap<String, Object>();
 
-		String start = "1338156000";
-		String end = "1341784800";
-
+		long startS = 1338156000L;
+		long endS = 1341784800L;
+		
+		Date start = new Date(startS * 1000);
 		filter.put("start", start);
+		
+		Date end = new Date(endS * 1000);
 		filter.put("end", end);
 
 		List<Event> events = eventHandler.read(filter);
