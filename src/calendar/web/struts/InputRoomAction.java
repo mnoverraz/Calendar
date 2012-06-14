@@ -12,6 +12,7 @@ import calendar.core.controller.RoomController;
 import calendar.core.entity.Room;
 import calendar.core.entity.RoomCategory;
 import calendar.core.exception.CoreException;
+import calendar.core.exception.SystemException;
 
 import org.apache.coyote.http11.InputFilter;
 import org.apache.struts.action.Action;
@@ -81,9 +82,11 @@ public class InputRoomAction extends Action {
 					inputRoomForm.setRoomCategory(String.valueOf(room.getRoomCategory().getId()));
 				}
 			} catch (NumberFormatException e) {
-				e.printStackTrace();
+				SystemException se = new SystemException();
+				se.detailInformation = e;
 			} catch (CoreException e) {
-				e.printStackTrace();
+				SystemException se = new SystemException();
+				se.detailInformation = e;
 			}
 		}
 				

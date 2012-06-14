@@ -11,6 +11,7 @@ import calendar.core.controller.RoomController;
 import calendar.core.entity.Room;
 import calendar.core.entity.RoomCategory;
 import calendar.core.exception.CoreException;
+import calendar.core.exception.SystemException;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
@@ -47,7 +48,8 @@ public class InputRoomAddAction extends Action {
 			roomController.create(room);
 			
 		} catch (CoreException e) {
-			e.printStackTrace();
+			SystemException se = new SystemException();
+			se.detailInformation = e;
 			return mapping.findForward("failure");
 		}
 		
