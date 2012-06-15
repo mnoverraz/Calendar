@@ -44,7 +44,7 @@ public class Main {
 
 		eventHandler.create(event);
 
-		event = new Event(0, "event 2", "description 2", "");
+		event = new Event(0, "エベント　２", "詳細がありません。", "d", DateHelper.StringToDate("2012-07-16"));
 		eventDate = new EventDate(DateHelper.StringToDate("2012-06-16 11:00",
 				Config.DATE_FORMAT_LONG), DateHelper.StringToDate(
 				"2012-06-16 13:00", Config.DATE_FORMAT_LONG));
@@ -86,10 +86,10 @@ public class Main {
 		/*
 		 * Dummy data for test, real data access should be here
 		 */
-
-		Room room1 = new Room(0, "T101", "FEE Classroom", "25 seats, 1 beamer");
-		Room room2 = new Room(0, "T103", "FEE Classroom", "50 seats, 1 beamer");
-		Room room3 = new Room(0, "R102", "HEIG-VD Auditorium", "120 seats, 1 beamer");
+//'219', 'Salle de conférence', '', '12 pl. assises + 9 chaises, rétro-projecteur, tableau blanc, vidéoconférence', 0, 1),
+		Room room1 = new Room(0, "313", "Microscope à fluorescence", "Please indicate if you use fluorescence or not (fluo oui, fluo non).");
+		Room room2 = new Room(0, "219", "Salle de conférence", "12 pl. assises + 9 chaises, rétro-projecteur, tableau blanc, vidéoconférence");
+		Room room3 = new Room(0, "006", "Animalerie", "");
 		
 //		roomHandler.create(room1);
 //		roomHandler.create(room2);

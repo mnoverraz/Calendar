@@ -68,6 +68,15 @@ public class EventHandlerTest {
 				message.addElementToBody(eventMap);
 			}*/
 		}
+	}
+	
+	@Test
+	public void testDeleteEvent() throws PersistException {
+		System.out.println("testReadWithStartEndFilter");
+		Event event = new Event(12);
+
+		eventHandler.delete(event);
+		
 
 	}
 }
