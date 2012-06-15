@@ -40,7 +40,7 @@ public class Event implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	
-	@OneToMany(mappedBy="event", fetch = FetchType.EAGER, cascade={CascadeType.MERGE})
+	@OneToMany(mappedBy="event", fetch = FetchType.EAGER, cascade={CascadeType.ALL})
 	private List<EventDate> eventDates;
 	@Column
 	private String title;
