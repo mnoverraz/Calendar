@@ -7,7 +7,7 @@
 
  * {margin:0; padding:0} 
 
-html,body,h1 {
+html,body,h1,div.content table.inline th, div.content table.inline td {
 	vertical-align: top;
 	margin: 0px;
 	font-family: verdana, arial, helvetica;
@@ -124,4 +124,39 @@ select {
 .language:hover{
 	font-weight: bold;
 	text-shadow: 0px 0px 9px #222;
+}
+/* tableau ---------------------------------------------- */
+div.content table.inline {
+    background-color: #FFFFFF;
+    border: 0px;
+}
+
+div.content table.inline th {
+	border: 1px solid #EC9B33;
+    background-color: #EC9B33;
+    color: #FFFFFF;
+    font-weight: bold;
+    //height: 16px;
+    padding-left: 5px;
+    vertical-align: middle;	
+}
+
+div.content table.inline th.col1, div.content table.inline th.col3, div.content table.inline th.col5 {
+	color: #000000;
+    background-color: #FFFFFF;	
+    border-bottom: 1px solid #EC9B33;
+    border-top: 1px solid #EC9B33;
+    font-weight: bold;
+    //height: 16px;
+    padding-left: 5px;
+    vertical-align: middle;
+}
+
+div.content table.inline td {
+	border: 0px;
+    height: 18px;
+    padding: 0px;
+	padding-left: 5px;
+	border-bottom: 1px dashed #48A8D4;
+	vertical-align: top;
 }

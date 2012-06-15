@@ -16,10 +16,11 @@
 <link rel="stylesheet" type="text/css" href="misc/css/main.css" media="screen" />
 </head>
   <body>
+  <div class="content">
     <h1>Add room</h1>
     <html:form action="/inputRoomAdd.do" method="POST">
       <html:hidden property="id" />
-      <table>
+      <table class="inline">
         <tr>
           <td>
             Local:
@@ -75,5 +76,6 @@
         </tr>
       </table>
     </html:form>
+    </div>
   </body>
 </html>

@@ -23,19 +23,20 @@
 	media="screen" />
 </head>
 <body>
+  <div class="content">
 	<h1>Room Management</h1>
 	<br />
 	<input type="button" value="Add room"
 		onclick="self.location.href='inputRoom.do'" />
 	<br />
 	<hr />
-	<table border="1">
+	<table class="inline">
 		<tr>
-			<th>Local</th>
-			<th>Name</th>
-			<th>Description</th>
-			<th>Category</th>
-			<th>Actions</th>
+			<th class="col0">Local</th>
+			<th class="col1">Name</th>
+			<th class="col2">Description</th>
+			<th class="col3">Category</th>
+			<th class="col4">Actions</th>
 		</tr>
 		<logic:iterate id="room" name="rooms">
 			<tr>
@@ -59,6 +60,7 @@
 			</tr>
 		</logic:iterate>
 	</table>
+	</div>
 </body>
 </html>
 
