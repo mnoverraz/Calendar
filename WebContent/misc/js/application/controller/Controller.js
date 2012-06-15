@@ -1,3 +1,6 @@
+loadRooms();
+
+
 function send(url, data, method) {
 		console.log(url);
 		console.log(data);
@@ -16,6 +19,29 @@ function send(url, data, method) {
 	            }
 			}
 		});
+}
+
+function test(json){
+	$("#room_description").html(json.content[0].description);
+	$("#room_local").html(json.content[0].local);
+	$("#room_category").html(json.content[0].roomCategory);
+}
+
+function loadRooms(){
+	$.ajax({
+		type : 'get',
+		url : 'rest/room/?id=1',
+		dataType: "json",
+		data : null,
+		success : function(msg) {
+			console.log('room bien été envoyé');
+			$('.ui-dialog').unblock();
+			if (msg["success"]) {
+                $('#dialog').dialog("close");
+            }
+			test(msg);
+		}
+	});
 }
 
 /*
@@ -43,7 +69,7 @@ function showDialogEvent(url, mode, event){
 	
 	switch(mode){
 		case 'consult':
-			dialogTitle = 'Nom de l événement';
+			dialogTitle = event.title;
 			data = {
 					id : event['id']
 			};
@@ -58,7 +84,7 @@ function showDialogEvent(url, mode, event){
 		    }, {
 		        method : 'post'
 		    });
-			showDialog(url, event, buttonOpts);
+			showDialog(url, event, dialogTitle, buttonOpts);
 			break;
 		case 'create':
 			console.log(mode);
@@ -69,18 +95,9 @@ function showDialogEvent(url, mode, event){
 			    },{
 			        id : 'create'
 			    });
-			showDialog(url, null, buttonOpts);
+			showDialog(url, null, dialogTitle, buttonOpts);
 			break;
 		case 'update':
-			/*dialogTitle = 'Modifier événement';
-			data = $('#eventform').serialize();
-			buttonOpts['Modifier'] = $.extend(function() {                    
-		    	sendForm('rest/event/', data,'post');
-		    }, {
-		        method : 'post'
-		    });
-			showDialog(url, event, buttonOpts);
-			 */
 			console.log('ShowdialogEvent send()');
 			send('rest/event/', event,'post');
 			
@@ -100,11 +117,11 @@ function showDialogEvent(url, mode, event){
 	
 }
 
-function showDialog(url, event, buttonOpts) {
+function showDialog(url, event, dialogTitle, buttonOpts) {
 	var $dialog = $('<div id=\"dialog\"></div>')
     .load(url)
     .dialog({
-        title: 'titre',
+        title: dialogTitle,
         autoOpen: false,
         width: 290,
         buttons: buttonOpts,
@@ -136,7 +153,6 @@ function getMessage(json){
 			//soit la création ok soit dataset vide
 			alert('success mais retour vide');
 		}else{
-			alert(json['content']);
 			addEvents(json);
 		}
 		
@@ -155,6 +171,30 @@ function addEvents(json){
 }
 
 function processError(error){
-	alert(error['content'][0]);
+	this.jose = error.content;
+	//alert(jose.content[0].FormNotValidException.title);
+	this.exceptionType = Array;
+	for(var i in error.content) {
+	    exceptionType.push(i);
+	}
+}
+
+function exceptionToUI(exceptionType, detail) {
+	out = "";
+	switch(exceptionType) {
+    	case 'TimeSlotException' :
+			out += "<ul>";
+			$.each(detail, function(k, v) {
+				out += "<li>";
+				out += v["start"] + " " + v["end"];
+				out += "</li>";
+			});
+			out += "</ul>";
+			break;
+    	default :
+    		out += "Other exception";
+    		break;
+	}
+	return out;
 }
 

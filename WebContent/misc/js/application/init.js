@@ -122,7 +122,7 @@ $(document).ready(function() {
 		                        allDay: $(this).attr('allDay'),
 		                        start: $(this).attr('start'),
 		                        end: $(this).attr('end'),
-		                        description: $(this).attr('description')
+		                        description: $(this).attr('description'),
 		                    });
 		                });
 		                addEvents(doc);
@@ -181,6 +181,8 @@ $(document).ready(function() {
 	
 		    }
 	});
+	
+	
 	
 	
 });
