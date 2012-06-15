@@ -120,7 +120,6 @@ public class RESTServlet extends HttpServlet {
 	private void proceed(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
 
-		PrintWriter out = response.getWriter();
 		StringBuilder content = new StringBuilder();
 		WebController<?> controller = null;
 
@@ -175,9 +174,11 @@ public class RESTServlet extends HttpServlet {
 			message = exRenderer.getMessage();
 		} finally {
 			content.append(message.toJSON(showState));
-
+			response.setCharacterEncoding("UTF-8");
 			response.setContentType(contentType);
+			PrintWriter out = response.getWriter();
 			out.write(content.toString());
+			out.close();
 		}
 	}
 
