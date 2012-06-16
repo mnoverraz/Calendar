@@ -1,4 +1,5 @@
 package calendar.console;
+
 import java.text.ParseException;
 
 import javax.naming.Context;
@@ -15,15 +16,13 @@ import calendar.core.ejb.session.RoomCategoryHandlerRemote;
 import calendar.management.init.Config;
 import calendar.tools.utils.DateHelper;
 
-public class start {
-	private static Context context;
-	public static void main(String[] args) throws NamingException,
-			ParseException, PersistException {
+public class InitDB {
+	private Context context;
+	public InitDB() throws NamingException, ParseException, PersistException {
 		addEvents();
 		addRoomsAndCategories();
 	}
-	
-	public static void addEvents() throws NamingException, ParseException, PersistException {
+	private void addEvents() throws NamingException, ParseException, PersistException {
 		EventHandlerRemote eventHandler;
 		context = new InitialContext();
 		eventHandler = (EventHandlerRemote) context
@@ -68,7 +67,7 @@ public class start {
 		eventHandler.create(event);
 	}
 	
-	public static void addRoomsAndCategories() throws NamingException, ParseException, PersistException {
+	private void addRoomsAndCategories() throws NamingException, ParseException, PersistException {
 		RoomCategoryHandlerRemote roomCategoryHandler;
 		context = new InitialContext();
 		roomCategoryHandler = (RoomCategoryHandlerRemote) context
