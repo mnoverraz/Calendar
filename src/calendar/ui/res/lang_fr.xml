@@ -52,7 +52,7 @@
 	<entry key="day-names">['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi']</entry>
 	<entry key="day-names-short">['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa']</entry>
 	<entry key="month-names">['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet','Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']</entry>
-	<entry key="month-names-short">['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jui', 'Juil', 'Aou', 'Sept', 'Oct', 'Nov', 'Déc']</entry>
+	<entry key="month-names-short">['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sept', 'Oct', 'Nov', 'Déc']</entry>
 	
 	
 	
