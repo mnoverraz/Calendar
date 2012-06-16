@@ -25,6 +25,7 @@ function test(json){
 	$("#room_description").html(json.content[0].description);
 	$("#room_local").html(json.content[0].local);
 	$("#room_category").html(json.content[0].roomCategory);
+	$("#room_name").html(json.content[0].roomCategory);
 }
 
 function loadRooms(){

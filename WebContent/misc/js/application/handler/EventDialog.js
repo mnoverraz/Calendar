@@ -150,7 +150,7 @@ function fillEvent(){
 	}
 	
 	$("#repeatMode").attr('value',eventData['repeatMode']);
-	//$("#repeatEnd").val(dateToString(eventData['repeatEnd']));
+	$("#repeatEnd").val(dateToString(eventData['repeatEnd']));
 	$("#description").val(eventData['description']);
 	
 	if(eventData['allDay']){
