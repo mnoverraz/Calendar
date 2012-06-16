@@ -15,7 +15,7 @@ import calendar.tools.utils.DateHelper;
 import calendar.web.exception.FormNotValidException;
 import calendar.web.renderer.ExceptionRenderer;
 import calendar.web.renderer.Message;
-import calendar.web.renderer.form.FormUtils;
+import calendar.web.renderer.form.EventFormUtils;
 /**
  * Interfaces application EventController and user interaction
  * Generic type is resolved to EventController
@@ -82,7 +82,7 @@ public class WebEventController extends WebController<EventController> {
 					/*
 					 * Retrieves events from form utils
 					 */
-					event = FormUtils.createEventFromForm(id, date, startH,
+					event = EventFormUtils.createEventFromForm(id, date, startH,
 							startM, endH, endM, allDay, repeatMode, repeatEnd,
 							title, description);
 					controller.create(event);

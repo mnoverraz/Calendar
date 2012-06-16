@@ -14,8 +14,13 @@ import calendar.management.exception.SystemException;
 import calendar.management.init.Config;
 import calendar.tools.utils.DateHelper;
 import calendar.web.exception.FormNotValidException;
-
-public class FormUtils {
+/**
+ * Returns an event corresponding to a HTML form
+ * 
+ * @author AFFOLTER Nicolas, MEIER Stefan, NOVERRAZ Mathieu
+ * @version 2011.06.06
+ */
+public class EventFormUtils {
 
 	public static Event createEventFromForm(String fId, String fDate, String fStartH,
 			String fStartM, String fEndH, String fEndM, String fAllDay,
