@@ -191,7 +191,7 @@ public class DateHelper {
 		
 		int diff = DateHelper.getIntervalSizeBetween(start, end, interval);
 		
-		for (int i = 1; i <= diff; i++) {
+		for (int i = 0; i <= diff; i++) {
 			if ("d".equals(interval)) {
 				cal.add(GregorianCalendar.DATE, +1);
 			}

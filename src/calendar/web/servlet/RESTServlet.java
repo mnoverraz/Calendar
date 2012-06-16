@@ -72,8 +72,6 @@ public class RESTServlet extends HttpServlet {
 			HttpServletRequest request) throws IOException {
 		HashMap<String, String> paramMap = new HashMap<String, String>();
 
-		Set<Entry<String, String[]>> set = request.getParameterMap().entrySet();
-
 		if (request.getContentLength() > 0) {
 			BufferedReader br = new BufferedReader(new InputStreamReader(
 					request.getInputStream()));
@@ -95,16 +93,20 @@ public class RESTServlet extends HttpServlet {
 				paramMap.put(name, value);
 			}
 		}
-		Iterator<Entry<String, String[]>> it = set.iterator();
-		while (it.hasNext()) {
-			Map.Entry<String, String[]> entry = (Entry<String, String[]>) it
-					.next();
-			String paramName = entry.getKey();
+		if (!request.getParameterMap().isEmpty()) {
+			Set<Entry<String, String[]>> set = request.getParameterMap()
+					.entrySet();
+			Iterator<Entry<String, String[]>> it = set.iterator();
+			while (it.hasNext()) {
+				Map.Entry<String, String[]> entry = (Entry<String, String[]>) it
+						.next();
+				String paramName = entry.getKey();
 
-			String[] paramValues = entry.getValue();
+				String[] paramValues = entry.getValue();
 
-			paramMap.put(paramName, paramValues[0]);
+				paramMap.put(paramName, paramValues[0]);
 
+			}
 		}
 		return paramMap;
 	}
@@ -145,9 +147,13 @@ public class RESTServlet extends HttpServlet {
 			else
 				contentType = "application/json";
 
-			if (null == resource || null == config.getServletContext().getAttribute(resource))
-				throw new Exception("Resource: '" + resource + "'is not available");
-				controller = (WebController<?>) config.getServletContext().getAttribute(resource);
+			if (null == resource
+					|| null == config.getServletContext()
+							.getAttribute(resource))
+				throw new Exception("Resource: '" + resource
+						+ "'is not available");
+			controller = (WebController<?>) config.getServletContext()
+					.getAttribute(resource);
 			if ("GET".equals(method))
 				message = (Message) controller.read(params);
 			else if ("POST".equals(method))
