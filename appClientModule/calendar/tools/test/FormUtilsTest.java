@@ -11,7 +11,7 @@ import org.junit.Test;
 import calendar.core.ejb.entity.Event;
 import calendar.management.exception.SystemException;
 import calendar.web.exception.FormNotValidException;
-import calendar.web.utils.FormUtils;
+import calendar.web.renderer.form.EventFormUtils;
 
 public class FormUtilsTest {
 
@@ -33,7 +33,7 @@ public class FormUtilsTest {
 		String fDescription = "";
 
 		try {
-			event = FormUtils.createEventFromForm(fId, fDate, fStartH, fStartM,
+			event = EventFormUtils.createEventFromForm(fId, fDate, fStartH, fStartM,
 					fEndH, fEndM, fAllDay, fRepeatMode, fRepeatEnd, fTitle,
 					fDescription);
 		} catch (FormNotValidException e) {
