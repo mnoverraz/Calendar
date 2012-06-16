@@ -1,28 +1,26 @@
-package calendar.core.entity;
-
-import java.io.Serializable;
+package calendar.core.ejb.entity;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
-@DiscriminatorValue("Norm")
-public class NormalEvent extends Event implements Serializable{
+@DiscriminatorValue("Impt")
+public class ImportantEvent extends Event {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public NormalEvent() {
+	public ImportantEvent() {
 		super();
 	}
 
-	public NormalEvent(int id, String title,
+	public ImportantEvent(int id, String title,
 			String description, String mode) {
 		super(id, title, description, mode);
 	}
 	
-	public NormalEvent(int id, String title) {
+	public ImportantEvent(int id, String title) {
 		super(id, title);
 	}
 }

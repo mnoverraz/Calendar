@@ -1,4 +1,4 @@
-package calendar.core.application.utils;
+package calendar.core.ejb;
 
 import org.hibernate.dialect.MySQLDialect;
 

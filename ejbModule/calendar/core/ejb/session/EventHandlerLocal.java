@@ -1,4 +1,4 @@
-package calendar.core.session;
+package calendar.core.ejb.session;
 
 import javax.ejb.Local;
 

@@ -1,11 +1,11 @@
-package calendar.core.session;
+package calendar.core.ejb.session;
 
 import java.util.HashMap;
 import java.util.List;
 
 import javax.ejb.Local;
 
-import calendar.core.entity.RoomCategory;
+import calendar.core.ejb.entity.RoomCategory;
 
 @Local
 public interface RoomCategoryHandlerLocal {

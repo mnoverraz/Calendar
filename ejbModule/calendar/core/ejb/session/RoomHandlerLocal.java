@@ -1,14 +1,14 @@
-package calendar.core.session;
+package calendar.core.ejb.session;
 
 import java.util.HashMap;
 import java.util.List;
 
-import javax.ejb.Remote;
+import javax.ejb.Local;
 
-import calendar.core.entity.Room;
+import calendar.core.ejb.entity.Room;
 
-@Remote
-public interface RoomHandlerRemote {
+@Local
+public interface RoomHandlerLocal {
 	public abstract void create(Room room) throws PersistException;
 	public abstract List<Room> read(HashMap<String, Object> params) throws PersistException;
 	public abstract void update(Room room) throws PersistException;

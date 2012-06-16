@@ -1,4 +1,4 @@
-package calendar.core.entity;
+package calendar.core.ejb.entity;
 
 import java.io.Serializable;
 import java.util.Date;

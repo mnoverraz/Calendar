@@ -1,4 +1,4 @@
-package calendar.core.session;
+package calendar.core.ejb.session;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
-import calendar.core.entity.Room;
+import calendar.core.ejb.entity.Room;
 
 /**
  * Session Bean implementation class RoomBean

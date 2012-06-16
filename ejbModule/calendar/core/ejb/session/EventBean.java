@@ -1,4 +1,4 @@
-package calendar.core.session;
+package calendar.core.ejb.session;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,8 +10,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
-import calendar.core.entity.Event;
-import calendar.core.entity.EventDate;
+import calendar.core.ejb.entity.Event;
+import calendar.core.ejb.entity.EventDate;
 
 /**
  * Session Bean implementation class EventHandler

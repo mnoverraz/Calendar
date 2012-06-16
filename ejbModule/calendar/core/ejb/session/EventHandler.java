@@ -1,9 +1,9 @@
-package calendar.core.session;
+package calendar.core.ejb.session;
 
 import java.util.HashMap;
 import java.util.List;
 
-import calendar.core.entity.Event;
+import calendar.core.ejb.entity.Event;
 
 public interface EventHandler {
 	public abstract void create(Event event) throws PersistException;
