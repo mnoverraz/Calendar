@@ -15,7 +15,7 @@ import calendar.tools.utils.DateHelper;
 import calendar.web.exception.FormNotValidException;
 import calendar.web.renderer.ExceptionRenderer;
 import calendar.web.renderer.Message;
-import calendar.web.utils.FormUtils;
+import calendar.web.renderer.form.FormUtils;
 
 public class WebEventController extends WebController<EventController> {
 
