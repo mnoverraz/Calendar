@@ -22,6 +22,11 @@ public class UIBean {
 	 */
 	private String resourcePath;
 		
+	/**
+	 * An error is thrown in JSPs if no default constructor exists
+	 */
+	public UIBean() {};
+	
 	public UIBean(String resourcePath, String defaultLang) {
 		this.resourcePath = resourcePath;
 		setLang(defaultLang);
