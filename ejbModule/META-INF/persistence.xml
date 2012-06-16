@@ -5,8 +5,8 @@
 	<persistence-unit name="calendar">
 		<jta-data-source>java:calendar</jta-data-source>
 		<properties>
-			<property name="hibernate.dialect" value="calendar.core.application.utils.CustomMySQLDialect" />
-			<!--  <property name="hibernate.hbm2ddl.auto" value="create" />-->
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+			<!-- <property name="hibernate.hbm2ddl.auto" value="create" /> -->
 		</properties>
 	</persistence-unit>
 </persistence>
