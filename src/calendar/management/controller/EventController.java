@@ -15,20 +15,45 @@ import calendar.core.exception.CoreException;
 import calendar.management.exception.SystemException;
 import calendar.management.exception.TimeSlotException;
 
-
+/**
+ * Specific controller to handle Event data. 
+ * 
+ * @author AFFOLTER Nicolas, MEIER Stefan, NOVERRAZ Mathieu
+ * @version 2011.06.06
+ */
 public class EventController extends Controller<Event> {	
 	private EventHandler eventHandler;
 	
+	/**
+	 * This constructor is called if a local context is passed as parameter
+	 * 
+	 * @param context
+	 * @throws NamingException
+	 */
 	public EventController(Context context) throws NamingException {
 		super(context);
 		initialize("local");
 	}
 	
+	/**
+	 * This constructor is only called if a specific context source needs to 
+	 * be specified (for example to test this class in a JUnit test)
+	 * 
+	 * @param context
+	 * @param source
+	 * @throws NamingException
+	 */
 	public EventController(Context context, String source) throws NamingException {
 		super(context);
-		initialize("remote");
+		initialize(source);
 	}
 	
+	/**
+	 * Initializes the EJB handler on which the controller applies
+	 * 
+	 * @param source
+	 * @throws NamingException
+	 */
 	private void initialize(String source) throws NamingException {
 		this.eventHandler = (EventHandler) context.lookup("calendarEAR/EventBean/" + source);
 	}
@@ -60,6 +85,13 @@ public class EventController extends Controller<Event> {
 		doAction("delete", event);
 	}
 	
+	/**
+	 * Executes synchronized action in order to prevent inconsistent data
+	 * @param action
+	 * @param event
+	 * @throws TimeSlotException
+	 * @throws CoreException
+	 */
 	private synchronized void doAction(String action, Event event) throws TimeSlotException, CoreException {
 		try {
 		if ("delete".equals(action))
@@ -77,9 +109,20 @@ public class EventController extends Controller<Event> {
 		}
 	}
 	
+	/**
+	 * Checks if the time slot for the event in the parameter is available or not
+	 * 
+	 * @param event
+	 * @return boolean
+	 * @throws CoreException
+	 * @throws TimeSlotException
+	 */
 	private boolean checkAvailability(Event event) throws CoreException, TimeSlotException {
 		boolean available = true;
 		
+		/*
+		 * Holds all unavailable time slots
+		 */
 		ArrayList<EventDate> unavailableEvents = new ArrayList<EventDate>();
 		
 		HashMap<String, Object> filter = null;
@@ -116,6 +159,9 @@ public class EventController extends Controller<Event> {
 			}	
 		}
 		
+		/*
+		 * If at least on unavailable slot has been found, a TimeSlotException is thrown 
+		 */
 		if (unavailableEvents.size() > 0) {
 			TimeSlotException timeSlotException = new TimeSlotException();
 			timeSlotException.detailInformation = unavailableEvents;

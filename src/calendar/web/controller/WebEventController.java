@@ -16,7 +16,13 @@ import calendar.web.exception.FormNotValidException;
 import calendar.web.renderer.ExceptionRenderer;
 import calendar.web.renderer.Message;
 import calendar.web.renderer.form.FormUtils;
-
+/**
+ * Interfaces application EventController and user interaction
+ * Generic type is resolved to EventController
+ * 
+ * @author AFFOLTER Nicolas, MEIER Stefan, NOVERRAZ Mathieu
+ * @version 2011.06.06
+ */
 public class WebEventController extends WebController<EventController> {
 
 	public WebEventController(EventController controller) {
@@ -73,11 +79,17 @@ public class WebEventController extends WebController<EventController> {
 				}
 
 				try {
+					/*
+					 * Retrieves events from form utils
+					 */
 					event = FormUtils.createEventFromForm(id, date, startH,
 							startM, endH, endM, allDay, repeatMode, repeatEnd,
 							title, description);
 					controller.create(event);
 					HashMap<String, Object> eventMap = null;
+					/*
+					 * Translates the result to message format
+					 */
 					for (EventDate eventDate : event.getEventDates()) {
 						eventMap = new HashMap<String, Object>();
 						eventMap.put("id", event.getId());
@@ -93,6 +105,10 @@ public class WebEventController extends WebController<EventController> {
 
 						message.addElementToBody(eventMap);
 					}
+				/*
+				* If no event can be created due tue invalid data a FormNotValidException
+				* needs to be catched
+				*/
 				} catch (FormNotValidException fe) {
 					message.state = false;
 					ExceptionRenderer exRenderer = new ExceptionRenderer(fe);
@@ -119,16 +135,26 @@ public class WebEventController extends WebController<EventController> {
 
 		try {
 			if (params != null) {
+				/*
+				 * Filters event by id
+				 * JavaScript time stamps need to be converted to Java time stamps
+				 */
 				if (params.containsKey("id")) {
 					long id = Long.parseLong(params.get("id"));
 					filter.put("id", id);
 				}
+				/*
+				 * Filters events by start time
+				 */
 				if (params.containsKey("start")) {
 					long timeStamp = Long.parseLong(params.get("start"));
 
 					Date date = new Date(timeStamp * 1000);
 					filter.put("start", date);
 				}
+				/*
+				 * Filters events by end time
+				 */
 				if (params.containsKey("end")) {
 					long timeStamp = Long.parseLong(params.get("end"));
 
@@ -136,8 +162,15 @@ public class WebEventController extends WebController<EventController> {
 					filter.put("end", date);
 				}
 			}
+			
+			/*
+			 * Retrieves the events from controller corresponding to the filter
+			 */
 			events = (ArrayList<Event>) controller.read(filter);
 
+			/*
+			 * Gets trough all events and formats a message
+			 */
 			for (Event event : events) {
 				HashMap<String, Object> eventMap = null;
 				for (EventDate eventDate : event.getEventDates()) {

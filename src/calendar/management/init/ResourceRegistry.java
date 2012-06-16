@@ -10,6 +10,10 @@ import calendar.management.controller.Controller;
  * @version 2011.06.06
  */
 public class ResourceRegistry {
+	/*
+	 * Generic controller type as all kind of controllers can
+	 * be handled by the registry
+	 */
 	private HashMap<String, Controller<?>> controllers;
 	
 	public ResourceRegistry() {

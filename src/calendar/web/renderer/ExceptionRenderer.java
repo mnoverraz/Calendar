@@ -10,7 +10,12 @@ import calendar.management.exception.TimeSlotException;
 import calendar.management.init.Config;
 import calendar.tools.utils.DateHelper;
 import calendar.web.exception.FormNotValidException;
-
+/**
+ * Renders a Java exception to a message understandable in web context
+ * 
+ * @author AFFOLTER Nicolas, MEIER Stefan, NOVERRAZ Mathieu
+ * @version 2011.06.06
+ */
 public class ExceptionRenderer {
 	
 	private Exception ex;
@@ -18,7 +23,11 @@ public class ExceptionRenderer {
 	public ExceptionRenderer(Exception ex) {
 		this.ex = ex;
 	}
-	
+	@SuppressWarnings("unchecked")
+	/**
+	 * Renders all exceptions
+	 * @return Message
+	 */
 	public Message getMessage() {
 		Message message = new Message();
 		message.state = false;
@@ -28,7 +37,7 @@ public class ExceptionRenderer {
 		if (ex instanceof TimeSlotException) {
 			ArrayList<HashMap<String, Object>> description = new ArrayList<HashMap<String, Object>>();
 			TimeSlotException ts = (TimeSlotException)ex;
-			@SuppressWarnings("unchecked")
+
 			ArrayList<EventDate> eventDates = (ArrayList<EventDate>) ts.detailInformation;
 
 			HashMap<String, Object> eventMap = null;
@@ -43,10 +52,13 @@ public class ExceptionRenderer {
 		}
 		else if (ex instanceof FormNotValidException) {
 			FormNotValidException fe = (FormNotValidException)ex;
-			@SuppressWarnings("unchecked")
 			HashMap<String, Object> errors = (HashMap<String, Object>) fe.detailInformation;
 			content.put("FormNotValidException", errors);
 		}
+		/*
+		 * Other exceptions are not send to the web user and are written to
+		 * system output instead
+		 */
 		else {
 			StringBuilder sb = new StringBuilder();
 			StringWriter sw = new StringWriter();
