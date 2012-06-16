@@ -1,4 +1,4 @@
-package calendar.core.test;
+package calendar.tools.test;
 
 import static org.junit.Assert.*;
 
@@ -9,8 +9,8 @@ import java.util.Date;
 import org.junit.Before;
 import org.junit.Test;
 
-import calendar.core.application.Config;
-import calendar.core.application.utils.DateHelper;
+import calendar.management.init.Config;
+import calendar.tools.utils.DateHelper;
 
 public class DateHelperTest {
 	private Date start = null;

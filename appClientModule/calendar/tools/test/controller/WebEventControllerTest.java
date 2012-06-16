@@ -1,4 +1,4 @@
-package calendar.core.test.controller;
+package calendar.tools.test.controller;
 
 import static org.junit.Assert.*;
 
@@ -12,9 +12,9 @@ import javax.naming.NamingException;
 import org.junit.Before;
 import org.junit.Test;
 
-import calendar.core.application.Config;
-import calendar.core.application.utils.DateHelper;
-import calendar.core.controller.EventController;
+import calendar.management.controller.EventController;
+import calendar.management.init.Config;
+import calendar.tools.utils.DateHelper;
 import calendar.web.controller.WebEventController;
 import calendar.web.renderer.Message;
 

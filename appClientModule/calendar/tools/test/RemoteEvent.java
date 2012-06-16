@@ -1,4 +1,4 @@
-package calendar.core.test;
+package calendar.tools.test;
 
 import static org.junit.Assert.*;
 
@@ -10,8 +10,9 @@ import javax.naming.NamingException;
 
 import org.junit.Test;
 
-import calendar.core.entity.Event;
-import calendar.core.session.*;
+import calendar.core.ejb.entity.Event;
+import calendar.core.ejb.session.EventHandler;
+import calendar.core.ejb.session.PersistException;
 
 
 public class RemoteEvent {

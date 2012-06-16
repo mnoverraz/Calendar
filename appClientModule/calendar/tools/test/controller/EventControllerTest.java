@@ -1,4 +1,4 @@
-package calendar.core.test.controller;
+package calendar.tools.test.controller;
 
 import static org.junit.Assert.*;
 
@@ -13,14 +13,14 @@ import javax.naming.NamingException;
 import org.junit.Before;
 import org.junit.Test;
 
-import calendar.core.application.BootStrap;
-import calendar.core.application.Config;
-import calendar.core.application.utils.DateHelper;
-import calendar.core.controller.EventController;
-import calendar.core.entity.Event;
-import calendar.core.entity.EventDate;
+import calendar.core.ejb.entity.Event;
+import calendar.core.ejb.entity.EventDate;
 import calendar.core.exception.CoreException;
-import calendar.core.exception.TimeSlotException;
+import calendar.management.controller.EventController;
+import calendar.management.exception.TimeSlotException;
+import calendar.management.init.BootStrap;
+import calendar.management.init.Config;
+import calendar.tools.utils.DateHelper;
 
 public class EventControllerTest {
 	

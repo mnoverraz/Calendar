@@ -1,20 +1,21 @@
+package calendar.console;
 import java.text.ParseException;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import calendar.core.application.Config;
-import calendar.core.application.utils.DateHelper;
-import calendar.core.entity.Event;
-import calendar.core.entity.EventDate;
-import calendar.core.entity.Room;
-import calendar.core.entity.RoomCategory;
-import calendar.core.session.EventHandlerRemote;
-import calendar.core.session.PersistException;
-import calendar.core.session.RoomCategoryHandlerRemote;
+import calendar.core.ejb.entity.Event;
+import calendar.core.ejb.entity.EventDate;
+import calendar.core.ejb.entity.Room;
+import calendar.core.ejb.entity.RoomCategory;
+import calendar.core.ejb.session.EventHandlerRemote;
+import calendar.core.ejb.session.PersistException;
+import calendar.core.ejb.session.RoomCategoryHandlerRemote;
+import calendar.management.init.Config;
+import calendar.tools.utils.DateHelper;
 
-public class Main {
+public class start {
 	private static Context context;
 	public static void main(String[] args) throws NamingException,
 			ParseException, PersistException {
@@ -39,7 +40,7 @@ public class Main {
 
 		eventHandler.create(event);
 
-		event = new Event(0, "エベント　２", "詳細がありません。", "d", DateHelper.StringToDate("2012-07-16"));
+		event = new Event(0, "米婚の大切なやつ", "皆バーツブン", "d", DateHelper.StringToDate("2012-07-16"));
 		eventDate = new EventDate(DateHelper.StringToDate("2012-06-16 11:00",
 				Config.DATE_FORMAT_LONG), DateHelper.StringToDate(
 				"2012-06-16 13:00", Config.DATE_FORMAT_LONG));

@@ -1,4 +1,4 @@
-package calendar.core.test;
+package calendar.tools.test;
 
 import static org.junit.Assert.*;
 
@@ -8,8 +8,8 @@ import java.util.Map.Entry;
 
 import org.junit.Test;
 
-import calendar.core.entity.Event;
-import calendar.core.exception.SystemException;
+import calendar.core.ejb.entity.Event;
+import calendar.management.exception.SystemException;
 import calendar.web.exception.FormNotValidException;
 import calendar.web.utils.FormUtils;
 
