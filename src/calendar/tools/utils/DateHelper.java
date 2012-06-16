@@ -14,7 +14,7 @@ import org.joda.time.Weeks;
 import org.joda.time.Months;
 import org.joda.time.Years;
 
-import calendar.core.init.Config;
+import calendar.management.init.Config;
 
 
 /**

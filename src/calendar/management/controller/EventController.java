@@ -12,8 +12,8 @@ import calendar.core.ejb.entity.EventDate;
 import calendar.core.ejb.session.EventHandler;
 import calendar.core.ejb.session.PersistException;
 import calendar.core.exception.CoreException;
-import calendar.core.exception.SystemException;
-import calendar.core.exception.TimeSlotException;
+import calendar.management.exception.SystemException;
+import calendar.management.exception.TimeSlotException;
 
 
 public class EventController extends Controller<Event> {	

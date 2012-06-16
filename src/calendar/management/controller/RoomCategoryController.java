@@ -10,7 +10,7 @@ import calendar.core.ejb.entity.RoomCategory;
 import calendar.core.ejb.session.PersistException;
 import calendar.core.ejb.session.RoomCategoryHandlerLocal;
 import calendar.core.exception.CoreException;
-import calendar.core.exception.SystemException;
+import calendar.management.exception.SystemException;
 
 public class RoomCategoryController extends Controller<RoomCategory> {
 	

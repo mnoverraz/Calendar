@@ -1,4 +1,4 @@
-package calendar.core.init;
+package calendar.management.init;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;

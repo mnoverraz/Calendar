@@ -1,4 +1,6 @@
-package calendar.core.exception;
+package calendar.management.exception;
+
+import calendar.core.exception.CoreException;
 
 public class SystemException extends CoreException {
 
