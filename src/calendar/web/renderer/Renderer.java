@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-public class Renderer {
+class Renderer {
 	@SuppressWarnings("unchecked")
-	public static String toJSON (String key, Object value) {
+	protected static String toJSON (String key, Object value) {
 		StringBuilder sb = new StringBuilder();
 		if (value != null) {
 			if (null != key) {
@@ -48,6 +48,11 @@ public class Renderer {
 			}
 		}
 		
+		return sb.toString();
+	}
+	
+	protected static String toXML (String key, Object value) {
+		StringBuilder sb = new StringBuilder();
 		return sb.toString();
 	}
 }

@@ -1,4 +1,4 @@
-package calendar.core.application.utils;
+package calendar.tools.utils;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -14,7 +14,7 @@ import org.joda.time.Weeks;
 import org.joda.time.Months;
 import org.joda.time.Years;
 
-import calendar.core.application.Config;
+import calendar.core.init.Config;
 
 
 /**

@@ -2,7 +2,7 @@ package calendar.web.controller;
 
 import java.util.HashMap;
 
-import calendar.core.controller.Controller;
+import calendar.management.controller.Controller;
 import calendar.web.renderer.Message;
 
 public abstract class WebController<C extends Controller<?>> {

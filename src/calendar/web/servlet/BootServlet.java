@@ -6,11 +6,11 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
-import calendar.core.application.BootStrap;
-import calendar.core.application.ResourceRegistry;
-import calendar.core.controller.EventController;
-import calendar.core.controller.RoomCategoryController;
-import calendar.core.controller.RoomController;
+import calendar.core.init.BootStrap;
+import calendar.core.init.ResourceRegistry;
+import calendar.management.controller.EventController;
+import calendar.management.controller.RoomCategoryController;
+import calendar.management.controller.RoomController;
 import calendar.web.controller.WebEventController;
 import calendar.web.controller.WebRoomController;
 

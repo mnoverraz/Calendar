@@ -1,4 +1,4 @@
-package calendar.core.controller;
+package calendar.management.controller;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -7,13 +7,13 @@ import java.util.HashMap;
 import javax.naming.Context;
 import javax.naming.NamingException;
 
-import calendar.core.entity.Event;
-import calendar.core.entity.EventDate;
+import calendar.core.ejb.entity.Event;
+import calendar.core.ejb.entity.EventDate;
+import calendar.core.ejb.session.EventHandler;
+import calendar.core.ejb.session.PersistException;
 import calendar.core.exception.CoreException;
 import calendar.core.exception.SystemException;
 import calendar.core.exception.TimeSlotException;
-import calendar.core.session.EventHandler;
-import calendar.core.session.PersistException;
 
 
 public class EventController extends Controller<Event> {	

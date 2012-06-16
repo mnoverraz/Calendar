@@ -8,11 +8,11 @@ import java.util.HashMap;
 import org.apache.commons.lang3.StringUtils;
 
 
-import calendar.core.application.Config;
-import calendar.core.application.utils.DateHelper;
-import calendar.core.entity.Event;
-import calendar.core.entity.EventDate;
+import calendar.core.ejb.entity.Event;
+import calendar.core.ejb.entity.EventDate;
 import calendar.core.exception.SystemException;
+import calendar.core.init.Config;
+import calendar.tools.utils.DateHelper;
 import calendar.web.exception.FormNotValidException;
 
 public class FormUtils {

@@ -1,4 +1,4 @@
-package calendar.core.controller;
+package calendar.management.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;

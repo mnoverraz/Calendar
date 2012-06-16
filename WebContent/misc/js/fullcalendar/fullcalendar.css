@@ -107,7 +107,8 @@ html .fc,
 	
 /* Content
 ------------------------------------------------------------------------*/
-	
+.fc-sun {color: red;}
+.fc-sat {color: blue;}
 .fc-content {
 	clear: both;
 	}

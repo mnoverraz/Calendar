@@ -1,8 +1,8 @@
-package calendar.core.application;
+package calendar.core.init;
 
 import java.util.HashMap;
 
-import calendar.core.controller.Controller;
+import calendar.management.controller.Controller;
 /**
  * Holds all controllers needed by application components
  * 

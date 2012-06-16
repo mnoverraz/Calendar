@@ -1,4 +1,4 @@
-package calendar.core.application.utils;
+package calendar.tools.utils;
 
 import java.io.IOException;
 import java.io.InputStream;

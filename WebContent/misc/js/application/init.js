@@ -63,14 +63,14 @@ $(document).ready(function() {
 			    '': 'H:mm'
 			},
 			titleFormat :{
-			    month: 'MMMM yyyy',
-			    week: 'd MMM yyyy - {dd MMM yyyy}',
-			    day: 'dddd d MMMM yyyy'
+			    month: 'yyyy年 M月',
+			    week: '[yyyy年　JM月] d日{&#8212;[yyyy年][M月]d日}',
+			    day: 'yyyy年 M月 d日 dddd'
 			},
 			columnFormat :{
 			    month: 'ddd',
-			    week: 'ddd d MMM',
-			    day: 'dddd d MMMM'
+			    week: 'M/d (ddd)',
+			    day: 'M/d (ddd)'
 			},
 			axisFormat : 'HH:mm',
 			slotMinutes : 30,
@@ -92,7 +92,7 @@ $(document).ready(function() {
 			    day:      resourceBundle['day']
 			},
 			monthNames : eval(resourceBundle['month-names']),
-			monthAbbrevs : eval(resourceBundle['month-names-short']),
+			monthNamesShort : eval(resourceBundle['month-names-short']),
 			dayNames : eval(resourceBundle['day-names']),
 			dayNamesShort : eval(resourceBundle['day-names-short']),
 			

@@ -1,11 +1,11 @@
-package calendar.core.application;
+package calendar.core.init;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-import calendar.core.controller.EventController;
-import calendar.core.controller.RoomCategoryController;
-import calendar.core.controller.RoomController;
+import calendar.management.controller.EventController;
+import calendar.management.controller.RoomCategoryController;
+import calendar.management.controller.RoomController;
 
 /**
  * Loads and makes available ResourceRegistry

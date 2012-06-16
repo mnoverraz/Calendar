@@ -1,97 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-	id="WebApp_ID" version="2.5">
-
-	<display-name>Calendar</display-name>
-	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
-	</welcome-file-list>
-
-	<filter>
-		<filter-name>UrlRewriteFilter</filter-name>
-		<filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>UrlRewriteFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-		<dispatcher>REQUEST</dispatcher>
-		<dispatcher>FORWARD</dispatcher>
-	</filter-mapping>
-
-	<filter>
-		<display-name>SessionFilter</display-name>
-		<filter-name>SessionFilter</filter-name>
-		<filter-class>calendar.web.servlet.SessionFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>SessionFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-
-	<servlet>
-		<description></description>
-		<display-name>BootServlet</display-name>
-		<servlet-name>BootServlet</servlet-name>
-		<servlet-class>calendar.web.servlet.BootServlet</servlet-class>
-		<init-param>
-			<description>ResourcePath</description>
-			<param-name>resource-path</param-name>
-			<param-value>calendar.web.res.lang</param-value>
-		</init-param>
-		<load-on-startup>0</load-on-startup>
-	</servlet>
-
-	<servlet>
-		<description></description>
-		<display-name>ConfigServlet</display-name>
-		<servlet-name>ConfigServlet</servlet-name>
-		<servlet-class>calendar.web.servlet.ConfigServlet</servlet-class>
-		<init-param>
-			<description>Default Redirect</description>
-			<param-name>default-redirect</param-name>
-			<param-value>/index.jsp</param-value>
-		</init-param>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ConfigServlet</servlet-name>
-		<url-pattern>/config</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<description></description>
-		<display-name>RESTServlet</display-name>
-		<servlet-name>RESTServlet</servlet-name>
-		<servlet-class>calendar.web.servlet.RESTServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>RESTServlet</servlet-name>
-		<url-pattern>/rest</url-pattern>
-	</servlet-mapping>
-
-
-
-	<servlet>
-		<servlet-name>action</servlet-name>
-		<servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
-		<init-param>
-			<param-name>config</param-name>
-			<param-value>/WEB-INF/struts-config.xml</param-value>
-		</init-param>
-		<init-param>
-			<param-name>debug</param-name>
-			<param-value>2</param-value>
-		</init-param>
-		<init-param>
-			<param-name>detail</param-name>
-			<param-value>2</param-value>
-		</init-param>
-		<load-on-startup>2</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>action</servlet-name>
-		<url-pattern>*.do</url-pattern>
-	</servlet-mapping>
-
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>Calendar</display-name>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  <filter>
+    <filter-name>UrlRewriteFilter</filter-name>
+    <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>UrlRewriteFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+  </filter-mapping>
+  <filter>
+    <display-name>SessionFilter</display-name>
+    <filter-name>SessionFilter</filter-name>
+    <filter-class>calendar.web.servlet.SessionFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>SessionFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <servlet>
+    <description></description>
+    <display-name>BootServlet</display-name>
+    <servlet-name>BootServlet</servlet-name>
+    <servlet-class>calendar.web.servlet.BootServlet</servlet-class>
+    <init-param>
+      <description>ResourcePath</description>
+      <param-name>resource-path</param-name>
+      <param-value>calendar.web.res.lang</param-value>
+    </init-param>
+    <load-on-startup>0</load-on-startup>
+  </servlet>
+  <servlet>
+    <description></description>
+    <display-name>ConfigServlet</display-name>
+    <servlet-name>ConfigServlet</servlet-name>
+    <servlet-class>calendar.web.servlet.ConfigServlet</servlet-class>
+    <init-param>
+      <description>Default Redirect</description>
+      <param-name>default-redirect</param-name>
+      <param-value>/index.jsp</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ConfigServlet</servlet-name>
+    <url-pattern>/config</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RESTServlet</display-name>
+    <servlet-name>RESTServlet</servlet-name>
+    <servlet-class>calendar.web.servlet.RESTServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RESTServlet</servlet-name>
+    <url-pattern>/rest</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>action</servlet-name>
+    <servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
+    <init-param>
+      <param-name>config</param-name>
+      <param-value>/WEB-INF/struts-config.xml</param-value>
+    </init-param>
+    <init-param>
+      <param-name>debug</param-name>
+      <param-value>2</param-value>
+    </init-param>
+    <init-param>
+      <param-name>detail</param-name>
+      <param-value>2</param-value>
+    </init-param>
+    <load-on-startup>2</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>action</servlet-name>
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FrontController</display-name>
+    <servlet-name>FrontController</servlet-name>
+    <servlet-class>calendar.web.servlet.FrontController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FrontController</servlet-name>
+    <url-pattern>/FrontController</url-pattern>
+  </servlet-mapping>
 </web-app>

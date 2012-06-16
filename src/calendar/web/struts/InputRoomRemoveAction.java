@@ -6,10 +6,10 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import calendar.core.controller.RoomController;
-import calendar.core.entity.Room;
+import calendar.core.ejb.entity.Room;
 import calendar.core.exception.CoreException;
 import calendar.core.exception.SystemException;
+import calendar.management.controller.RoomController;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;

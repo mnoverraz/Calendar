@@ -1,4 +1,4 @@
-<%@page import="calendar.core.entity.RoomCategory"%>
+<%@page import="calendar.core.ejb.entity.RoomCategory"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page pageEncoding="UTF-8"%>
 

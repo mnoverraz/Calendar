@@ -31,4 +31,9 @@ public class Message {
 
 		return sb.toString();
 	}
+	
+	public String toXML(boolean showState) {
+		StringBuilder sb = new StringBuilder();
+		return sb.toString();
+	}
 }

@@ -1,4 +1,4 @@
-package calendar.core.controller;
+package calendar.management.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,11 +6,11 @@ import java.util.HashMap;
 import javax.naming.Context;
 import javax.naming.NamingException;
 
-import calendar.core.entity.RoomCategory;
+import calendar.core.ejb.entity.RoomCategory;
+import calendar.core.ejb.session.PersistException;
+import calendar.core.ejb.session.RoomCategoryHandlerLocal;
 import calendar.core.exception.CoreException;
 import calendar.core.exception.SystemException;
-import calendar.core.session.PersistException;
-import calendar.core.session.RoomCategoryHandlerLocal;
 
 public class RoomCategoryController extends Controller<RoomCategory> {
 	

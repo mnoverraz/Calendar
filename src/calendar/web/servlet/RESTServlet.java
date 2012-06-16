@@ -26,7 +26,6 @@ import calendar.web.renderer.Message;
 public class RESTServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private String method;
-	private HashMap<String, String> paramMap;
 	private ServletConfig config;
 
 	public void init(ServletConfig config) throws ServletException {
@@ -44,29 +43,37 @@ public class RESTServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		paramMap =new HashMap<String, String>();
-		createParameterMap(request.getParameterMap());
 		this.method = "GET";
 		proceed(request, response);
 	}
 
-	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		paramMap =new HashMap<String, String>();
-		createParameterMap(request.getParameterMap());
 		this.method = "POST";
 		proceed(request, response);
 	}
 
-	@SuppressWarnings("unchecked")
 	protected void doPut(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		paramMap =new HashMap<String, String>();
-		createParameterMap(request.getParameterMap());
+		this.method = "PUT";
+		proceed(request, response);
+	}
+
+	protected void doDelete(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		this.method = "DELETE";
+		proceed(request, response);
+	}
+
+	@SuppressWarnings("unchecked")
+	private HashMap<String, String> createParameterMap(
+			HttpServletRequest request) throws IOException {
+		HashMap<String, String> paramMap = new HashMap<String, String>();
+
+		Set<Entry<String, String[]>> set = request.getParameterMap().entrySet();
+
 		if (request.getContentLength() > 0) {
 			BufferedReader br = new BufferedReader(new InputStreamReader(
 					request.getInputStream()));
@@ -86,24 +93,8 @@ public class RESTServlet extends HttpServlet {
 					value = param[1];
 
 				paramMap.put(name, value);
-
 			}
 		}
-		this.method = "PUT";
-		proceed(request, response);
-	}
-
-	@SuppressWarnings("unchecked")
-	protected void doDelete(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		paramMap =new HashMap<String, String>();
-		createParameterMap(request.getParameterMap());
-		this.method = "DELETE";
-		proceed(request, response);
-	}
-
-	private void createParameterMap(Map<String, String[]> map) {
-		Set<Entry<String, String[]>> set = map.entrySet();
 		Iterator<Entry<String, String[]>> it = set.iterator();
 		while (it.hasNext()) {
 			Map.Entry<String, String[]> entry = (Entry<String, String[]>) it
@@ -115,6 +106,7 @@ public class RESTServlet extends HttpServlet {
 			paramMap.put(paramName, paramValues[0]);
 
 		}
+		return paramMap;
 	}
 
 	private void proceed(HttpServletRequest request,
@@ -129,24 +121,23 @@ public class RESTServlet extends HttpServlet {
 		boolean showState = true;
 
 		String resource = null;
-		HashMap<String, String> params = new HashMap<String, String>();
+
 		Message message = new Message();
 
 		try {
-			Iterator<Entry<String, String>> it = paramMap.entrySet().iterator();
 
-			while (it.hasNext()) {
-				String key = it.next().getKey();
-				String value = paramMap.get(key);
-
-				if (paramMap.containsKey("format"))
-					format = value;
-				else if ("resource".equals(key))
-					resource = value;
-				else if ("showState".equals(key))
-					showState = Boolean.parseBoolean(value);
-				else
-					params.put(key, value);
+			HashMap<String, String> params = createParameterMap(request);
+			if (params.containsKey("format")) {
+				format = params.get("format");
+				params.remove("format");
+			}
+			if (params.containsKey("resource")) {
+				resource = params.get("resource");
+				params.remove("resource");
+			}
+			if (params.containsKey("showState")) {
+				showState = Boolean.parseBoolean(params.get("showState"));
+				params.remove("showState");
 			}
 
 			if (("xml").equals(format))
@@ -154,13 +145,9 @@ public class RESTServlet extends HttpServlet {
 			else
 				contentType = "application/json";
 
-			if (null == resource
-					|| null == config.getServletContext()
-							.getAttribute(resource))
-				throw new Exception("Resource: '" + resource
-						+ "'is not available");
-			controller = (WebController<?>) config.getServletContext()
-					.getAttribute(resource);
+			if (null == resource || null == config.getServletContext().getAttribute(resource))
+				throw new Exception("Resource: '" + resource + "'is not available");
+				controller = (WebController<?>) config.getServletContext().getAttribute(resource);
 			if ("GET".equals(method))
 				message = (Message) controller.read(params);
 			else if ("POST".equals(method))

@@ -10,10 +10,10 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 
-import calendar.core.controller.RoomCategoryController;
-import calendar.core.entity.RoomCategory;
+import calendar.core.ejb.entity.RoomCategory;
 import calendar.core.exception.CoreException;
 import calendar.core.exception.SystemException;
+import calendar.management.controller.RoomCategoryController;
 
 
 @SuppressWarnings("serial")

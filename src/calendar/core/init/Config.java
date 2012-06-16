@@ -1,4 +1,4 @@
-package calendar.core.application;
+package calendar.core.init;
 
 /**
  * Global configuration class, holds all application parameters

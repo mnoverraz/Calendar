@@ -1,23 +1,13 @@
 package calendar.web.controller;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map.Entry;
 
-import calendar.core.application.Config;
-import calendar.core.application.utils.DateHelper;
-import calendar.core.controller.EventController;
-import calendar.core.controller.RoomController;
-import calendar.core.entity.Event;
-import calendar.core.entity.EventDate;
-import calendar.core.entity.Room;
+import calendar.core.ejb.entity.Room;
 import calendar.core.exception.CoreException;
-import calendar.web.exception.FormNotValidException;
+import calendar.management.controller.RoomController;
 import calendar.web.renderer.ExceptionRenderer;
 import calendar.web.renderer.Message;
-import calendar.web.utils.FormUtils;
 
 public class WebRoomController extends WebController<RoomController> {
 
