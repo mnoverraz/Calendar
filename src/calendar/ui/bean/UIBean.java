@@ -1,4 +1,4 @@
-package calendar.web.bean;
+package calendar.ui.bean;
 
 import java.util.Locale;
 import java.util.ResourceBundle;

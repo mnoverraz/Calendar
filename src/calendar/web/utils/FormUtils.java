@@ -10,8 +10,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import calendar.core.ejb.entity.Event;
 import calendar.core.ejb.entity.EventDate;
-import calendar.core.exception.SystemException;
-import calendar.core.init.Config;
+import calendar.management.exception.SystemException;
+import calendar.management.init.Config;
 import calendar.tools.utils.DateHelper;
 import calendar.web.exception.FormNotValidException;
 

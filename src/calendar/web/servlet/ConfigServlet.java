@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import calendar.web.bean.UIBean;
+import calendar.ui.bean.UIBean;
 
 /**
  * Servlet implementation class ConfigServlet

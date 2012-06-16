@@ -12,8 +12,8 @@ import org.apache.struts.action.ActionMessage;
 
 import calendar.core.ejb.entity.RoomCategory;
 import calendar.core.exception.CoreException;
-import calendar.core.exception.SystemException;
 import calendar.management.controller.RoomCategoryController;
+import calendar.management.exception.SystemException;
 
 
 @SuppressWarnings("serial")

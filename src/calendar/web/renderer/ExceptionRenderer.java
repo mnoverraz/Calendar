@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import calendar.core.ejb.entity.EventDate;
-import calendar.core.exception.TimeSlotException;
-import calendar.core.init.Config;
+import calendar.management.exception.TimeSlotException;
+import calendar.management.init.Config;
 import calendar.tools.utils.DateHelper;
 import calendar.web.exception.FormNotValidException;
 

@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import calendar.core.ejb.entity.Room;
 import calendar.core.ejb.entity.RoomCategory;
 import calendar.core.exception.CoreException;
-import calendar.core.exception.SystemException;
 import calendar.management.controller.RoomCategoryController;
 import calendar.management.controller.RoomController;
+import calendar.management.exception.SystemException;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;

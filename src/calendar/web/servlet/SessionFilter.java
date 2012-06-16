@@ -13,7 +13,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import calendar.web.bean.UIBean;
+import calendar.ui.bean.UIBean;
 
 /**
  * Servlet Filter implementation class SessionFilter

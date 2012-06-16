@@ -4,7 +4,7 @@
 <%@ page import="java.util.Iterator"%>
 <%@ page import="java.util.Map.Entry"%>
 
-<jsp:useBean id="ui" class="calendar.web.bean.UIBean" scope="session" />
+<jsp:useBean id="ui" class="calendar.ui.bean.UIBean" scope="session" />
 
 <%
 HashMap<String, String> lang = new HashMap<String, String>();

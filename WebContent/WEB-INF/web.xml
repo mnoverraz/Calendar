@@ -31,7 +31,7 @@
     <init-param>
       <description>ResourcePath</description>
       <param-name>resource-path</param-name>
-      <param-value>calendar.web.res.lang</param-value>
+      <param-value>calendar.ui.res.lang</param-value>
     </init-param>
     <load-on-startup>0</load-on-startup>
   </servlet>

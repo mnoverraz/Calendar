@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page pageEncoding="UTF-8"%>
-<jsp:useBean id="ui" class="calendar.web.bean.UIBean" scope="session" />
+<jsp:useBean id="ui" class="calendar.ui.bean.UIBean" scope="session" />
 <html>
 <head>
 <title>UNIL - FBM CALENDAR</title>

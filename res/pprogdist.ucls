@@ -1,7 +1,8 @@
 <class-diagram version="1.0.9" icons="true" always-add-relationships="true" generalizations="true" realizations="true" 
   associations="true" dependencies="true" nesting-relationships="true">  
   <class id="1" corner="BOTTOM_RIGHT" language="java" name="calendar.management.controller.Controller" 
-    project="calendarEARWeb" file="/calendarEARWeb/src/calendar/management/controller/Controller.java" binary="false">    
+    project="calendarEAREJB" file="/calendarEAREJB/ejbModule/calendar/management/controller/Controller.java" 
+    binary="false">    
     <position height="-1" width="-1" x="510" y="124"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
@@ -9,7 +10,7 @@
     </display>  
   </class>  
   <class id="2" corner="BOTTOM_RIGHT" language="java" name="calendar.management.controller.EventController" 
-    project="calendarEARWeb" file="/calendarEARWeb/src/calendar/management/controller/EventController.java" 
+    project="calendarEAREJB" file="/calendarEAREJB/ejbModule/calendar/management/controller/EventController.java" 
     binary="false">    
     <position height="-1" width="-1" x="513" y="456"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
@@ -34,7 +35,7 @@
     </display>  
   </class>  
   <class id="5" corner="BOTTOM_RIGHT" language="java" name="calendar.management.controller.RoomController" 
-    project="calendarEARWeb" file="/calendarEARWeb/src/calendar/management/controller/RoomController.java" 
+    project="calendarEAREJB" file="/calendarEAREJB/ejbModule/calendar/management/controller/RoomController.java" 
     binary="false">    
     <position height="-1" width="-1" x="893" y="461"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
@@ -43,7 +44,7 @@
     </display>  
   </class>  
   <class id="6" corner="BOTTOM_RIGHT" language="java" name="calendar.management.controller.RoomCategoryController" 
-    project="calendarEARWeb" file="/calendarEARWeb/src/calendar/management/controller/RoomCategoryController.java" 
+    project="calendarEAREJB" file="/calendarEAREJB/ejbModule/calendar/management/controller/RoomCategoryController.java" 
     binary="false">    
     <position height="-1" width="-1" x="1063" y="274"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
