@@ -33,7 +33,7 @@ public class WebRoomController extends WebController<RoomController> {
 		try {
 			if (params != null) {
 				if (params.containsKey("id")) {
-					long id = Integer.parseInt(params.get("id"));
+					long id = Long.parseLong(params.get("id"));
 					filter.put("id", id);
 				}
 			}

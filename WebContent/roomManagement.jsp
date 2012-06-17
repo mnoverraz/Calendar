@@ -44,7 +44,7 @@
 				<td><bean:write name="room" property="name" /></td>
 				<td><bean:write name="room" property="description" /></td>
 				<td><bean:define id="roomCategoryValue" name="room"
-						property="roomCategory" type="calendar.core.entity.RoomCategory" />
+						property="roomCategory" type="calendar.core.ejb.entity.RoomCategory" />
 					<%
 						RoomCategory rc = roomCategoryValue;
 							out.print(rc.getName());
