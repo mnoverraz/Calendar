@@ -19,6 +19,17 @@ lang.put("day-names-short", ui.getLangText("day-names-short"));
 lang.put("month-names", ui.getLangText("month-names"));
 lang.put("month-names-short", ui.getLangText("month-names-short"));
 
+//format
+lang.put("format-title-month", ui.getLangText("format-title-month"));
+lang.put("format-title-week", ui.getLangText("format-title-week"));
+lang.put("format-title-day", ui.getLangText("format-title-day"));
+lang.put("format-column-month", ui.getLangText("format-column-month"));
+lang.put("format-column-week", ui.getLangText("format-column-week"));
+lang.put("format-column-day", ui.getLangText("format-column-day"));
+
+lang.put("application-title", ui.getLangText("application-title"));
+
+
 /*
 Generate JavaScript Array
 */

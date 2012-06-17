@@ -63,14 +63,14 @@ $(document).ready(function() {
 			    '': 'H:mm'
 			},
 			titleFormat :{
-			    month: 'yyyy年 M月',
-			    week: '[yyyy年　JM月] d日{&#8212;[yyyy年][M月]d日}',
-			    day: 'yyyy年 M月 d日 dddd'
+			    month: resourceBundle['format-title-month'],
+			    week: resourceBundle['format-title-week'],
+			    day: resourceBundle['format-title-day']
 			},
 			columnFormat :{
-			    month: 'ddd',
-			    week: 'M/d (ddd)',
-			    day: 'M/d (ddd)'
+			    month: resourceBundle['format-column-month'],
+			    week: resourceBundle['format-column-week'],
+			    day: resourceBundle['format-column-day']
 			},
 			axisFormat : 'HH:mm',
 			slotMinutes : 30,
@@ -123,6 +123,7 @@ $(document).ready(function() {
 		                        start: $(this).attr('start'),
 		                        end: $(this).attr('end'),
 		                        description: $(this).attr('description'),
+		                        color: '#f00'
 		                    });
 		                });
 		                addEvents(doc);

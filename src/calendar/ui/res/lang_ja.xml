@@ -43,7 +43,14 @@
 	<entry key="day-4-short">水</entry>
 	<entry key="day-5-short">木</entry>
 	<entry key="day-6-short">金</entry>
-	<entry key="day-7-short">土</entry>	
+	<entry key="day-7-short">土</entry>
+	
+	<entry key="format-title-month">yyyy年 M月</entry>
+	<entry key="format-title-week">[yyyy年　JM月] d日{&#8212;[yyyy年][M月]d日}</entry>
+	<entry key="format-title-day">yyyy年 M月 d日 dddd</entry>
+	<entry key="format-column-month">ddd</entry>
+	<entry key="format-column-week">M/d (ddd)</entry>
+	<entry key="format-column-day">M/d (ddd)</entry>
 	
 	<entry key="today">今日</entry>
 	<entry key="month">月</entry>

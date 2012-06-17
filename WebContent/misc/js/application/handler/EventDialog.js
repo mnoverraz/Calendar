@@ -128,6 +128,7 @@ function fillEvent(){
 	console.log('	start: ' + eventData['start']);
 	console.log('	end: ' + eventData['end']);
 	console.log('	repeatMode: ' + eventData['repeatMode']);
+	console.log('	repeatEnd: ' + eventData['repeatEnd']);
 	console.log('	description: ' + eventData['description']);
 	console.log('------------------');
 	
@@ -150,7 +151,7 @@ function fillEvent(){
 	}
 	
 	$("#repeatMode").attr('value',eventData['repeatMode']);
-	$("#repeatEnd").val(dateToString(eventData['repeatEnd']));
+	//$("#repeatEnd").val(dateToString(eventData['repeatEnd']));
 	$("#description").val(eventData['description']);
 	
 	if(eventData['allDay']){
