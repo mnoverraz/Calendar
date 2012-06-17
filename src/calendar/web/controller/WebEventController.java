@@ -31,97 +31,7 @@ public class WebEventController extends WebController<EventController> {
 
 	@Override
 	public Message create(HashMap<String, String> params) {
-		Event event = null;
-		Message message = new Message();
-
-		if (params != null) {
-			String id = null;
-			String date = null;
-			String startH = null;
-			String startM = null;
-			String endH = null;
-			String endM = null;
-			String allDay = null;
-			String repeatMode = null;
-			String repeatEnd = null;
-			String title = null;
-			String description = null;
-
-			Iterator<Entry<String, String>> it = params.entrySet().iterator();
-
-			try {
-				while (it.hasNext()) {
-					String key = it.next().getKey();
-					String value = params.get(key);
-
-					if ("id".equals(key))
-						id = value;
-					if ("startH".equals(key))
-						startH = value;
-					if ("endH".equals(key))
-						endH = value;
-					if ("startM".equals(key))
-						startM = value;
-					if ("endM".equals(key))
-						endM = value;
-					if ("date".equals(key))
-						date = value;
-					if ("allDay".equals(key))
-						allDay = value;
-					if ("repeatMode".equals(key))
-						repeatMode = value;
-					if ("repeatEnd".equals(key))
-						repeatEnd = value;
-					if ("description".equals(key))
-						description = value;
-					if ("title".equals(key))
-						title = value;
-				}
-
-				try {
-					/*
-					 * Retrieves events from form utils
-					 */
-					event = EventFormUtils.createEventFromForm(id, date, startH,
-							startM, endH, endM, allDay, repeatMode, repeatEnd,
-							title, description);
-					controller.create(event);
-					HashMap<String, Object> eventMap = null;
-					/*
-					 * Translates the result to message format
-					 */
-					for (EventDate eventDate : event.getEventDates()) {
-						eventMap = new HashMap<String, Object>();
-						eventMap.put("id", event.getId());
-						eventMap.put("title", event.getTitle());
-						eventMap.put("start", DateHelper.DateToString(
-								eventDate.getStart(), Config.DATE_FORMAT_LONG));
-						eventMap.put("end", DateHelper.DateToString(
-								eventDate.getEnd(), Config.DATE_FORMAT_LONG));
-						eventMap.put("allDay", eventDate.isAllDay());
-						eventMap.put("description", event.getDescription());
-						eventMap.put("repeatMode", event.getMode());
-						eventMap.put("repeatEnd", event.getRepeatEnd());
-
-						message.addElementToBody(eventMap);
-					}
-				/*
-				* If no event can be created due tue invalid data a FormNotValidException
-				* needs to be catched
-				*/
-				} catch (FormNotValidException fe) {
-					message.state = false;
-					ExceptionRenderer exRenderer = new ExceptionRenderer(fe);
-					message = exRenderer.getMessage();
-				}
-
-			} catch (Exception e) {
-				message.state = false;
-				ExceptionRenderer exRenderer = new ExceptionRenderer(e);
-				message = exRenderer.getMessage();
-			}
-		}
-
+		Message message = proceed(params, "create");
 		return message;
 	}
 
@@ -199,10 +109,109 @@ public class WebEventController extends WebController<EventController> {
 		}
 		return message;
 	}
+	
+	private Message proceed (HashMap<String, String> params, String action) {
+		Event event = null;
+		Message message = new Message();
+
+		if (params != null) {
+			String id = null;
+			String date = null;
+			String startH = null;
+			String startM = null;
+			String endH = null;
+			String endM = null;
+			String allDay = null;
+			String repeatMode = null;
+			String repeatEnd = null;
+			String title = null;
+			String description = null;
+
+			Iterator<Entry<String, String>> it = params.entrySet().iterator();
+
+			try {
+				while (it.hasNext()) {
+					String key = it.next().getKey();
+					String value = params.get(key);
+
+					if ("id".equals(key))
+						id = value;
+					if ("startH".equals(key))
+						startH = value;
+					if ("endH".equals(key))
+						endH = value;
+					if ("startM".equals(key))
+						startM = value;
+					if ("endM".equals(key))
+						endM = value;
+					if ("date".equals(key))
+						date = value;
+					if ("allDay".equals(key))
+						allDay = value;
+					if ("repeatMode".equals(key))
+						repeatMode = value;
+					if ("repeatEnd".equals(key))
+						repeatEnd = value;
+					if ("description".equals(key))
+						description = value;
+					if ("title".equals(key))
+						title = value;
+				}
+
+				try {
+					/*
+					 * Retrieves events from form utils
+					 */
+					event = EventFormUtils.createEventFromForm(id, date, startH,
+							startM, endH, endM, allDay, repeatMode, repeatEnd,
+							title, description);
+					if ("update".equals(action)) 
+						controller.update(event);
+					else if ("create".equals(action))
+						controller.create(event);
+					
+					HashMap<String, Object> eventMap = null;
+					/*
+					 * Translates the result to message format
+					 */
+					for (EventDate eventDate : event.getEventDates()) {
+						eventMap = new HashMap<String, Object>();
+						eventMap.put("id", event.getId());
+						eventMap.put("title", event.getTitle());
+						eventMap.put("start", DateHelper.DateToString(
+								eventDate.getStart(), Config.DATE_FORMAT_LONG));
+						eventMap.put("end", DateHelper.DateToString(
+								eventDate.getEnd(), Config.DATE_FORMAT_LONG));
+						eventMap.put("allDay", eventDate.isAllDay());
+						eventMap.put("description", event.getDescription());
+						eventMap.put("repeatMode", event.getMode());
+						eventMap.put("repeatEnd", event.getRepeatEnd());
+
+						message.addElementToBody(eventMap);
+					}
+				/*
+				* If no event can be created due tue invalid data a FormNotValidException
+				* needs to be catched
+				*/
+				} catch (FormNotValidException fe) {
+					message.state = false;
+					ExceptionRenderer exRenderer = new ExceptionRenderer(fe);
+					message = exRenderer.getMessage();
+				}
+
+			} catch (Exception e) {
+				message.state = false;
+				ExceptionRenderer exRenderer = new ExceptionRenderer(e);
+				message = exRenderer.getMessage();
+			}
+		}
+
+		return message;
+	}
 
 	@Override
 	public Message update(HashMap<String, String> params) {
-		Message message = this.create(params);
+		Message message = proceed(params, "update");
 		return message;
 	}
 
