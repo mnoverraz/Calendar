@@ -10,6 +10,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import calendar.core.ejb.entity.Event;
 import calendar.core.ejb.entity.EventDate;
+import calendar.core.ejb.entity.NormalEvent;
+import calendar.core.ejb.entity.RepeatingEvent;
 import calendar.management.exception.SystemException;
 import calendar.management.init.Config;
 import calendar.tools.utils.DateHelper;
@@ -125,22 +127,27 @@ public class EventFormUtils {
 			throw fe;
 		}
 		try {
-			event = new Event(id, title, description, repeatMode, repeatEnd);
-			event.addEventDate(new EventDate(start, end));
-			dates = DateHelper.calculateRecurrentDates(start, repeatEnd,
-					repeatMode);
-			
-			for (Date d : dates) {
-				String dateString = DateHelper.DateToString(d);
-				Date eStart = null;
-				Date eEnd = null;
-
-				eStart = DateHelper.StringToDate(dateString + " " + fStartH
-						+ ":" + fStartM, Config.DATE_FORMAT_LONG);
-				eEnd = DateHelper.StringToDate(dateString + " " + fEndH + ":"
-						+ fEndM, Config.DATE_FORMAT_LONG);
-				event.addEventDate(new EventDate(eStart, eEnd));
+			if (repeatEnd != null) {
+				event = new RepeatingEvent(id, title, description, repeatMode, repeatEnd);
+				dates = DateHelper.calculateRecurrentDates(start, repeatEnd, repeatMode);
+				
+				for (Date d : dates) {
+					String dateString = DateHelper.DateToString(d);
+					Date eStart = null;
+					Date eEnd = null;
+	
+					eStart = DateHelper.StringToDate(dateString + " " + fStartH
+							+ ":" + fStartM, Config.DATE_FORMAT_LONG);
+					eEnd = DateHelper.StringToDate(dateString + " " + fEndH + ":"
+							+ fEndM, Config.DATE_FORMAT_LONG);
+					event.addEventDate(new EventDate(eStart, eEnd));
+				}
 			}
+			else {
+				event = new NormalEvent(id, title, description);
+			}
+			event.addEventDate(new EventDate(start, end));
+			
 		} catch (Exception ex) {
 			SystemException se = new SystemException();
 			se.detailInformation = "Form not valid unknow exception";
