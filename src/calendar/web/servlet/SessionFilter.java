@@ -16,7 +16,11 @@ import javax.servlet.http.HttpSession;
 import calendar.ui.bean.UIBean;
 
 /**
- * Servlet Filter implementation class SessionFilter
+ * Filters all requests and puts necessary information into the session
+ * (for example Language information)
+ * 
+ * @author AFFOLTER Nicolas, MEIER Stefan, NOVERRAZ Mathieu
+ * @version 2011.06.06
  */
 public class SessionFilter implements Filter {
 	

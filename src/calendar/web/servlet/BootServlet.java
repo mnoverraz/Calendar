@@ -13,7 +13,14 @@ import calendar.management.init.BootStrap;
 import calendar.management.init.ResourceRegistry;
 import calendar.web.controller.WebEventController;
 import calendar.web.controller.WebRoomController;
-
+/**
+ * Creates an instance of all necessary controllers for the application and
+ * stores them in the application context
+ * This Servlet is only loaded once at server startup or if the context is reloaded
+ * 
+ * @author AFFOLTER Nicolas, MEIER Stefan, NOVERRAZ Mathieu
+ * @version 2011.06.06
+ */
 public class BootServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

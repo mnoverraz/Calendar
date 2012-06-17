@@ -21,7 +21,17 @@ import calendar.web.renderer.ExceptionRenderer;
 import calendar.web.renderer.Message;
 
 /**
- * Servlet implementation class CalendarServlet
+ * Manages centrally all REST access to the application
+ * 
+ * By convention, the caller URL has to be in the following format:
+ * 	/resource/params
+ * 
+ * The resource is retrieved from application context if existing
+ * 
+ * All responses are formatted either in JSON or XML
+ * 
+ * @author AFFOLTER Nicolas, MEIER Stefan, NOVERRAZ Mathieu
+ * @version 2011.06.06
  */
 public class RESTServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -68,6 +78,14 @@ public class RESTServlet extends HttpServlet {
 	}
 
 	@SuppressWarnings("unchecked")
+	/**
+	 * Reads the requests input stream and all parameters and merges the information in
+	 * a HashMap
+	 * 
+	 * @param request
+	 * @return HashMap<String, String>
+	 * @throws IOException
+	 */
 	private HashMap<String, String> createParameterMap(
 			HttpServletRequest request) throws IOException {
 		HashMap<String, String> paramMap = new HashMap<String, String>();
@@ -111,6 +129,15 @@ public class RESTServlet extends HttpServlet {
 		return paramMap;
 	}
 
+	/**
+	 * Executes the action specified by resource and parameters and sends a Message to
+	 * the browser
+	 * All responses are sent in UTF-8
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 */
 	private void proceed(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
 

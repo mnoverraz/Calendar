@@ -12,7 +12,10 @@ import javax.servlet.http.HttpSession;
 import calendar.ui.bean.UIBean;
 
 /**
- * Servlet implementation class ConfigServlet
+ * Holds and changes the application configuration such as language
+ * 
+ * @author AFFOLTER Nicolas, MEIER Stefan, NOVERRAZ Mathieu
+ * @version 2011.06.06
  */
 public class ConfigServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

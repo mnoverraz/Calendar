@@ -24,6 +24,25 @@ import calendar.web.exception.FormNotValidException;
  */
 public class EventFormUtils {
 
+	/**
+	 * Checks the validity of the form and if valid returns an event corresponding
+	 * to the form input
+	 * 
+	 * @param fId
+	 * @param fDate
+	 * @param fStartH
+	 * @param fStartM
+	 * @param fEndH
+	 * @param fEndM
+	 * @param fAllDay
+	 * @param fRepeatMode
+	 * @param fRepeatEnd
+	 * @param fTitle
+	 * @param fDescription
+	 * @return Event
+	 * @throws FormNotValidException
+	 * @throws SystemException
+	 */
 	public static Event createEventFromForm(String fId, String fDate, String fStartH,
 			String fStartM, String fEndH, String fEndM, String fAllDay,
 			String fRepeatMode, String fRepeatEnd, String fTitle,

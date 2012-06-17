@@ -4,6 +4,9 @@ import calendar.core.exception.CoreException;
 /**
  * Exception type thrown if a form is not valid
  * 
+ * Contains a HashMap<String, String> with detail information about
+ * form validity
+ * 
  * @author AFFOLTER Nicolas, MEIER Stefan, NOVERRAZ Mathieu
  * @version 2011.06.06
  */
