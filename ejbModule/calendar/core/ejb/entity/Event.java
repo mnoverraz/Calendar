@@ -89,6 +89,9 @@ public class Event implements Serializable {
 	}
 	
 	public void setEventDates(List<EventDate> eventDates) {
+		for (EventDate eventDate : eventDates) {
+			eventDate.setEvent(this);
+		}
 		this.eventDates = eventDates;
 	}
 
