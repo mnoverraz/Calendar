@@ -1,6 +1,8 @@
 package calendar.console;
 
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Date;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -8,6 +10,8 @@ import javax.naming.NamingException;
 
 import calendar.core.ejb.entity.Event;
 import calendar.core.ejb.entity.EventDate;
+import calendar.core.ejb.entity.NormalEvent;
+import calendar.core.ejb.entity.RepeatingEvent;
 import calendar.core.ejb.entity.Room;
 import calendar.core.ejb.entity.RoomCategory;
 import calendar.core.ejb.session.EventHandlerRemote;
@@ -25,12 +29,20 @@ public class InitDB {
 	private void addEvents() throws NamingException, ParseException, PersistException {
 		EventHandlerRemote eventHandler;
 		context = new InitialContext();
+		String sDate = "2012-06-16";
+		String sRepeatEndDate = "2012-07-25";
+		String sStartTime = null;
+		String sEndTime = null;
+		String sRepeatMode = null;
+		Event event = null;
+		EventDate eventDate = null;
+		
 		eventHandler = (EventHandlerRemote) context
 				.lookup("calendarEAR/EventBean/remote");
 
-		Event event = new Event(0, "event 1",
-				"description 1", "m");
-		EventDate eventDate = new EventDate(DateHelper.StringToDate(
+		event = new NormalEvent(0, "event 1",
+				"description 1");
+		eventDate = new EventDate(DateHelper.StringToDate(
 				"2012-06-15 08:00", Config.DATE_FORMAT_LONG),
 				DateHelper.StringToDate("2012-06-15 10:00",
 						Config.DATE_FORMAT_LONG));
@@ -39,16 +51,42 @@ public class InitDB {
 
 		eventHandler.create(event);
 
-		event = new Event(0, "米婚の大切なやつ", "皆バーツブン", "d", DateHelper.StringToDate("2012-07-16"));
-		eventDate = new EventDate(DateHelper.StringToDate("2012-06-16 11:00",
-				Config.DATE_FORMAT_LONG), DateHelper.StringToDate(
-				"2012-06-16 13:00", Config.DATE_FORMAT_LONG));
-		eventDate.setEvent(event);
-		event.addEventDate(eventDate);
+		/*
+		 * Create dummy repeating event
+		 * ----------------------------
+		 */
+		sDate = "2012-06-16";
+		sRepeatEndDate = "2012-07-25";
+		sStartTime = "11:00";
+		sEndTime = "13:00";
+		sRepeatMode = "d";
+		
+		Date start = DateHelper.StringToDate(sDate + " " + sStartTime, Config.DATE_FORMAT_LONG);
+		Date end = DateHelper.StringToDate(sDate + " " + sEndTime, Config.DATE_FORMAT_LONG);
+		Date repeatEnd = DateHelper.StringToDate(sRepeatEndDate);
+		
+		event = new RepeatingEvent(0, "米婚の大切なやつ", "皆バーツブン", "d", DateHelper.StringToDate(sRepeatEndDate));
+		eventDate = new EventDate(start ,end);
+
+		event.addEventDate(new EventDate(start, end));
+		ArrayList<Date> dates = DateHelper.calculateRecurrentDates(start, repeatEnd, sRepeatMode);
+		
+		for (Date d : dates) {
+			String dateString = DateHelper.DateToString(d);
+			Date eStart = null;
+			Date eEnd = null;
+
+			eStart = DateHelper.StringToDate(dateString + " " + sStartTime, Config.DATE_FORMAT_LONG);
+			eEnd = DateHelper.StringToDate(dateString + " " + sEndTime, Config.DATE_FORMAT_LONG);
+			event.addEventDate(new EventDate(eStart, eEnd));
+		}
 
 		eventHandler.create(event);
 
-		event = new Event(0, "event 3", "description 3", "");
+		/*
+		 * Create dummy event
+		 */
+		event = new NormalEvent(0, "event 3", "description 3");
 		eventDate = new EventDate(DateHelper.StringToDate("2012-06-05 22:00",
 				Config.DATE_FORMAT_LONG), DateHelper.StringToDate(
 				"2012-06-05 23:00", Config.DATE_FORMAT_LONG));
@@ -57,7 +95,7 @@ public class InitDB {
 
 		eventHandler.create(event);
 
-		event = new Event(0, "event 4", "description 4", "");
+		event = new NormalEvent(0, "event 4", "description 4");
 		eventDate = new EventDate(DateHelper.StringToDate("2012-06-07 22:30",
 				Config.DATE_FORMAT_LONG), DateHelper.StringToDate(
 				"2012-06-07 23:45", Config.DATE_FORMAT_LONG));

@@ -2,8 +2,6 @@ package calendar.tools.test.controller;
 
 import static org.junit.Assert.*;
 
-import java.text.ParseException;
-import java.util.Date;
 import java.util.HashMap;
 
 import javax.naming.InitialContext;
@@ -13,8 +11,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import calendar.management.controller.EventController;
-import calendar.management.init.Config;
-import calendar.tools.utils.DateHelper;
 import calendar.web.controller.WebEventController;
 import calendar.web.renderer.Message;
 

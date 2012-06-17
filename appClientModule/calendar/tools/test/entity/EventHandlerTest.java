@@ -13,15 +13,9 @@ import javax.naming.NamingException;
 import org.junit.Before;
 import org.junit.Test;
 
-import calendar.tools.utils.DateHelper;
-import calendar.web.controller.WebEventController;
 import calendar.core.ejb.entity.Event;
-import calendar.core.ejb.entity.EventDate;
-import calendar.core.ejb.session.EventBean;
 import calendar.core.ejb.session.EventHandler;
 import calendar.core.ejb.session.PersistException;
-import calendar.management.controller.EventController;
-import calendar.management.init.Config;
 
 public class EventHandlerTest {
 	
@@ -32,11 +26,17 @@ public class EventHandlerTest {
 		try {
 			Context context = new InitialContext();
 			eventHandler = (EventHandler) context.lookup("calendarEAR/EventBean/remote");
+			/*
+			 * Inserts test data
+			 */
+			
 		} catch (NamingException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}
+	
+	
 	@Test
 	public void testReadWithStartEndFilter() throws PersistException {
 		System.out.println("testReadWithStartEndFilter");
@@ -73,10 +73,7 @@ public class EventHandlerTest {
 	@Test
 	public void testDeleteEvent() throws PersistException {
 		System.out.println("testReadWithStartEndFilter");
-		Event event = new Event(12);
-
+		Event event = new Event(6);
 		eventHandler.delete(event);
-		
-
 	}
 }

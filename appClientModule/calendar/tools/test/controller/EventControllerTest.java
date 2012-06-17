@@ -2,7 +2,6 @@ package calendar.tools.test.controller;
 
 import static org.junit.Assert.*;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -14,13 +13,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import calendar.core.ejb.entity.Event;
-import calendar.core.ejb.entity.EventDate;
 import calendar.core.exception.CoreException;
 import calendar.management.controller.EventController;
-import calendar.management.exception.TimeSlotException;
-import calendar.management.init.BootStrap;
-import calendar.management.init.Config;
-import calendar.tools.utils.DateHelper;
 
 public class EventControllerTest {
 	
