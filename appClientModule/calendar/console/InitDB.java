@@ -20,6 +20,12 @@ import calendar.core.ejb.session.RoomCategoryHandlerRemote;
 import calendar.management.init.Config;
 import calendar.tools.utils.DateHelper;
 
+/**
+ * Stores some dummy information in the DB (event, room)
+ * 
+ * @author AFFOLTER Nicolas, MEIER Stefan, NOVERRAZ Mathieu
+ * @version 2011.06.06
+ */
 public class InitDB {
 	private Context context;
 	public InitDB() throws NamingException, ParseException, PersistException {
@@ -29,8 +35,8 @@ public class InitDB {
 	private void addEvents() throws NamingException, ParseException, PersistException {
 		EventHandlerRemote eventHandler;
 		context = new InitialContext();
-		String sDate = "2012-06-16";
-		String sRepeatEndDate = "2012-07-25";
+		String sDate = null;
+		String sRepeatEndDate = null;
 		String sStartTime = null;
 		String sEndTime = null;
 		String sRepeatMode = null;
