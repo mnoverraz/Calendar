@@ -2,6 +2,7 @@ package calendar.tools.test.entity;
 
 import static org.junit.Assert.*;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -14,8 +15,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import calendar.core.ejb.entity.Event;
+import calendar.core.ejb.entity.EventDate;
+import calendar.core.ejb.entity.NormalEvent;
 import calendar.core.ejb.session.EventHandler;
 import calendar.core.ejb.session.PersistException;
+import calendar.management.init.Config;
+import calendar.tools.utils.DateHelper;
 
 public class EventHandlerTest {
 	
@@ -26,9 +31,7 @@ public class EventHandlerTest {
 		try {
 			Context context = new InitialContext();
 			eventHandler = (EventHandler) context.lookup("calendarEAR/EventBean/remote");
-			/*
-			 * Inserts test data
-			 */
+
 			
 		} catch (NamingException e1) {
 			// TODO Auto-generated catch block
@@ -54,26 +57,36 @@ public class EventHandlerTest {
 		List<Event> events = eventHandler.read(filter);
 		for (Event event : events) {
 			System.out.println(event);
-			/*for (EventDate eventDate : event.getEventDates()) {
-				System.out.println("id", event.getId());
-				eventMap.put("title", event.getTitle());
-				eventMap.put("start", DateHelper.DateToString(
-						eventDate.getStart(), Config.DATE_FORMAT_LONG));
-				eventMap.put("end", DateHelper.DateToString(
-						eventDate.getEnd(), Config.DATE_FORMAT_LONG));
-				eventMap.put("allDay", eventDate.isAllDay());
-				eventMap.put("description", event.getDescription());
-				eventMap.put("repeatMode", event.getMode());
-	
-				message.addElementToBody(eventMap);
-			}*/
 		}
 	}
 	
-	@Test
+	/*@Test
 	public void testDeleteEvent() throws PersistException {
-		System.out.println("testReadWithStartEndFilter");
+		System.out.println("testDeleteEvent");
 		Event event = new Event(6);
 		eventHandler.delete(event);
+	}*/
+	@Test
+	public void testUpdateEvent() throws ParseException, PersistException {
+		System.out.println("testUpdateEvent");
+		Event event = new NormalEvent(35, "event adsfadsf",
+				"description adsfadsf");
+		EventDate eventDate = new EventDate(DateHelper.StringToDate(
+				"2012-06-16 08:00", Config.DATE_FORMAT_LONG),
+				DateHelper.StringToDate("2012-06-16 10:00",
+						Config.DATE_FORMAT_LONG));
+		eventDate.setEvent(event);
+		event.addEventDate(eventDate);
+
+		eventHandler.update(event);
+		
+		HashMap<String, Object> filter = new HashMap<String, Object>();
+		
+
+		
+		List<Event> events = eventHandler.read(filter);
+		for (Event rEvent : events) {
+			System.out.println(rEvent);
+		}
 	}
 }
