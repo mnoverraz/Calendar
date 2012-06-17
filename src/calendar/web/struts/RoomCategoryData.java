@@ -1,5 +1,11 @@
 package calendar.web.struts;
 
+/**
+ * 
+ * 
+ * @author AFFOLTER Nicolas, MEIER Stefan, NOVERRAZ Mathieu
+ * @version 2011.06.06
+ */
 public class RoomCategoryData {
 	
 	private String roomCategoryId;
