@@ -42,6 +42,7 @@ public class Event implements Serializable {
 	
 	@OneToMany(mappedBy="event", fetch = FetchType.EAGER, cascade={CascadeType.ALL})
 	private List<EventDate> eventDates;
+	
 	@Column
 	private String title;
 	@Column
@@ -58,7 +59,7 @@ public class Event implements Serializable {
 		eventDates = new ArrayList<EventDate>();
 	}
 
-	public Event(long id, String title,
+	protected Event(long id, String title,
 			String description, String mode, Date repeatEnd) {
 		initialize(id, title);
 		this.description = description;
@@ -66,7 +67,7 @@ public class Event implements Serializable {
 		this.setRepeatEnd(repeatEnd);
 	}
 	
-	public Event(long id, String title,
+	protected Event(long id, String title,
 			String description, String mode) {
 		initialize(id, title);
 		this.description = description;

@@ -17,12 +17,12 @@ public class NormalEvent extends Event implements Serializable{
 		super();
 	}
 
-	public NormalEvent(int id, String title,
-			String description, String mode) {
-		super(id, title, description, mode);
+	public NormalEvent(long id, String title,
+			String description) {
+		super(id, title, description, "n");
 	}
 	
-	public NormalEvent(int id, String title) {
+	public NormalEvent(long id, String title) {
 		super(id, title);
 	}
 }

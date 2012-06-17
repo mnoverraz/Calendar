@@ -76,6 +76,7 @@ public class EventBean implements EventHandlerLocal, EventHandlerRemote {
 	public void update(Event event) throws PersistException {
 		Event origEvent = em.find(Event.class, event.getId());
 		origEvent.setMode(event.getMode());
+		origEvent.setRepeatEnd(event.getRepeatEnd());
 		origEvent.setTitle(event.getTitle());
 		origEvent.setDescription(event.getDescription());
 		origEvent.setEventDates(event.getEventDates());
