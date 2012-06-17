@@ -16,6 +16,12 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+/**
+ * 
+ * 
+ * @author AFFOLTER Nicolas, MEIER Stefan, NOVERRAZ Mathieu
+ * @version 2011.06.06
+ */
 public class InputRoomRemoveAction extends Action {
 
 	public ActionForward execute(ActionMapping mapping,
@@ -26,7 +32,6 @@ public class InputRoomRemoveAction extends Action {
 		RoomController roomController = (RoomController) context.getAttribute("roomController");
 		
 		Long id = Long.parseLong(request.getParameter("id"));
-		System.out.println(String.valueOf(id));
 		HashMap<String, Object> filter = new HashMap<String, Object>();
 		
 		filter.put("id", id);

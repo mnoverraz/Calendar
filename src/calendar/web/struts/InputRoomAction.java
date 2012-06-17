@@ -1,25 +1,27 @@
 package calendar.web.struts;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import calendar.core.controller.RoomCategoryController;
 import calendar.core.controller.RoomController;
 import calendar.core.entity.Room;
-import calendar.core.entity.RoomCategory;
 import calendar.core.exception.CoreException;
 import calendar.core.exception.SystemException;
 
-import org.apache.coyote.http11.InputFilter;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+/**
+ * This action class loads a room record when an id is passed
+ * 
+ * @author AFFOLTER Nicolas, MEIER Stefan, NOVERRAZ Mathieu
+ * @version 2011.06.06
+ */
 public class InputRoomAction extends Action {
 
 	public ActionForward execute(ActionMapping mapping,
