@@ -35,7 +35,7 @@ public class RoomBean implements RoomHandlerRemote, RoomHandlerLocal {
 		List<Room> rooms = null;
 		StringBuffer query = new StringBuffer();
 
-		if (params != null)
+		if (params == null)
 			params = new HashMap<String, Object>();
 
 		query.append("SELECT r");
