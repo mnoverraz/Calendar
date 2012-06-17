@@ -12,7 +12,10 @@ import javax.persistence.Query;
 import calendar.core.ejb.entity.Room;
 
 /**
- * Session Bean implementation class RoomBean
+ * Handles CRUD access on Rooms
+ * 
+ * @author AFFOLTER Nicolas, MEIER Stefan, NOVERRAZ Mathieu
+ * @version 2011.06.06
  */
 @Stateless
 public class RoomBean implements RoomHandlerRemote, RoomHandlerLocal {
@@ -29,40 +32,23 @@ public class RoomBean implements RoomHandlerRemote, RoomHandlerLocal {
 	@Override
 	public List<Room> read(HashMap<String, Object> params)
 			throws PersistException {
-
-		/* ORIGINAL */
-//		List<Room> rooms = null;
-//		StringBuffer query = new StringBuffer();
-//
-//		query.append("FROM Room room ");
-//		
-//		try {
-//			Query q = em.createQuery(query.toString());
-//			//q.setParameter("id", null);
-//			
-//			rooms = q.getResultList();
-//		} catch (PersistenceException ex) {
-//			ex.printStackTrace();
-//			throw new PersistException();
-//		}
-//		return rooms;
-		/* ----------------------------------------------- */
-
 		List<Room> rooms = null;
 		StringBuffer query = new StringBuffer();
+
+		if (params != null)
+			params = new HashMap<String, Object>();
 
 		query.append("SELECT r");
 		query.append(" FROM Room as r ");
 
-		if (params != null)
-			if (params.containsKey("id"))
-				query.append(" WHERE r.id = :id");
+		if (params.containsKey("id"))
+			query.append(" WHERE r.id = :id");
 
 		try {
 			Query q = em.createQuery(query.toString());
-			if (params != null)
-				if (params.containsKey("id"))
-					q.setParameter("id", params.get("id"));
+
+			if (params.containsKey("id"))
+				q.setParameter("id", params.get("id"));
 			rooms = q.getResultList();
 		} catch (PersistenceException ex) {
 			ex.printStackTrace();

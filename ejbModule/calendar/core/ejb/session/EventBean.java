@@ -12,7 +12,10 @@ import javax.persistence.Query;
 import calendar.core.ejb.entity.Event;
 
 /**
- * Session Bean implementation class EventHandler
+ * Handles all CRUD access to events
+ * 
+ * @author AFFOLTER Nicolas, MEIER Stefan, NOVERRAZ Mathieu
+ * @version 2011.06.06
  */
 @Stateless
 public class EventBean implements EventHandlerLocal, EventHandlerRemote {
@@ -40,30 +43,11 @@ public class EventBean implements EventHandlerLocal, EventHandlerRemote {
 		query.append(" WHERE");
 		query.append(" 1=1");
 		if (params.containsKey("id")) 
-			query.append(" AND event.id = :id");
-		/*
-		if (params.containsKey("start"))
-			query.append(" AND date.start >= :start");
-		if (params.containsKey("end"))
-			query.append(" AND date.end <= :end");*/
-		
-		else {
-			/*if (params.containsKey("start") || params.containsKey("end")) {
-				query.append(" LEFT OUTER JOIN event.eventDates as date");
-				query.append(" WHERE event.id = date.event.id");
-			}*/
-
-		}
-		
+			query.append(" AND event.id = :id");		
 		try {
 			Query q = em.createQuery(query.toString());
 			if (params.containsKey("id"))
-				q.setParameter("id", params.get("id"));
-			/*if (params.containsKey("start"))
-				q.setParameter("start", params.get("start"));
-			if (params.containsKey("end"))
-				q.setParameter("end", params.get("end"));*/
-			
+				q.setParameter("id", params.get("id"));			
 			events = q.getResultList();
 		} catch (PersistenceException ex) {
 			ex.printStackTrace();

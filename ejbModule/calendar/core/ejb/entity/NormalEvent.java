@@ -9,9 +9,6 @@ import javax.persistence.Entity;
 @DiscriminatorValue("Norm")
 public class NormalEvent extends Event implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	public NormalEvent() {
 		super();
