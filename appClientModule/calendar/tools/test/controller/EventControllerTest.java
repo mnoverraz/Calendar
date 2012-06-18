@@ -2,6 +2,7 @@ package calendar.tools.test.controller;
 
 import static org.junit.Assert.*;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -13,8 +14,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 import calendar.core.ejb.entity.Event;
+import calendar.core.ejb.entity.EventDate;
+import calendar.core.ejb.entity.NormalEvent;
 import calendar.core.exception.CoreException;
 import calendar.management.controller.EventController;
+import calendar.management.exception.TimeSlotException;
+import calendar.management.init.Config;
+import calendar.tools.utils.DateHelper;
 
 public class EventControllerTest {
 	
@@ -31,9 +37,9 @@ public class EventControllerTest {
 		}
 	}
 
-	/*@Test(expected=TimeSlotException.class)
+	@Test(expected=TimeSlotException.class)
 	public void testAvailability_throwsTimeSlotException() throws CoreException, NamingException {
-		Event eventToTest = new Event(4, "event 3", "description 3", "m");
+		Event eventToTest = new NormalEvent(4, "event 3", "description 3");
 		
 
 		try {
