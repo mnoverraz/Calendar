@@ -33,7 +33,6 @@ function loadRooms(){
 		data : null,
 		success : function(msg) {
 			fillRooms(msg);
-			alert('loadRooms success');
 		}
 	});
 }

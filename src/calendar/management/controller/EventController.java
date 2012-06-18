@@ -119,7 +119,6 @@ public class EventController extends Controller<Event> {
 	 */
 	private boolean checkAvailability(Event event) throws CoreException, TimeSlotException {
 		boolean available = true;
-		
 		/*
 		 * Holds all unavailable time slots
 		 */

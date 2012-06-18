@@ -232,7 +232,7 @@ public class WebEventController extends WebController<EventController> {
 
 					controller.delete(event);
 					
-					message.addElementToBody(event);
+					message.addElementToBody(params);
 
 				} catch (Exception e) {
 					message.state = false;
