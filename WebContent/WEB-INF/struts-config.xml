@@ -4,16 +4,16 @@
  "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
 
 <struts-config>
-  <!-- ========== Définition des beans de formulaire =============== -->
+  <!-- ========== Form beans declaration ===================================== -->
   <form-beans>
     <form-bean name="inputRoomForm" type="calendar.web.struts.InputRoomForm" />
   </form-beans>
 
-  <!-- ========== Définition des enchainements ================ -->
+  <!-- ========== Global forwards definition =========================== -->
   <global-forwards>
   </global-forwards>
 
-  <!-- ========== Définition du mappage d'action ==================== -->
+  <!-- ========== Action mappings definition =========================== -->
   <action-mappings>
   
     <action path="/roomManagement"
@@ -68,7 +68,7 @@
 
   </action-mappings>
  
-  <!-- ========== Définition Messages et  plug-in ==================== -->
+  <!-- ========== Ressources definition ================================= -->
   <message-resources parameter="calendar.web.struts.FormMessages"/>
 
 </struts-config>

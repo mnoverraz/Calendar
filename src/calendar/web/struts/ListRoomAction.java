@@ -17,7 +17,9 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
+ * This action class is meant to be triggered by the 'roomManagement.do' action.
  * 
+ * It calls the room controller to fetch all the rooms in the database.
  * 
  * @author AFFOLTER Nicolas, MEIER Stefan, NOVERRAZ Mathieu
  * @version 2011.06.06
