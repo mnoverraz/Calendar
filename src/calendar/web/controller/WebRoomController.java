@@ -49,6 +49,7 @@ public class WebRoomController extends WebController<RoomController> {
 			for (Room room : rooms) {
 				roomMap = new HashMap<String, Object>();
 				roomMap.put("id", room.getId());
+				roomMap.put("name", room.getName());
 				roomMap.put("local", room.getLocal());
 				roomMap.put("description", room.getDescription());
 				roomMap.put("roomCategory", room.getRoomCategory().getName());
