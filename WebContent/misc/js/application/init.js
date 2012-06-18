@@ -63,14 +63,14 @@ $(document).ready(function() {
 			    '': 'H:mm'
 			},
 			titleFormat :{
-			    month: 'yyyy年 M月',
-			    week: '[yyyy年　JM月] d日{&#8212;[yyyy年][M月]d日}',
-			    day: 'yyyy年 M月 d日 dddd'
+			    month: resourceBundle['format-title-month'],
+			    week: resourceBundle['format-title-week'],
+			    day: resourceBundle['format-title-day']
 			},
 			columnFormat :{
-			    month: 'ddd',
-			    week: 'M/d (ddd)',
-			    day: 'M/d (ddd)'
+			    month: resourceBundle['format-column-month'],
+			    week: resourceBundle['format-column-week'],
+			    day: resourceBundle['format-column-day']
 			},
 			axisFormat : 'HH:mm',
 			slotMinutes : 30,
@@ -122,6 +122,7 @@ $(document).ready(function() {
 		                        allDay: $(this).attr('allDay'),
 		                        start: $(this).attr('start'),
 		                        end: $(this).attr('end'),
+		                        repeatEnd: $(this).attr('repeatEnd'),
 		                        description: $(this).attr('description'),
 		                    });
 		                });
@@ -146,39 +147,13 @@ $(document).ready(function() {
 			        calendar.fullCalendar('unselect');
 			},
 			eventClick: function(calEvent, jsEvent, view) { //Trigger when sb click on the event
-
 				showDialogEvent('eventdialog.jsp', 'consult', calEvent);
-	
 		    },
 		    eventDrop: function(event,dayDelta,minuteDelta,allDay,revertFunc) { //Trigger when sb drop a event
-		        
-		    	console.log('------------------');
-				console.log('----Update by eventDrop-----');
-				console.log('	id: ' + event['id']);
-				console.log('	title: ' + event['title']);
-				console.log('	start: ' + event['start']);
-				console.log('	end: ' + event['end']);
-				console.log('	repeatMode: ' + event['repeatMode']);
-				console.log('	description: ' + event['description']);
-				console.log('------------------');
-				
-				
 		        showDialogEvent('eventdialog.jsp', 'update', event);
-	
 		    },
 			eventResize: function(event,dayDelta,minuteDelta,revertFunc) { //Trigger when sb resize an event (only on weekView and dayView)
-				
-				console.log('------------------');
-				console.log('----Update by eventResize-----');
-				console.log('	id: ' + event['id']);
-				console.log('	title: ' + event['title']);
-				console.log('	start: ' + event['start']);
-				console.log('	end: ' + event['end']);
-				console.log('	repeatMode: ' + event['repeatMode']);
-				console.log('	description: ' + event['description']);
-				console.log('------------------');
 		        showDialogEvent('eventdialog.jsp', 'update', event);
-	
 		    }
 	});
 	

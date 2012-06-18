@@ -101,13 +101,6 @@ function wholeDay() {
 }
 
 function sendForm(url, data, method) {
-    /*if (action == 'delete') {
-        $("#action").val("delete");
-    }
-    $('.ui-dialog').block({ 
-        message: '<img src="misc/img/loading.gif" />', 
-        css: { border: 'none' } 
-    }); */
     dataString = $('#eventform').serialize();
     send(url, dataString, method);
     
@@ -128,6 +121,7 @@ function fillEvent(){
 	console.log('	start: ' + eventData['start']);
 	console.log('	end: ' + eventData['end']);
 	console.log('	repeatMode: ' + eventData['repeatMode']);
+	console.log('	repeatEnd: ' + eventData['repeatEnd']);
 	console.log('	description: ' + eventData['description']);
 	console.log('------------------');
 	
@@ -150,13 +144,15 @@ function fillEvent(){
 	}
 	
 	$("#repeatMode").attr('value',eventData['repeatMode']);
-	$("#repeatEnd").val(dateToString(eventData['repeatEnd']));
+	/*if(eventData['repeatEnd'] != ''){
+		$("#repeatEnd").val(eventData['repeatEnd']);
+	}*/
 	$("#description").val(eventData['description']);
 	
 	if(eventData['allDay']){
 		$('#allDay').attr('checked', true);
 	}
-	//$("#repeatEnd").val(eventData['end'].getFullYear() + '-' + eventData['end'].getMonth() + '-' + eventData['end'].getDate());
+	//("#repeatEnd").val(eventData['repeatEnd'].getFullYear() + '-' + eventData['repeatEnd'].getMonth() + '-' + eventData['repeatEnd'].getDate());
 	eventData = null;
 	
 }

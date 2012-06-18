@@ -43,7 +43,14 @@
 	<entry key="day-4-short">Mer</entry>
 	<entry key="day-5-short">Jeu</entry>
 	<entry key="day-6-short">Ven</entry>
-	<entry key="day-7-short">Sam</entry>	
+	<entry key="day-7-short">Sam</entry>
+	
+	<entry key="format-title-month">MMMM yyyy</entry>
+	<entry key="format-title-week">d MMM yyyy - {dd MMM yyyy}</entry>
+	<entry key="format-title-day">dddd d MMMM yyyy</entry>
+	<entry key="format-column-month">ddd</entry>
+	<entry key="format-column-week">ddd d MMM</entry>
+	<entry key="format-column-day">dddd d MMMM</entry>
 	
 	<entry key="today">Aujourd'hui</entry>
 	<entry key="month">Mois</entry>

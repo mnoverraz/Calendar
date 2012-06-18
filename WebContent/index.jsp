@@ -40,10 +40,10 @@
 	<div id="page">
 		<!-- BEBIN HEADER -->
 		<div id="header">
-			<img id="login" src="https://wwwfbm.unil.ch/html/img/login.gif"
-				alt="login" />
+			<!--img id="login" src="https://wwwfbm.unil.ch/html/img/login.gif"
+				alt="login" /-->
 			<div id="language"><a href="config?lang=fr" class="language">Français</a> | <a href="config?lang=en" class="language">English</a> | <a href="config?lang=ja"  class="language">日本語</a></div>
-			<div id="bar">Room reservation system</div>
+			<div id="bar"><script type='text/javascript'>document.write(resourceBundle['application-title']);</script></div>
 		</div>
 		
 		<!-- END HEADER -->
@@ -63,7 +63,7 @@
 				<div id="room">
 					<!-- BEGIN INFORMATION -->
 					<div class="box">
-						<h1>Information <span id="room_category"></span> <span id="room_local"></span></h1>
+						<h1>Information <span id="room_category"></span></h1>
 						<div>
 							<span id="room_description"></span>
 						</div>
