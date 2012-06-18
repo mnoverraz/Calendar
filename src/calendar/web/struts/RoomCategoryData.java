@@ -1,7 +1,8 @@
 package calendar.web.struts;
 
 /**
- * 
+ * Holds the id and the name of a room. It is used to auto populate the options
+ * in the select tag included in the 'inputRoom.jsp' and 'inputRoomEdition.jsp' forms.
  * 
  * @author AFFOLTER Nicolas, MEIER Stefan, NOVERRAZ Mathieu
  * @version 2011.06.06

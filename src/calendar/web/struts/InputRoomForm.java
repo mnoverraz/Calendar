@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
@@ -17,9 +16,9 @@ import calendar.management.controller.RoomCategoryController;
 import calendar.management.exception.SystemException;
 
 /**
- * This class is a bean that holds the room properties
+ * This class is an ActionForm bean that holds the room properties
  * 
- * It implements the validate and reset methods of the ActionForm superclass.
+ * It implements the validate and reset methods from the ActionForm superclass.
  * 
  * @author AFFOLTER Nicolas, MEIER Stefan, NOVERRAZ Mathieu
  * @version 2011.06.06
@@ -86,70 +85,46 @@ public class InputRoomForm extends ActionForm {
 		this.roomCategoryList = roomCategoryList;
 	}
 	
+	/**
+	 * Gets the array list of all the room categories through the room category controller
+	 * and populates the room category list with its values.
+	 * 
+	 * @param mapping
+	 * @param request
+	 * @return void
+	 * @throws CoreException
+	 */
 	public void reset(ActionMapping mapping, HttpServletRequest request) {
 		
-		HttpSession session = request.getSession(true);
+		ServletContext context = servlet.getServletConfig().getServletContext();
+		RoomCategoryController roomCategoryController = (RoomCategoryController) context.getAttribute("roomCategoryController");
 		
-//		if (session.getAttribute("roomCategoryList") == null) {
-			
-			System.out.println("was null");
-			
-			ServletContext context = servlet.getServletConfig().getServletContext();
-			RoomCategoryController roomCategoryController = (RoomCategoryController) context.getAttribute("roomCategoryController");
-			
-			ArrayList<RoomCategory> roomCategories = null;
-			ArrayList<RoomCategoryData> roomCategoryList = new ArrayList<RoomCategoryData>();
-			
-			try {
-				roomCategories = roomCategoryController.read(null);			
-			} catch (CoreException e) {
-				SystemException se = new SystemException();
-				se.detailInformation = e;
-			}
-			
-			for (RoomCategory rc : roomCategories) {
-				roomCategoryList.add(new RoomCategoryData(String.valueOf(rc.getId()), rc.getName()));
-			}
-			
-			session.setAttribute("roomCategoryList", roomCategoryList);
-			ArrayList<RoomCategory> rcList = (ArrayList<RoomCategory>) session.getAttribute("roomCategoryList");
-			System.out.println(roomCategoryList);
-			System.out.println(rcList);
-			setRoomCategoryList(roomCategoryList);
-			
-//		} else {
-//			System.out.println("was Not null :D");
-//			ArrayList<RoomCategory> rcList = (ArrayList<RoomCategory>) session.getAttribute("roomCategoryList");
-//			setRoomCategoryList(roomCategoryList);
-//		}
+		ArrayList<RoomCategory> roomCategories = null;
+		ArrayList<RoomCategoryData> roomCategoryList = new ArrayList<RoomCategoryData>();
 		
+		try {
+			roomCategories = roomCategoryController.read(null);			
+		} catch (CoreException e) {
+			SystemException se = new SystemException();
+			se.detailInformation = e;
+		}
 		
+		for (RoomCategory rc : roomCategories) {
+			roomCategoryList.add(new RoomCategoryData(String.valueOf(rc.getId()), rc.getName()));
+		}
 		
-		
-		
-//		System.out.println("was null");
-//		
-//		ServletContext context = servlet.getServletConfig().getServletContext();
-//		RoomCategoryController roomCategoryController = (RoomCategoryController) context.getAttribute("roomCategoryController");
-//		
-//		ArrayList<RoomCategory> roomCategories = null;
-//		ArrayList<RoomCategoryData> roomCategoryList = new ArrayList<RoomCategoryData>();
-//		
-//		try {
-//			roomCategories = roomCategoryController.read(null);			
-//		} catch (CoreException e) {
-//			SystemException se = new SystemException();
-//			se.detailInformation = e;
-//		}
-//		
-//		for (RoomCategory rc : roomCategories) {
-//			roomCategoryList.add(new RoomCategoryData(String.valueOf(rc.getId()), rc.getName()));
-//		}
-//		
-//		setRoomCategoryList(roomCategoryList);
+		setRoomCategoryList(roomCategoryList);
 		
 	}
 	
+	
+	/**
+	 * Performs a validation check on the 'local' and 'roomCategory' properties.
+	 * 
+	 * @param mapping
+	 * @param request
+	 * @return ActionErrors
+	 */
 	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
 		
 		ActionErrors errors = new ActionErrors();
@@ -163,10 +138,8 @@ public class InputRoomForm extends ActionForm {
 		if (getName().length() > 255 ) 
         	errors.add("name", new ActionMessage("error.name.maxchars"));
         
-        
 		if (getDescription().length() > 255 ) 
         	errors.add("description", new ActionMessage("error.description.maxchars"));
-        
 		
 		if (getRoomCategory().equals("0"))
 			errors.add("roomCategory", new ActionMessage("error.roomCategory.required"));

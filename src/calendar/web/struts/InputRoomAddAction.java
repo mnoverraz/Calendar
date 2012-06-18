@@ -19,7 +19,10 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
+ * This action class is meant to be triggered after the validation
+ * of the ActionForm 'InputRoomForm'.
  * 
+ * It calls the room controller to add the new room in the database.
  * 
  * @author AFFOLTER Nicolas, MEIER Stefan, NOVERRAZ Mathieu
  * @version 2011.06.06
