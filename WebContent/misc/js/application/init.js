@@ -122,6 +122,7 @@ $(document).ready(function() {
 		                        allDay: $(this).attr('allDay'),
 		                        start: $(this).attr('start'),
 		                        end: $(this).attr('end'),
+		                        repeatEnd: $(this).attr('repeatEnd'),
 		                        description: $(this).attr('description'),
 		                    });
 		                });

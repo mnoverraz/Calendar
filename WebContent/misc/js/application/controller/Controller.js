@@ -2,25 +2,23 @@ loadRooms();
 
 
 function send(url, data, method) {
-		alert('send: ' + method);
-		$.ajax({
-			type : method,
-			url : url,
-			dataType: 'json',
-			data : data,
-			success : function(msg) {
-				alert('success: ' + msg["success"]);
-				getMessage(msg);
-				$('.ui-dialog').unblock();
-				if (msg["success"]) {
-	                $('#dialog').dialog("close");
-	            }
+	$.ajax({
+		type : method,
+		url : url,
+		dataType: 'json',
+		data : data,
+		success : function(msg){
+			getMessage(msg);
+			$('.ui-dialog').unblock();
+			if (msg['success']) {
+				$('#dialog').dialog('close');
 			}
-		});
-		calendar.fullCalendar( 'refetchEvents' );
+		}
+	});
+	calendar.fullCalendar('refetchEvents');
 }
 
-function test(json){
+function fillRooms(json){
 	$("#room_description").html(json.content[0].description);
 	$("#room_local").html(json.content[0].local);
 	$("#room_category").html(json.content[0].roomCategory);
@@ -34,7 +32,8 @@ function loadRooms(){
 		dataType: 'json',
 		data : null,
 		success : function(msg) {
-			test(msg);
+			fillRooms(msg);
+			alert('loadRooms success');
 		}
 	});
 }

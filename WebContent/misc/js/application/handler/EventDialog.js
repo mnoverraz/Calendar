@@ -144,13 +144,15 @@ function fillEvent(){
 	}
 	
 	$("#repeatMode").attr('value',eventData['repeatMode']);
-	//$("#repeatEnd").val(dateToString(eventData['repeatEnd']));
+	/*if(eventData['repeatEnd'] != ''){
+		$("#repeatEnd").val(eventData['repeatEnd']);
+	}*/
 	$("#description").val(eventData['description']);
 	
 	if(eventData['allDay']){
 		$('#allDay').attr('checked', true);
 	}
-	//$("#repeatEnd").val(eventData['end'].getFullYear() + '-' + eventData['end'].getMonth() + '-' + eventData['end'].getDate());
+	//("#repeatEnd").val(eventData['repeatEnd'].getFullYear() + '-' + eventData['repeatEnd'].getMonth() + '-' + eventData['repeatEnd'].getDate());
 	eventData = null;
 	
 }
