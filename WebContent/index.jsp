@@ -63,7 +63,7 @@
 				<div id="room">
 					<!-- BEGIN INFORMATION -->
 					<div class="box">
-						<h1>Information <span id="room_category"></span> <span id="room_local"></span></h1>
+						<h1>Information <span id="room_category"></span></h1>
 						<div>
 							<span id="room_description"></span>
 						</div>

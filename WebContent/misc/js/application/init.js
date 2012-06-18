@@ -123,7 +123,6 @@ $(document).ready(function() {
 		                        start: $(this).attr('start'),
 		                        end: $(this).attr('end'),
 		                        description: $(this).attr('description'),
-		                        color: '#f00'
 		                    });
 		                });
 		                addEvents(doc);
@@ -147,39 +146,13 @@ $(document).ready(function() {
 			        calendar.fullCalendar('unselect');
 			},
 			eventClick: function(calEvent, jsEvent, view) { //Trigger when sb click on the event
-
 				showDialogEvent('eventdialog.jsp', 'consult', calEvent);
-	
 		    },
 		    eventDrop: function(event,dayDelta,minuteDelta,allDay,revertFunc) { //Trigger when sb drop a event
-		        
-		    	console.log('------------------');
-				console.log('----Update by eventDrop-----');
-				console.log('	id: ' + event['id']);
-				console.log('	title: ' + event['title']);
-				console.log('	start: ' + event['start']);
-				console.log('	end: ' + event['end']);
-				console.log('	repeatMode: ' + event['repeatMode']);
-				console.log('	description: ' + event['description']);
-				console.log('------------------');
-				
-				
 		        showDialogEvent('eventdialog.jsp', 'update', event);
-	
 		    },
 			eventResize: function(event,dayDelta,minuteDelta,revertFunc) { //Trigger when sb resize an event (only on weekView and dayView)
-				
-				console.log('------------------');
-				console.log('----Update by eventResize-----');
-				console.log('	id: ' + event['id']);
-				console.log('	title: ' + event['title']);
-				console.log('	start: ' + event['start']);
-				console.log('	end: ' + event['end']);
-				console.log('	repeatMode: ' + event['repeatMode']);
-				console.log('	description: ' + event['description']);
-				console.log('------------------');
 		        showDialogEvent('eventdialog.jsp', 'update', event);
-	
 		    }
 	});
 	

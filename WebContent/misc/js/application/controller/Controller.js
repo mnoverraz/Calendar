@@ -2,16 +2,14 @@ loadRooms();
 
 
 function send(url, data, method) {
-		console.log(url);
-		console.log(data);
-		console.log(method);
+		alert('send: ' + method);
 		$.ajax({
 			type : method,
 			url : url,
-			dataType: "json",
+			dataType: 'json',
 			data : data,
 			success : function(msg) {
-				console.log('bien été envoyé');
+				alert('success: ' + msg["success"]);
 				getMessage(msg);
 				$('.ui-dialog').unblock();
 				if (msg["success"]) {
@@ -19,6 +17,7 @@ function send(url, data, method) {
 	            }
 			}
 		});
+		calendar.fullCalendar( 'refetchEvents' );
 }
 
 function test(json){
@@ -32,14 +31,9 @@ function loadRooms(){
 	$.ajax({
 		type : 'get',
 		url : 'rest/room/?id=1',
-		dataType: "json",
+		dataType: 'json',
 		data : null,
 		success : function(msg) {
-			console.log('room bien été envoyé');
-			$('.ui-dialog').unblock();
-			if (msg["success"]) {
-                $('#dialog').dialog("close");
-            }
 			test(msg);
 		}
 	});
@@ -99,7 +93,17 @@ function showDialogEvent(url, mode, event){
 			showDialog(url, null, dialogTitle, buttonOpts);
 			break;
 		case 'update':
-			console.log('ShowdialogEvent send()');
+			console.log('------------------');
+			console.log('----Envoi modification-----');
+			console.log('	id: ' + event.id);
+			console.log('	titre: ' + event.title);
+			console.log('	date: ' + event.start);
+			console.log('	jour entier: ' + event.allDay);
+			console.log('	end: ' + event.end);
+			console.log('	repeatMode: ' + event.repeatMode);
+			console.log('	repeatEnd: ' + event.repeatEnd);
+			console.log('	description: ' + event.description);
+			console.log('------------------');
 			send('rest/event/', event,'post');
 			
 			break;
@@ -163,7 +167,6 @@ function getMessage(json){
 }
 
 function addEvents(json){
-	alert('ok');
 	for(var i= 0; i < json['content'].length; i++)
 	{
 	     calendar.fullCalendar('renderEvent', json['content'][i], true);
