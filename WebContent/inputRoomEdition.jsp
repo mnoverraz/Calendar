@@ -13,7 +13,7 @@
 
 <link rel="icon" href="https://wwwfbm.unil.ch/favicon.ico" type="image/x-icon" />
 <link rel="shortcut icon" href="https://wwwfbm.unil.ch/favicon.ico" type="image/x-icon" />
-<link rel="stylesheet" type="text/css" href="misc/css/main.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="misc/css/roomEditor.css" media="screen" />
 </head>
   <body>
     <h1>Edit room</h1>

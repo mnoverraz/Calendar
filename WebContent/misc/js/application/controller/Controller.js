@@ -13,6 +13,7 @@ function send(url, data, method) {
 			if (msg['success']) {
 				$('#dialog').dialog('close');
 			}
+			processError(msg);
 		}
 	});
 	calendar.fullCalendar('refetchEvents');
@@ -173,8 +174,7 @@ function addEvents(json){
 }
 
 function processError(error){
-	this.jose = error.content;
-	//alert(jose.content[0].FormNotValidException.title);
+	this.errorType = error;
 	this.exceptionType = Array;
 	for(var i in error.content) {
 	    exceptionType.push(i);
