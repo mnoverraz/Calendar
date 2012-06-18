@@ -22,18 +22,17 @@ function fillRooms(json){
 	$("#room_description").html(json.content[0].description);
 	$("#room_local").html(json.content[0].local);
 	$("#room_category").html(json.content[0].roomCategory);
-	$("#room_name").html(json.content[0].roomCategory);
+	$("#room_name").html(json.content[0].local);
 }
 
 function loadRooms(){
 	$.ajax({
 		type : 'get',
-		url : 'rest/room/?id=1',
+		url : 'rest/room/?id=7',
 		dataType: 'json',
 		data : null,
 		success : function(msg) {
 			fillRooms(msg);
-			alert('loadRooms success');
 		}
 	});
 }
