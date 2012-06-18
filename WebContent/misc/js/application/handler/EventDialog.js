@@ -27,11 +27,11 @@ $(document).ready(function() {
     
 
     if ($("#date").val() == '') {
-        $("#date").val(caldate);
+        $("#date").val(eventDate);
     }
 
     if ($("#repeatEnd").val() == '') {
-        $("#repeatEnd").val(caldate);
+        $("#repeatEnd").val(repeatEnd);
     }
     
     $("#date").change(function() {
@@ -63,8 +63,9 @@ $(document).ready(function() {
     
     // Datepicker
     $(".datepicker").datepicker({
-        //dayNamesMin: [resourceBundle["day-1-short"], resourceBundle["day-2-short"], resourceBundle["day-3-short"], resourceBundle["day-4-short"], resourceBundle["day-5-short"], resourceBundle["day-6-short"], resourceBundle["day-7-short"]],
-        //monthNames: [resourceBundle["month-1-full"],resourceBundle["month-2-full"],resourceBundle["month-3-full"],resourceBundle["month-4-full"],resourceBundle["month-5-full"],resourceBundle["month-6-full"],resourceBundle["month-7-full"],resourceBundle["month-8-full"],resourceBundle["month-9-full"],resourceBundle["month-10-full"],resourceBundle["month-11-full"],resourceBundle["month-12-full"]],
+        dayNamesMin: eval(resourceBundle['day-names-short']),
+        monthNamesMin: eval(resourceBundle['month-names']),
+        monthNames: eval(resourceBundle['month-names-short']),
         firstDay: 1,
         //maxDate: (new Date().getFullYear() + maxYearOffset) + '-12-31',
         minDate: new Date(),
@@ -144,9 +145,9 @@ function fillEvent(){
 	}
 	
 	$("#repeatMode").attr('value',eventData['repeatMode']);
-	/*if(eventData['repeatEnd'] != ''){
+	if(eventData['repeatEnd'] != undefined){
 		$("#repeatEnd").val(eventData['repeatEnd']);
-	}*/
+	}
 	$("#description").val(eventData['description']);
 	
 	if(eventData['allDay']){
