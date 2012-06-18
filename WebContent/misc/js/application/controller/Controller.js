@@ -13,7 +13,6 @@ function send(url, data, method) {
 			if (msg['success']) {
 				$('#dialog').dialog('close');
 			}
-			processError(msg);
 		}
 	});
 	calendar.fullCalendar('refetchEvents');
@@ -116,6 +115,10 @@ function showDialogEvent(url, mode, event){
 		        id : 'delete'
 		    });
 			break;
+		case 'error':
+			dialogTitle = 'Erreur';
+			showDialog(url, null, dialogTitle, buttonOpts);
+			break;
 	
 	}
 	
@@ -165,20 +168,31 @@ function getMessage(json){
 	}
 }
 
-function addEvents(json){
-	for(var i= 0; i < json['content'].length; i++)
-	{
-	     calendar.fullCalendar('renderEvent', json['content'][i], true);
-	}
-	
-}
 
 function processError(error){
-	this.errorType = error;
-	this.exceptionType = Array;
-	for(var i in error.content) {
-	    exceptionType.push(i);
+	console.log('--------ERROR------');
+	console.log('obj: ' + error.content[0]);
+	
+	//TimeSlotException
+	if(error.content[0].TimeSlotException != undefined){
+		
+		errorDialog(exceptionToUI('TimeSlotException', error.content[0].TimeSlotException), 'TimeSlotException');
 	}
+}
+
+function errorDialog(message, errorName) {
+	$("#dialog").html(message);
+	buttonsOpts = {};
+    buttonsOpts["Fermer"] = function() {
+        $(this).dialog( "close" );
+    };
+    $("#dialog").dialog({
+    	title: errorName,
+        resizable: false,
+        width: 350,
+        modal: true,
+        buttons: buttonsOpts
+    });
 }
 
 function exceptionToUI(exceptionType, detail) {

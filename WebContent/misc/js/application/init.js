@@ -1,3 +1,17 @@
+function toto(json){
+	alert(json);
+}
+
+
+
+
+
+
+
+
+
+
+
 var calendar = null;
 
 $(document).ready(function() {
@@ -76,7 +90,7 @@ $(document).ready(function() {
 			slotMinutes : 30,
 			firstDay : 1,
 			firstHour : 7,
-			editable : true,
+			editable : false,
 			
 		//---------
 		//Language
@@ -115,18 +129,22 @@ $(document).ready(function() {
 		            },
 		            success: function(doc) {
 		                var events = [];
-		                $(doc).find('event').each(function() {
-		                    events.push({
-		                    	id: $(this).attr('id'),
-		                        title: $(this).attr('title'),
-		                        allDay: $(this).attr('allDay'),
-		                        start: $(this).attr('start'),
-		                        end: $(this).attr('end'),
-		                        repeatEnd: $(this).attr('repeatEnd'),
-		                        description: $(this).attr('description'),
-		                    });
+
+		                $(doc).each(function(index, object) {
+		                    var event = {
+		                    	id: object.id,
+		                        title: object.title,
+		                        allDay: object.allDay,
+		                        start: object.start,
+		                        end: object.end,
+		                        repeatEnd: object.repeatEnd,
+		                        description: object.description
+		                    };
+		                    if (object.repeatMode != 'n') event.color = '#bbb';
+		                    events.push(event);
 		                });
-		                addEvents(doc);
+
+		                addEvents(events);
 		            }
 		        });
 		    },
