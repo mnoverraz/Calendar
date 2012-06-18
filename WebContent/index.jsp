@@ -31,7 +31,6 @@
 <script type='text/javascript' src='misc/js/application/helpers/dateHelper.js'></script>
 <script type='text/javascript' src='misc/js/application/init.js'></script>
 <script type='text/javascript' src='misc/js/application/controller/Controller.js'></script>
-<!--script type='text/javascript' src='misc/js/application/handler/CalendarHandler.js'></script-->
 <!-- END APPLICATION -->
 </head>
 <body>
@@ -63,7 +62,7 @@
 				<div id="room">
 					<!-- BEGIN INFORMATION -->
 					<div class="box">
-						<h1>Information <span id="room_category"></span></h1>
+						<h1>Information</h1>
 						<div>
 							<span id="room_description"></span>
 						</div>

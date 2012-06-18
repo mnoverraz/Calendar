@@ -1,9 +1,8 @@
 /**
- * @author:     Stefan Meier
-
- * @version:    20110711
- * 
  * This script is a listener for all eventdialog events
+ * 
+ * @author AFFOLTER Nicolas, MEIER Stefan, NOVERRAZ Mathieu
+ * @version 2011.06.06
  */
 
 function repeatSelector() {
@@ -18,14 +17,11 @@ function repeatSelector() {
 }
 
 $(document).ready(function() {
-	
     $('#title').focus();
     
     if(typeof(eventData)!='undefined'){
     	fillEvent();
 	}
-    
-
     if ($("#date").val() == '') {
         $("#date").val(eventDate);
     }
@@ -58,24 +54,17 @@ $(document).ready(function() {
 		$("#endH").val(endHour);
     });
     
-    //Let this line commented to show for the first time the repeat date.
-    //$("#repeatEnd").hide();
-    
-    // Datepicker
     $(".datepicker").datepicker({
         dayNamesMin: eval(resourceBundle['day-names-short']),
-        monthNamesMin: eval(resourceBundle['month-names']),
-        monthNames: eval(resourceBundle['month-names-short']),
+        monthNames: eval(resourceBundle['month-names']),
+        monthNamesShort: eval(resourceBundle['month-names-short']),
         firstDay: 1,
-        //maxDate: (new Date().getFullYear() + maxYearOffset) + '-12-31',
+        maxDate: (new Date().getFullYear() + 1) + '-12-31',
         minDate: new Date(),
         dateFormat: 'yy-mm-dd',
         changeMonth: true,
 		changeYear: true
     });
-
-    
-
     $('#allDay').change(function() {
         wholeDay();
     });
@@ -104,28 +93,9 @@ function wholeDay() {
 function sendForm(url, data, method) {
     dataString = $('#eventform').serialize();
     send(url, dataString, method);
-    
-
 }
 
-function fillEvent(){
-	/*alert(
-			'id=' + eventData['id'] +
-			'| title=' + eventData['title'] +
-			'| date=' + eventData['start'].getFullYear() +
-			'| allDay=' + eventData['allDay']
-	);*/
-	console.log('------------------');
-	console.log('----FillEvent-----');
-	console.log('	id: ' + eventData['id']);
-	console.log('	title: ' + eventData['title']);
-	console.log('	start: ' + eventData['start']);
-	console.log('	end: ' + eventData['end']);
-	console.log('	repeatMode: ' + eventData['repeatMode']);
-	console.log('	repeatEnd: ' + eventData['repeatEnd']);
-	console.log('	description: ' + eventData['description']);
-	console.log('------------------');
-	
+function fillEvent(){	
 	$("#id").val(eventData['id']);
 	$("#title").val(eventData['title']);
 	$("#date").val(dateToString(eventData['start']));
@@ -153,7 +123,5 @@ function fillEvent(){
 	if(eventData['allDay']){
 		$('#allDay').attr('checked', true);
 	}
-	//("#repeatEnd").val(eventData['repeatEnd'].getFullYear() + '-' + eventData['repeatEnd'].getMonth() + '-' + eventData['repeatEnd'].getDate());
 	eventData = null;
-	
 }

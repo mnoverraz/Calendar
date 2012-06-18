@@ -1,5 +1,12 @@
-loadRooms();
+/**
+ * JavaScript controller
+ * Generic type is resolved to EventController
+ * 
+ * @author AFFOLTER Nicolas, MEIER Stefan, NOVERRAZ Mathieu
+ * @version 2011.06.06
+ */
 
+loadRooms();
 
 function send(url, data, method) {
 	$.ajax({
@@ -21,14 +28,14 @@ function send(url, data, method) {
 function fillRooms(json){
 	$("#room_description").html(json.content[0].description);
 	$("#room_local").html(json.content[0].local);
-	$("#room_category").html(json.content[0].roomCategory);
-	$("#room_name").html(json.content[0].local);
+	//$("#room_category").html(json.content[0].roomCategory);
+	$("#room_name").html(json.content[0].name);
 }
 
 function loadRooms(){
 	$.ajax({
 		type : 'get',
-		url : 'rest/room/?id=7',
+		url : 'rest/room/?id=1',
 		dataType: 'json',
 		data : null,
 		success : function(msg) {
@@ -37,19 +44,7 @@ function loadRooms(){
 	});
 }
 
-/*
- * 
- * 		{
-			example : ""
-		}
-	
- * 
- */
-//foreach $.each(errors, function(key, val) {
-
-
 function showDialogEvent(url, mode, event){
-	
 	//Definitions
 	this.eventData = event;
 	buttonOpts = {};
@@ -80,7 +75,6 @@ function showDialogEvent(url, mode, event){
 			showDialog(url, event, dialogTitle, buttonOpts);
 			break;
 		case 'create':
-			console.log(mode);
 			dialogTitle = 'Création événement';
 			data = $('#eventform').serialize();
 			 buttonOpts['Créer'] = $.extend(function() {
@@ -91,19 +85,7 @@ function showDialogEvent(url, mode, event){
 			showDialog(url, null, dialogTitle, buttonOpts);
 			break;
 		case 'update':
-			console.log('------------------');
-			console.log('----Envoi modification-----');
-			console.log('	id: ' + event.id);
-			console.log('	titre: ' + event.title);
-			console.log('	date: ' + event.start);
-			console.log('	jour entier: ' + event.allDay);
-			console.log('	end: ' + event.end);
-			console.log('	repeatMode: ' + event.repeatMode);
-			console.log('	repeatEnd: ' + event.repeatEnd);
-			console.log('	description: ' + event.description);
-			console.log('------------------');
 			send('rest/event/', event,'post');
-			
 			break;
 		case 'delete':
 			dialogTitle = 'Suppression événement';
@@ -144,11 +126,6 @@ function showDialog(url, event, dialogTitle, buttonOpts) {
     });
 
     $dialog.dialog('open');
-
-
-    /*if (eventMode != 'edit') {
-        $("#delete").hide();
-    }*/
     return false;
 }
 
@@ -170,9 +147,6 @@ function getMessage(json){
 
 
 function processError(error){
-	console.log('--------ERROR------');
-	console.log('obj: ' + error.content[0]);
-	
 	//TimeSlotException
 	if(error.content[0].TimeSlotException != undefined){
 		
