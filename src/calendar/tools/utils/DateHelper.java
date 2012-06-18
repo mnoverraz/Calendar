@@ -77,7 +77,7 @@ public class DateHelper {
 	/**
 	 * Gets the minutes of a date
 	 * @param date
-	 * @return
+	 * @return int
 	 */
 	public static int getMinutes(Date date) {
 		SimpleDateFormat sdf = new SimpleDateFormat("mm");
@@ -96,7 +96,7 @@ public class DateHelper {
 	
 	/**
 	 * Gets todays date
-	 * @return
+	 * @return Date
 	 */
 	public static  Date getToday() {
 		return new Date();  
@@ -121,7 +121,7 @@ public class DateHelper {
 	/**
 	 * Gets the previous days date for specified date
 	 * @param day
-	 * @return
+	 * @return Date
 	 */
 	public static Date getPreviousDay(Date day) {
 		//---Get Calendar object set to the date and time of the given Date object 

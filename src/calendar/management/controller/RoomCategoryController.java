@@ -11,7 +11,12 @@ import calendar.core.ejb.session.PersistException;
 import calendar.core.ejb.session.RoomCategoryHandlerLocal;
 import calendar.core.exception.CoreException;
 import calendar.management.exception.SystemException;
-
+/**
+ * Specific controller to handle Room categories 
+ * 
+ * @author AFFOLTER Nicolas, MEIER Stefan, NOVERRAZ Mathieu
+ * @version 2011.06.06
+ */
 public class RoomCategoryController extends Controller<RoomCategory> {
 	
 	private RoomCategoryHandlerLocal roomCategoryHandler;
@@ -45,13 +50,13 @@ public class RoomCategoryController extends Controller<RoomCategory> {
 
 	@Override
 	public void update(RoomCategory object) throws CoreException {
-		// TODO Auto-generated method stub
+		//Not implemented
 		
 	}
 
 	@Override
 	public void delete(RoomCategory object) throws CoreException {
-		// TODO Auto-generated method stub
+		// Not implemented
 		
 	}
 

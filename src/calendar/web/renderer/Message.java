@@ -43,7 +43,7 @@ public class Message {
 	/**
 	 * Returns the message in JSON format
 	 * @param showState
-	 * @return
+	 * @return String
 	 */
 	public String toJSON(boolean showState) {
 		StringBuilder sb = new StringBuilder();

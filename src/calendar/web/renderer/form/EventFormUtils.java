@@ -122,11 +122,11 @@ public class EventFormUtils {
 			id = Integer.parseInt(fId);
 
 		if (fTitle != null && !"".equals(fTitle))
-			title = StringUtils.replaceEach(fTitle, new String[]{"&", "\"", "<", ">"}, new String[]{"&amp;", "&quot;", "&lt;", "&gt;"});
+			title = StringUtils.replaceEach(fTitle, new String[]{"&", "\"", "<", ">", "+"}, new String[]{"&amp;", "&quot;", "&lt;", "&gt;", " "});
 		else 
 			validation.put("title", false);
 		if (fDescription != null && !"".equals(fDescription))
-			description = StringUtils.replaceEach(fDescription, new String[]{"&", "\"", "<", ">"}, new String[]{"&amp;", "&quot;", "&lt;", "&gt;"});
+			description = StringUtils.replaceEach(fDescription, new String[]{"&", "\"", "<", ">", "+"}, new String[]{"&amp;", "&quot;", "&lt;", "&gt;", " "});
 
 		if (repeatMode != null && !"n".equals(repeatMode)) {
 			try {

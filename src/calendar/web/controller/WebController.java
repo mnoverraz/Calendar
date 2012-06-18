@@ -27,28 +27,28 @@ public abstract class WebController<C extends Controller<?>> {
 	 * Creates an object corresponding to the parameter specified
 	 * @param params (Contains information to build the controlled object type)
 	 * @return Message
-	 * @see calendar.core.controller.Controller
+	 * @see calendar.management.controller.Controller
 	 */
 	public abstract Message create(HashMap<String, String> params);
 	/**
 	 * Gets an object specified by the filter
 	 * @param filter (permits to filter data in order to retrieve only a port of it)
 	 * @return Message
-	 * @see calendar.core.controller.Controller
+	 * @see calendar.management.controller.Controller
 	 */
 	public abstract Message read(HashMap<String, String> filter);
 	/**
 	 * Updates data specified by the parameters
 	 * @param params (Contains information to build the controlled object type)
 	 * @return Message
-	 * @see calendar.core.controller.Controller
+	 * @see calendar.management.controller.Controller
 	 */
 	public abstract Message update(HashMap<String, String> params);
 	/**
 	 * Deletes data specified by the parameters
 	 * @param params (Contains information to build the controlled object type)
 	 * @return Message
-	 * @see calendar.core.controller.Controller
+	 * @see calendar.management.controller.Controller
 	 */
 	public abstract Message delete(HashMap<String, String> params);
 }

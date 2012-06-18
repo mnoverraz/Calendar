@@ -105,8 +105,10 @@ public class RESTServlet extends HttpServlet {
 				String name = param[0];
 				String value = "";
 
+
 				if (param.length > 1)
 					value = param[1];
+
 
 				paramMap.put(name, value);
 			}
@@ -143,7 +145,7 @@ public class RESTServlet extends HttpServlet {
 
 		StringBuilder content = new StringBuilder();
 		WebController<?> controller = null;
-
+		
 		String contentType = "";
 
 		String format = null;

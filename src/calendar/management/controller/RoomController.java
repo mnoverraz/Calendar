@@ -12,23 +12,25 @@ import calendar.core.ejb.session.RoomHandlerLocal;
 import calendar.core.exception.CoreException;
 import calendar.management.exception.SystemException;
 
+/**
+ * Specific controller to handle Room data.
+ * 
+ * @author AFFOLTER Nicolas, MEIER Stefan, NOVERRAZ Mathieu
+ * @version 2011.06.06
+ */
 public class RoomController extends Controller<Room> {
-	
+
 	private RoomHandlerLocal roomHandler;
-	
+
 	public RoomController(Context context) throws NamingException {
 		super(context);
-		this.roomHandler = (RoomHandlerLocal) context.lookup("calendarEAR/RoomBean/local");
+		this.roomHandler = (RoomHandlerLocal) context
+				.lookup("calendarEAR/RoomBean/local");
 	}
 
 	@Override
-	public void create(Room object) throws CoreException {
-		try {
-			roomHandler.create(object);
-		} catch (PersistException e) {
-			SystemException se = new SystemException();
-			se.detailInformation = e;
-		}
+	public void create(Room room) throws CoreException {
+		doAction("create", room);
 	}
 
 	@Override
@@ -40,24 +42,36 @@ public class RoomController extends Controller<Room> {
 		} catch (PersistException e) {
 			SystemException se = new SystemException();
 			se.detailInformation = e;
-		}		
+		}
 		return rooms;
 	}
 
 	@Override
-	public void update(Room object) throws CoreException {
-		try {
-			roomHandler.update(object);
-		} catch (PersistException e) {
-			SystemException se = new SystemException();
-			se.detailInformation = e;
-		}
+	public void update(Room room) throws CoreException {
+		doAction("update", room);
 	}
 
 	@Override
-	public void delete(Room object) throws CoreException {
+	public void delete(Room room) throws CoreException {
+		doAction("delete", room);
+	}
+
+	/**
+	 * Executes synchronized action in order to prevent inconsistent data
+	 * @param action
+	 * @param room
+	 */
+	private synchronized void doAction(String action, Room room) {
 		try {
-			roomHandler.delete(object);
+			if ("delete".equals(action))
+				roomHandler.delete(room);
+			else
+
+			if ("create".equals(action))
+				roomHandler.create(room);
+			else if ("update".equals(action))
+				roomHandler.update(room);
+
 		} catch (PersistException e) {
 			SystemException se = new SystemException();
 			se.detailInformation = e;

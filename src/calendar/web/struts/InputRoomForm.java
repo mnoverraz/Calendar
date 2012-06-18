@@ -91,7 +91,6 @@ public class InputRoomForm extends ActionForm {
 	 * 
 	 * @param mapping
 	 * @param request
-	 * @return void
 	 * @throws CoreException
 	 */
 	public void reset(ActionMapping mapping, HttpServletRequest request) {
