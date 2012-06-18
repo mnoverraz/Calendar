@@ -8,7 +8,13 @@ import calendar.core.exception.CoreException;
 import calendar.management.controller.RoomController;
 import calendar.web.renderer.ExceptionRenderer;
 import calendar.web.renderer.Message;
-
+/**
+ * Interfaces application RoomController and user interaction
+ * Generic type is resolved to RoomController
+ * 
+ * @author AFFOLTER Nicolas, MEIER Stefan, NOVERRAZ Mathieu
+ * @version 2011.06.06
+ */
 public class WebRoomController extends WebController<RoomController> {
 
 	public WebRoomController(RoomController controller) {
