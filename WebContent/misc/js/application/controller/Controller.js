@@ -25,6 +25,12 @@ function send(url, data, method) {
 	calendar.fullCalendar('refetchEvents');
 }
 
+/**
+ * Fill rooms fields in HTML page
+ * 
+ * @author AFFOLTER Nicolas, MEIER Stefan, NOVERRAZ Mathieu
+ * @version 2011.06.18
+ */
 function fillRooms(json){
 	$("#room_description").html(json.content[0].description);
 	$("#room_local").html(json.content[0].local);
@@ -32,6 +38,12 @@ function fillRooms(json){
 	$("#room_name").html(json.content[0].name);
 }
 
+/**
+ * Load rooms informations
+ * 
+ * @author AFFOLTER Nicolas, MEIER Stefan, NOVERRAZ Mathieu
+ * @version 2011.06.18
+ */
 function loadRooms(){
 	$.ajax({
 		type : 'get',
@@ -44,6 +56,12 @@ function loadRooms(){
 	});
 }
 
+/**
+ * Preapare dialog content
+ * 
+ * @author AFFOLTER Nicolas, MEIER Stefan, NOVERRAZ Mathieu
+ * @version 2011.06.18
+ */
 function showDialogEvent(url, mode, event){
 	//Definitions
 	this.eventData = event;
@@ -106,6 +124,12 @@ function showDialogEvent(url, mode, event){
 	
 }
 
+/**
+ * Show the dialog
+ * 
+ * @author AFFOLTER Nicolas, MEIER Stefan, NOVERRAZ Mathieu
+ * @version 2011.06.18
+ */
 function showDialog(url, event, dialogTitle, buttonOpts) {
 	var $dialog = $('<div id=\"dialog\"></div>')
     .load(url)
@@ -129,9 +153,16 @@ function showDialog(url, event, dialogTitle, buttonOpts) {
     return false;
 }
 
+/**
+ * Get the return ajax query and eval if the return
+ * is successful or contains errors
+ * 
+ * @author AFFOLTER Nicolas, MEIER Stefan, NOVERRAZ Mathieu
+ * @version 2011.06.18
+ */
 function getMessage(json){	
 	
-	if(json['success']){
+	if(!json['success']){
 		if(json['content'] == ''){
 			//success mais rien n'arrive
 			//soit la création ok soit dataset vide
@@ -145,7 +176,13 @@ function getMessage(json){
 	}
 }
 
-
+/**
+ * Get an json error message and show an
+ * error dialog
+ * 
+ * @author AFFOLTER Nicolas, MEIER Stefan, NOVERRAZ Mathieu
+ * @version 2011.06.18
+ */
 function processError(error){
 	//TimeSlotException
 	if(error.content[0].TimeSlotException != undefined){
@@ -154,6 +191,12 @@ function processError(error){
 	}
 }
 
+/**
+ * Show an error dialog
+ * 
+ * @author AFFOLTER Nicolas, MEIER Stefan, NOVERRAZ Mathieu
+ * @version 2011.06.18
+ */
 function errorDialog(message, errorName) {
 	$("#dialog").html(message);
 	buttonsOpts = {};
@@ -169,6 +212,12 @@ function errorDialog(message, errorName) {
     });
 }
 
+/**
+ * Format the error to HTML
+ * 
+ * @author AFFOLTER Nicolas, MEIER Stefan, NOVERRAZ Mathieu
+ * @version 2011.06.18
+ */
 function exceptionToUI(exceptionType, detail) {
 	out = "";
 	switch(exceptionType) {
