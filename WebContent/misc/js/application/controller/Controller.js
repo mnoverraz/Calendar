@@ -48,7 +48,7 @@ function showDialogEvent(url, mode, event){
 	//Definitions
 	this.eventData = event;
 	buttonOpts = {};
-    buttonOpts['Fermer'] = $.extend(function() {
+    buttonOpts[resourceBundle['calendar-event-cancel']] = $.extend(function() {
         $(this).dialog("close");
     },{
         id : 'close'
@@ -62,12 +62,12 @@ function showDialogEvent(url, mode, event){
 					id : event['id']
 			};
 				
-			buttonOpts['Supprimer'] = $.extend(function() {                    
+			buttonOpts[resourceBundle['calendar-event-delete']] = $.extend(function() {                    
 			    	send('rest/event/', data,'delete');
 			}, {
 			        id : 'delete'
 			});
-			buttonOpts['Modifier'] = $.extend(function() {                    
+			buttonOpts[resourceBundle['calendar-event-edit']] = $.extend(function() {                    
 		    	sendForm('rest/event/', data,'post');
 		    }, {
 		        method : 'post'
@@ -75,9 +75,9 @@ function showDialogEvent(url, mode, event){
 			showDialog(url, event, dialogTitle, buttonOpts);
 			break;
 		case 'create':
-			dialogTitle = 'Création événement';
+			dialogTitle = resourceBundle['calendar-event-new'];
 			data = $('#eventform').serialize();
-			 buttonOpts['Créer'] = $.extend(function() {
+			 buttonOpts[resourceBundle['calendar-event-save']] = $.extend(function() {
 				 sendForm('rest/event/', data,'put');
 			    },{
 			        id : 'create'
@@ -91,7 +91,7 @@ function showDialogEvent(url, mode, event){
 			dialogTitle = 'Suppression événement';
 			data = $('#eventform').serialize();
 			
-			buttonOpts['Supprimer'] = $.extend(function() {                    
+			buttonOpts[resourceBundle['calendar-event-delete']] = $.extend(function() {                    
 				 sendForm('rest/event/', data,'delete');
 		    }, {
 		        id : 'delete'
@@ -157,7 +157,7 @@ function processError(error){
 function errorDialog(message, errorName) {
 	$("#dialog").html(message);
 	buttonsOpts = {};
-    buttonsOpts["Fermer"] = function() {
+    buttonsOpts[resourceBundle['calendar-event-cancel']] = function() {
         $(this).dialog( "close" );
     };
     $("#dialog").dialog({

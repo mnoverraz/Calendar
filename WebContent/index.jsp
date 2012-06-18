@@ -68,14 +68,14 @@
 						</div>
 					</div>
 					<!-- END INFORMATION -->
-					<!-- BEGIN CONTACT -->
+					<!-- BEGIN ADMINISTRATION -->
 					<div class="box">
 						<h1>Admin Room</h1>
 						<div>
 							<a href="roomManagement.do">Administration</a>
 						</div>
 					</div>
-					<!-- END CONTACT -->
+					<!-- END ADMINISTRATION -->
 				</div>
 				<!-- END ROOM-VIEW -->
 				<!-- BEGIN CONTROL-VIEW -->

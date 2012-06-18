@@ -18,6 +18,11 @@ lang.put("day-names", ui.getLangText("day-names"));
 lang.put("day-names-short", ui.getLangText("day-names-short"));
 lang.put("month-names", ui.getLangText("month-names"));
 lang.put("month-names-short", ui.getLangText("month-names-short"));
+lang.put("calendar-event-new", ui.getLangText("calendar-event-new"));
+lang.put("calendar-event-save", ui.getLangText("calendar-event-save"));
+lang.put("calendar-event-edit", ui.getLangText("calendar-event-edit"));
+lang.put("calendar-event-delete", ui.getLangText("calendar-event-delete"));
+lang.put("calendar-event-cancel", ui.getLangText("calendar-event-cancel"));
 
 //format
 lang.put("format-title-month", ui.getLangText("format-title-month"));
