@@ -22,13 +22,13 @@ function fillRooms(json){
 	$("#room_description").html(json.content[0].description);
 	$("#room_local").html(json.content[0].local);
 	$("#room_category").html(json.content[0].roomCategory);
-	$("#room_name").html(json.content[0].roomCategory);
+	$("#room_name").html(json.content[0].local);
 }
 
 function loadRooms(){
 	$.ajax({
 		type : 'get',
-		url : 'rest/room/?id=1',
+		url : 'rest/room/?id=7',
 		dataType: 'json',
 		data : null,
 		success : function(msg) {
@@ -115,6 +115,10 @@ function showDialogEvent(url, mode, event){
 		        id : 'delete'
 		    });
 			break;
+		case 'error':
+			dialogTitle = 'Erreur';
+			showDialog(url, null, dialogTitle, buttonOpts);
+			break;
 	
 	}
 	
@@ -164,21 +168,31 @@ function getMessage(json){
 	}
 }
 
-function addEvents(json){
-	for(var i= 0; i < json['content'].length; i++)
-	{
-	     calendar.fullCalendar('renderEvent', json['content'][i], true);
-	}
-	
-}
 
 function processError(error){
-	this.jose = error.content;
-	//alert(jose.content[0].FormNotValidException.title);
-	this.exceptionType = Array;
-	for(var i in error.content) {
-	    exceptionType.push(i);
+	console.log('--------ERROR------');
+	console.log('obj: ' + error.content[0]);
+	
+	//TimeSlotException
+	if(error.content[0].TimeSlotException != undefined){
+		
+		errorDialog(exceptionToUI('TimeSlotException', error.content[0].TimeSlotException), 'TimeSlotException');
 	}
+}
+
+function errorDialog(message, errorName) {
+	$("#dialog").html(message);
+	buttonsOpts = {};
+    buttonsOpts["Fermer"] = function() {
+        $(this).dialog( "close" );
+    };
+    $("#dialog").dialog({
+    	title: errorName,
+        resizable: false,
+        width: 350,
+        modal: true,
+        buttons: buttonsOpts
+    });
 }
 
 function exceptionToUI(exceptionType, detail) {
