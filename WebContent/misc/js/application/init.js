@@ -138,6 +138,7 @@ $(document).ready(function() {
 		                        start: object.start,
 		                        end: object.end,
 		                        repeatEnd: object.repeatEnd,
+		                        repeatMode: object.repeatMode,
 		                        description: object.description
 		                    };
 		                    if (object.repeatMode != 'n') event.color = '#bbb';

@@ -132,33 +132,92 @@ function sendForm(url, data, method) {
  * @author AFFOLTER Nicolas, MEIER Stefan, NOVERRAZ Mathieu
  * @version 2011.06.18
  */
-function fillEvent(){	
-	$("#id").val(eventData['id']);
-	$("#title").val(eventData['title']);
-	$("#date").val(dateToString(eventData['start']));
+function fillEvent(){
 	
-	if(eventData['start'].getHours() == 0 && eventData['start'].getMinutes() == 0){
-		$("#startH").val(new Date().getHours());
-		$("#startM").val(new Date().getMinutes());
-		$("#endH").val(new Date().getHours());
-		$("#endM").val(new Date().getMinutes());
+	console.log('----------fill event source ------------');
+	console.log('id: ', eventData['id']);
+	console.log('title: ', eventData['title']);
+	console.log('date: ', eventData['start']);
+	console.log('repeatMode: ', eventData['repeatMode']);
+	console.log('repeatEnd: ', eventData['repeatEnd']);
+	console.log('description: ', eventData['description']);
+	console.log('allDay: ', eventData['allDay']);
+	console.log('----------fill event source ------------');
+	if(eventData['id'] != undefined){
+		$("#id").val(eventData['id']);
+		console.log('id');
+	}
+	if(eventData['title'] != undefined){
+		$("#title").val(eventData['title']);
+		console.log('title');
+	}
+	if(eventData['start'] != undefined){
+		$("#date").val(dateToString(eventData['start']));
+		console.log('date');
 		
-	}else{
-		
-		$("#startH").val(intOn2Digit(eventData['start'].getHours()));
-		$("#startM").val(intOn2Digit(eventData['start'].getMinutes()));
-		$("#endH").val(intOn2Digit(eventData['end'].getHours()));
-		$("#endM").val(intOn2Digit(eventData['end'].getMinutes()));
+		if(eventData['start'].getHours() == 0 && eventData['start'].getMinutes() == 0){
+			$("#startH").val(new Date().getHours());
+			console.log('startH');
+			$("#startM").val(new Date().getMinutes());
+			console.log('startM');
+			$("#endH").val(new Date().getHours());
+			console.log('endH');
+			$("#endM").val(new Date().getMinutes());
+			console.log('endM');
+			
+		}else{
+			
+			$("#startH").val(intOn2Digit(eventData['start'].getHours()));
+			console.log('startH');
+			$("#startM").val(intOn2Digit(eventData['start'].getMinutes()));
+			console.log('startM');
+			if(eventData['end'] != undefined){
+				$("#endH").val(intOn2Digit(eventData['end'].getHours()));
+				console.log('endH');
+				$("#endM").val(intOn2Digit(eventData['end'].getMinutes()));
+				console.log('endM');
+			}
+			
+		}
 	}
 	
-	$("#repeatMode").attr('value',eventData['repeatMode']);
+	if(eventData['repeatMode'] != undefined){
+		$("#repeatMode").attr('value',eventData['repeatMode']);
+		console.log('repeatMode');
+	}
 	if(eventData['repeatEnd'] != undefined){
-		$("#repeatEnd").val(eventData['repeatEnd']);
+		if(eventData['repeatEnd'] != undefined){
+			$("#repeatEnd").val(eventData['repeatEnd']);
+			console.log('repeatEnd');
+		}
 	}
-	$("#description").val(eventData['description']);
+	if(eventData['description'] != undefined){
+		$("#description").val(eventData['description']);
+		console.log('description');
+	}
+	if(eventData['allDay'] != undefined){
+		if(eventData['allDay']){
+			//$('#allDay').attr('checked', 'checked');
+			//$('#allDay').prop("checked", true);
+			console.log('allDay');
+		}
+	}
 	
-	if(eventData['allDay']){
-		$('#allDay').attr('checked', true);
-	}
 	eventData = null;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*if(eventData['allDay']){
+		//$('#allDay').attr('checked', 'checked');
+		//$('#allDay').prop("checked", true);
+		console.log('allDay');
+	}
+	*/
 }
