@@ -1,17 +1,3 @@
-function toto(json){
-	alert(json);
-}
-
-
-
-
-
-
-
-
-
-
-
 var calendar = null;
 
 $(document).ready(function() {
@@ -114,11 +100,6 @@ $(document).ready(function() {
 		//Actions
 		//---------
 			events: function(start, end, addEvents) {
-				console.log('------------------');
-				console.log('----Chargement des events-----');
-				console.log('	start: ' + start);
-				console.log('	end: ' + end);
-
 		        $.ajax({
 		            url: 'rest/event/?showState=false',
 		            dataType: 'json',
@@ -138,9 +119,10 @@ $(document).ready(function() {
 		                        start: object.start,
 		                        end: object.end,
 		                        repeatEnd: object.repeatEnd,
+		                        repeatMode: object.repeatMode,
 		                        description: object.description
 		                    };
-		                    if (object.repeatMode != 'n') event.color = '#bbb';
+		                    if (object.repeatMode != 'n') event.color = '#f15c2e';
 		                    events.push(event);
 		                });
 

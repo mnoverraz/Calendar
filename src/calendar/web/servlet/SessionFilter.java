@@ -51,7 +51,7 @@ public class SessionFilter implements Filter {
 			ui = new UIBean(resourcePath, language);
 			session.setAttribute("ui", ui);
 		}
-
+		request.setCharacterEncoding("UTF-8");
 		chain.doFilter(request, response);
 	}
 

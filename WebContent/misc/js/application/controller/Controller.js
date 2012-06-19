@@ -15,23 +15,29 @@ function send(url, data, method) {
 		dataType: 'json',
 		data : data,
 		success : function(msg){
-			getMessage(msg);
 			$('.ui-dialog').unblock();
 			if (msg['success']) {
 				$('#dialog').dialog('close');
+				calendar.fullCalendar('refetchEvents');
 			}
+			else 
+				processError(msg);
 		}
 	});
-	calendar.fullCalendar('refetchEvents');
+	
 }
-
+/**
+ * Fill rooms fields in HTML page
+ */
 function fillRooms(json){
 	$("#room_description").html(json.content[0].description);
 	$("#room_local").html(json.content[0].local);
 	//$("#room_category").html(json.content[0].roomCategory);
 	$("#room_name").html(json.content[0].name);
 }
-
+/**
+ * Load rooms informations
+ */
 function loadRooms(){
 	$.ajax({
 		type : 'get',
@@ -43,7 +49,9 @@ function loadRooms(){
 		}
 	});
 }
-
+/**
+ * Preapare dialog content
+ */
 function showDialogEvent(url, mode, event){
 	//Definitions
 	this.eventData = event;
@@ -105,7 +113,9 @@ function showDialogEvent(url, mode, event){
 	}
 	
 }
-
+/**
+ * Show the dialog
+ */
 function showDialog(url, event, dialogTitle, buttonOpts) {
 	var $dialog = $('<div id=\"dialog\"></div>')
     .load(url)
@@ -128,24 +138,10 @@ function showDialog(url, event, dialogTitle, buttonOpts) {
     $dialog.dialog('open');
     return false;
 }
-
-function getMessage(json){	
-	
-	if(json['success']){
-		if(json['content'] == ''){
-			//success mais rien n'arrive
-			//soit la création ok soit dataset vide
-			alert('success mais retour vide');
-		}else{
-			addEvents(json);
-		}
-		
-	}else{
-		processError(json);
-	}
-}
-
-
+/**
+ * Get an json error message and show an
+ * error dialog
+ */
 function processError(error){
 	//TimeSlotException
 	if(error.content[0].TimeSlotException != undefined){
@@ -153,7 +149,9 @@ function processError(error){
 		errorDialog(exceptionToUI('TimeSlotException', error.content[0].TimeSlotException), 'TimeSlotException');
 	}
 }
-
+/**
+ * Show an error dialog
+ */
 function errorDialog(message, errorName) {
 	$("#dialog").html(message);
 	buttonsOpts = {};
@@ -168,7 +166,9 @@ function errorDialog(message, errorName) {
         buttons: buttonsOpts
     });
 }
-
+/**
+ * Format the error to HTML
+ */
 function exceptionToUI(exceptionType, detail) {
 	out = "";
 	switch(exceptionType) {

@@ -91,11 +91,11 @@ public class RESTServlet extends HttpServlet {
 		HashMap<String, String> paramMap = new HashMap<String, String>();
 
 		if (request.getContentLength() > 0) {
-			BufferedReader br = new BufferedReader(new InputStreamReader(
-					request.getInputStream()));
+			BufferedReader br = new BufferedReader(
+					new InputStreamReader(request.getInputStream(), "UTF8"));
 
 			String data = br.readLine();
-
+			System.out.println(data);
 			String[] temp;
 
 			temp = data.split("&");

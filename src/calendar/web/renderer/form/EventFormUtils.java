@@ -99,8 +99,15 @@ public class EventFormUtils {
 		}
 
 		if (!allDay) {
-			if ("true".equals(fAllDay) || "on".equals(fAllDay))
+			if ("true".equals(fAllDay) || "on".equals(fAllDay)) {
 				allDay = true;
+				try {
+					start = DateHelper.StringToDate(fDate + " 00:00", Config.DATE_FORMAT_LONG);
+					end = DateHelper.StringToDate(fDate + " 00:00", Config.DATE_FORMAT_LONG);
+				} catch (ParseException e) {
+					validation.put("allDay", false);
+				}
+			}
 		}
 
 		if ("n".equals(fRepeatMode))

@@ -14,6 +14,7 @@ import calendar.core.ejb.session.PersistException;
 import calendar.core.exception.CoreException;
 import calendar.management.exception.SystemException;
 import calendar.management.exception.TimeSlotException;
+import calendar.tools.utils.DateHelper;
 
 /**
  * Specific controller to handle Event data. 
@@ -148,9 +149,18 @@ public class EventController extends Controller<Event> {
 					 * if the events begin takes place after or at the same time as the existing events end
 					 * then the event can be inserted
 					 */
-					available = event.getId() == existingEvent.getId() || (newEnd.before(existingStart) 
-							|| newEnd.equals(existingStart)) || (newStart.after(existingEnd) 
-							|| newStart.equals(existingEnd));
+					available = (event.getId() == existingEvent.getId()) 
+							|| (newEnd.before(existingStart) || newEnd.equals(existingStart)
+							|| newStart.after(existingEnd) || newStart.equals(existingEnd));
+					
+					
+					/*
+					 * If the existing date has the same date as the new one, check if one of the two
+					 * is an all day event and if true, time slot is not available
+					 */
+					if (DateHelper.DateToString(newEnd).equals(DateHelper.DateToString(existingEnd)) && event.getId() != existingEvent.getId()) {
+						available =  !(eventDate.isAllDay() ||existingEventDate.isAllDay());
+					}
 					
 					if (!available)
 						unavailableEvents.add(eventDate);

@@ -4,7 +4,9 @@
  * @author AFFOLTER Nicolas, MEIER Stefan, NOVERRAZ Mathieu
  * @version 2011.06.06
  */
-
+/**
+ * Show or hide the repeatSelector for an event
+ */
 function repeatSelector() {
     if ($("#repeatMode :selected").val() == 'n') {
         $("#repeat_date").hide();
@@ -18,14 +20,18 @@ function repeatSelector() {
 
 $(document).ready(function() {
     $('#title').focus();
-    
+    /**
+     * Fill the date input with the current date
+     */
     if(typeof(eventData)!='undefined'){
     	fillEvent();
 	}
     if ($("#date").val() == '') {
         $("#date").val(eventDate);
     }
-
+    /**
+     * Check the date
+     */
     if ($("#repeatEnd").val() == '') {
         $("#repeatEnd").val(repeatEnd);
     }
@@ -39,7 +45,9 @@ $(document).ready(function() {
         }
         
     });
-
+    /**
+     * Check time
+     */
     $("#startH").change(function() {
         startHour = $("#startH").val();
 		startHour = parseInt(startHour);
@@ -53,7 +61,9 @@ $(document).ready(function() {
         }
 		$("#endH").val(endHour);
     });
-    
+	/**
+	 * Date Picker
+	 */
     $(".datepicker").datepicker({
         dayNamesMin: eval(resourceBundle['day-names-short']),
         monthNames: eval(resourceBundle['month-names']),
@@ -75,7 +85,9 @@ $(document).ready(function() {
     
     wholeDay();
 });
-
+/**
+ * Show or hide the wholeDay option
+ */
 function wholeDay() {
 	if ($("#allDay").is(":checked")) {
 		$("#start").hide();
@@ -89,39 +101,59 @@ function wholeDay() {
 		$("#end").show();
 	}
 }
-
+/**
+ * Send the form (serialized) from the dialogEvent.
+ */
 function sendForm(url, data, method) {
     dataString = $('#eventform').serialize();
     send(url, dataString, method);
 }
-
+/**
+ * Fill the event content in the dialog fields
+ */
 function fillEvent(){	
-	$("#id").val(eventData['id']);
-	$("#title").val(eventData['title']);
-	$("#date").val(dateToString(eventData['start']));
-	
-	if(eventData['start'].getHours() == 0 && eventData['start'].getMinutes() == 0){
-		$("#startH").val(new Date().getHours());
-		$("#startM").val(new Date().getMinutes());
-		$("#endH").val(new Date().getHours());
-		$("#endM").val(new Date().getMinutes());
-		
-	}else{
-		
-		$("#startH").val(intOn2Digit(eventData['start'].getHours()));
-		$("#startM").val(intOn2Digit(eventData['start'].getMinutes()));
-		$("#endH").val(intOn2Digit(eventData['end'].getHours()));
-		$("#endM").val(intOn2Digit(eventData['end'].getMinutes()));
+	if(eventData['id'] != undefined){
+		$("#id").val(eventData['id']);
 	}
-	
-	$("#repeatMode").attr('value',eventData['repeatMode']);
+	if(eventData['title'] != undefined){
+		$("#title").val(eventData['title']);
+	}
+	if(eventData['start'] != undefined){
+		$("#date").val(dateToString(eventData['start']));
+
+		if(eventData['start'].getHours() == 0 && eventData['start'].getMinutes() == 0){
+			$("#startH").val(new Date().getHours());
+			$("#startM").val(new Date().getMinutes());
+			$("#endH").val(new Date().getHours());
+			$("#endM").val(new Date().getMinutes());
+		}else{
+			$("#startH").val(intOn2Digit(eventData['start'].getHours()));
+			$("#startM").val(intOn2Digit(eventData['start'].getMinutes()));
+			if(eventData['end'] != undefined){
+				$("#endH").val(intOn2Digit(eventData['end'].getHours()));
+				$("#endM").val(intOn2Digit(eventData['end'].getMinutes()));
+			}
+
+		}
+	}
+
+	if(eventData['repeatMode'] != undefined){
+		$("#repeatMode").attr('value',eventData['repeatMode']);
+	}
+
 	if(eventData['repeatEnd'] != undefined){
-		$("#repeatEnd").val(eventData['repeatEnd']);
+		if (eventData['repeatEnd'] != '')
+			$("#repeatEnd").val(eventData['repeatEnd']);
 	}
-	$("#description").val(eventData['description']);
-	
-	if(eventData['allDay']){
-		$('#allDay').attr('checked', true);
+
+	if(eventData['description'] != undefined){
+		$("#description").val(eventData['description']);
+	}
+	if(eventData['allDay'] != undefined){
+		if(eventData['allDay']){
+			$('#allDay').attr("checked", true);
+		}
 	}
 	eventData = null;
+
 }
