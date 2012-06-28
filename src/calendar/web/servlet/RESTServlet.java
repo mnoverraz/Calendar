@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -88,14 +89,15 @@ public class RESTServlet extends HttpServlet {
 	 */
 	private HashMap<String, String> createParameterMap(
 			HttpServletRequest request) throws IOException {
+		 if(null == request.getCharacterEncoding())
+		        request.setCharacterEncoding("UTF-8");
 		HashMap<String, String> paramMap = new HashMap<String, String>();
 
 		if (request.getContentLength() > 0) {
 			BufferedReader br = new BufferedReader(
-					new InputStreamReader(request.getInputStream(), "UTF8"));
+					new InputStreamReader(request.getInputStream(), "UTF-8"));
 
 			String data = br.readLine();
-			System.out.println(data);
 			String[] temp;
 
 			temp = data.split("&");
@@ -109,7 +111,7 @@ public class RESTServlet extends HttpServlet {
 				if (param.length > 1)
 					value = param[1];
 
-
+				value = URLDecoder.decode(value, "UTF-8");
 				paramMap.put(name, value);
 			}
 		}
@@ -125,7 +127,6 @@ public class RESTServlet extends HttpServlet {
 				String[] paramValues = entry.getValue();
 
 				paramMap.put(paramName, paramValues[0]);
-
 			}
 		}
 		return paramMap;

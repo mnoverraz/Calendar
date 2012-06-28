@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page pageEncoding="UTF-8"%>
 <jsp:useBean id="ui" class="calendar.ui.bean.UIBean" scope="session" />
 
 <script type='text/javascript' src='misc/js/application/handler/EventDialog.js'></script>

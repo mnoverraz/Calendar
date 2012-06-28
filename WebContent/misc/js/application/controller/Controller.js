@@ -153,12 +153,12 @@ function processError(error){
  * Show an error dialog
  */
 function errorDialog(message, errorName) {
-	$("#dialog").html(message);
+	$("#dialog-error").html(message);
 	buttonsOpts = {};
     buttonsOpts[resourceBundle['calendar-event-cancel']] = function() {
         $(this).dialog( "close" );
     };
-    $("#dialog").dialog({
+    $("#dialog-error").dialog({
     	title: errorName,
         resizable: false,
         width: 350,

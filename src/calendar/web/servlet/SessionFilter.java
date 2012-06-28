@@ -37,9 +37,12 @@ public class SessionFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+	    if(null == request.getCharacterEncoding())
+	        request.setCharacterEncoding("UTF-8");
+		
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession(true);
-		
+
 		ServletContext context = config.getServletContext();
 		String resourcePath = (String) context.getAttribute("resourcePath");
 		Locale locale = request.getLocale();

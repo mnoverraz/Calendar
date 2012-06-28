@@ -81,14 +81,4 @@
     <servlet-name>action</servlet-name>
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>FrontController</display-name>
-    <servlet-name>FrontController</servlet-name>
-    <servlet-class>calendar.web.servlet.FrontController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>FrontController</servlet-name>
-    <url-pattern>/FrontController</url-pattern>
-  </servlet-mapping>
 </web-app>

@@ -25,9 +25,10 @@
 			type : method,
 			url : "../rest/event/",
 			dataType: "text",
+			contentType: "application/x-www-form-urlencoded;charset=UTF-8",
 			data : {
 				"id" : "12",
-				"example" : "adsf"
+				"title" : "éà"
 			},
 			success : function(msg) {
 				$('#log').append("<br/>method: " + method);

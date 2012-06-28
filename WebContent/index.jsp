@@ -91,6 +91,7 @@
 			right reserved</div>
 		<!-- END FOOTER -->
 	</div>
-	<!-- END PAGE -->
+<div id="dialog-error"></div>
+<!-- END PAGE -->
 </body>
 </html>
